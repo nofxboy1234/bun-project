@@ -1,4 +1,4 @@
-# bun-react-template
+# bun-project
 
 To install dependencies:
 

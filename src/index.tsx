@@ -27,6 +27,12 @@ const server = serve({
         message: `Hello, ${name}!`,
       });
     },
+
+    "/bun": async () => {
+      return Response.json({
+        message: "bun :)",
+      });
+    },
   },
 
   development: process.env.NODE_ENV !== "production" && {
