@@ -1,4 +1,5 @@
 import { useRef, type FormEvent } from "react";
+import styles from "./styles.module.css";
 
 export function APITester() {
   const responseInputRef = useRef<HTMLTextAreaElement>(null);
@@ -35,7 +36,7 @@ export function APITester() {
           className="url-input"
           placeholder="/api/hello"
         />
-        <button type="submit" className="send-button">
+        <button type="submit" className={styles.button}>
           Send
         </button>
       </form>
