@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "lint": "bunx eslint .",
     "ts": "bunx tsc",
     "dev": "bun --hot src/index.tsx",
     "build": "bun build --minify --sourcemap --env='BUN_PUBLIC_*' --production --target=bun ./src/index.tsx --outdir=dist",
