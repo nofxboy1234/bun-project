@@ -7,17 +7,21 @@ export function App() {
       <div>
         <h1>bun-project</h1>
         <h2>Simplify your tasks</h2>
-        <a href="">home</a>
-        <div>Hello</div>
-        <div className={`${styles.cyanSquare} ${styles.roundedCorners}`}></div>
-        <div className={`${styles.greySquare} ${styles.roundedCorners}`}></div>
-        <div className={`${styles.whiteSquare} ${styles.roundedCorners}`}></div>
-        <div className={`${styles.navySquare} ${styles.roundedCorners}`}></div>
-        <div className={`${styles.redSquare} ${styles.roundedCorners}`}></div>
-        <div
-          className={`${styles.yellowSquare} ${styles.roundedCorners}`}
-        ></div>
-        <div className={`${styles.pinkSquare} ${styles.roundedCorners}`}></div>
+
+        <div className={styles.taskContainer}>
+          <h3 className={styles.wantToDo}>Want to do</h3>
+          <div className={styles.task}>Eat</div>
+        </div>
+
+        <div className={styles.taskContainer}>
+          <h3 className={styles.needToDo}>Need to do</h3>
+          <div className={styles.task}>Sleep</div>
+        </div>
+
+        <div className={styles.taskContainer}>
+          <h3 className={styles.amDoing}>Am doing</h3>
+          <div className={styles.task}>Working</div>
+        </div>
       </div>
     </div>
   );

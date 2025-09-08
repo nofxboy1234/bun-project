@@ -7,44 +7,23 @@
   color: var(--dracula-pink);
 }
 
-.cyanSquare {
-  width: 2rem;
-  height: 2rem;
-  background-color: var(--dracula-cyan);
+.wantToDo {
+  color: var(--dracula-cyan);
 }
 
-.greySquare {
-  width: 2rem;
-  height: 2rem;
-  background-color: var(--dracula-grey);
+.needToDo {
+  color: var(--dracula-cyan);
 }
 
-.whiteSquare {
-  width: 2rem;
-  height: 2rem;
-  background-color: var(--dracula-white);
-}
-.navySquare {
-  width: 2rem;
-  height: 2rem;
-  background-color: var(--dracula-navy);
-}
-.redSquare {
-  width: 2rem;
-  height: 2rem;
-  background-color: var(--dracula-red);
-}
-.yellowSquare {
-  width: 2rem;
-  height: 2rem;
-  background-color: var(--dracula-yellow);
-}
-.pinkSquare {
-  width: 2rem;
-  height: 2rem;
-  background-color: var(--dracula-pink);
+.amDoing {
+  color: var(--dracula-cyan);
 }
 
-.roundedCorners {
-  border-radius: 3px;
+.taskContainer {
+  padding-bottom: 1rem;
+}
+
+.task {
+  font-size: 1rem;
+  color: var(--dracula-white);
 }

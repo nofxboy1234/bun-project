@@ -5,15 +5,19 @@
 }
 
 :root {
+  --dracula-white: #f8f8f2;
+
   --dracula-green: #92fa9b;
   --dracula-purple: #b696f5;
   --dracula-cyan: #a0e6fb;
+
+  --dracula-pink: #ff92df;
+  --dracula-yellow: #ffffa5;
+  --dracula-orange: #ffa962;
+
   --dracula-grey: #aab2cd;
-  --dracula-white: #f8f8f2;
   --dracula-navy: #282a35;
   --dracula-red: #ff6e6e;
-  --dracula-yellow: #ffffa5;
-  --dracula-pink: #ff92df;
 }
 
 @font-face {
@@ -36,6 +40,7 @@ h1 {
 
 h2 {
   color: var(--dracula-purple);
+  padding-bottom: 1rem;
 }
 
 a {
