@@ -8,6 +8,7 @@ This is a React project bootstrapped with `bun init`. It uses Bun as the JavaScr
 - **React:** Used for the frontend UI.
 - **TypeScript:** Used for static typing.
 - **ESLint:** Used for code linting.
+- **Prettier:** Used for code formatting.
 
 ## Architecture
 
@@ -50,6 +51,6 @@ The project is a single-page application (SPA) with a simple backend API.
 
 # Development Conventions
 
-- **Coding Style:** The project uses ESLint for code linting. The configuration is in `eslint.config.ts`.
+- **Coding Style:** The project uses ESLint for code linting and Prettier for code formatting. The ESLint configuration is in `eslint.config.ts`. `eslint-config-prettier` is used to prevent conflicts between ESLint and Prettier.
 - **Testing:** There are no testing practices defined in the project.
 - **Contribution:** There are no contribution guidelines defined in the project.
