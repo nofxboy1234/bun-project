@@ -4,9 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "ts": "bunx tsc",
     "dev": "bun --hot src/index.tsx",
-    "build": "bun build ./src/index.html --outdir=dist --sourcemap --target=browser --minify --define:process.env.NODE_ENV='\"production\"' --env='BUN_PUBLIC_*'",
-    "start": "NODE_ENV=production bun src/index.tsx"
+    "build": "bun build --minify --sourcemap --env='BUN_PUBLIC_*' --production --target=bun ./src/index.tsx --outdir=dist",
+    "build-exe": "bun build --compile --minify --sourcemap --env='BUN_PUBLIC_*' --bytecode --production --target=bun ./src/index.tsx --outfile myapp",
+    "start": "NODE_ENV=production bun src/index.tsx",
+    "start:js": "cd dist && NODE_ENV=production bun index.js",
+    "clean": "rm -rf dist && rm -f myapp && echo 'Done cleaning.'"
   },
   "dependencies": {
     "react": "^19",
