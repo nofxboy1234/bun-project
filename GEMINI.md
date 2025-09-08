@@ -44,6 +44,14 @@ The project is a single-page application (SPA) with a simple backend API.
   ```bash
   bun ts
   ```
+- **Lint files:**
+  ```bash
+  bun lint
+  ```
+- **Format files:**
+  ```bash
+  bun format
+  ```
 - **Clean build artifacts:**
   ```bash
   bun clean
