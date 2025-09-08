@@ -1,0 +1,43 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --dracula-green: #92fa9b;
+  --dracula-purple: #b696f5;
+  --dracula-cyan: #a0e6fb;
+  --dracula-grey: #aab2cd;
+  --dracula-white: #f8f8f2;
+  --dracula-navy: #282a35;
+  --dracula-red: #ff6e6e;
+  --dracula-yellow: #ffffa5;
+  --dracula-pink: #ff92df;
+}
+
+@font-face {
+  font-family: Roboto;
+  src: url(./fonts/Roboto-Regular.ttf);
+}
+
+body {
+  background-color: var(--dracula-navy);
+  color: var(--dracula-white);
+  font-size: 1rem;
+  padding: 1rem;
+  font-family: Roboto, sans-serif;
+}
+
+h1 a {
+  color: var(--dracula-green);
+  text-decoration: none;
+}
+
+h2 {
+  color: var(--dracula-purple);
+}
+
+a {
+  color: var(--dracula-cyan);
+}
