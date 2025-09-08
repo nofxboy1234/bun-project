@@ -29,9 +29,9 @@ body {
   font-family: Roboto, sans-serif;
 }
 
-h1 a {
+h1 {
+  margin: 1rem;
   color: var(--dracula-green);
-  text-decoration: none;
 }
 
 h2 {

@@ -1,3 +1,50 @@
+.app {
+  display: flex;
+  justify-content: center;
+}
+
 .button {
   color: var(--dracula-pink);
+}
+
+.cyanSquare {
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--dracula-cyan);
+}
+
+.greySquare {
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--dracula-grey);
+}
+
+.whiteSquare {
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--dracula-white);
+}
+.navySquare {
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--dracula-navy);
+}
+.redSquare {
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--dracula-red);
+}
+.yellowSquare {
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--dracula-yellow);
+}
+.pinkSquare {
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--dracula-pink);
+}
+
+.roundedCorners {
+  border-radius: 3px;
 }
