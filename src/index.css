@@ -5,20 +5,16 @@
 }
 
 :root {
-  --dracula-white: #f8f8f2;
+  --dracula-green: #69ff94;
+  --dracula-purple: #bd93f9;
+  --dracula-navy: #282a36;
+  --dracula-cyan: #8be9fd;
 
-  --dracula-green: #92fa9b;
-  --dracula-purple: #b696f5;
-  --dracula-cyan: #a0e6fb;
-
-  --dracula-pink: #ff92df;
-  --dracula-light-pink: #fff2fc;
-  --dracula-yellow: #ffffa5;
-  --dracula-orange: #ffa962;
-
-  --dracula-grey: #aab2cd;
-  --dracula-navy: #282a35;
-  --dracula-red: #ff6e6e;
+  --yacine-white: #f8f7f8;
+  --yacine-blue: #31a1f2;
+  --yacine-green: #80dee0;
+  --yacine-seaweed: #09212f;
+  --yacine-dark-grey: #04141e;
 }
 
 @font-face {
@@ -27,7 +23,7 @@
 }
 
 body {
-  background: linear-gradient(var(--dracula-light-pink), white);
+  background-color: var(--dracula-navy);
   font-family: Roboto, sans-serif;
   font-size: 1rem;
   min-height: 100vh;

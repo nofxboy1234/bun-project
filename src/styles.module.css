@@ -5,20 +5,27 @@
 
 .getStarted {
   margin: 1rem;
-  color: rgb(20 21 26);
-  font-size: 3rem;
-  font-weight: 700;
+  color: var(--dracula-green);
+  font-size: 2rem;
+}
+
+.hello {
+  margin: 1rem;
+  color: var(--dracula-purple);
+  font-size: 25.6px;
 }
 
 .task {
-  /* min-width: 436px;
-  min-height: 244px; */
   border: 2px solid rgb(224, 224, 224);
   border-radius: 0.7rem;
-  background-color: white;
+  background-color: var(--yacine-white);
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.taskTitle {
+  font-weight: 700;
 }
 
 .taskNotes {
@@ -30,12 +37,9 @@
   color: rgb(59 63 75);
 }
 
-.taskTitle {
-  font-weight: 700;
-}
-
 .grid {
   display: grid;
-  grid-template-columns: 500px 500px;
-  grid-template-rows: 500px 500px;
+  grid-template-columns: 436px 436px;
+  grid-auto-rows: 244px;
+  gap: 1.5rem;
 }
