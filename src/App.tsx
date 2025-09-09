@@ -5,22 +5,52 @@ export function App() {
   return (
     <div className={styles.app}>
       <div>
-        <h1>bun-project</h1>
-        <h2>Simplify your tasks</h2>
+        <h1 className={styles.getStarted}>Get Started with Bun</h1>
 
-        <div className={styles.taskContainer}>
-          <h3 className={styles.wantToDo}>Want to do</h3>
-          <div className={styles.task}>Eat</div>
-        </div>
+        <div className={styles.grid}>
+          <div className={styles.task}>
+            <div className={styles.taskContent}>
+              <div className={styles.taskTitle}>Do stuff</div>
+              <div className={styles.taskNotes}>
+                <div>Eat</div>
+                <div>Sleep</div>
+                <div>Work</div>
+              </div>
+            </div>
+          </div>
 
-        <div className={styles.taskContainer}>
-          <h3 className={styles.needToDo}>Need to do</h3>
-          <div className={styles.task}>Sleep</div>
-        </div>
+          <div className={styles.task}>
+            <div className={styles.taskContent}>
+              <div className={styles.taskTitle}>Do stuff</div>
+              <div className={styles.taskNotes}>
+                <div>Eat</div>
+                <div>Sleep</div>
+                <div>Work</div>
+              </div>
+            </div>
+          </div>
 
-        <div className={styles.taskContainer}>
-          <h3 className={styles.amDoing}>Am doing</h3>
-          <div className={styles.task}>Working</div>
+          <div className={styles.task}>
+            <div className={styles.taskContent}>
+              <div className={styles.taskTitle}>Do stuff</div>
+              <div className={styles.taskNotes}>
+                <div>Eat</div>
+                <div>Sleep</div>
+                <div>Work</div>
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.task}>
+            <div className={styles.taskContent}>
+              <div className={styles.taskTitle}>Do stuff</div>
+              <div className={styles.taskNotes}>
+                <div>Eat</div>
+                <div>Sleep</div>
+                <div>Work</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

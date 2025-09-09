@@ -12,6 +12,7 @@
   --dracula-cyan: #a0e6fb;
 
   --dracula-pink: #ff92df;
+  --dracula-light-pink: #fff2fc;
   --dracula-yellow: #ffffa5;
   --dracula-orange: #ffa962;
 
@@ -26,23 +27,9 @@
 }
 
 body {
-  background-color: var(--dracula-navy);
-  color: var(--dracula-white);
-  font-size: 1rem;
-  padding: 1rem;
+  background: linear-gradient(var(--dracula-light-pink), white);
   font-family: Roboto, sans-serif;
-}
-
-h1 {
-  margin: 1rem;
-  color: var(--dracula-green);
-}
-
-h2 {
-  color: var(--dracula-purple);
-  padding-bottom: 1rem;
-}
-
-a {
-  color: var(--dracula-cyan);
+  font-size: 1rem;
+  min-height: 100vh;
+  padding: 1rem;
 }

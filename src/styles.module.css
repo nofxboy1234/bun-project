@@ -3,27 +3,39 @@
   justify-content: center;
 }
 
-.button {
-  color: var(--dracula-pink);
-}
-
-.wantToDo {
-  color: var(--dracula-cyan);
-}
-
-.needToDo {
-  color: var(--dracula-cyan);
-}
-
-.amDoing {
-  color: var(--dracula-cyan);
-}
-
-.taskContainer {
-  padding-bottom: 1rem;
+.getStarted {
+  margin: 1rem;
+  color: rgb(20 21 26);
+  font-size: 3rem;
+  font-weight: 700;
 }
 
 .task {
-  font-size: 1rem;
-  color: var(--dracula-white);
+  /* min-width: 436px;
+  min-height: 244px; */
+  border: 2px solid rgb(224, 224, 224);
+  border-radius: 0.7rem;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.taskNotes {
+  width: 384px;
+  height: 92px;
+  border-radius: 0.5rem;
+  background-color: #f3f4f6;
+  padding: 1rem;
+  color: rgb(59 63 75);
+}
+
+.taskTitle {
+  font-weight: 700;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 500px 500px;
+  grid-template-rows: 500px 500px;
 }
