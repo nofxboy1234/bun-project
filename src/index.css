@@ -9,12 +9,11 @@
   --dracula-purple: #bd93f9;
   --dracula-navy: #282a36;
   --dracula-cyan: #8be9fd;
-
-  --yacine-white: #f8f7f8;
-  --yacine-blue: #31a1f2;
-  --yacine-green: #80dee0;
-  --yacine-seaweed: #09212f;
-  --yacine-dark-grey: #04141e;
+  --dracula-black: #0d0e12;
+  --dracula-black2: #191a21;
+  --dracula-pink: #ff7ac6;
+  --dracula-white: #f0f1f4;
+  --dracula-grey: #959699;
 }
 
 @font-face {
@@ -23,7 +22,7 @@
 }
 
 body {
-  background-color: var(--dracula-navy);
+  background-color: var(--dracula-black);
   font-family: Roboto, sans-serif;
   font-size: 1rem;
   min-height: 100vh;

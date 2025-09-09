@@ -17,23 +17,32 @@
 
 .task {
   border-radius: 0.7rem;
-  background-color: var(--yacine-white);
+  border: 2px solid var(--dracula-grey);
+  /* background-color: var(--dracula-navy); */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .taskTitle {
-  font-weight: 700;
+  color: var(--dracula-pink);
+}
+
+.deadLine {
+  color: var(--dracula-cyan);
+}
+
+.hasDueDate {
+  border: 2px solid var(--dracula-cyan);
 }
 
 .taskNotes {
   width: 384px;
   height: 92px;
   border-radius: 0.5rem;
-  background-color: #eaecee;
+  background-color: var(--dracula-black2);
   padding: 1rem;
-  color: rgb(59 63 75);
+  color: var(--dracula-white);
 }
 
 .grid {

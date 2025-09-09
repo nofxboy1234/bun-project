@@ -9,7 +9,7 @@ export function App() {
         <h2 className={styles.hello}>Systems Engineer</h2>
 
         <div className={styles.grid}>
-          <div className={styles.task}>
+          <div className={`${styles.task} ${styles.hasDueDate}`}>
             <div className={styles.taskContent}>
               <div className={styles.taskTitle}>Do stuff</div>
               <div className={styles.taskNotes}>
@@ -17,6 +17,7 @@ export function App() {
                 <div>Sleep</div>
                 <div>Work</div>
               </div>
+              <div className={styles.deadLine}>30 Sept 2025</div>
             </div>
           </div>
 
