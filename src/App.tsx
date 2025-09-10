@@ -1,8 +1,7 @@
 import { useState } from "react";
 import "./index.css";
 import styles from "./styles.module.css";
-import { Task } from "./Task2";
-import { Task as ImageTask } from "./Task";
+import { Task } from "./Task";
 
 export function App() {
   const [selectedTask, setSelectedTask] = useState<number | null>(null);
@@ -27,13 +26,6 @@ export function App() {
       <div>
         <h1 className={styles.getStarted}>bun-project</h1>
         <h2 className={styles.hello}>Simple, Fast Tasks</h2>
-
-        <ImageTask
-          key={99}
-          id={99}
-          selectTask={selectTask}
-          selected={selectedTask === 99}
-        />
 
         {tasks.map((task) => (
           <Task

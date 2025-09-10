@@ -16,19 +16,9 @@
 }
 
 .task {
-  margin-bottom: 1rem;
-  display: flex;
-  justify-content: center;
-  border: 3px solid transparent;
+  margin-bottom: 3rem;
   cursor: pointer;
-}
 
-.taskImage {
-  height: 21rem;
-  display: block;
-}
-
-.taskContent {
   width: 42rem;
   height: 21rem;
   background-color: var(--unnamed-white);
@@ -38,6 +28,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  border: 3px solid var(--unnamed-pale-mint);
+  border-radius: 1rem;
+}
+
+.taskImage {
+  height: 21rem;
+  display: block;
 }
 
 .taskHeader {

@@ -1,25 +1,18 @@
 import styles from "./styles.module.css";
-import taskImage from "./img/unnamed.png";
 
 export function Task({
-  id,
   selected,
   selectTask,
+  task,
 }: {
-  id: number;
   selected: boolean;
   selectTask: (index: number) => void;
+  task: { id: number; title: string; deadline: Date };
 }) {
   return (
     <div
       className={`${styles.task} ${selected ? styles.selected : ""}`}
-      onClick={() => selectTask(id)}
-    >
-      <img
-        src={taskImage}
-        alt="A task to do"
-        className={`${styles.taskImage}`}
-      />
-    </div>
+      onClick={() => selectTask(task.id)}
+    ></div>
   );
 }
