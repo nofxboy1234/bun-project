@@ -18,7 +18,6 @@
 .task {
   border-radius: 0.7rem;
   border: 2px solid var(--dracula-grey);
-  /* background-color: var(--dracula-navy); */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,10 +27,6 @@
   height: 21em;
   display: block;
 }
-
-/* .bun-logo {
-  transform: scale(1.2);
-} */
 
 .taskTitle {
   color: var(--dracula-cyan);
