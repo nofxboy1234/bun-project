@@ -16,11 +16,9 @@
 }
 
 .task {
-  border-radius: 0.7rem;
-  border: 2px solid var(--dracula-grey);
+  margin-bottom: 1rem;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .taskImage {
