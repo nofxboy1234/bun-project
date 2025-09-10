@@ -5,15 +5,24 @@
 }
 
 :root {
+  --dracula-navy: #282a36;
   --dracula-green: #69ff94;
   --dracula-purple: #bd93f9;
-  --dracula-navy: #282a36;
+  --dracula-pink: #ff7ac6;
+  --dracula-yellow: #ffffa5;
   --dracula-cyan: #8be9fd;
+
   --dracula-black: #0d0e12;
   --dracula-black2: #191a21;
-  --dracula-pink: #ff7ac6;
   --dracula-white: #f0f1f4;
   --dracula-grey: #959699;
+
+  --unnamed-white: #faf9f8;
+  --unnamed-pale-green: #e2f2f5;
+  --unnamed-sky-blue: #30a0f1;
+  --unnamed-seaweed: #09202f;
+  --unnamed-blue-black: #06151f;
+  --unnamed-pale-mint: #a6e1e0;
 }
 
 @font-face {
@@ -22,7 +31,7 @@
 }
 
 body {
-  background-color: var(--dracula-black);
+  background-color: var(--dracula-navy);
   font-family: Roboto, sans-serif;
   font-size: 1rem;
   min-height: 100vh;

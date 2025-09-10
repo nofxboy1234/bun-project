@@ -24,16 +24,25 @@
   align-items: center;
 }
 
+.taskImage {
+  height: 21em;
+  display: block;
+}
+
+/* .bun-logo {
+  transform: scale(1.2);
+} */
+
 .taskTitle {
-  color: var(--dracula-pink);
+  color: var(--dracula-cyan);
 }
 
 .deadLine {
   color: var(--dracula-cyan);
 }
 
-.hasDueDate {
-  border: 2px solid var(--dracula-cyan);
+.selected {
+  border: 3px solid var(--dracula-pink);
 }
 
 .taskNotes {
