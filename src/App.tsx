@@ -6,7 +6,14 @@ import { Task } from "./Task";
 export function App() {
   const [selectedTask, setSelectedTask] = useState<number | null>(null);
 
-  const tasks = [{ id: 0 }, { id: 1 }];
+  const tasks = [
+    { id: 0 },
+    { id: 1 },
+    { id: 2 },
+    { id: 3 },
+    { id: 4 },
+    { id: 5 },
+  ];
 
   const selectTask = (index: number) => {
     setSelectedTask((prevSelectedTask) =>
@@ -17,8 +24,8 @@ export function App() {
   return (
     <div className={styles.app}>
       <div>
-        <h1 className={styles.getStarted}>yacine</h1>
-        <h2 className={styles.hello}>Systems Engineer</h2>
+        <h1 className={styles.getStarted}>bun-project</h1>
+        <h2 className={styles.hello}>Simple, Fast Tasks</h2>
 
         {tasks.map((task) => (
           <Task
