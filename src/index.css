@@ -6,6 +6,7 @@
 
 :root {
   --dracula-navy: #282a36;
+  --dracula-white: #f8f8f2;
   --dracula-green: #69ff94;
   --dracula-purple: #bd93f9;
   --dracula-pink: #ff7ac6;
@@ -14,7 +15,6 @@
 
   --dracula-black: #0d0e12;
   --dracula-black2: #191a21;
-  --dracula-white: #f0f1f4;
   --dracula-grey: #959699;
 
   --unnamed-white: #faf9f8;
@@ -32,6 +32,7 @@
 
 body {
   background-color: var(--dracula-navy);
+  color: var(--dracula-white);
   font-family: Roboto, sans-serif;
   font-size: 1rem;
   min-height: 100vh;
