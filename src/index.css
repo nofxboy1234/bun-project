@@ -13,16 +13,13 @@
   --dracula-yellow: #ffffa5;
   --dracula-cyan: #8be9fd;
 
-  --dracula-black: #0d0e12;
-  --dracula-black2: #191a21;
-  --dracula-grey: #959699;
-
   --unnamed-white: #faf9f8;
   --unnamed-pale-green: #e2f2f5;
   --unnamed-sky-blue: #30a0f1;
   --unnamed-seaweed: #09202f;
   --unnamed-blue-black: #06151f;
   --unnamed-pale-mint: #a6e1e0;
+  --unnamed-grey: #a8b2cf;
 }
 
 @font-face {
