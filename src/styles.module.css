@@ -90,11 +90,11 @@
 
 .taskHeader {
   height: 5rem;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   margin: 1rem;
   padding: 1rem;
-  border: 2px solid #444444;
-  border-radius: 0.5rem;
+  /* border: 2px solid #444444;
+  border-radius: 0.5rem; */
   color: #444444;
 }
 
