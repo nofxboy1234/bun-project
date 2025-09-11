@@ -12,11 +12,7 @@ export function Task({
   return (
     <div
       className={`${styles.task} ${selected ? styles.selected : ""}`}
-      onClick={(event) => {
-        const target = event.target;
-
-        selectTask(task.id);
-      }}
+      onClick={() => selectTask(task.id)}
     >
       <div className={styles.taskContent}>
         <div className={styles.angleRect}>{task.title}</div>
