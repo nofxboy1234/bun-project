@@ -1,7 +1,19 @@
 .app {
   display: flex;
   justify-content: center;
+
+  background-image: url("./img/asa-yoru.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  height: 100vh;
+  /* opacity: 50%; */
 }
+
+/* .appContainer {
+  opacity: 100%;
+} */
 
 .getStarted {
   margin: 1rem;

@@ -39,12 +39,12 @@
 
 @font-face {
   font-family: Roboto;
-  src: url(./fonts/Roboto-VariableFont_wdth,wght.ttf);
+  src: url("./fonts/Roboto-VariableFont_wdth,wght.ttf");
 }
 
 @font-face {
   font-family: FiraCode;
-  src: url(./fonts/FiraCode-VariableFont_wght.ttf);
+  src: url("./fonts/FiraCode-VariableFont_wght.ttf");
 }
 
 body {
@@ -53,5 +53,5 @@ body {
   font-family: Roboto, sans-serif;
   font-size: 1rem;
   min-height: 100vh;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
