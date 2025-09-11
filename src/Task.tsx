@@ -15,7 +15,8 @@ export function Task({
       onClick={() => selectTask(task.id)}
     >
       <div className={styles.taskContent}>
-        <div className={styles.taskHeader}></div>
+        <div className={styles.taskHeader}>{task.title}</div>
+        <div className={styles.taskFooter}>{task.deadline.toString()}</div>
       </div>
       <div className={styles.angleRect}></div>
     </div>
