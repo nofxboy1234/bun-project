@@ -24,17 +24,19 @@ export function App() {
   return (
     <div className={styles.app}>
       <div>
-        <h1 className={styles.getStarted}>bun-project</h1>
+        <h1 className={styles.getStarted}>Asa-Yoru</h1>
         <h2 className={styles.hello}>Simple, Fast Tasks</h2>
 
-        {tasks.map((task) => (
-          <Task
-            key={task.id}
-            task={task}
-            selectTask={selectTask}
-            selected={selectedTask === task.id}
-          />
-        ))}
+        <div>
+          {tasks.map((task) => (
+            <Task
+              key={task.id}
+              task={task}
+              selectTask={selectTask}
+              selected={selectedTask === task.id}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

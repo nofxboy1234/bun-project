@@ -5,32 +5,62 @@
 
 .getStarted {
   margin: 1rem;
-  color: var(--dracula-green);
-  font-size: 2rem;
+  /* color: var(--dracula-green); */
+  /* font-size: 2rem; */
 }
 
 .hello {
   margin: 1rem;
-  color: var(--dracula-purple);
-  font-size: 25.6px;
+  /* color: var(--dracula-purple); */
+  /* font-size: 2rem; */
 }
 
 .task {
-  margin-bottom: 3rem;
+  margin-bottom: 0.5rem;
   cursor: pointer;
 
-  width: 42rem;
-  height: 21rem;
-  background-color: var(--unnamed-white);
-  color: var(--unnamed-seaweed);
-  font-weight: 700;
-  font-size: 1.5rem;
+  width: 40rem;
+  height: 15rem;
+  background-color: #ececec;
+  /* background-color: var(--unnamed-white); */
+  /* color: var(--unnamed-seaweed); */
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  border: 3px solid var(--unnamed-pale-mint);
-  border-radius: 1rem;
+  border: 3px solid var(--dracula-navy);
+  /* border-radius: 1rem; */
+  /* padding: 1.5rem; */
+  overflow: hidden;
+  position: relative;
+}
+
+.taskContent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+.taskHeader {
+  /* position: absolute;
+  top: 0;
+  left: 0; */
+  height: 3rem;
+  /* width: 100%; */
+  background-color: #b6b6b6;
+}
+
+.angleRect {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-color: #010101;
+  transform: translate(-100px, -250px) rotate(25deg);
 }
 
 .taskImage {
@@ -38,17 +68,33 @@
   display: block;
 }
 
-.taskHeader {
-  height: 5rem;
-  background-color: var(--unnamed-seaweed);
-  color: var(--unnamed-white);
-}
-
 .taskFooter {
   height: 10rem;
   background-color: var(--unnamed-sky-blue);
 }
 
+.taskDetail {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  border-radius: 0.375rem;
+}
+
+.taskID {
+  /* background-color: var(--unnamed-pale-mint); */
+  color: var(--unnamed-white);
+}
+
+.taskTitle {
+  /* background-color: var(--unnamed-seaweed); */
+  color: var(--unnamed-white);
+}
+
+.taskDeadline {
+  /* background-color: var(--unnamed-sky-blue); */
+  color: var(--unnamed-white);
+}
+
 .selected {
-  border: 3px solid var(--dracula-pink);
+  border: 3px solid var(--dracula-purple);
 }

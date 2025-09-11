@@ -13,6 +13,11 @@ export function Task({
     <div
       className={`${styles.task} ${selected ? styles.selected : ""}`}
       onClick={() => selectTask(task.id)}
-    ></div>
+    >
+      <div className={styles.taskContent}>
+        <div className={styles.taskHeader}></div>
+      </div>
+      <div className={styles.angleRect}></div>
+    </div>
   );
 }

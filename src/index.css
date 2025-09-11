@@ -20,6 +20,21 @@
   --unnamed-blue-black: #06151f;
   --unnamed-pale-mint: #a6e1e0;
   --unnamed-grey: #a8b2cf;
+
+  --bun-grey: #eaecf3;
+  --bun-black: #14151a;
+
+  --manga-white: #fefefe;
+  --manga-white-2: #ffffff;
+  --manga-black: #000000;
+  --manga-black-2: #010101;
+  --manga-grey-1: #e1e1e1;
+  --manga-grey-2: #a3a3a3;
+  --manga-grey-3: #8a8a8a;
+  --manga-grey-4: #ababab;
+  --manga-grey-5: #999999;
+  --manga-grey-6: #e6e6e6;
+  --manga-grey-7: #e4e4e4;
 }
 
 @font-face {
@@ -27,9 +42,14 @@
   src: url(./fonts/Roboto-VariableFont_wdth,wght.ttf);
 }
 
+@font-face {
+  font-family: FiraCode;
+  src: url(./fonts/FiraCode-VariableFont_wght.ttf);
+}
+
 body {
-  background-color: var(--dracula-navy);
-  color: var(--dracula-white);
+  background-color: var(--manga-white);
+  color: var(--manga-black);
   font-family: Roboto, sans-serif;
   font-size: 1rem;
   min-height: 100vh;
