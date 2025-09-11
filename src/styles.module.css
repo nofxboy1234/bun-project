@@ -15,7 +15,7 @@
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.2;
+  opacity: 0.1;
 }
 
 .appContainer {
@@ -47,7 +47,7 @@
 
   width: 40rem;
   height: 15rem;
-  background-color: #ececec;
+  /* background-color: #ececec; */
   font-size: 1rem;
   display: flex;
   flex-direction: column;
