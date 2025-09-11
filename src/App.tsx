@@ -20,30 +20,30 @@ export function App() {
       deadline: new Date(),
     },
     { id: 2, title: "Task 2", description: "asdfsfsfd", deadline: new Date() },
-    // {
-    //   id: 3,
-    //   title: "Task 3",
-    //   description: "addfdfdgfgkjkj",
-    //   deadline: new Date(),
-    // },
-    // {
-    //   id: 4,
-    //   title: "Task 4",
-    //   description: "sfkljjkjipwiwi",
-    //   deadline: new Date(),
-    // },
-    // {
-    //   id: 5,
-    //   title: "Task 5",
-    //   description: "zzzzzzzzzzjdkfjskdf",
-    //   deadline: new Date(),
-    // },
-    // {
-    //   id: 6,
-    //   title: "Task 6",
-    //   description: "sdklfjdskikjskjdfksdjkfjskfjdk",
-    //   deadline: new Date(),
-    // },
+    {
+      id: 3,
+      title: "Task 3",
+      description: "addfdfdgfgkjkj",
+      deadline: new Date(),
+    },
+    {
+      id: 4,
+      title: "Task 4",
+      description: "sfkljjkjipwiwi",
+      deadline: new Date(),
+    },
+    {
+      id: 5,
+      title: "Task 5",
+      description: "zzzzzzzzzzjdkfjskdf",
+      deadline: new Date(),
+    },
+    {
+      id: 6,
+      title: "Task 6",
+      description: "sdklfjdskikjskjdfksdjkfjskfjdk",
+      deadline: new Date(),
+    },
   ];
 
   const selectTask = (index: number) => {
@@ -59,7 +59,7 @@ export function App() {
         <h1 className={styles.getStarted}>Asa-Yoru</h1>
         <h2 className={styles.hello}>Simple, Fast Tasks</h2>
 
-        <div>
+        <div className={styles.tasksContainer}>
           {tasks.map((task) => (
             <Task
               key={task.id}
