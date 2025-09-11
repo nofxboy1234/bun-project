@@ -7,12 +7,37 @@ export function App() {
   const [selectedTask, setSelectedTask] = useState<number | null>(null);
 
   const tasks = [
-    { id: 0, title: "Task 1", deadline: new Date() },
-    { id: 1, title: "Task 2", deadline: new Date() },
-    { id: 2, title: "Task 3", deadline: new Date() },
-    { id: 3, title: "Task 4", deadline: new Date() },
-    { id: 4, title: "Task 5", deadline: new Date() },
-    { id: 5, title: "Task 6", deadline: new Date() },
+    {
+      id: 0,
+      title: "Task 1",
+      description: "ksdjfkjsdkf",
+      deadline: new Date(),
+    },
+    {
+      id: 1,
+      title: "Task 2",
+      description: "sdlkfjdskjkj",
+      deadline: new Date(),
+    },
+    { id: 2, title: "Task 3", description: "asdfsfsfd", deadline: new Date() },
+    {
+      id: 3,
+      title: "Task 4",
+      description: "addfdfdgfgkjkj",
+      deadline: new Date(),
+    },
+    {
+      id: 4,
+      title: "Task 5",
+      description: "sfkljjkjipwiwi",
+      deadline: new Date(),
+    },
+    {
+      id: 5,
+      title: "Task 6",
+      description: "zzzzzzzzzzjdkfjskdf",
+      deadline: new Date(),
+    },
   ];
 
   const selectTask = (index: number) => {

@@ -7,7 +7,7 @@ export function Task({
 }: {
   selected: boolean;
   selectTask: (index: number) => void;
-  task: { id: number; title: string; deadline: Date };
+  task: { id: number; title: string; description: string; deadline: Date };
 }) {
   return (
     <div
@@ -15,10 +15,10 @@ export function Task({
       onClick={() => selectTask(task.id)}
     >
       <div className={styles.taskContent}>
-        <div className={styles.taskHeader}>{task.title}</div>
+        <div className={styles.angleRect}>{task.title}</div>
+        <div className={styles.taskHeader}>{task.description}</div>
         <div className={styles.taskFooter}>{task.deadline.toString()}</div>
       </div>
-      <div className={styles.angleRect}></div>
     </div>
   );
 }
