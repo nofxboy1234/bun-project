@@ -5,14 +5,10 @@
 
 .getStarted {
   margin: 1rem;
-  /* color: var(--dracula-green); */
-  /* font-size: 2rem; */
 }
 
 .hello {
   margin: 1rem;
-  /* color: var(--dracula-purple); */
-  /* font-size: 2rem; */
 }
 
 .task {
@@ -22,8 +18,6 @@
   width: 40rem;
   height: 15rem;
   background-color: #ececec;
-  /* background-color: var(--unnamed-white); */
-  /* color: var(--unnamed-seaweed); */
   font-size: 1rem;
   display: flex;
   flex-direction: column;
@@ -45,11 +39,7 @@
 }
 
 .taskHeader {
-  /* position: absolute;
-  top: 0;
-  left: 0; */
   height: 3rem;
-  /* width: 100%; */
   background-color: #b6b6b6;
 }
 
@@ -81,17 +71,14 @@
 }
 
 .taskID {
-  /* background-color: var(--unnamed-pale-mint); */
   color: var(--unnamed-white);
 }
 
 .taskTitle {
-  /* background-color: var(--unnamed-seaweed); */
   color: var(--unnamed-white);
 }
 
 .taskDeadline {
-  /* background-color: var(--unnamed-sky-blue); */
   color: var(--unnamed-white);
 }
 
