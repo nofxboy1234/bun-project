@@ -54,7 +54,7 @@ export function App() {
 
   return (
     <div className={styles.app}>
-      <div className={styles.appBackground}></div>
+      {/* <div className={styles.appBackground}></div> */}
       <div className={styles.appContainer}>
         <h1 className={styles.getStarted}>Asa-Yoru</h1>
         <h2 className={styles.hello}>Simple, Fast Tasks</h2>
