@@ -35,10 +35,12 @@
 
 .getStarted {
   margin: 1rem;
+  color: var(--dracula-pink);
 }
 
 .hello {
   margin: 1rem;
+  color: var(--dracula-purple);
 }
 
 .task {
@@ -130,5 +132,6 @@
 }
 
 .selected {
-  border: 3px solid var(--dracula-purple);
+  border: 3px solid var(--dracula-pink);
+  background-color: var(--dracula-yellow);
 }
