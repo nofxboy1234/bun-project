@@ -10,6 +10,8 @@ export function Task({
   return (
     <div className={styles.task}>
       <div>{task.title}</div>
+      <div>{task.description}</div>
+      <div>{task.deadline.toString()}</div>
       <div className={styles.taskOperations}>
         <img src={updateIcon} alt="Delete Task" className={styles.updateIcon} />
         <img src={deleteIcon} alt="Delete Task" className={styles.deleteIcon} />
