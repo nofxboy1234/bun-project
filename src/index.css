@@ -65,7 +65,7 @@
 
 body {
   background-color: var(--reddit-main);
-  color: var(--manga-black);
+  color: var(--reddit-main-black);
   font-family: Roboto, sans-serif;
   font-size: 1rem;
   min-height: 100vh;
