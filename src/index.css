@@ -35,6 +35,11 @@
   --manga-grey-5: #999999;
   --manga-grey-6: #e6e6e6;
   --manga-grey-7: #e4e4e4;
+
+  --reddit-shell: #ffffff;
+  --reddit-main: #fdfaf6;
+  --reddit-post-hover: #faedde;
+  --reddit-main-border-color: #cccccc;
 }
 
 @font-face {
@@ -48,7 +53,7 @@
 }
 
 body {
-  background-color: var(--manga-white);
+  background-color: var(--reddit-main);
   color: var(--manga-black);
   font-family: Roboto, sans-serif;
   font-size: 1rem;
