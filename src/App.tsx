@@ -63,15 +63,12 @@ export function App() {
 
   return (
     <div className={styles.app}>
-      {/* <div className={styles.appBackground}></div> */}
-      <div className={styles.appContainer}>
-        <h1 className={styles.title}>Asa-Yoru</h1>
+      <h1 className={styles.title}>Asa-Yoru</h1>
 
-        <div className={styles.tasksContainer}>
-          {tasks.map((task) => (
-            <Task key={task.id} task={task} />
-          ))}
-        </div>
+      <div className={styles.tasksContainer}>
+        {tasks.map((task) => (
+          <Task key={task.id} task={task} />
+        ))}
       </div>
     </div>
   );

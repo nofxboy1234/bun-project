@@ -13,33 +13,44 @@
   --dracula-yellow: #ffffa5;
   --dracula-cyan: #8be9fd;
 
-  --unnamed-white: #faf9f8;
-  --unnamed-pale-green: #e2f2f5;
-  --unnamed-sky-blue: #30a0f1;
-  --unnamed-seaweed: #09202f;
-  --unnamed-blue-black: #06151f;
-  --unnamed-pale-mint: #a6e1e0;
-  --unnamed-grey: #a8b2cf;
-
-  --bun-grey: #eaecf3;
-  --bun-black: #14151a;
-
-  --manga-white: #fefefe;
-  --manga-white-2: #ffffff;
-  --manga-black: #000000;
-  --manga-black-2: #010101;
-  --manga-grey-1: #e1e1e1;
-  --manga-grey-2: #a3a3a3;
-  --manga-grey-3: #8a8a8a;
-  --manga-grey-4: #ababab;
-  --manga-grey-5: #999999;
-  --manga-grey-6: #e6e6e6;
-  --manga-grey-7: #e4e4e4;
-
   --reddit-shell: #ffffff;
   --reddit-main: #fdfaf6;
   --reddit-post-hover: #faedde;
+  --reddit-aside-link: #f8e5ce;
+  --reddit-aside-link-hover: #f7debf;
+  --reddit-aside: #fcf4eb;
+  --reddit-shell-search-1: #e5ebee;
+  --reddit-shell-search-2: #c9d7de;
+  --reddit-shell-search-hover: #dbe4e9;
+  --reddit-main-black: #1c1306;
+  --reddit-feed-link-active: #f4ce9a;
+  --reddit-grey-1: #7f7d7b;
+  --reddit-about-link: #5c6c74;
+  --reddit-new-link: #7e6234;
+  --reddit-popup-black: #000000;
+  --reddit-popup-title: #333d42;
   --reddit-main-border-color: #cccccc;
+  --reddit-tag-1: #ea0fff;
+  --reddit-tag-2: #fc8d8c;
+  --reddit-tag-3: #7d8890;
+  --reddit-tag-4: #5781ff;
+  --reddit-tag-5: #ed6baf;
+  --reddit-tag-6: #fd66ff;
+  --reddit-tag-7: #f4a471;
+  --reddit-tag-8: #de019f;
+  --reddit-tag-9: #ea4651;
+  --reddit-tag-10: #d54b1c;
+  --reddit-tag-11: #150e04;
+  --reddit-tag-12: #00a6a5;
+  --reddit-tag-12: #73f39b;
+  --reddit-spoiler-thumbnail: #585858;
+  --reddit-sidebar-link-hover: #f6f8f9;
+  --reddit-side-bar-link: #21272a;
+  --reddit-side-bar-link-active: #000000;
+  --reddit-shell-border: #cccccc;
+  --reddit-comment-line: #f6dbba;
+  --reddit-comment-button: #71382b;
+  --reddit-comment-button-hover: #56291f;
 }
 
 @font-face {
