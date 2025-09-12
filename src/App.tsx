@@ -1,7 +1,7 @@
 import "./index.css";
 import styles from "./styles.module.css";
 import { Task } from "./Task";
-import plusIcon from "@/icons/add.svg";
+import plusIcon from "@/icons/add_2.svg";
 
 export function App() {
   const tasks = [

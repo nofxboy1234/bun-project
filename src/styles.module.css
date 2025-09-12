@@ -11,7 +11,7 @@
 
 .header {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 
   grid-area: header;
   background-color: var(--reddit-shell);
@@ -41,6 +41,7 @@
 .title {
   color: var(--dracula-purple);
   font-size: 1.75rem;
+  margin-left: 1rem;
 }
 
 .task {
@@ -60,5 +61,5 @@
 }
 
 .plusIcon {
-  /* width: 800px; */
+  transform: scale(0.6);
 }
