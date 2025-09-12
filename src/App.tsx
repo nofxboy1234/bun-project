@@ -72,6 +72,24 @@ export function App() {
       description: "the last task!",
       deadline: new Date(),
     },
+    {
+      id: 12,
+      title: "Task 12",
+      description: "the last task!",
+      deadline: new Date(),
+    },
+    {
+      id: 13,
+      title: "Task 13",
+      description: "the last task!",
+      deadline: new Date(),
+    },
+    {
+      id: 14,
+      title: "Task 14",
+      description: "the last task!",
+      deadline: new Date(),
+    },
   ];
 
   return (
