@@ -10,10 +10,11 @@
 }
 
 .header {
+  grid-area: header;
+
   display: flex;
   justify-content: space-between;
 
-  grid-area: header;
   background-color: var(--reddit-shell);
   border-bottom: 1px solid var(--reddit-shell-border);
   padding: 0.5rem;
@@ -52,10 +53,12 @@
 }
 
 .task {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   cursor: pointer;
-
   height: 126px;
-
   border-bottom: 1px solid var(--reddit-main-border-color);
 }
 
@@ -69,4 +72,26 @@
 
 .plusIcon {
   transform: scale(0.6);
+}
+
+/* .updateIcon {
+  transform: scale(1.2);
+  padding: 0.5rem;
+}
+
+.deleteIcon {
+  transform: scale(1.2);
+  padding: 0.5rem;
+} */
+
+.blocks {
+  display: flex;
+}
+
+.updateIcon,
+.deleteIcon {
+  transform: scale(0.8);
+  width: 2rem;
+  height: 2rem;
+  margin: 1rem;
 }
