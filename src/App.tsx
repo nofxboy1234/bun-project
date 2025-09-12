@@ -81,7 +81,7 @@ export function App() {
         <img src={plusIcon} alt="Create Task" className={styles.plusIcon} />
       </div>
 
-      <div className={`${styles.nav}`}>nav</div>
+      <div className={`${styles.nav} ${styles.stickyNav}`}>nav</div>
 
       <div className={styles.main}>
         <div className={styles.tasksContainer}>

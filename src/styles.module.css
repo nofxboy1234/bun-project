@@ -31,6 +31,13 @@
   border-right: 1px solid var(--reddit-shell-border);
 }
 
+.stickyNav {
+  position: sticky;
+  top: 57.27px;
+  height: calc(100vh - 57.27px);
+  z-index: 999;
+}
+
 .main {
   grid-area: main;
 }
