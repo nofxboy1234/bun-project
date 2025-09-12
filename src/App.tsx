@@ -44,6 +44,12 @@ export function App() {
       description: "sdklfjdskikjskjdfksdjkfjskfjdk",
       deadline: new Date(),
     },
+    {
+      id: 7,
+      title: "Task 7",
+      description: "the last task!",
+      deadline: new Date(),
+    },
   ];
 
   const selectTask = (index: number) => {
