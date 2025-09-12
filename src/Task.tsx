@@ -10,7 +10,7 @@ export function Task({
   return (
     <div className={styles.task}>
       <div>{task.title}</div>
-      <div className={styles.blocks}>
+      <div className={styles.taskOperations}>
         <img src={updateIcon} alt="Delete Task" className={styles.updateIcon} />
         <img src={deleteIcon} alt="Delete Task" className={styles.deleteIcon} />
       </div>
