@@ -2,17 +2,27 @@
   /* width: 100vw; */
 
   display: grid;
-  grid-template-columns: 1fr 8.5fr;
-  grid-template-rows: 1fr 22fr;
+  grid-template-columns: 271px 1fr;
+  grid-template-rows: 57.27px 1fr;
   grid-template-areas:
     "header header"
     "nav main";
 }
 
 .header {
+  display: flex;
+  justify-content: space-evenly;
+
   grid-area: header;
   background-color: var(--reddit-shell);
   border-bottom: 1px solid var(--reddit-shell-border);
+  padding: 0.5rem;
+}
+
+.stickyHeader {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .nav {
@@ -47,4 +57,8 @@
 
 .task:hover {
   background-color: var(--reddit-post-hover);
+}
+
+.plusIcon {
+  /* width: 800px; */
 }

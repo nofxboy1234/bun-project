@@ -1,6 +1,7 @@
 import "./index.css";
 import styles from "./styles.module.css";
 import { Task } from "./Task";
+import plusIcon from "@/icons/add.svg";
 
 export function App() {
   const tasks = [
@@ -59,15 +60,28 @@ export function App() {
       description: "the last task!",
       deadline: new Date(),
     },
+    {
+      id: 10,
+      title: "Task 10",
+      description: "the last task!",
+      deadline: new Date(),
+    },
+    {
+      id: 11,
+      title: "Task 11",
+      description: "the last task!",
+      deadline: new Date(),
+    },
   ];
 
   return (
     <div className={styles.app}>
-      <div className={styles.header}>
+      <div className={`${styles.header} ${styles.stickyHeader}`}>
         <h1 className={styles.title}>asa-yoru</h1>
+        <img src={plusIcon} alt="Create Task" className={styles.plusIcon} />
       </div>
 
-      <div className={styles.nav}>nav</div>
+      <div className={`${styles.nav}`}>nav</div>
 
       <div className={styles.main}>
         <div className={styles.tasksContainer}>
