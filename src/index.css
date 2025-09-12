@@ -54,16 +54,6 @@
 }
 
 @font-face {
-  font-family: Roboto;
-  src: url("./fonts/Roboto-VariableFont_wdth,wght.ttf");
-}
-
-@font-face {
-  font-family: FiraCode;
-  src: url("./fonts/FiraCode-VariableFont_wght.ttf");
-}
-
-@font-face {
   font-family: RedditSans-Regular;
   src: url("./fonts/reddit-sans/RedditSans-Regular.ttf");
 }

@@ -2,8 +2,8 @@
   /* width: 100vw; */
 
   display: grid;
-  grid-template-columns: 1fr 6fr;
-  grid-template-rows: 1fr 11fr;
+  grid-template-columns: 1fr 8.5fr;
+  grid-template-rows: 1fr 22fr;
   grid-template-areas:
     "header header"
     "nav main";
@@ -11,10 +11,14 @@
 
 .header {
   grid-area: header;
+  background-color: var(--reddit-shell);
+  border-bottom: 1px solid var(--reddit-shell-border);
 }
 
 .nav {
   grid-area: nav;
+  background-color: var(--reddit-shell);
+  border-right: 1px solid var(--reddit-shell-border);
 }
 
 .main {
@@ -26,6 +30,7 @@
 
 .title {
   color: var(--dracula-purple);
+  font-size: 1.75rem;
 }
 
 .task {

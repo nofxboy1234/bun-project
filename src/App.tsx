@@ -64,7 +64,7 @@ export function App() {
   return (
     <div className={styles.app}>
       <div className={styles.header}>
-        <h1 className={styles.title}>Asa-Yoru</h1>
+        <h1 className={styles.title}>asa-yoru</h1>
       </div>
 
       <div className={styles.nav}>nav</div>
