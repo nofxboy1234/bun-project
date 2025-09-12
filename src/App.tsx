@@ -53,6 +53,12 @@ export function App() {
       description: "the last task!",
       deadline: new Date(),
     },
+    {
+      id: 9,
+      title: "Task 9",
+      description: "the last task!",
+      deadline: new Date(),
+    },
   ];
 
   return (
