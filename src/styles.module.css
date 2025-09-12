@@ -1,5 +1,24 @@
 .app {
-  width: 100vw;
+  /* width: 100vw; */
+
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+  grid-template-rows: 1fr 11fr;
+  grid-template-areas:
+    "header header"
+    "nav main";
+}
+
+.header {
+  grid-area: header;
+}
+
+.nav {
+  grid-area: nav;
+}
+
+.main {
+  grid-area: main;
 }
 
 .tasksContainer {
