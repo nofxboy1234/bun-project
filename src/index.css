@@ -63,10 +63,15 @@
   src: url("./fonts/FiraCode-VariableFont_wght.ttf");
 }
 
+@font-face {
+  font-family: RedditSans-Regular;
+  src: url("./fonts/reddit-sans/RedditSans-Regular.ttf");
+}
+
 body {
   background-color: var(--reddit-main);
   color: var(--reddit-main-black);
-  font-family: Roboto, sans-serif;
+  font-family: RedditSans-Regular, sans-serif;
   font-size: 1rem;
   min-height: 100vh;
 }
