@@ -64,6 +64,10 @@
   /* position: relative; */
 }
 
+.task:first-child {
+  border-top: 1px solid var(--reddit-main-border-color);
+}
+
 .task:hover {
   background-color: var(--reddit-post-hover);
 }
