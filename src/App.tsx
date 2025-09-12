@@ -1,11 +1,8 @@
-import { useState } from "react";
 import "./index.css";
 import styles from "./styles.module.css";
 import { Task } from "./Task";
 
 export function App() {
-  const [selectedTask, setSelectedTask] = useState<number | null>(null);
-
   const tasks = [
     {
       id: 0,
@@ -50,13 +47,13 @@ export function App() {
       description: "the last task!",
       deadline: new Date(),
     },
+    {
+      id: 8,
+      title: "Task 8",
+      description: "the last task!",
+      deadline: new Date(),
+    },
   ];
-
-  const selectTask = (index: number) => {
-    setSelectedTask((prevSelectedTask) =>
-      prevSelectedTask === index ? null : index,
-    );
-  };
 
   return (
     <div className={styles.app}>
@@ -66,12 +63,7 @@ export function App() {
 
         <div className={styles.tasksContainer}>
           {tasks.map((task) => (
-            <Task
-              key={task.id}
-              task={task}
-              selectTask={selectTask}
-              selected={selectedTask === task.id}
-            />
+            <Task key={task.id} task={task} />
           ))}
         </div>
       </div>
