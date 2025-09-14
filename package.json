@@ -15,6 +15,7 @@
     "clean": "rm -rf dist && rm -f bun-project && echo 'Done cleaning.'"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.87.4",
     "react": "^19",
     "react-dom": "^19"
   },
