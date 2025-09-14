@@ -11,6 +11,29 @@ export default defineConfig(
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
+    ignores: [
+      "node_modules",
+      "out",
+      "dist",
+      "*.tgz",
+      "coverage",
+      "*.lcov",
+      "logs",
+      "_.log",
+      "report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json",
+      ".env",
+      ".env.development.local",
+      ".env.test.local",
+      ".env.production.local",
+      ".env.local",
+      ".eslintcache",
+      ".cache",
+      "*.tsbuildinfo",
+      ".idea",
+      ".DS_Store",
+    ],
+  },
+  {
     ...pluginReact.configs.flat.recommended,
     settings: {
       react: {
