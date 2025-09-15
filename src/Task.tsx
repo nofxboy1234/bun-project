@@ -1,12 +1,9 @@
 import styles from "./styles.module.css";
 import deleteIcon from "@/icons/delete.svg";
 import updateIcon from "@/icons/update.svg";
+import type { Task } from "./types";
 
-export function Task({
-  task,
-}: {
-  task: { id: number; title: string; description: string; deadline: Date };
-}) {
+export function Task({ task }: { task: Task }) {
   return (
     <div className={styles.task}>
       <div>{task.title}</div>

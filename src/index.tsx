@@ -13,8 +13,9 @@ const server = serve({
       },
       async POST(req) {
         const task = await req.json();
+        task.id = tasks.length;
         tasks.push(task);
-        return Response.json({ created: true, ...task });
+        return Response.json(task);
       },
     },
 
