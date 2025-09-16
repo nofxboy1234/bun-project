@@ -7,7 +7,7 @@ import type { Task as Todo } from "./types";
 export function Tasks() {
   const queryClient = useQueryClient();
 
-  const { data, isPending, error } = useQuery({
+  const { isPending, isError, data, error } = useQuery({
     queryKey: ["tasks"],
     queryFn: () => fetch("/api/tasks").then((r) => r.json()),
   });
@@ -24,7 +24,7 @@ export function Tasks() {
   });
 
   if (isPending) return <span>Loading...</span>;
-  if (error) return <span>Oops!</span>;
+  if (isError) return <span>Error: {error.message}</span>;
 
   return (
     <div className={styles.app}>
