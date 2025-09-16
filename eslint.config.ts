@@ -41,6 +41,7 @@ export default defineConfig(
       "*.tsbuildinfo",
       ".idea",
       ".DS_Store",
+      "routeTree.gen.ts",
     ],
   },
   {
