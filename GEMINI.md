@@ -6,6 +6,7 @@ This is a React project bootstrapped with `bun init`. It uses Bun as the JavaScr
 
 - **Bun:** Used for runtime, package management, and bundling.
 - **React:** Used for the frontend UI.
+- **@tanstack/react-query:** Used for managing server state in React.
 - **TypeScript:** Used for static typing.
 - **ESLint:** Used for code linting.
 - **Prettier:** Used for code formatting.
@@ -14,8 +15,13 @@ This is a React project bootstrapped with `bun init`. It uses Bun as the JavaScr
 
 The project is a single-page application (SPA) with a simple backend API.
 
-- **Frontend:** The frontend is built with React and is served from the `src` directory. The main component is `src/App.tsx`, which renders the `APITester` component.
-- **Backend:** The backend is a simple API built with Bun's `serve` function in `src/index.tsx`. It has a few endpoints under `/api`.
+- **Frontend:** The frontend is built with React and is served from the `src` directory. The main component is `src/App.tsx`, which renders the `Tasks` component, a simple todo application.
+- **Backend:** The backend is a simple API built with Bun's `serve` function in `src/index.tsx`. It has the following endpoints for managing tasks:
+    - `GET /api/tasks`: Get all tasks.
+    - `POST /api/tasks`: Create a new task.
+    - `GET /api/tasks/:id`: Get a task by id.
+    - `PATCH /api/tasks/:id`: Update a task by id.
+    - `DELETE /api/tasks/:id`: Delete a task by id.
 - **Routing:** The server is configured to serve the `index.html` for all routes that are not matched by the API, allowing for client-side routing.
 
 # Building and Running
