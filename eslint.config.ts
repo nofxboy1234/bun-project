@@ -12,6 +12,15 @@ export default defineConfig(
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
+    files: ["**/*.ts", "**/*.tsx"],
+    languageOptions: {
+      parserOptions: {
+        project: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+  {
     ignores: [
       "node_modules",
       "out",
@@ -60,4 +69,20 @@ export default defineConfig(
   eslintConfigPrettier,
   ...pluginQuery.configs["flat/recommended"],
   ...pluginRouter.configs["flat/recommended"],
+  {
+    rules: {
+      "@typescript-eslint/only-throw-error": [
+        "error",
+        {
+          allow: [
+            {
+              from: "package",
+              package: "@tanstack/router-core",
+              name: "Redirect",
+            },
+          ],
+        },
+      ],
+    },
+  },
 );
