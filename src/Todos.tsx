@@ -48,16 +48,9 @@ export function Tasks() {
 
       <div className={styles.main}>
         <div className={styles.tasksContainer}>
-          {data.map(
-            (task: {
-              id: number;
-              title: string;
-              description: string;
-              deadline: Date;
-            }) => (
-              <Task key={task.id} task={task} />
-            ),
-          )}
+          {data.map((task: Todo) => (
+            <Task key={task.id} task={task} />
+          ))}
         </div>
       </div>
     </div>
