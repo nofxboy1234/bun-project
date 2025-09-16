@@ -6,6 +6,7 @@ import pluginReactHooks from "eslint-plugin-react-hooks";
 import { defineConfig } from "eslint/config";
 import eslintConfigPrettier from "eslint-config-prettier";
 import pluginQuery from "@tanstack/eslint-plugin-query";
+import pluginRouter from "@tanstack/eslint-plugin-router";
 
 export default defineConfig(
   js.configs.recommended,
@@ -58,4 +59,5 @@ export default defineConfig(
   },
   eslintConfigPrettier,
   ...pluginQuery.configs["flat/recommended"],
+  ...pluginRouter.configs["flat/recommended"],
 );
