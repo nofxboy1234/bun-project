@@ -7,7 +7,7 @@ import type { Task as Todo } from "./types";
 export function Tasks() {
   const queryClient = useQueryClient();
 
-  const { isPending, isError, data, error } = useQuery({
+  const { isPending, isError, data, error } = useQuery<Todo[]>({
     queryKey: ["tasks"],
     queryFn: () => fetch("/api/tasks").then((r) => r.json()),
   });
@@ -48,7 +48,7 @@ export function Tasks() {
 
       <div className={styles.main}>
         <div className={styles.tasksContainer}>
-          {data.map((task: Todo) => (
+          {data.map((task) => (
             <Task key={task.id} task={task} />
           ))}
         </div>
