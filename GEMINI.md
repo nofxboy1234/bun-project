@@ -10,14 +10,14 @@ The project is structured as a monorepo-like setup within a single `package.json
 
 ### Key Technologies
 
-*   **Runtime & Bundler**: Bun
-*   **Backend**: Bun Native Server
-*   **Frontend**: React 19, ReactDOM 19
-*   **Routing**: TanStack Router
-*   **Data Fetching**: TanStack Query
-*   **Language**: TypeScript
-*   **Linting**: ESLint
-*   **Formatting**: Prettier
+- **Runtime & Bundler**: Bun
+- **Backend**: Bun Native Server
+- **Frontend**: React 19, ReactDOM 19
+- **Routing**: TanStack Router
+- **Data Fetching**: TanStack Query
+- **Language**: TypeScript
+- **Linting**: ESLint
+- **Formatting**: Prettier
 
 ## Building and Running
 
@@ -57,25 +57,27 @@ bun start
 
 ### Other Commands
 
-*   **Linting**: Check for code quality issues.
-    ```bash
-    bun lint
-    ```
+- **Linting**: Check for code quality issues.
 
-*   **Formatting**: Automatically format the code.
-    ```bash
-    bun format
-    ```
+  ```bash
+  bun lint
+  ```
 
-*   **Type Checking**: Run the TypeScript compiler to check for type errors.
-    ```bash
-    bun ts
-    ```
+- **Formatting**: Automatically format the code.
+
+  ```bash
+  bun format
+  ```
+
+- **Type Checking**: Run the TypeScript compiler to check for type errors.
+  ```bash
+  bun ts
+  ```
 
 ## Development Conventions
 
-*   **Routing**: The application uses file-based routing managed by TanStack Router. New routes are created as `.tsx` files within the `src/routes/` directory. The route tree is generated automatically by running `bun run generate-routes`.
-*   **API**: The backend API is served from the same process as the frontend. API routes are likely handled within `src/index.tsx` and are prefixed with `/api`.
-*   **State Management**: Server state (e.g., tasks) is managed via TanStack Query. Use hooks like `useQuery` and `useMutation` to interact with the backend API. Client state can be managed with React hooks.
-*   **Styling**: The project uses a combination of global CSS (`src/index.css`) and CSS Modules (`.module.css`) for component-level styling.
-*   **Paths**: The `tsconfig.json` is configured with a path alias `@/*` pointing to `./src/*`, which should be used for cleaner imports.
+- **Routing**: The application uses file-based routing managed by TanStack Router. New routes are created as `.tsx` files within the `src/routes/` directory. The route tree is generated automatically by running `bun run generate-routes`.
+- **API**: The backend API is served from the same process as the frontend. API routes are likely handled within `src/index.tsx` and are prefixed with `/api`.
+- **State Management**: Server state (e.g., tasks) is managed via TanStack Query. Use hooks like `useQuery` and `useMutation` to interact with the backend API. Client state can be managed with React hooks.
+- **Styling**: The project uses a combination of global CSS (`src/index.css`) and CSS Modules (`.module.css`) for component-level styling.
+- **Paths**: The `tsconfig.json` is configured with a path alias `@/*` pointing to `./src/*`, which should be used for cleaner imports.
