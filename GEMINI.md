@@ -1,70 +1,81 @@
-# Project Overview
+# GEMINI Project Context: bun-project
 
-This is a React project bootstrapped with `bun init`. It uses Bun as the JavaScript runtime, package manager, and bundler. The project is configured to use TypeScript and features a simple server-side API built with Bun's built-in `serve` function.
+## Project Overview
 
-## Key Technologies
+This is a full-stack TypeScript project built with [Bun](https://bun.com), [React](https://react.dev/), and the [TanStack](https://tanstack.com/) suite. It functions as a simple task management application.
 
-- **Bun:** Used for runtime, package management, and bundling.
-- **React:** Used for the frontend UI.
-- **@tanstack/react-query:** Used for managing server state in React.
-- **TypeScript:** Used for static typing.
-- **ESLint:** Used for code linting.
-- **Prettier:** Used for code formatting.
+The backend server is powered by Bun's native HTTP server, which directly serves the React frontend and provides a JSON API. The frontend is built with React 19 and utilizes TanStack Router for type-safe routing and TanStack Query for asynchronous state management.
 
-## Architecture
+The project is structured as a monorepo-like setup within a single `package.json`, where Bun acts as the runtime for both the server and the client-side development environment.
 
-The project is a single-page application (SPA) with a simple backend API.
+### Key Technologies
 
-- **Frontend:** The frontend is built with React and is served from the `src` directory. The main component is `src/App.tsx`, which renders the `Tasks` component, a simple todo application.
-- **Backend:** The backend is a simple API built with Bun's `serve` function in `src/index.tsx`. It has the following endpoints for managing tasks:
-  - `GET /api/tasks`: Get all tasks.
-  - `POST /api/tasks`: Create a new task.
-  - `GET /api/tasks/:id`: Get a task by id.
-  - `PATCH /api/tasks/:id`: Update a task by id.
-  - `DELETE /api/tasks/:id`: Delete a task by id.
-- **Routing:** The server is configured to serve the `index.html` for all routes that are not matched by the API, allowing for client-side routing.
+*   **Runtime & Bundler**: Bun
+*   **Backend**: Bun Native Server
+*   **Frontend**: React 19, ReactDOM 19
+*   **Routing**: TanStack Router
+*   **Data Fetching**: TanStack Query
+*   **Language**: TypeScript
+*   **Linting**: ESLint
+*   **Formatting**: Prettier
 
-# Building and Running
+## Building and Running
 
-- **Install dependencies:**
-  ```bash
-  bun install
-  ```
-- **Start development server:**
-  ```bash
-  bun dev
-  ```
-- **Run for production:**
-  ```bash
-  bun start
-  ```
-- **Build for production:**
-  ```bash
-  bun build
-  ```
-- **Build a standalone executable:**
-  ```bash
-  bun build-exe
-  ```
-- **Type check:**
-  ```bash
-  bun ts
-  ```
-- **Lint files:**
-  ```bash
-  bun lint
-  ```
-- **Format files:**
-  ```bash
-  bun format
-  ```
-- **Clean build artifacts:**
-  ```bash
-  bun clean
-  ```
+The project's scripts are defined in `package.json` and are run using `bun`.
 
-# Development Conventions
+### Development
 
-- **Coding Style:** The project uses ESLint for code linting and Prettier for code formatting. The ESLint configuration is in `eslint.config.ts`. `eslint-config-prettier` is used to prevent conflicts between ESLint and Prettier.
-- **Testing:** There are no testing practices defined in the project.
-- **Contribution:** There are no contribution guidelines defined in the project.
+To start the development server with hot-reloading for both the backend and frontend:
+
+```bash
+bun dev
+```
+
+This command concurrently starts the route watcher and the Bun development server.
+
+### Production
+
+To build the project for production:
+
+```bash
+bun build
+```
+
+This creates an optimized build in the `dist/` directory.
+
+To run the built production server:
+
+```bash
+bun start:js
+```
+
+Alternatively, you can run the production-ready server directly from the source:
+
+```bash
+bun start
+```
+
+### Other Commands
+
+*   **Linting**: Check for code quality issues.
+    ```bash
+    bun lint
+    ```
+
+*   **Formatting**: Automatically format the code.
+    ```bash
+    bun format
+    ```
+
+*   **Type Checking**: Run the TypeScript compiler to check for type errors.
+    ```bash
+    bun ts
+    ```
+
+## Development Conventions
+
+*   **Routing**: The application uses file-based routing managed by TanStack Router. New routes are created as `.tsx` files within the `src/routes/` directory. The route tree is generated automatically by running `bun run generate-routes`.
+*   **API**: The backend API is served from the same process as the frontend. API routes are likely handled within `src/index.tsx` and are prefixed with `/api`.
+*   **State Management**: Server state (e.g., tasks) is managed via TanStack Query. Use hooks like `useQuery` and `useMutation` to interact with the backend API. Client state can be managed with React hooks.
+*   **Styling**: The project uses a combination of global CSS (`src/index.css`) and CSS Modules (`.module.css`) for component-level styling.
+*   **Paths**: The `tsconfig.json` is configured with a path alias `@/*` pointing to `./src/*`, which should be used for cleaner imports.
