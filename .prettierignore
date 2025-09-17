@@ -35,3 +35,6 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 
 # TanStack Router
 routeTree.gen.ts
+
+# Bun Single-File Executable
+bun-project

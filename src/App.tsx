@@ -1,15 +1,8 @@
-import "./index.css";
-import { Tasks } from "./Todos";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+// import "./index.css";
+// import { Tasks } from "./Todos";
 
-const queryClient = new QueryClient();
+// function App() {
+//   return <Tasks />;
+// }
 
-export function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Tasks />
-    </QueryClientProvider>
-  );
-}
-
-export default App;
+// export default App;

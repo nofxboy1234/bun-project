@@ -42,6 +42,7 @@ export default defineConfig(
       ".idea",
       ".DS_Store",
       "routeTree.gen.ts",
+      "bun-project",
     ],
   },
   {

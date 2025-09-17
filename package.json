@@ -13,7 +13,7 @@
     "start": "NODE_ENV=production bun src/index.tsx",
     "build": "bun run generate-routes && bun build --minify --sourcemap --env='BUN_PUBLIC_*' --production --target=bun ./src/index.tsx --outdir=dist",
     "start:js": "NODE_ENV=production bun --cwd=dist index.js",
-    "build-exe": "bun build --compile --minify --sourcemap --env='BUN_PUBLIC_*' --bytecode --production --target=bun ./src/index.tsx --outfile bun-project",
+    "build-exe": "bun run generate-routes && bun build --compile --minify --sourcemap --env='BUN_PUBLIC_*' --bytecode --production --target=bun ./src/index.tsx --outfile bun-project",
     "clean": "rm -rf dist && rm -f bun-project && echo 'Done cleaning.'"
   },
   "dependencies": {

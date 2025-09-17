@@ -43,9 +43,6 @@
   grid-area: main;
 }
 
-.tasksContainer {
-}
-
 .title {
   color: var(--dracula-purple);
   font-size: 1.75rem;
