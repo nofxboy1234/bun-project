@@ -15,7 +15,7 @@ import plusIcon from "@/icons/add_2.svg";
 
 import type { Task } from "@/types";
 
-import "../index.css";
+import "@/index.css";
 
 const RootLayout = () => {
   const queryClient = useQueryClient();
