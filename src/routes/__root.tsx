@@ -67,7 +67,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     notFoundComponent: () => {
       return (
         <div>
-          <p>This is the notFountComponent configured on root route</p>
+          <p>This is the notFoundComponent configured on root route</p>
           <Link to="/">Start Over</Link>
         </div>
       );
