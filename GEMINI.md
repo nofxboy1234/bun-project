@@ -74,6 +74,16 @@ bun start
   bun ts
   ```
 
+- **Build Executable**: Build a standalone executable for the project.
+  ```bash
+  bun build-exe
+  ```
+
+- **Clean**: Remove the `dist` directory and any compiled executable.
+  ```bash
+  bun clean
+  ```
+
 ## Development Conventions
 
 - **Routing**: The application uses file-based routing managed by TanStack Router. New routes are created as `.tsx` files within the `src/routes/` directory. The route tree is generated automatically by running `bun run generate-routes`.
