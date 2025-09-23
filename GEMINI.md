@@ -70,11 +70,13 @@ bun start
   ```
 
 - **Type Checking**: Run the TypeScript compiler to check for type errors.
+
   ```bash
   bun ts
   ```
 
 - **Build Executable**: Build a standalone executable for the project.
+
   ```bash
   bun build-exe
   ```
@@ -88,11 +90,20 @@ bun start
 
 - **Routing**: The application uses file-based routing managed by TanStack Router. New routes are created as `.tsx` files within the `src/routes/` directory. The route tree is generated automatically by running `bun run generate-routes`.
 - **API**: The backend API is served from the same process as the frontend. API routes are defined in `src/index.tsx` and are prefixed with `/api`. The available endpoints are:
-    - `GET /api/tasks`: Fetches all tasks.
-    - `POST /api/tasks`: Creates a new task.
-    - `GET /api/tasks/:id`: Fetches a single task by its ID.
-    - `PATCH /api/tasks/:id`: Updates a task.
-    - `DELETE /api/tasks/:id`: Deletes a task.
+  - `GET /api/tasks`: Fetches all tasks.
+  - `POST /api/tasks`: Creates a new task.
+  - `GET /api/tasks/:id`: Fetches a single task by its ID.
+  - `PATCH /api/tasks/:id`: Updates a task.
+  - `DELETE /api/tasks/:id`: Deletes a task.
 - **State Management**: Server state (e.g., tasks) is managed via TanStack Query. Use hooks like `useQuery` and `useMutation` to interact with the backend API. Client state can be managed with React hooks.
 - **Styling**: The project uses a combination of global CSS (`src/index.css`) and CSS Modules (`.module.css`) for component-level styling.
 - **Paths**: The `tsconfig.json` is configured with a path alias `@/*` pointing to `./src/*`, which should be used for cleaner imports.
+
+Run the following package scripts after every change you make:
+bun lint
+bun format
+bun ts
+
+Fix any errors that occur from the above script runs.
+
+When updating @src/index.tsx, don't use a fetch catch-all route - use the /\* route on the route object.
