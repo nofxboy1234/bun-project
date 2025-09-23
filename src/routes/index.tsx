@@ -12,8 +12,7 @@ export const Route = createFileRoute("/")({
 });
 
 function TasksLayoutComponent() {
-  const tasksQuery = useSuspenseQuery(tasksQueryOptions);
-  const tasks = tasksQuery.data;
+  const { data: tasks } = useSuspenseQuery(tasksQueryOptions);
 
   return (
     <div className={styles.main}>
