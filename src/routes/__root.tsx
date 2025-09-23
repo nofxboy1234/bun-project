@@ -16,6 +16,7 @@ import plusIcon from "@/icons/add_2.svg";
 import type { Task } from "@/types";
 
 import "@/index.css";
+import { Suspense } from "react";
 
 const RootLayout = () => {
   const queryClient = useQueryClient();
@@ -52,7 +53,9 @@ const RootLayout = () => {
 
         <div className={`${styles.nav} ${styles.stickyNav}`}>nav</div>
 
-        <Outlet />
+        <Suspense fallback={<div>loading</div>}>
+          <Outlet />
+        </Suspense>
       </div>
 
       <ReactQueryDevtools buttonPosition="bottom-right" />
