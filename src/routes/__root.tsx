@@ -55,7 +55,7 @@ const RootLayout = () => {
         <Outlet />
       </div>
 
-      <ReactQueryDevtools buttonPosition="top-right" />
+      <ReactQueryDevtools buttonPosition="bottom-right" />
       <TanStackRouterDevtools position="bottom-right" />
     </>
   );
