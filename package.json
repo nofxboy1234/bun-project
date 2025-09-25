@@ -19,8 +19,9 @@
   "dependencies": {
     "@tanstack/react-query": "^5.90.2",
     "@tanstack/react-query-devtools": "^5.90.2",
-    "@tanstack/react-router": "^1.132.0",
-    "@tanstack/react-router-devtools": "^1.132.0",
+    "@tanstack/react-router": "^1.132.6",
+    "@tanstack/react-router-devtools": "^1.132.6",
+    "@tanstack/router-cli": "^1.132.6",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
@@ -28,8 +29,6 @@
     "@eslint/js": "^9.36.0",
     "@tanstack/eslint-plugin-query": "^5.90.1",
     "@tanstack/eslint-plugin-router": "^1.132.0",
-    "@tanstack/react-router-ssr-query": "^1.132.0",
-    "@tanstack/router-cli": "^1.132.0",
     "@types/bun": "latest",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
