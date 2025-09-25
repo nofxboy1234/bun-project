@@ -16,7 +16,6 @@ import plusIcon from "@/icons/add_2.svg";
 import type { Task } from "@/types";
 
 import "@/index.css";
-import { Suspense } from "react";
 
 const RootLayout = () => {
   const queryClient = useQueryClient();
