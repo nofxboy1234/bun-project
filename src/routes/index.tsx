@@ -6,9 +6,8 @@ import styles from "@/styles.module.css";
 import { Task } from "@/Task";
 
 export const Route = createFileRoute("/")({
-  loader: ({ context: { queryClient } }) => {
-    queryClient.ensureQueryData(tasksQueryOptions);
-  },
+  loader: ({ context: { queryClient } }) =>
+    queryClient.ensureQueryData(tasksQueryOptions),
   component: TasksLayoutComponent,
 });
 

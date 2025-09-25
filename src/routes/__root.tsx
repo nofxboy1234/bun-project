@@ -53,9 +53,7 @@ const RootLayout = () => {
 
         <div className={`${styles.nav} ${styles.stickyNav}`}>nav</div>
 
-        <Suspense fallback={<div>loading</div>}>
-          <Outlet />
-        </Suspense>
+        <Outlet />
       </div>
 
       <ReactQueryDevtools buttonPosition="bottom-right" />
