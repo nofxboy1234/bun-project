@@ -1,4 +1,4 @@
-import { serve, sleep } from "bun";
+import { serve } from "bun";
 import index from "./index.html";
 import { tasks } from "./tasks";
 
@@ -9,7 +9,6 @@ const server = serve({
 
     "/api/tasks": {
       async GET() {
-        await sleep(3000);
         return Response.json(tasks);
       },
       async POST(req) {
