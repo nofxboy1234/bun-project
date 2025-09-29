@@ -35,7 +35,9 @@ const RootLayout = () => {
     <>
       <div className={styles.app}>
         <div className={`${styles.header} ${styles.stickyHeader}`}>
-          <h1 className={styles.title}>asa-yoru</h1>
+          <Link to="/">
+            <h1 className={styles.title}>asa-yoru</h1>
+          </Link>
           <img
             src={plusIcon}
             alt="Create Task"

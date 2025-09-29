@@ -15,7 +15,6 @@ export function Task({ task }: { task: Task }) {
     },
   });
 
-  console.log(task);
   const taskId = task.id!.toString();
 
   return (

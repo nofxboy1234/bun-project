@@ -5,7 +5,7 @@ import { Task } from "@/Task";
 
 export const Route = createFileRoute("/tasks/$taskId")({
   loader: async ({ context: { queryClient }, params: { taskId } }) => {
-    await queryClient.ensureQueryData(taskQueryOptions(Number(taskId)));
+    await queryClient.prefetchQuery(taskQueryOptions(Number(taskId)));
   },
   component: RouteComponent,
 });
