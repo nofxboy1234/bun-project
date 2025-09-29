@@ -3,6 +3,7 @@ import deleteIcon from "@/icons/delete.svg";
 import updateIcon from "@/icons/update.svg";
 import type { Task } from "./types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Link } from "@tanstack/react-router";
 
 export function Task({ task }: { task: Task }) {
   const queryClient = useQueryClient();
@@ -14,8 +15,11 @@ export function Task({ task }: { task: Task }) {
     },
   });
 
+  console.log(task);
+  const taskId = task.id!.toString();
+
   return (
-    <div className={styles.task} onClick={() => console.log(task.id)}>
+    <Link to="/tasks/$taskId" params={{ taskId }} className={styles.task}>
       <div>{task.title}</div>
       <div>{task.description}</div>
       <div>{task.deadline.toString()}</div>
@@ -28,6 +32,6 @@ export function Task({ task }: { task: Task }) {
           onClick={() => mutation.mutate(task.id!)}
         />
       </div>
-    </div>
+    </Link>
   );
 }

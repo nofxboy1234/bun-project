@@ -22,7 +22,8 @@ const server = serve({
     "/api/tasks/:id": {
       async GET(req) {
         const { id } = req.params;
-        const task = tasks.at(Number(id));
+        console.log(`GET task with id ${id}`);
+        const task = tasks.find((task) => task.id === Number(id));
         return Response.json(task);
       },
       async PATCH(req) {
