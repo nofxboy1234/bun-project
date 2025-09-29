@@ -33,7 +33,8 @@ const server = serve({
       },
       async DELETE(req) {
         const { id } = req.params;
-        const deletedTask = tasks.splice(Number(id), 1);
+        const deleteIndex = tasks.findIndex((task) => task.id === Number(id));
+        const deletedTask = tasks.splice(deleteIndex, 1);
         return Response.json({ deleted: true, ...deletedTask });
       },
     },
