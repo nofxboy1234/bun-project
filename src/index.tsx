@@ -2,6 +2,8 @@ import { serve } from "bun";
 import index from "./index.html";
 import { tasks } from "./tasks";
 
+let taskId = 15;
+
 const server = serve({
   routes: {
     // Serve index.html for all unmatched routes.
@@ -13,7 +15,7 @@ const server = serve({
       },
       async POST(req) {
         const task = await req.json();
-        task.id = tasks.length;
+        task.id = taskId++;
         tasks.push(task);
         return Response.json(task);
       },
