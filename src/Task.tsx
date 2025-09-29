@@ -18,7 +18,12 @@ export function Task({ task }: { task: Task }) {
   const taskId = task.id!.toString();
 
   return (
-    <Link to="/tasks/$taskId" params={{ taskId }} className={styles.task}>
+    <Link
+      to="/tasks/$taskId"
+      params={{ taskId }}
+      className={styles.task}
+      onClick={() => console.log("Link onclick")}
+    >
       <div>{task.title}</div>
       <div>{task.description}</div>
       <div>{task.deadline.toString()}</div>
@@ -28,7 +33,12 @@ export function Task({ task }: { task: Task }) {
           src={deleteIcon}
           alt="Delete Task"
           className={styles.deleteIcon}
-          onClick={() => mutation.mutate(task.id!)}
+          onClick={(event) => {
+            console.log("img onclick");
+            event.stopPropagation();
+            event.preventDefault();
+            mutation.mutate(task.id!);
+          }}
         />
       </div>
     </Link>
