@@ -3,7 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 
 import styles from "@/styles.module.css";
-import { Task } from "@/Task";
+import { TaskPreview } from "@/TaskPreview";
 
 export const Route = createFileRoute("/")({
   loader: async ({ context: { queryClient } }) => {
@@ -23,7 +23,7 @@ function TasksLayoutComponent() {
     >
       <div className={styles.tasksContainer}>
         {tasks.map((task) => (
-          <Task key={task.id} task={task} />
+          <TaskPreview key={task.id} task={task} />
         ))}
       </div>
     </div>
