@@ -20,16 +20,16 @@ const server = serve({
         console.log(formData);
 
         const task: Task = {
+          id: taskId++,
           title: formData.get("title") as string,
           description: formData.get("description") as string,
           deadline: new Date(formData.get("deadline") as string),
         };
 
+        tasks.push(task);
+
         console.log(task);
         console.log(typeof task);
-
-        task.id = taskId++;
-        tasks.push(task);
 
         return Response.json(task);
       },
@@ -43,10 +43,22 @@ const server = serve({
         return Response.json(task);
       },
       async PATCH(req) {
-        const updatedTaskData = await req.json();
-        const task = tasks.at(updatedTaskData.id);
-        const updatedTask = { ...task, ...updatedTaskData };
-        return Response.json({ updated: true, ...updatedTask });
+        const formData = await req.formData();
+        console.log(formData);
+
+        const taskId = formData.get("id") as string;
+        const task = tasks.find((task) => task.id === Number(taskId));
+
+        const updatedTask: Task = {
+          id: Number(taskId),
+          title: formData.get("title") as string,
+          description: formData.get("description") as string,
+          deadline: new Date(formData.get("deadline") as string),
+        };
+
+        Object.assign(task!, updatedTask);
+
+        return Response.json({ updated: true, ...task });
       },
       async DELETE(req) {
         const { id } = req.params;

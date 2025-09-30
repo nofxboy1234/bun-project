@@ -1,9 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { Task } from "@/Task";
+import { TaskForm } from "@/TaskForm";
 import { taskQueryOptions } from "@/taskQueryOptions";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/tasks/$taskId")({
+export const Route = createFileRoute("/tasks/$taskId/edit")({
   loader: async ({ context: { queryClient }, params: { taskId } }) => {
     await queryClient.ensureQueryData({
       ...taskQueryOptions(Number(taskId)),
@@ -19,5 +19,7 @@ function RouteComponent() {
     ...taskQueryOptions(Number(taskId)),
   });
 
-  return <Task task={task} />;
+  console.log("/tasks/$taskId/edit");
+
+  return <TaskForm task={task} />;
 }

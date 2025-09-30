@@ -1,18 +1,29 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createFileRoute } from "@tanstack/react-router";
+import type { Task } from "./types";
 
-export const Route = createFileRoute("/tasks/new")({
-  component: TaskForm,
-});
-
-export function TaskForm() {
+export function TaskForm({ task }: { task?: Task }) {
   const queryClient = useQueryClient();
-  const mutation = useMutation({
+  const postMutation = useMutation({
     mutationFn: (taskData: FormData) =>
       fetch("/api/tasks", {
         method: "POST",
         body: taskData,
       }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+    },
+  });
+
+  const patchMutation = useMutation({
+    mutationFn: (taskData: FormData) => {
+      const taskId = task!.id!.toString();
+      taskData.set("id", taskId);
+
+      return fetch(`/api/tasks/${taskId}`, {
+        method: "PATCH",
+        body: taskData,
+      });
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
     },
@@ -31,7 +42,11 @@ export function TaskForm() {
           const formData = new FormData(form);
           console.log(formData.entries());
 
-          mutation.mutate(formData);
+          if (task) {
+            patchMutation.mutate(formData);
+          } else {
+            postMutation.mutate(formData);
+          }
         }}
       >
         <div>
@@ -40,7 +55,7 @@ export function TaskForm() {
             type="text"
             id="task-title"
             name="title"
-            defaultValue="New Task"
+            defaultValue={task?.title ?? "New Task"}
             placeholder="New Task"
           />
         </div>
@@ -51,17 +66,26 @@ export function TaskForm() {
             type="text"
             id="task-description"
             name="description"
-            defaultValue="Get this done"
+            defaultValue={task?.description ?? "Get this done"}
             placeholder="Get this done"
           />
         </div>
 
         <div>
           <label htmlFor="task-deadline">Deadline</label>
-          <input type="date" id="task-deadline" name="deadline" />
+          <input
+            type="date"
+            id="task-deadline"
+            name="deadline"
+            defaultValue={
+              task?.deadline
+                ? new Date(task.deadline).toISOString().slice(0, 10)
+                : new Date().toISOString().slice(0, 10)
+            }
+          />
         </div>
 
-        <button type="submit">Create</button>
+        <button type="submit">{task ? "Update" : "Create"}</button>
       </form>
     </div>
   );

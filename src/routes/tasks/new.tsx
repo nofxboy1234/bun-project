@@ -8,11 +8,3 @@ export const Route = createFileRoute("/tasks/new")({
 function RouteComponent() {
   return <TaskForm />;
 }
-
-// onClick={() =>
-//   mutation.mutate({
-//     title: "Dylan",
-//     description: "Palmboom",
-//     deadline: new Date(),
-//   })
-// }

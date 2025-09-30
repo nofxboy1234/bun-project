@@ -3,12 +3,13 @@ import deleteIcon from "@/icons/delete.svg";
 import updateIcon from "@/icons/update.svg";
 import type { Task } from "./types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 
 export function TaskPreview({ task }: { task: Task }) {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
-  const mutation = useMutation({
+  const deleteMutation = useMutation({
     mutationFn: (id: number) => fetch(`/api/tasks/${id}`, { method: "DELETE" }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
@@ -27,16 +28,25 @@ export function TaskPreview({ task }: { task: Task }) {
       <div>{task.title}</div>
       <div>{task.deadline.toString()}</div>
       <div className={styles.taskOperations}>
-        <img src={updateIcon} alt="Delete Task" className={styles.updateIcon} />
+        <img
+          src={updateIcon}
+          alt="Update Task"
+          className={styles.updateIcon}
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            navigate({ to: "/tasks/$taskId/edit", params: { taskId } });
+          }}
+        />
         <img
           src={deleteIcon}
           alt="Delete Task"
           className={styles.deleteIcon}
           onClick={(event) => {
-            console.log("img onclick");
+            console.log("delete img onclick");
             event.stopPropagation();
             event.preventDefault();
-            mutation.mutate(task.id!);
+            deleteMutation.mutate(task.id!);
           }}
         />
       </div>
