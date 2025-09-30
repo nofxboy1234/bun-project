@@ -68,8 +68,8 @@
 }
 
 .plusIcon {
-  transform: scale(0.6);
-  cursor: pointer;
+  transform: scale(1);
+  /* cursor: pointer; */
 }
 
 /* .updateIcon {

@@ -7,7 +7,10 @@ import { TaskPreview } from "@/TaskPreview";
 
 export const Route = createFileRoute("/")({
   loader: async ({ context: { queryClient } }) => {
-    await queryClient.ensureQueryData(tasksQueryOptions);
+    await queryClient.ensureQueryData({
+      ...tasksQueryOptions,
+      revalidateIfStale: true,
+    });
   },
   component: TasksLayoutComponent,
 });

@@ -38,18 +38,9 @@ const RootLayout = () => {
           <Link to="/">
             <h1 className={styles.title}>asa-yoru</h1>
           </Link>
-          <img
-            src={plusIcon}
-            alt="Create Task"
-            className={styles.plusIcon}
-            onClick={() =>
-              mutation.mutate({
-                title: "Dylan",
-                description: "Palmboom",
-                deadline: new Date(),
-              })
-            }
-          />
+          <Link to="/tasks/new">
+            <img src={plusIcon} alt="Create Task" className={styles.plusIcon} />
+          </Link>
         </div>
 
         <div className={`${styles.nav} ${styles.stickyNav}`}>nav</div>
