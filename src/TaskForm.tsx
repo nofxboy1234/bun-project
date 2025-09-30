@@ -1,3 +1,4 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/tasks/new")({
@@ -5,12 +6,32 @@ export const Route = createFileRoute("/tasks/new")({
 });
 
 export function TaskForm() {
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: (taskData: FormData) =>
+      fetch("/api/tasks", {
+        method: "POST",
+        body: taskData,
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+    },
+  });
+
   return (
     <div>
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          console.log("submit");
+
+          console.log(`currentTarget: ${event.currentTarget}`);
+          console.log(`target: ${event.target}`);
+
+          const form = event.currentTarget;
+          const formData = new FormData(form);
+          console.log(formData.entries());
+
+          mutation.mutate(formData);
         }}
       >
         <div>
@@ -36,8 +57,8 @@ export function TaskForm() {
         </div>
 
         <div>
-          <label htmlFor="task-date">Deadline</label>
-          <input type="date" id="task-date" name="date" />
+          <label htmlFor="task-deadline">Deadline</label>
+          <input type="date" id="task-deadline" name="deadline" />
         </div>
 
         <button type="submit">Create</button>

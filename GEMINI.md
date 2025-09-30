@@ -72,8 +72,8 @@ The project uses TanStack Query for managing server state. The query options are
 
 The backend API is defined in `src/index.tsx`. It provides the following endpoints:
 
-*   `GET /api/tasks`: Get all tasks.
-*   `POST /api/tasks`: Create a new task.
-*   `GET /api/tasks/:id`: Get a single task by ID.
-*   `PATCH /api/tasks/:id`: Update a task by ID.
-*   `DELETE /api/tasks/:id`: Delete a task by ID.
+- `GET /api/tasks`: Get all tasks.
+- `POST /api/tasks`: Create a new task.
+- `GET /api/tasks/:id`: Get a single task by ID.
+- `PATCH /api/tasks/:id`: Update a task by ID.
+- `DELETE /api/tasks/:id`: Delete a task by ID.

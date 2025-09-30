@@ -1,5 +1,4 @@
 import type { QueryClient } from "@tanstack/react-query";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
@@ -10,27 +9,12 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
-import styles from "@/styles.module.css";
+import styles from "../styles.module.css";
 import plusIcon from "@/icons/add_2.svg";
 
-import type { Task } from "@/types";
-
-import "@/index.css";
+import "../index.css";
 
 const RootLayout = () => {
-  const queryClient = useQueryClient();
-
-  const mutation = useMutation({
-    mutationFn: (newTask: Task) =>
-      fetch("/api/tasks", {
-        method: "POST",
-        body: JSON.stringify(newTask),
-      }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["tasks"] });
-    },
-  });
-
   return (
     <>
       <div className={styles.app}>

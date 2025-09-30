@@ -24,4 +24,4 @@ declare module "*.module.css" {
   export = classes;
 }
 
-declare module "*.css";
+// declare module "*.css";
