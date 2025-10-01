@@ -20,7 +20,7 @@ const RootLayout = () => {
       <div className={styles.app}>
         <div className={`${styles.header} ${styles.stickyHeader}`}>
           <Link to="/">
-            <h1 className={styles.title}>asa-yoru</h1>
+            <h1 className={styles.title}>bun-project</h1>
           </Link>
           <Link to="/tasks/new">
             <img src={plusIcon} alt="Create Task" className={styles.plusIcon} />
