@@ -40,3 +40,6 @@ bun-project
 .tanstack
 
 TODO.md
+
+# Postgres tools
+postgrestools.jsonc
