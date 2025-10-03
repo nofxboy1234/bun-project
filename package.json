@@ -13,6 +13,7 @@
     "seed:make": "bun --bun kysely seed:make",
     "seed:list": "bun --bun kysely seed list",
     "seed": "bun --bun kysely seed:run",
+    "sql": "bun --bun kysely sql -f json",
     "gen": "bun tsr generate",
     "watch": "bun tsr watch",
     "dev": "bun run watch & bun --hot src/index.tsx",
