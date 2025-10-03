@@ -14,11 +14,11 @@ export interface Database {
 
 export interface PersonTable {
   id: Generated<number>;
-
   first_name: string;
-  gender: "man" | "woman" | "other";
   last_name: string | null;
+  gender: "man" | "woman" | "other";
   created_at: ColumnType<Date, string | undefined, never>;
+  mother_id: number;
   metadata: JSONColumnType<{
     login_at: string;
     ip: string | null;

@@ -4,10 +4,11 @@ import { Kysely, PostgresDialect } from "kysely";
 
 const dialect = new PostgresDialect({
   pool: new Pool({
-    database: "test",
+    database: "people_pets",
     host: "localhost",
-    user: "admin",
-    port: 5434,
+    user: "dylan",
+    password: "dlp*FS&84",
+    port: 5432,
     max: 10,
   }),
 });

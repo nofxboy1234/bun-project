@@ -7,6 +7,8 @@
     "lnt": "bunx eslint .",
     "fmt": "FORCE_COLOR=1 bunx prettier . --write",
     "ts": "bunx tsc",
+    "mig": "bun src/migrate.ts",
+    "migd": "bun src/migrateDown.ts",
     "gen": "bun tsr generate",
     "watch": "bun tsr watch",
     "dev": "bun run watch & bun --hot src/index.tsx",
