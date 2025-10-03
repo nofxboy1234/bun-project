@@ -5,7 +5,8 @@
 //   PostgresQueryCompiler,
 // } from "kysely";
 import { defineConfig } from "kysely-ctl";
-import { db } from "./src/database";
+import { db } from "@/database";
+// import { db } from "./src/database";
 
 export default defineConfig({
   // replace me with a real dialect instance OR a dialect name + `dialectConfig` prop.

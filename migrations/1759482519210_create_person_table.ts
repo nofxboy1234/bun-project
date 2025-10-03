@@ -13,9 +13,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn("created_at", "timestamp", (col) =>
       col.defaultTo(sql`now()`).notNull(),
     )
-    .addColumn("mother_id", "integer", (col) =>
-      col.references("person.id").notNull(),
-    )
+    .addColumn("mother_id", "integer", (col) => col.references("person.id"))
     .addColumn("metadata", "json")
     .execute();
 

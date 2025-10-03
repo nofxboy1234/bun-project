@@ -15,11 +15,11 @@ export interface Database {
 export interface PersonTable {
   id: Generated<number>;
   first_name: string;
-  last_name: string | null;
+  last_name?: string | null;
   gender: "man" | "woman" | "other";
   created_at: ColumnType<Date, string | undefined, never>;
-  mother_id: number;
-  metadata: JSONColumnType<{
+  mother_id?: number;
+  metadata?: JSONColumnType<{
     login_at: string;
     ip: string | null;
     agent: string | null;
@@ -34,7 +34,7 @@ export type PersonUpdate = Updateable<PersonTable>;
 export interface PetTable {
   id: Generated<number>;
   name: string;
-  owner_id: number;
+  owner_id?: number;
   species: "dog" | "cat";
 }
 
