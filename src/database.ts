@@ -1,12 +1,10 @@
-import { Pool } from "pg";
-import { Kysely, PostgresDialect } from "kysely";
+import { Kysely } from "kysely";
 import type { DB } from "@/db";
+import { SQL } from "bun";
+import { PostgresJSDialect } from "kysely-postgres-js";
 
-const dialect = new PostgresDialect({
-  pool: new Pool({
-    connectionString: Bun.env.DATABASE_URL,
-    max: 10,
-  }),
+const dialect = new PostgresJSDialect({
+  postgres: new SQL(Bun.env.DATABASE_URL!),
 });
 
 export const db = new Kysely<DB>({
