@@ -1,16 +1,15 @@
-import type { Kysely } from "kysely";
+import type { Insertable, Kysely } from "kysely";
 import { faker } from "@faker-js/faker";
-import { createPerson } from "@/PersonRepository";
-import type { NewPerson } from "@/types";
-import type { Database } from "@/types";
+import { createPerson } from "@/queries/person";
+import type { DB, Person } from "@/db";
 
 // replace `any` with your database interface.
-export async function seed(db: Kysely<Database>): Promise<void> {
-  const person: NewPerson = {
+export async function seed(db: Kysely<DB>): Promise<void> {
+  const person: Insertable<Person> = {
     first_name: faker.person.firstName("female"),
     gender: "woman",
   };
-  const dbPerson = createPerson(person);
+  createPerson(person);
 
   // // Create and insert a mother person first
   // const mother = await db

@@ -1,5 +1,6 @@
 import { db } from "@/database";
-import type { PersonUpdate, Person, NewPerson } from "@/types";
+import type { Person } from "@/db";
+import type { Selectable, Insertable, Updateable } from "kysely";
 
 export async function findPersonById(id: number) {
   return await db
@@ -9,7 +10,7 @@ export async function findPersonById(id: number) {
     .executeTakeFirst();
 }
 
-export async function findPeople(criteria: Partial<Person>) {
+export async function findPeople(criteria: Partial<Selectable<Person>>) {
   let query = db.selectFrom("person");
 
   if (criteria.id) {
@@ -39,11 +40,11 @@ export async function findPeople(criteria: Partial<Person>) {
   return await query.selectAll().execute();
 }
 
-export async function updatePerson(id: number, updateWith: PersonUpdate) {
+export async function updatePerson(id: number, updateWith: Updateable<Person>) {
   await db.updateTable("person").set(updateWith).where("id", "=", id).execute();
 }
 
-export async function createPerson(person: NewPerson) {
+export async function createPerson(person: Insertable<Person>) {
   return await db
     .insertInto("person")
     .values(person)
