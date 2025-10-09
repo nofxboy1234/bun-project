@@ -41,6 +41,3 @@ bun-project
 
 # Postgres tools
 *.jsonc
-
-# Kysely code-gen
-db.d.ts
