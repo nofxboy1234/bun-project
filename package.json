@@ -4,11 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "lint": "bunx eslint .",
-    "format": "FORCE_COLOR=1 bunx prettier . --write",
-    "ts": "bunx tsc",
-    "gen": "bun tsr generate",
-    "watch": "bun tsr watch",
+    "db:push": "bunx --bun drizzle-kit push",
+    "lint": "bunx --bun eslint .",
+    "format": "FORCE_COLOR=1 bunx --bun prettier . --write",
+    "ts": "bunx --bun tsc",
+    "gen": "bunx --bun tsr generate",
+    "watch": "bunx --bun tsr watch",
     "dev": "bun run watch & bun --hot src/index.tsx",
     "start": "NODE_ENV=production bun src/index.tsx",
     "build": "bun run gen && bun build --minify --sourcemap --env='BUN_PUBLIC_*' --production --target=bun ./src/index.tsx --outdir=dist",
@@ -31,6 +32,7 @@
     "@tanstack/eslint-plugin-query": "^5.91.0",
     "@tanstack/eslint-plugin-router": "^1.132.31",
     "@types/bun": "^1.2.23",
+    "@types/pg": "^8.15.5",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.1",
     "drizzle-kit": "^0.31.5",
@@ -40,6 +42,7 @@
     "eslint-plugin-react-hooks": "^7.0.0",
     "globals": "^16.4.0",
     "jiti": "^2.6.1",
+    "pg": "^8.16.3",
     "prettier": "3.6.2",
     "typescript-eslint": "^8.46.0"
   }
