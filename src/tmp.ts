@@ -1,16 +1,36 @@
 import { sql } from "bun";
 
-// const result = await sql.file("./src/queries/tmp.sql");
-// console.log(result);
+import { statusesTable } from "./db/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
-interface Cat {
-  id: number;
-  name: string;
+async function main() {
+  const status: typeof statusesTable.$inferInsert = {
+    name: "Alive",
+  };
+
+  await db.insert(statusesTable).values(status);
+  console.log("New status created!");
+
+  const statuses = await db.select().from(statusesTable);
+  const selectedStatus = statuses[0];
+  console.log("Getting all statuses from the database: ", statuses);
+
+  await db
+    .update(statusesTable)
+    .set({
+      name: "Dead",
+    })
+    .where(eq(statusesTable.id, selectedStatus!.id));
+  console.log("Status info updated!");
+
+  await db
+    .delete(statusesTable)
+    .where(eq(statusesTable.id, selectedStatus!.id));
+  console.log("Status deleted!");
 }
 
-const cat: Cat = {
-  id: 1,
-  name: "Muezza",
-};
+main();
 
-console.log(cat);
+// const result = await sql.file("./src/queries/tmp.sql");
+// console.log(result);
