@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "db:push": "bunx --bun drizzle-kit push",
+    "db:push": "bunx drizzle-kit push",
+    "db:push2": "npx drizzle-kit push",
     "lint": "bunx --bun eslint .",
     "format": "FORCE_COLOR=1 bunx --bun prettier . --write",
     "ts": "bunx --bun tsc",
