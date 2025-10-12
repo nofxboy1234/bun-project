@@ -2,6 +2,7 @@ import js from "@eslint/js";
 import tseslint from "typescript-eslint";
 import pluginReact from "eslint-plugin-react";
 import pluginReactHooks from "eslint-plugin-react-hooks";
+import pluginReactRefresh from "eslint-plugin-react-refresh";
 import { defineConfig } from "eslint/config";
 import eslintConfigPrettier from "eslint-config-prettier";
 import pluginQuery from "@tanstack/eslint-plugin-query";
@@ -56,10 +57,13 @@ export default defineConfig(
     files: ["src/**/*.{js,jsx,ts,tsx}"],
     plugins: {
       "react-hooks": pluginReactHooks,
+      "react-refresh": pluginReactRefresh,
     },
     rules: {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ...(pluginReactHooks as any).configs.recommended.rules,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ...(pluginReactRefresh as any).configs.vite.rules,
       "react/react-in-jsx-scope": "off",
     },
   },

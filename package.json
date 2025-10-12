@@ -5,13 +5,13 @@
   "type": "module",
   "scripts": {
     "db:push": "bunx drizzle-kit push",
-    "db:push2": "npx drizzle-kit push",
     "lint": "bunx --bun eslint .",
     "format": "FORCE_COLOR=1 bunx --bun prettier . --write",
     "ts": "bunx --bun tsc",
     "gen": "bunx --bun tsr generate",
     "watch": "bunx --bun tsr watch",
     "dev": "bun run watch & bun --hot src/index.tsx",
+    "dev:vite": "bunx --bun vite",
     "start": "NODE_ENV=production bun src/index.tsx",
     "build": "bun run gen && bun build --minify --sourcemap --env='BUN_PUBLIC_*' --production --target=bun ./src/index.tsx --outdir=dist",
     "start:js": "NODE_ENV=production bun --cwd=dist index.js",
@@ -36,15 +36,19 @@
     "@types/pg": "^8.15.5",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.1",
+    "@vitejs/plugin-react-swc": "^4.1.0",
     "drizzle-kit": "^0.31.5",
     "eslint": "^9.37.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.0",
+    "eslint-plugin-react-refresh": "^0.4.23",
     "globals": "^16.4.0",
     "jiti": "^2.6.1",
     "pg": "^8.16.3",
     "prettier": "3.6.2",
-    "typescript-eslint": "^8.46.0"
+    "typescript-eslint": "^8.46.0",
+    "vite": "^7.1.9",
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }
