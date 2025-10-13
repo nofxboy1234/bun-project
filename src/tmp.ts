@@ -1,9 +1,9 @@
-import { locationTypesTable, locationsTable } from "./db/schema";
+import { locationTypes, locations } from "./db/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
 
 async function main() {
-  const result = await db.query.locationTypesTable.findMany({
+  const result = await db.query.locationTypes.findMany({
     with: {
       locations: true,
     },
