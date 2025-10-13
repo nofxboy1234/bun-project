@@ -1,36 +1,35 @@
-import { sql } from "bun";
-
-import { statusesTable } from "./db/schema";
+import { locationTypesTable, locationsTable } from "./db/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
 
 async function main() {
-  const status: typeof statusesTable.$inferInsert = {
-    name: "Alive",
+  const locationTypeCity: typeof locationTypesTable.$inferInsert = {
+    name: "City",
   };
 
-  await db.insert(statusesTable).values(status);
-  console.log("New status created!");
+  const locationTypeCountry: typeof locationTypesTable.$inferInsert = {
+    name: "Country",
+  };
 
-  const statuses = await db.select().from(statusesTable);
-  const selectedStatus = statuses[0];
-  console.log("Getting all statuses from the database: ", statuses);
+  await db.insert(locationTypesTable).values(locationTypeCity);
+  await db.insert(locationTypesTable).values(locationTypeCountry);
 
-  await db
-    .update(statusesTable)
-    .set({
-      name: "Dead",
-    })
-    .where(eq(statusesTable.id, selectedStatus!.id));
-  console.log("Status info updated!");
+  const locationTypes = await db
+    .select()
+    .from(locationTypesTable)
+    .where(eq(locationTypesTable.name, "City"));
 
-  await db
-    .delete(statusesTable)
-    .where(eq(statusesTable.id, selectedStatus!.id));
-  console.log("Status deleted!");
+  const locationType = locationTypes[0];
+
+  const location: typeof locationsTable.$inferInsert = {
+    name: "Tokyo",
+    locationTypeId: locationType!.id,
+  };
+
+  await db.insert(locationsTable).values(location);
+
+  const locations = await db.select().from(locationsTable);
+  console.log(locations);
 }
 
 main();
-
-// const result = await sql.file("./src/queries/tmp.sql");
-// console.log(result);
