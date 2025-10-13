@@ -3,30 +3,33 @@ import { db } from "./db";
 import { eq } from "drizzle-orm";
 
 async function main() {
-  const locationTypeCity: typeof locationTypesTable.$inferInsert = {
-    name: "City",
-  };
+  const o1 = { a: { b: { c: { d: { e: 5 } } } } };
+  console.log(o1);
 
-  const locationTypeCountry: typeof locationTypesTable.$inferInsert = {
-    name: "Country",
-  };
+  // const locationTypeCity: typeof locationTypesTable.$inferInsert = {
+  //   name: "City",
+  // };
 
-  await db.insert(locationTypesTable).values(locationTypeCity);
-  await db.insert(locationTypesTable).values(locationTypeCountry);
+  // const locationTypeCountry: typeof locationTypesTable.$inferInsert = {
+  //   name: "Country",
+  // };
 
-  const locationTypes = await db
-    .select()
-    .from(locationTypesTable)
-    .where(eq(locationTypesTable.name, "City"));
+  // await db.insert(locationTypesTable).values(locationTypeCity);
+  // await db.insert(locationTypesTable).values(locationTypeCountry);
 
-  const locationType = locationTypes[0];
+  // const locationTypes = await db
+  //   .select()
+  //   .from(locationTypesTable)
+  //   .where(eq(locationTypesTable.name, "City"));
 
-  const location: typeof locationsTable.$inferInsert = {
-    name: "Tokyo",
-    locationTypeId: locationType!.id,
-  };
+  // const locationType = locationTypes[0];
 
-  await db.insert(locationsTable).values(location);
+  // const location: typeof locationsTable.$inferInsert = {
+  //   name: "Tokyo",
+  //   locationTypeId: locationType!.id,
+  // };
+
+  // await db.insert(locationsTable).values(location);
 
   const locations = await db.select().from(locationsTable);
   console.log(locations);
