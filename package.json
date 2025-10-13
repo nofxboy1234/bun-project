@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "db:push": "bunx drizzle-kit push",
+    "db:studio": "bunx drizzle-kit studio --verbose",
     "lint": "bunx --bun eslint .",
     "format": "FORCE_COLOR=1 bunx --bun prettier . --write",
     "ts": "bunx --bun tsc",
