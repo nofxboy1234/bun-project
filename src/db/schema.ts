@@ -20,7 +20,11 @@ export const locations = pgTable(
   {
     id: integer().primaryKey().generatedAlwaysAsIdentity(),
     name: varchar({ length: 255 }).notNull(),
-    locationTypeId: integer().references(() => locationTypes.id),
+    locationTypeId: integer()
+      .references(() => locationTypes.id, {
+        onDelete: "cascade",
+      })
+      .notNull(),
   },
   (table) => [index("location_type_id_idx").on(table.locationTypeId)],
 );
