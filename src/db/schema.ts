@@ -14,6 +14,10 @@ export const statuses = pgTable("statuses", {
   name: varchar({ length: 255 }).notNull(),
 });
 
+export const statusesRelations = relations(statuses, ({ many }) => ({
+  characters: many(characters),
+}));
+
 export const locationTypes = pgTable("location_types", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
@@ -39,18 +43,34 @@ export const locations = pgTable(
   (table) => [index("location_type_id_idx").on(table.locationTypeId)],
 );
 
-export const locationsRelations = relations(locations, ({ one }) => ({
+export const locationsRelations = relations(locations, ({ one, many }) => ({
   locationType: one(locationTypes, {
     fields: [locations.locationTypeId],
     references: [locationTypes.id],
   }),
+  characters: many(characters),
+  map: one(maps),
+  species: many(species),
 }));
 
 export const characterAliases = pgTable("character_aliases", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
   name: varchar({ length: 255 }).notNull(),
+  characterId: integer()
+    .references(() => characters.id, { onDelete: "cascade" })
+    .notNull(),
 });
+
+export const characterAliasesRelations = relations(
+  characterAliases,
+  ({ one }) => ({
+    character: one(characters, {
+      fields: [characterAliases.characterId],
+      references: [characters.id],
+    }),
+  }),
+);
 
 export const genders = pgTable("genders", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
@@ -58,36 +78,106 @@ export const genders = pgTable("genders", {
   name: varchar({ length: 255 }).notNull(),
 });
 
+export const gendersRelations = relations(genders, ({ many }) => ({
+  characters: many(characters),
+}));
+
 export const speciesAliases = pgTable("species_aliases", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
   name: varchar({ length: 255 }).notNull(),
+  speciesId: integer()
+    .references(() => species.id, { onDelete: "cascade" })
+    .notNull(),
 });
+
+export const speciesAliasesRelations = relations(speciesAliases, ({ one }) => ({
+  species: one(species, {
+    fields: [speciesAliases.speciesId],
+    references: [species.id],
+  }),
+}));
 
 export const species = pgTable("species", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
   name: varchar({ length: 255 }).notNull(),
   description: varchar({ length: 255 }).notNull(),
+  birthplaceId: integer()
+    .references(() => locations.id, { onDelete: "cascade" })
+    .notNull(),
 });
+
+export const speciesRelations = relations(species, ({ one, many }) => ({
+  speciesAliases: many(speciesAliases),
+  characters: many(characters),
+  birthplace: one(locations, {
+    fields: [species.birthplaceId],
+    references: [locations.id],
+  }),
+}));
 
 export const maps = pgTable("maps", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
   imageFilePath: varchar({ length: 255 }).notNull(),
+  locationId: integer()
+    .references(() => locations.id, { onDelete: "cascade" })
+    .notNull(),
 });
+
+export const mapsRelations = relations(maps, ({ one }) => ({
+  location: one(locations, {
+    fields: [maps.locationId],
+    references: [locations.id],
+  }),
+}));
 
 export const relatives = pgTable("relatives", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
   type: varchar({ length: 255 }).notNull(),
+  character1Id: integer()
+    .references(() => characters.id, { onDelete: "cascade" })
+    .notNull(),
+  character2Id: integer()
+    .references(() => characters.id, { onDelete: "cascade" })
+    .notNull(),
 });
+
+export const relativesRelations = relations(relatives, ({ one }) => ({
+  character1: one(characters, {
+    fields: [relatives.character1Id],
+    references: [characters.id],
+  }),
+  character2: one(characters, {
+    fields: [relatives.character2Id],
+    references: [characters.id],
+  }),
+}));
 
 export const contracts = pgTable("contracts", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
   terms: varchar({ length: 255 }).notNull(),
+  humanId: integer()
+    .references(() => characters.id, { onDelete: "cascade" })
+    .notNull(),
+  devilId: integer()
+    .references(() => characters.id, { onDelete: "cascade" })
+    .notNull(),
 });
+
+export const contractsRelations = relations(contracts, ({ one }) => ({
+  human: one(characters, {
+    fields: [contracts.humanId],
+    references: [characters.id],
+  }),
+  devil: one(characters, {
+    fields: [contracts.devilId],
+    references: [characters.id],
+  }),
+}));
 
 export const characters = pgTable("characters", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
@@ -96,12 +186,68 @@ export const characters = pgTable("characters", {
   age: integer(),
   height: integer(),
   birthday: date(),
+  speciesId: integer()
+    .references(() => species.id, { onDelete: "cascade" })
+    .notNull(),
+  genderId: integer()
+    .references(() => genders.id, { onDelete: "cascade" })
+    .notNull(),
+  birthplaceId: integer()
+    .references(() => locations.id, { onDelete: "cascade" })
+    .notNull(),
+  statusId: integer()
+    .references(() => statuses.id, { onDelete: "cascade" })
+    .notNull(),
 });
+
+export const charactersRelations = relations(characters, ({ one, many }) => ({
+  characterAliases: many(characterAliases),
+  occupations: many(occupations),
+  affiliations: many(affiliations),
+  contracts: many(contracts),
+  relatives: many(relatives),
+  species: one(species, {
+    fields: [characters.speciesId],
+    references: [species.id],
+  }),
+  gender: one(genders, {
+    fields: [characters.genderId],
+    references: [genders.id],
+  }),
+  birthplace: one(locations, {
+    fields: [characters.birthplaceId],
+    references: [locations.id],
+  }),
+  status: one(statuses, {
+    fields: [characters.statusId],
+    references: [statuses.id],
+  }),
+}));
 
 export const characterAffiliations = pgTable("character_affiliations", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
+  characterId: integer()
+    .references(() => characters.id, { onDelete: "cascade" })
+    .notNull(),
+  affiliationId: integer()
+    .references(() => affiliations.id, { onDelete: "cascade" })
+    .notNull(),
 });
+
+export const characterAffiliationsRelations = relations(
+  characterAffiliations,
+  ({ one }) => ({
+    character: one(characters, {
+      fields: [characterAffiliations.characterId],
+      references: [characters.id],
+    }),
+    affiliation: one(affiliations, {
+      fields: [characterAffiliations.affiliationId],
+      references: [affiliations.id],
+    }),
+  }),
+);
 
 export const affiliations = pgTable("affiliations", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
@@ -109,13 +255,41 @@ export const affiliations = pgTable("affiliations", {
   name: varchar({ length: 255 }).notNull(),
 });
 
-export const character_occupations = pgTable("character_occupations", {
+export const affiliationsRelations = relations(affiliations, ({ many }) => ({
+  characters: many(characters),
+}));
+
+export const characterOccupations = pgTable("character_occupations", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
+  characterId: integer()
+    .references(() => characters.id, { onDelete: "cascade" })
+    .notNull(),
+  occupationId: integer()
+    .references(() => occupations.id, { onDelete: "cascade" })
+    .notNull(),
 });
+
+export const characterOccupationsRelations = relations(
+  characterOccupations,
+  ({ one }) => ({
+    character: one(characters, {
+      fields: [characterOccupations.characterId],
+      references: [characters.id],
+    }),
+    occupation: one(occupations, {
+      fields: [characterOccupations.occupationId],
+      references: [occupations.id],
+    }),
+  }),
+);
 
 export const occupations = pgTable("occupations", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
   name: varchar({ length: 255 }).notNull(),
 });
+
+export const occupationsRelations = relations(occupations, ({ many }) => ({
+  characters: many(characters),
+}));
