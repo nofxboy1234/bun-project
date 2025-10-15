@@ -102,7 +102,7 @@ export const species = pgTable("species", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
   name: varchar({ length: 255 }).notNull(),
-  description: varchar({ length: 255 }).notNull(),
+  description: varchar({ length: 2000 }).notNull(),
   birthplaceId: integer()
     .references(() => locations.id, { onDelete: "cascade" })
     .notNull(),
@@ -159,7 +159,7 @@ export const relativesRelations = relations(relatives, ({ one }) => ({
 export const contracts = pgTable("contracts", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
-  terms: varchar({ length: 255 }).notNull(),
+  terms: varchar({ length: 2000 }).notNull(),
   humanId: integer()
     .references(() => characters.id, { onDelete: "cascade" })
     .notNull(),
