@@ -54,6 +54,7 @@ async function main() {
       columns: {
         name: f.valuesFromArray({
           values: ["Denji", "Power", "Aki Hayakawa"],
+          isUnique: true,
         }),
         age: f.int({
           minValue: 16,
@@ -64,6 +65,7 @@ async function main() {
           maxValue: 100,
         }),
       },
+      count: 3,
     },
     contracts: {
       columns: {

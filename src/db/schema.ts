@@ -182,7 +182,7 @@ export const contractsRelations = relations(contracts, ({ one }) => ({
 export const characters = pgTable("characters", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
-  name: varchar({ length: 255 }).notNull(),
+  name: varchar({ length: 255 }).notNull().unique(),
   age: integer(),
   height: integer(),
   birthday: date(),
