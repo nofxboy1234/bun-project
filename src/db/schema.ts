@@ -252,7 +252,7 @@ export const characterAffiliationsRelations = relations(
 export const affiliations = pgTable("affiliations", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
-  name: varchar({ length: 255 }).notNull(),
+  name: varchar({ length: 255 }).notNull().unique(),
 });
 
 export const affiliationsRelations = relations(affiliations, ({ many }) => ({

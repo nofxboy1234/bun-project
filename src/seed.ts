@@ -29,6 +29,7 @@ async function main() {
           ],
         }),
       },
+      count: 10,
     },
     characterAliases: {
       columns: {
