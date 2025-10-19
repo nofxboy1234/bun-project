@@ -1,8 +1,8 @@
 [serve.static]
 env = "BUN_PUBLIC_*"
 
-[install.security]
-scanner = "@socketsecurity/bun-security-scanner"
+# [install.security]
+# scanner = "@socketsecurity/bun-security-scanner"
 
 [console]
 depth = 5
