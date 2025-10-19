@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "db:push": "bunx drizzle-kit push",
-    "db:seed": "bun src/seed.ts",
+    "db:sync": "bunx @snaplet/seed sync",
+    "db:reset": "bun resetDB.ts",
+    "db:seed": "bun seed.ts",
     "db:studio": "bunx drizzle-kit studio --verbose",
     "lint": "bunx --bun eslint .",
     "format": "FORCE_COLOR=1 bunx --bun prettier . --write",
@@ -32,6 +34,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.37.0",
+    "@snaplet/copycat": "^6.0.0",
+    "@snaplet/seed": "^0.98.0",
     "@socketsecurity/bun-security-scanner": "^1.1.0",
     "@tanstack/eslint-plugin-query": "^5.91.0",
     "@tanstack/eslint-plugin-router": "^1.132.31",
@@ -41,7 +45,6 @@
     "@types/react-dom": "^19.2.1",
     "@vitejs/plugin-react-swc": "^4.1.0",
     "drizzle-kit": "^0.31.5",
-    "drizzle-seed": "^0.3.1",
     "eslint": "^9.37.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react": "^7.37.5",

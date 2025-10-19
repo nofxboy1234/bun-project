@@ -1,36 +1,91 @@
 import { db } from "./db";
-import { reset, seed } from "drizzle-seed";
-import * as schema from "@/db/schema";
+import {
+  affiliations,
+  characterAffiliations,
+  characterAliases,
+  characterOccupations,
+  characters,
+  contracts,
+  genders,
+  locationTypes,
+  locations,
+  maps,
+  occupations,
+  relatives,
+  species,
+  speciesAliases,
+  statuses,
+} from "@/db/schema";
 
 async function main() {
-  await reset(db, schema);
+  db.query.characters.findMany({
+    with: {
+      characterAffiliations: {
+        columns: {
+          affiliationId: false,
+          characterId: false,
+          created_at: false,
+          id: false,
+        },
+        with: {
+          affiliation: true,
+        },
+      },
+    },
+  });
+
+  db.delete(characterAffiliations);
+  db.delete(characterAliases);
+  db.delete(characterOccupations);
+  db.delete(characters);
+  db.delete(contracts);
+  db.delete(maps);
+  db.delete(relatives);
+  db.delete(species);
+  db.delete(speciesAliases);
+
+  db.delete(locations);
+  db.delete(genders);
+  db.delete(locationTypes);
+  db.delete(statuses);
+  db.delete(affiliations);
+  db.delete(occupations);
+
+  db.insert(genders).values([{ name: "Male" }, { name: "Female" }]);
+  db.insert(locationTypes).values([
+    { name: "Country" },
+    { name: "City" },
+    { name: "Church" },
+    { name: "High School" },
+    { name: "Restaurant" },
+    { name: "Detention Center" },
+  ]);
+  db.insert(statuses).values([
+    { name: "Alive" },
+    { name: "Deceased" },
+    { name: "Reincarnated" },
+  ]);
+  db.insert(affiliations).values([
+    { name: "Pochita" },
+    { name: "Yakuza" },
+    { name: "Public Safety Devil Hunters" },
+    { name: "Tokyo Special Division 4" },
+    { name: "Fourth East High School" },
+    { name: "Chainsaw Man Church" },
+    { name: "Bat Devil" },
+    { name: "Tokyo Divison 2" },
+    { name: "Devil Hunters" },
+    { name: "Weapon Devils" },
+  ]);
+  db.insert(occupations).values([
+    { name: "Private Devil Hunter" },
+    { name: "Public Safety Devil Hunter" },
+    { name: "High School Student" },
+    { name: "Wild Fiend" },
+  ]);
+  db.insert(locations).values([{ name: "", locationTypeId: 1 }]);
+
   await seed(db, schema, { seed: 1984 }).refine((f) => ({
-    statuses: {
-      columns: {
-        name: f.valuesFromArray({
-          values: ["Alive", "Deceased", "Reincarnated"],
-        }),
-      },
-    },
-    affiliations: {
-      columns: {
-        name: f.valuesFromArray({
-          values: [
-            "Pochita",
-            "Yakuza",
-            "Public Safety Devil Hunters",
-            "Tokyo Special Division 4",
-            "Fourth East High School",
-            "Chainsaw Man Church",
-            "Bat Devil",
-            "Tokyo Divison 2",
-            "Devil Hunters",
-            "Weapon Devils",
-          ],
-        }),
-      },
-      count: 10,
-    },
     characterAliases: {
       columns: {
         name: f.valuesFromArray({
@@ -78,27 +133,6 @@ async function main() {
             'In exchange for promising to find and befriend the reincarnated blood devil and "turn her back into Power," Power gave Denji her blood.',
             "In exchange for living a normal life, the Chainsaw Devil became Denji's heart and turned him into a hybrid.",
             "In exchange for escaping Aging's World, and Yoshida, Denji, Asa, Yoru and the Aging Devil's Victim to return to their respective worlds and never fight each other again.",
-          ],
-        }),
-      },
-    },
-    genders: {
-      columns: {
-        name: f.valuesFromArray({
-          values: ["Male", "Female"],
-        }),
-      },
-    },
-    locationTypes: {
-      columns: {
-        name: f.valuesFromArray({
-          values: [
-            "Country",
-            "City",
-            "Church",
-            "High School",
-            "Restaurant",
-            "Detention Center",
           ],
         }),
       },

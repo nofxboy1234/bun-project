@@ -41,3 +41,6 @@ bun-project
 
 # Postgres tools
 *.jsonc
+
+# @snaplet/seed
+.snaplet
