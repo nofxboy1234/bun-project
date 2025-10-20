@@ -201,7 +201,6 @@ export const characters = pgTable("characters", {
   name: varchar({ length: 255 }).notNull().unique(),
   age: integer(),
   height: integer(),
-  birthday: date(),
   speciesId: integer()
     .references(() => species.id, { onDelete: "cascade" })
     .notNull(),

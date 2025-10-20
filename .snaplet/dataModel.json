@@ -551,20 +551,6 @@
           "maxLength": null
         },
         {
-          "id": "public.characters.birthday",
-          "name": "birthday",
-          "columnName": "birthday",
-          "type": "date",
-          "isRequired": false,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false,
-          "isId": false,
-          "maxLength": null
-        },
-        {
           "id": "public.characters.species_id",
           "name": "species_id",
           "columnName": "species_id",

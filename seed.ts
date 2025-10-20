@@ -91,6 +91,7 @@ const main = async () => {
           { name: "Red Chainsaw Man" },
         ],
         age: 18,
+        height: 173,
       },
       // ...char(3),
       {
@@ -102,6 +103,7 @@ const main = async () => {
           { name: "Number One" },
         ],
         age: null,
+        height: 170,
       },
       {
         name: "Aki",
@@ -111,6 +113,7 @@ const main = async () => {
           { name: "Gun Fiend" },
         ],
         age: null,
+        height: 182,
       },
     ],
     {
