@@ -140,7 +140,6 @@ export const relativeTypesRelations = relations(relativeTypes, ({ many }) => ({
 export const relatives = pgTable("relatives", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
-  type: varchar({ length: 255 }).notNull(),
   character1Id: integer()
     .references(() => characters.id, { onDelete: "cascade" })
     .notNull(),

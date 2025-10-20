@@ -1499,20 +1499,6 @@
           "maxLength": null
         },
         {
-          "id": "public.relatives.type",
-          "name": "type",
-          "columnName": "type",
-          "type": "varchar",
-          "isRequired": true,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false,
-          "isId": false,
-          "maxLength": 255
-        },
-        {
           "id": "public.relatives.character1_id",
           "name": "character1_id",
           "columnName": "character1_id",
