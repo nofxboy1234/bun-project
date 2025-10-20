@@ -41,15 +41,25 @@ const main = async () => {
     },
   ]);
 
-  const { locations } = await seed.locations((loc) =>
-    loc(3, ({ index: locIndex }) => ({
-      name: `location-${locIndex}`,
-      location_types: (locInst) => ({ name: `location-type-${locIndex}` }),
-      maps: (map) =>
-        map(1, ({ index: mapIndex }) => ({
-          image_file_path: `path/to/map${mapIndex}-location${locIndex}`,
-        })),
-    })),
+  const { location_types } = await seed.location_types([
+    { name: "Country" },
+    { name: "City" },
+    { name: "Church" },
+    { name: "High School" },
+    { name: "Restaurant" },
+    { name: "Detention Center" },
+  ]);
+
+  const { locations } = await seed.locations(
+    (loc) =>
+      loc(3, ({ index: locIndex }) => ({
+        name: `location-${locIndex}`,
+        maps: (map) =>
+          map(1, ({ index: mapIndex }) => ({
+            image_file_path: `path/to/map${mapIndex}-location${locIndex}`,
+          })),
+      })),
+    { connect: { location_types } },
   );
 
   const { affiliations } = await seed.affiliations((aff) => [
