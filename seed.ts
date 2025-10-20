@@ -113,12 +113,51 @@ const main = async () => {
     connect: { characters, occupations },
   });
 
-  await seed.contracts((contract) => contract(3, () => ({})), {
-    connect: { characters },
-  });
+  await seed.contracts(
+    [
+      {
+        terms:
+          "In exchange for letting him live in his right eye, Aki can see a few seconds into the future with the Future Devil's power. For the two others in Public Safety, one has to pay half of their lifespan, and the other one has to exchange their eyes, sense of taste and smell. The price of the exchange will depend on the future of the devil hunter.",
+      },
+      {
+        terms:
+          "The Control Devil will give Aki power if he gives everything of himself to her",
+      },
+      {
+        terms:
+          "In exchange for most of his lifespan, the Curse Devil kills his target if he stabs it with his sword by three times.",
+      },
+      {
+        terms:
+          "In exchange for feeding her a part of his body, Aki may summon the Fox Devil to attack a target. Aki can summon her head because the Fox Devil considers him 'handsome'",
+      },
+      {
+        terms:
+          "In exchange for promising to find and befriend the reincarnated blood devil and 'turn her back into Power,' Power gave Denji her blood.",
+      },
+      {
+        terms:
+          "In exchange for living a normal life, the Chainsaw Devil became Denji's heart and turned him into a hybrid.",
+      },
+      {
+        terms:
+          "In exchange for escaping Aging's World, and Yoshida, Denji, Asa, Yoru and the Aging Devil's Victim to return to their respective worlds and never fight each other again.",
+      },
+    ],
+    {
+      connect: { characters },
+    },
+  );
+
+  const { relative_types } = await seed.relative_types([
+    { name: "Sibling" },
+    { name: "Parent" },
+    { name: "Pet" },
+    { name: "Child" },
+  ]);
 
   await seed.relatives((relative) => relative(3, () => ({})), {
-    connect: { characters },
+    connect: { characters, relative_types },
   });
 
   // ************************

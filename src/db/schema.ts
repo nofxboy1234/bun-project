@@ -127,6 +127,16 @@ export const mapsRelations = relations(maps, ({ one }) => ({
   }),
 }));
 
+export const relativeTypes = pgTable("relative_types", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  created_at: timestamp().defaultNow(),
+  name: varchar({ length: 255 }).notNull(),
+});
+
+export const relativeTypesRelations = relations(relativeTypes, ({ many }) => ({
+  relatives: many(relatives),
+}));
+
 export const relatives = pgTable("relatives", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
@@ -136,6 +146,11 @@ export const relatives = pgTable("relatives", {
     .notNull(),
   character2Id: integer()
     .references(() => characters.id, { onDelete: "cascade" })
+    .notNull(),
+  relativeTypeId: integer()
+    .references(() => relativeTypes.id, {
+      onDelete: "cascade",
+    })
     .notNull(),
 });
 
@@ -149,6 +164,10 @@ export const relativesRelations = relations(relatives, ({ one }) => ({
     fields: [relatives.character2Id],
     references: [characters.id],
     relationName: "character2",
+  }),
+  relativeType: one(relativeTypes, {
+    fields: [relatives.relativeTypeId],
+    references: [relativeTypes.id],
   }),
 }));
 
