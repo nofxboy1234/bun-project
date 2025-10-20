@@ -5,6 +5,7 @@
  * Learn more about the Seed Client by following our guide: https://docs.snaplet.dev/seed/getting-started
  */
 import { createSeedClient } from "@snaplet/seed";
+import { copycat } from "@snaplet/copycat";
 
 const main = async () => {
   const seed = await createSeedClient();
@@ -89,6 +90,7 @@ const main = async () => {
           { name: "Chainsaw Kid" },
           { name: "Red Chainsaw Man" },
         ],
+        age: copycat.int("denji", { min: 16, max: 100 }),
       },
       // ...char(3),
       {
@@ -99,6 +101,7 @@ const main = async () => {
           { name: "Powy" },
           { name: "Number One" },
         ],
+        age: copycat.int("power", { min: 16, max: 100 }),
       },
       {
         name: "Aki",
@@ -107,6 +110,7 @@ const main = async () => {
           { name: "Jerk-face" },
           { name: "Gun Fiend" },
         ],
+        age: copycat.int("aki", { min: 16, max: 100 }),
       },
     ],
     {
