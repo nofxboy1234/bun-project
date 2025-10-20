@@ -90,7 +90,7 @@ const main = async () => {
           { name: "Chainsaw Kid" },
           { name: "Red Chainsaw Man" },
         ],
-        age: copycat.int("denji", { min: 16, max: 100 }),
+        age: 18,
       },
       // ...char(3),
       {
@@ -101,7 +101,7 @@ const main = async () => {
           { name: "Powy" },
           { name: "Number One" },
         ],
-        age: copycat.int("power", { min: 16, max: 100 }),
+        age: null,
       },
       {
         name: "Aki",
@@ -110,7 +110,7 @@ const main = async () => {
           { name: "Jerk-face" },
           { name: "Gun Fiend" },
         ],
-        age: copycat.int("aki", { min: 16, max: 100 }),
+        age: null,
       },
     ],
     {
