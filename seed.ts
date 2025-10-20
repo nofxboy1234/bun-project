@@ -92,6 +92,8 @@ const main = async () => {
         ],
         age: 18,
         height: 173,
+        genders: (charCtx) =>
+          charCtx.connect(genders.find((gender) => gender.name === "Male")!),
       },
       // ...char(3),
       {
@@ -104,6 +106,8 @@ const main = async () => {
         ],
         age: null,
         height: 170,
+        genders: (charCtx) =>
+          charCtx.connect(genders.find((gender) => gender.name === "Female")!),
       },
       {
         name: "Aki",
@@ -114,6 +118,8 @@ const main = async () => {
         ],
         age: null,
         height: 182,
+        genders: (charCtx) =>
+          charCtx.connect(genders.find((gender) => gender.name === "Male")!),
       },
     ],
     {
@@ -176,110 +182,6 @@ const main = async () => {
   await seed.relatives((relative) => relative(3, () => ({})), {
     connect: { characters, relative_types },
   });
-
-  // ************************
-
-  // const { locations, characters } = await seed.locations(
-  //   (loc) =>
-  //     loc(3, ({ index: locIndex }) => ({
-  //       characters: (char) =>
-  //         char(1, ({ index }) => {
-  //           const sp =
-  //             locIndex === 0
-  //               ? species.find((s) => s.name === "Human")
-  //               : species.find((s) => s.name === "Devil");
-  //           return {
-  //             species: (ctx) => ctx.connect(sp!),
-  //           };
-  //         }),
-  //     })),
-  //   // { connect: { statuses } },
-  // );
-
-  // ************************
-
-  // await baseClient.location_types([
-  //   {
-  //     locations: [{}, {}, {}, {}],
-  //     // locations: (x) => x(3),
-  //   },
-  // ]);
-
-  // await seed.affiliations();
-
-  // await seed.location_types((x) => x(1));
-
-  // await seed.locations((x) => x(3));
-
-  // *
-  // const { locations } = await seed.locations((x) => x(1));
-  // await seed.characters((x) => x(3), { connect: { locations } });
-
-  // const { locations } = await seed.locations((x) => x(3));
-  // await seed.characters((x) => x(100), { connect: { locations } });
-
-  /* 
-  species: 2
-  locations: 2 + 3
-  location_types: 2
-  statuses: 3
-  characters: 9
-  */
-
-  // const { locations } = await baseClient.locations((loc) =>
-  //   loc(3, ({ index }) => ({
-  //     location_types: () => ({ name: `location_type_${index}!` }),
-  //   })),
-  // );
-
-  // const { locations } = await seed.locations([
-  //   {
-  //     location_types: { name: "hello" },
-  //   },
-  //   {
-  //     location_types: { name: "bye" },
-  //   },
-  //   {
-  //     location_types: { name: "yay" },
-  //   },
-  // ]);
-
-  // const { locations } = await seed.locations((x) => [
-  //   {
-  //     location_types: (x) => ({ name: "hello" }),
-  //     maps: (map) =>
-  //       map(1, ({ index }) => ({
-  //         image_file_path: `path/to/file${index}`,
-  //       })),
-  //   },
-  //   {
-  //     location_types: (x) => ({ name: "bye" }),
-  //     maps: (map) =>
-  //       map(1, ({ index }) => ({
-  //         image_file_path: `path/to/file${index}`,
-  //       })),
-  //   },
-  //   {
-  //     location_types: (x) => ({ name: "yay" }),
-  //     maps: (map) =>
-  //       map(1, ({ index }) => ({
-  //         image_file_path: `path/to/file${index}`,
-  //       })),
-  //   },
-  // ]);
-
-  // await seed.locations(
-  //   (x) =>
-  //     x(1, {
-  //       characters: [{}, {}, {}],
-  //     }),
-  //   { seed: "1984" },
-  // );
-
-  // await seed.locations([{}]);
-  // await seed.statuses((x) => x(10));
-
-  // Type completion not working? You might want to reload your TypeScript Server to pick up the changes
 
   console.log("Database seeded successfully!");
 
