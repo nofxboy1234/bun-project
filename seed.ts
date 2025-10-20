@@ -5,6 +5,7 @@
  * Learn more about the Seed Client by following our guide: https://docs.snaplet.dev/seed/getting-started
  */
 import { createSeedClient } from "@snaplet/seed";
+import { connect } from "bun";
 
 const main = async () => {
   const seed = await createSeedClient();
@@ -22,11 +23,11 @@ const main = async () => {
   ]);
 
   const { species } = await seed.species((sp) => [
-    { name: "Human" },
-    { name: "Devil" },
-    { name: "Hybrid" },
-    { name: "Fiend" },
-    { name: "Fiend Host" },
+    { name: "Human", species_aliases: [{}] },
+    { name: "Devil", species_aliases: [{}] },
+    { name: "Hybrid", species_aliases: [{}] },
+    { name: "Fiend", species_aliases: [{}] },
+    { name: "Fiend Host", species_aliases: [{}] },
   ]);
 
   const { statuses } = await seed.statuses((status) => [
@@ -41,29 +42,64 @@ const main = async () => {
     },
   ]);
 
-  await seed.characters(
+  const { locations } = await seed.locations((loc) =>
+    loc(3, ({ index: locIndex }) => ({
+      name: `location-${locIndex}`,
+      location_types: (locInst) => ({ name: `location-type-${locIndex}` }),
+      maps: (map) =>
+        map(1, ({ index: mapIndex }) => ({
+          image_file_path: `path/to/map${mapIndex}-location${locIndex}`,
+        })),
+    })),
+  );
+
+  const { affiliations } = await seed.affiliations((aff) =>
+    aff(3, ({ index: affIndex }) => ({
+      name: `affiliation-${affIndex}`,
+    })),
+  );
+
+  const { occupations } = await seed.occupations((occ) =>
+    occ(3, ({ index: charAliasIndex }) => ({})),
+  );
+
+  const { characters } = await seed.characters(
     (char) => [
       {
         name: "Denji",
+        character_aliases: [{}],
       },
       // ...char(3),
       {
         name: "Power",
+        character_aliases: [{}],
       },
       {
         name: "Aki",
+        character_aliases: [{}],
       },
     ],
     {
-      connect: { genders, species, statuses },
+      connect: { genders, species, statuses, locations },
       seed: "2000",
     },
   );
 
-  // await seed.characters((char) => char(3, ({ index }) => ({})), {
-  //   connect: { genders, species },
-  //   seed: "2000",
-  // });
+  await seed.character_affiliations((charAff) => charAff(3, () => ({})), {
+    connect: { characters, affiliations },
+  });
+
+  await seed.character_occupations((charOcc) => charOcc(3, () => ({})), {
+    connect: { characters, occupations },
+  });
+
+  await seed.contracts((contract) => contract(3, () => ({})), {
+    connect: { characters },
+  });
+
+  await seed.relatives((relative) => relative(3, () => ({})), {
+    connect: { characters },
+  });
 
   // ************************
 
@@ -131,16 +167,6 @@ const main = async () => {
   //     location_types: { name: "yay" },
   //   },
   // ]);
-
-  const { locations } = await seed.locations((x) =>
-    x(3, ({ index: locIndex }) => ({
-      location_types: (x) => ({ name: "hello" }),
-      maps: (map) =>
-        map(1, ({ index: mapIndex }) => ({
-          image_file_path: `path/to/file${locIndex}`,
-        })),
-    })),
-  );
 
   // const { locations } = await seed.locations((x) => [
   //   {
