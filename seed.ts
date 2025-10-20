@@ -5,7 +5,6 @@
  * Learn more about the Seed Client by following our guide: https://docs.snaplet.dev/seed/getting-started
  */
 import { createSeedClient } from "@snaplet/seed";
-import { connect } from "bun";
 
 const main = async () => {
   const seed = await createSeedClient();
@@ -53,11 +52,18 @@ const main = async () => {
     })),
   );
 
-  const { affiliations } = await seed.affiliations((aff) =>
-    aff(3, ({ index: affIndex }) => ({
-      name: `affiliation-${affIndex}`,
-    })),
-  );
+  const { affiliations } = await seed.affiliations((aff) => [
+    { name: "Pochita" },
+    { name: "Yakuza" },
+    { name: "Public Safety Devil Hunters" },
+    { name: "Tokyo Special Division 4" },
+    { name: "Fourth East High School" },
+    { name: "Chainsaw Man Church" },
+    { name: "Bat Devil" },
+    { name: "Tokyo Divison 2" },
+    { name: "Devil Hunters" },
+    { name: "Weapon Devils" },
+  ]);
 
   const { occupations } = await seed.occupations((occ) =>
     occ(3, ({ index: charAliasIndex }) => ({})),
@@ -67,16 +73,30 @@ const main = async () => {
     (char) => [
       {
         name: "Denji",
-        character_aliases: [{}],
+        character_aliases: [
+          { name: "Chainsaw Man" },
+          { name: "Lord Chainsaw" },
+          { name: "Chainsaw Kid" },
+          { name: "Red Chainsaw Man" },
+        ],
       },
       // ...char(3),
       {
         name: "Power",
-        character_aliases: [{}],
+        character_aliases: [
+          { name: "Blood Fiend" },
+          { name: "Detective Power" },
+          { name: "Powy" },
+          { name: "Number One" },
+        ],
       },
       {
         name: "Aki",
-        character_aliases: [{}],
+        character_aliases: [
+          { name: "Topknot" },
+          { name: "Jerk-face" },
+          { name: "Gun Fiend" },
+        ],
       },
     ],
     {
