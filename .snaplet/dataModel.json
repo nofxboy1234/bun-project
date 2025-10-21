@@ -351,8 +351,9 @@
       ],
       "uniqueConstraints": [
         {
-          "name": "character_aliases_name_unique",
+          "name": "character_aliases_characterId_name_unique",
           "fields": [
+            "character_id",
             "name"
           ],
           "nullNotDistinct": false
@@ -926,6 +927,14 @@
         }
       ],
       "uniqueConstraints": [
+        {
+          "name": "contracts_humanId_devilId_unique",
+          "fields": [
+            "devil_id",
+            "human_id"
+          ],
+          "nullNotDistinct": false
+        },
         {
           "name": "contracts_pkey",
           "fields": [

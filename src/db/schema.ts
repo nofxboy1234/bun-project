@@ -54,14 +54,18 @@ export const locationsRelations = relations(locations, ({ one, many }) => ({
   map: one(maps),
 }));
 
-export const characterAliases = pgTable("character_aliases", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  created_at: timestamp().defaultNow(),
-  name: varchar({ length: 255 }).notNull().unique(),
-  characterId: integer()
-    .references(() => characters.id, { onDelete: "cascade" })
-    .notNull(),
-});
+export const characterAliases = pgTable(
+  "character_aliases",
+  {
+    id: integer().primaryKey().generatedAlwaysAsIdentity(),
+    created_at: timestamp().defaultNow(),
+    name: varchar({ length: 255 }).notNull(),
+    characterId: integer()
+      .references(() => characters.id, { onDelete: "cascade" })
+      .notNull(),
+  },
+  (t) => [unique().on(t.characterId, t.name)],
+);
 
 export const characterAliasesRelations = relations(
   characterAliases,

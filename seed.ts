@@ -20,10 +20,17 @@ const main = async () => {
     {
       name: "Female",
     },
+    {
+      name: "Unknown",
+    },
   ]);
 
   const { species } = await seed.species((sp) => [
-    { name: "Human", description: null },
+    {
+      name: "Human",
+      description: null,
+      // species_aliases: []
+    },
     {
       name: "Devil",
       description: "Supernatural creatures born from human concepts",
@@ -109,6 +116,8 @@ const main = async () => {
     { name: "Public Safety Devil Hunter" },
     { name: "High School Student" },
     { name: "Wild Fiend" },
+    { name: "Wild Devil" },
+    { name: "Contract Devil" },
   ]);
 
   const { characters } = await seed.characters(
@@ -125,12 +134,15 @@ const main = async () => {
         height: 173,
         genders: (charCtx) =>
           charCtx.connect(genders.find((gender) => gender.name === "Male")!),
+        species: (charCtx) =>
+          charCtx.connect(species.find((sp) => sp.name === "Human")!),
       },
       // ...char(3),
       {
         name: "Power",
         character_aliases: [
           { name: "Blood Fiend" },
+          { name: "Blood Devil" },
           { name: "Detective Power" },
           { name: "Powy" },
           { name: "Number One" },
@@ -139,6 +151,8 @@ const main = async () => {
         height: 170,
         genders: (charCtx) =>
           charCtx.connect(genders.find((gender) => gender.name === "Female")!),
+        species: (charCtx) =>
+          charCtx.connect(species.find((sp) => sp.name === "Devil")!),
       },
       {
         name: "Aki",
@@ -151,6 +165,78 @@ const main = async () => {
         height: 182,
         genders: (charCtx) =>
           charCtx.connect(genders.find((gender) => gender.name === "Male")!),
+        species: (charCtx) =>
+          charCtx.connect(species.find((sp) => sp.name === "Human")!),
+      },
+      {
+        name: "Pochita",
+        character_aliases: [
+          { name: "Chainsaw" },
+          { name: "Chainsaw Devil" },
+          { name: "Chainsaw Man" },
+          { name: "Hero of Hell" },
+          { name: "Black Chainsaw Man" },
+        ],
+        age: null,
+        height: null,
+        genders: (charCtx) =>
+          charCtx.connect(genders.find((gender) => gender.name === "Male")!),
+        species: (charCtx) =>
+          charCtx.connect(species.find((sp) => sp.name === "Devil")!),
+      },
+      {
+        name: "Future Devil",
+        // character_aliases: [],
+        age: null,
+        height: null,
+        genders: (charCtx) =>
+          charCtx.connect(genders.find((gender) => gender.name === "Unknown")!),
+        species: (charCtx) =>
+          charCtx.connect(species.find((sp) => sp.name === "Devil")!),
+      },
+      {
+        name: "Makima",
+        character_aliases: [
+          { name: "Control Devil" },
+          { name: "Conquest Devil" },
+          { name: "Devil of Domination" },
+        ],
+        age: null,
+        height: 168,
+        genders: (charCtx) =>
+          charCtx.connect(genders.find((gender) => gender.name === "Female")!),
+        species: (charCtx) =>
+          charCtx.connect(species.find((sp) => sp.name === "Devil")!),
+      },
+      {
+        name: "Curse Devil",
+        // character_aliases: [],
+        age: null,
+        height: null,
+        genders: (charCtx) =>
+          charCtx.connect(genders.find((gender) => gender.name === "Unknown")!),
+        species: (charCtx) =>
+          charCtx.connect(species.find((sp) => sp.name === "Devil")!),
+      },
+      {
+        name: "Fox Devil",
+        // character_aliases: [],
+        age: null,
+        height: null,
+        genders: (charCtx) =>
+          charCtx.connect(genders.find((gender) => gender.name === "Female")!),
+        species: (charCtx) =>
+          charCtx.connect(species.find((sp) => sp.name === "Devil")!),
+      },
+      {
+        name: "Aging Devil",
+        character_aliases: [{ name: "Aging" }],
+        age: null,
+        height: null,
+        genders: (charCtx) =>
+          charCtx.connect(genders.find((gender) => gender.name === "Unknown")!),
+        species: (charCtx) =>
+          charCtx.connect(species.find((sp) => sp.name === "Devil")!),
       },
     ],
     {
@@ -172,35 +258,83 @@ const main = async () => {
       {
         terms:
           "In exchange for letting him live in his right eye, Aki can see a few seconds into the future with the Future Devil's power. For the two others in Public Safety, one has to pay half of their lifespan, and the other one has to exchange their eyes, sense of taste and smell. The price of the exchange will depend on the future of the devil hunter.",
+        characters_contracts_human_idTocharacters: (contractCtx) =>
+          contractCtx.connect(characters.find((char) => char.name === "Aki")!),
+        characters_contracts_devil_idTocharacters: (contractCtx) =>
+          contractCtx.connect(
+            characters.find((char) => char.name === "Future Devil")!,
+          ),
       },
       {
         terms:
           "The Control Devil will give Aki power if he gives everything of himself to her",
+        characters_contracts_human_idTocharacters: (contractCtx) =>
+          contractCtx.connect(characters.find((char) => char.name === "Aki")!),
+        characters_contracts_devil_idTocharacters: (contractCtx) =>
+          contractCtx.connect(
+            characters.find((char) => char.name === "Makima")!,
+          ),
       },
       {
         terms:
           "In exchange for most of his lifespan, the Curse Devil kills his target if he stabs it with his sword by three times.",
+        characters_contracts_human_idTocharacters: (contractCtx) =>
+          contractCtx.connect(characters.find((char) => char.name === "Aki")!),
+        characters_contracts_devil_idTocharacters: (contractCtx) =>
+          contractCtx.connect(
+            characters.find((char) => char.name === "Curse Devil")!,
+          ),
       },
       {
         terms:
           "In exchange for feeding her a part of his body, Aki may summon the Fox Devil to attack a target. Aki can summon her head because the Fox Devil considers him 'handsome'",
+        characters_contracts_human_idTocharacters: (contractCtx) =>
+          contractCtx.connect(characters.find((char) => char.name === "Aki")!),
+        characters_contracts_devil_idTocharacters: (contractCtx) =>
+          contractCtx.connect(
+            characters.find((char) => char.name === "Fox Devil")!,
+          ),
       },
       {
         terms:
           "In exchange for promising to find and befriend the reincarnated blood devil and 'turn her back into Power,' Power gave Denji her blood.",
+        characters_contracts_human_idTocharacters: (contractCtx) =>
+          contractCtx.connect(
+            characters.find((char) => char.name === "Denji")!,
+          ),
+        characters_contracts_devil_idTocharacters: (contractCtx) =>
+          contractCtx.connect(
+            characters.find((char) => char.name === "Power")!,
+          ),
       },
       {
         terms:
           "In exchange for living a normal life, the Chainsaw Devil became Denji's heart and turned him into a hybrid.",
+        characters_contracts_human_idTocharacters: (contractCtx) =>
+          contractCtx.connect(
+            characters.find((char) => char.name === "Denji")!,
+          ),
+        characters_contracts_devil_idTocharacters: (contractCtx) =>
+          contractCtx.connect(
+            characters.find((char) => char.name === "Pochita")!,
+          ),
       },
       {
         terms:
           "In exchange for escaping Aging's World, and Yoshida, Denji, Asa, Yoru and the Aging Devil's Victim to return to their respective worlds and never fight each other again.",
+        characters_contracts_human_idTocharacters: (contractCtx) =>
+          contractCtx.connect(
+            characters.find((char) => char.name === "Denji")!,
+          ),
+        characters_contracts_devil_idTocharacters: (contractCtx) =>
+          contractCtx.connect(
+            characters.find((char) => char.name === "Aging Devil")!,
+          ),
       },
     ],
-    {
-      connect: { characters },
-    },
+    // {
+    //   connect: { characters },
+    // },
   );
 
   const { relative_types } = await seed.relative_types([
