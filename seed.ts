@@ -78,9 +78,12 @@ const main = async () => {
     { name: "Weapon Devils" },
   ]);
 
-  const { occupations } = await seed.occupations((occ) =>
-    occ(3, ({ index: charAliasIndex }) => ({})),
-  );
+  const { occupations } = await seed.occupations([
+    { name: "Private Devil Hunter" },
+    { name: "Public Safety Devil Hunter" },
+    { name: "High School Student" },
+    { name: "Wild Fiend" },
+  ]);
 
   const { characters } = await seed.characters(
     (char) => [
