@@ -51,16 +51,18 @@ const main = async () => {
     { name: "Detention Center" },
   ]);
 
+  const locationValues = ["Japan", "Hell"];
+
   const { locations } = await seed.locations(
     (loc) =>
-      loc(3, ({ index: locIndex }) => ({
-        name: `location-${locIndex}`,
+      loc(2, ({ index: locIndex }) => ({
+        name: `${locationValues[locIndex]}`,
         maps: (map) =>
           map(1, ({ index: mapIndex }) => ({
-            image_file_path: `path/to/map${mapIndex}-location${locIndex}`,
+            image_file_path: `path/to/map-of-${locationValues[locIndex]}`,
           })),
       })),
-    { connect: { location_types } },
+    { connect: { location_types }, seed: "1984" },
   );
 
   const { affiliations } = await seed.affiliations((aff) => [
