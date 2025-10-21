@@ -13,7 +13,7 @@ import {
 export const statuses = pgTable("statuses", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
-  name: varchar({ length: 255 }).notNull(),
+  name: varchar({ length: 255 }).notNull().unique(),
 });
 
 export const statusesRelations = relations(statuses, ({ many }) => ({
@@ -23,7 +23,7 @@ export const statusesRelations = relations(statuses, ({ many }) => ({
 export const locationTypes = pgTable("location_types", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
-  name: varchar({ length: 255 }).notNull(),
+  name: varchar({ length: 255 }).notNull().unique(),
 });
 
 export const locationTypesRelations = relations(locationTypes, ({ many }) => ({
@@ -35,7 +35,7 @@ export const locations = pgTable(
   {
     id: integer().primaryKey().generatedAlwaysAsIdentity(),
     created_at: timestamp().defaultNow(),
-    name: varchar({ length: 255 }).notNull(),
+    name: varchar({ length: 255 }).notNull().unique(),
     locationTypeId: integer()
       .references(() => locationTypes.id, {
         onDelete: "cascade",
@@ -80,7 +80,7 @@ export const characterAliasesRelations = relations(
 export const genders = pgTable("genders", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
-  name: varchar({ length: 255 }).notNull(),
+  name: varchar({ length: 255 }).notNull().unique(),
 });
 
 export const gendersRelations = relations(genders, ({ many }) => ({
@@ -90,7 +90,7 @@ export const gendersRelations = relations(genders, ({ many }) => ({
 export const speciesAliases = pgTable("species_aliases", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
-  name: varchar({ length: 255 }).notNull(),
+  name: varchar({ length: 255 }).notNull().unique(),
   speciesId: integer()
     .references(() => species.id, { onDelete: "cascade" })
     .notNull(),
@@ -106,7 +106,7 @@ export const speciesAliasesRelations = relations(speciesAliases, ({ one }) => ({
 export const species = pgTable("species", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
-  name: varchar({ length: 255 }).notNull(),
+  name: varchar({ length: 255 }).notNull().unique(),
   description: varchar({ length: 2000 }),
 });
 
@@ -135,28 +135,32 @@ export const mapsRelations = relations(maps, ({ one }) => ({
 export const relativeTypes = pgTable("relative_types", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
-  name: varchar({ length: 255 }).notNull(),
+  name: varchar({ length: 255 }).notNull().unique(),
 });
 
 export const relativeTypesRelations = relations(relativeTypes, ({ many }) => ({
   relatives: many(relatives),
 }));
 
-export const relatives = pgTable("relatives", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  created_at: timestamp().defaultNow(),
-  character1Id: integer()
-    .references(() => characters.id, { onDelete: "cascade" })
-    .notNull(),
-  character2Id: integer()
-    .references(() => characters.id, { onDelete: "cascade" })
-    .notNull(),
-  relativeTypeId: integer()
-    .references(() => relativeTypes.id, {
-      onDelete: "cascade",
-    })
-    .notNull(),
-});
+export const relatives = pgTable(
+  "relatives",
+  {
+    id: integer().primaryKey().generatedAlwaysAsIdentity(),
+    created_at: timestamp().defaultNow(),
+    character1Id: integer()
+      .references(() => characters.id, { onDelete: "cascade" })
+      .notNull(),
+    character2Id: integer()
+      .references(() => characters.id, { onDelete: "cascade" })
+      .notNull(),
+    relativeTypeId: integer()
+      .references(() => relativeTypes.id, {
+        onDelete: "cascade",
+      })
+      .notNull(),
+  },
+  (t) => [unique().on(t.character1Id, t.character2Id)],
+);
 
 export const relativesRelations = relations(relatives, ({ one }) => ({
   character1: one(characters, {
@@ -324,7 +328,7 @@ export const characterOccupationsRelations = relations(
 export const occupations = pgTable("occupations", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
-  name: varchar({ length: 255 }).notNull(),
+  name: varchar({ length: 255 }).notNull().unique(),
 });
 
 export const occupationsRelations = relations(occupations, ({ many }) => ({

@@ -1012,6 +1012,13 @@
       ],
       "uniqueConstraints": [
         {
+          "name": "genders_name_unique",
+          "fields": [
+            "name"
+          ],
+          "nullNotDistinct": false
+        },
+        {
           "name": "genders_pkey",
           "fields": [
             "id"
@@ -1087,6 +1094,13 @@
         }
       ],
       "uniqueConstraints": [
+        {
+          "name": "location_types_name_unique",
+          "fields": [
+            "name"
+          ],
+          "nullNotDistinct": false
+        },
         {
           "name": "location_types_pkey",
           "fields": [
@@ -1209,6 +1223,13 @@
         }
       ],
       "uniqueConstraints": [
+        {
+          "name": "locations_name_unique",
+          "fields": [
+            "name"
+          ],
+          "nullNotDistinct": false
+        },
         {
           "name": "locations_pkey",
           "fields": [
@@ -1387,6 +1408,13 @@
       ],
       "uniqueConstraints": [
         {
+          "name": "occupations_name_unique",
+          "fields": [
+            "name"
+          ],
+          "nullNotDistinct": false
+        },
+        {
           "name": "occupations_pkey",
           "fields": [
             "id"
@@ -1462,6 +1490,13 @@
         }
       ],
       "uniqueConstraints": [
+        {
+          "name": "relative_types_name_unique",
+          "fields": [
+            "name"
+          ],
+          "nullNotDistinct": false
+        },
         {
           "name": "relative_types_pkey",
           "fields": [
@@ -1607,6 +1642,14 @@
       ],
       "uniqueConstraints": [
         {
+          "name": "relatives_character1Id_character2Id_unique",
+          "fields": [
+            "character1_id",
+            "character2_id"
+          ],
+          "nullNotDistinct": false
+        },
+        {
           "name": "relatives_pkey",
           "fields": [
             "id"
@@ -1711,6 +1754,13 @@
       ],
       "uniqueConstraints": [
         {
+          "name": "species_name_unique",
+          "fields": [
+            "name"
+          ],
+          "nullNotDistinct": false
+        },
+        {
           "name": "species_pkey",
           "fields": [
             "id"
@@ -1805,6 +1855,13 @@
       ],
       "uniqueConstraints": [
         {
+          "name": "species_aliases_name_unique",
+          "fields": [
+            "name"
+          ],
+          "nullNotDistinct": false
+        },
+        {
           "name": "species_aliases_pkey",
           "fields": [
             "id"
@@ -1880,6 +1937,13 @@
         }
       ],
       "uniqueConstraints": [
+        {
+          "name": "statuses_name_unique",
+          "fields": [
+            "name"
+          ],
+          "nullNotDistinct": false
+        },
         {
           "name": "statuses_pkey",
           "fields": [
