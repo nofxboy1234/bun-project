@@ -237,8 +237,7 @@ export const charactersRelations = relations(characters, ({ one, many }) => ({
   characterAffiliations: many(characterAffiliations),
   contractsAsHuman: many(contracts, { relationName: "human" }),
   contractsAsDevil: many(contracts, { relationName: "devil" }),
-  relativesAsCharacter1: many(relatives, { relationName: "character1" }),
-  relativesAsCharacter2: many(relatives, { relationName: "character2" }),
+  relatives: many(relatives, { relationName: "character1" }),
   species: one(species, {
     fields: [characters.speciesId],
     references: [species.id],
