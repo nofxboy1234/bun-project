@@ -102,7 +102,7 @@ export const species = pgTable("species", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
   name: varchar({ length: 255 }).notNull(),
-  description: varchar({ length: 2000 }).notNull(),
+  description: varchar({ length: 2000 }),
 });
 
 export const speciesRelations = relations(species, ({ one, many }) => ({

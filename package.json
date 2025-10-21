@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "db:reset": "bun resetDB.ts",
     "db:push": "bunx drizzle-kit push",
     "db:sync": "bunx @snaplet/seed sync",
-    "db:reset": "bun resetDB.ts",
     "db:seed": "bun seed.ts",
     "db:studio": "bunx drizzle-kit studio --verbose",
     "lint": "bunx --bun eslint .",

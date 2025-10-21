@@ -23,11 +23,37 @@ const main = async () => {
   ]);
 
   const { species } = await seed.species((sp) => [
-    { name: "Human", species_aliases: [{}] },
-    { name: "Devil", species_aliases: [{}] },
-    { name: "Hybrid", species_aliases: [{}] },
-    { name: "Fiend", species_aliases: [{}] },
-    { name: "Fiend Host", species_aliases: [{}] },
+    { name: "Human", description: null },
+    {
+      name: "Devil",
+      description: "Supernatural creatures born from human concepts",
+      species_aliases: [{ name: "Fears" }],
+    },
+    {
+      name: "Hybrid",
+      description:
+        "Humans who have merged with and can take on the form of a Devil",
+      species_aliases: [
+        {
+          name: "Devil-humans",
+        },
+        {
+          name: "Weapon-humans",
+        },
+      ],
+    },
+    {
+      name: "Fiend",
+      description: "Devils that possess corpses.",
+      species_aliases: [
+        {
+          name: "Majin",
+        },
+        {
+          name: "Devilmen",
+        },
+      ],
+    },
   ]);
 
   const { statuses } = await seed.statuses((status) => [

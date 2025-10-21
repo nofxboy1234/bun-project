@@ -1647,7 +1647,7 @@
           "name": "description",
           "columnName": "description",
           "type": "varchar",
-          "isRequired": true,
+          "isRequired": false,
           "kind": "scalar",
           "isList": false,
           "isGenerated": false,
