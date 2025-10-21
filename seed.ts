@@ -338,10 +338,18 @@ const main = async () => {
   );
 
   const { relative_types } = await seed.relative_types([
-    { name: "Sibling" },
-    { name: "Parent" },
-    { name: "Pet" },
+    { name: "Mother" },
+    { name: "Father" },
     { name: "Child" },
+    { name: "Sister" },
+    { name: "Brother" },
+    { name: "Owner" },
+    { name: "Pet" },
+    { name: "Devil Pet" },
+    { name: "Previous Incarnation" },
+    { name: "Reincarnation" },
+    { name: "Boyfriend" },
+    { name: "Girlfriend" },
   ]);
 
   await seed.relatives((relative) => relative(3, () => ({})), {
