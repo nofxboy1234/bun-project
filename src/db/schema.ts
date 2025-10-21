@@ -56,7 +56,7 @@ export const locationsRelations = relations(locations, ({ one, many }) => ({
 export const characterAliases = pgTable("character_aliases", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   created_at: timestamp().defaultNow(),
-  name: varchar({ length: 255 }).notNull(),
+  name: varchar({ length: 255 }).notNull().unique(),
   characterId: integer()
     .references(() => characters.id, { onDelete: "cascade" })
     .notNull(),
@@ -280,16 +280,20 @@ export const affiliationsRelations = relations(affiliations, ({ many }) => ({
   characterAffiliations: many(characterAffiliations),
 }));
 
-export const characterOccupations = pgTable("character_occupations", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  created_at: timestamp().defaultNow(),
-  characterId: integer()
-    .references(() => characters.id, { onDelete: "cascade" })
-    .notNull(),
-  occupationId: integer()
-    .references(() => occupations.id, { onDelete: "cascade" })
-    .notNull(),
-});
+export const characterOccupations = pgTable(
+  "character_occupations",
+  {
+    id: integer().primaryKey().generatedAlwaysAsIdentity(),
+    created_at: timestamp().defaultNow(),
+    characterId: integer()
+      .references(() => characters.id, { onDelete: "cascade" })
+      .notNull(),
+    occupationId: integer()
+      .references(() => occupations.id, { onDelete: "cascade" })
+      .notNull(),
+  },
+  (t) => [unique().on(t.characterId, t.occupationId)],
+);
 
 export const characterOccupationsRelations = relations(
   characterOccupations,

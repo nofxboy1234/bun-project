@@ -351,6 +351,13 @@
       ],
       "uniqueConstraints": [
         {
+          "name": "character_aliases_name_unique",
+          "fields": [
+            "name"
+          ],
+          "nullNotDistinct": false
+        },
+        {
           "name": "character_aliases_pkey",
           "fields": [
             "id"
@@ -462,6 +469,14 @@
         }
       ],
       "uniqueConstraints": [
+        {
+          "name": "character_occupations_characterId_occupationId_unique",
+          "fields": [
+            "character_id",
+            "occupation_id"
+          ],
+          "nullNotDistinct": false
+        },
         {
           "name": "character_occupations_pkey",
           "fields": [
