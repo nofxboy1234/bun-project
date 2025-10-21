@@ -1,4 +1,4 @@
-import { relations } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import {
   pgTable,
   integer,
@@ -7,6 +7,7 @@ import {
   timestamp,
   date,
   unique,
+  check,
 } from "drizzle-orm/pg-core";
 
 export const statuses = pgTable("statuses", {
@@ -170,17 +171,24 @@ export const relativesRelations = relations(relatives, ({ one }) => ({
   }),
 }));
 
-export const contracts = pgTable("contracts", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  created_at: timestamp().defaultNow(),
-  terms: varchar({ length: 2000 }).notNull(),
-  humanId: integer()
-    .references(() => characters.id, { onDelete: "cascade" })
-    .notNull(),
-  devilId: integer()
-    .references(() => characters.id, { onDelete: "cascade" })
-    .notNull(),
-});
+export const contracts = pgTable(
+  "contracts",
+  {
+    id: integer().primaryKey().generatedAlwaysAsIdentity(),
+    created_at: timestamp().defaultNow(),
+    terms: varchar({ length: 2000 }).notNull(),
+    humanId: integer()
+      .references(() => characters.id, { onDelete: "cascade" })
+      .notNull(),
+    devilId: integer()
+      .references(() => characters.id, { onDelete: "cascade" })
+      .notNull(),
+  },
+  (t) => [
+    check("no_self_contract", sql`${t.humanId} <> ${t.devilId}`),
+    unique().on(t.humanId, t.devilId),
+  ],
+);
 
 export const contractsRelations = relations(contracts, ({ one }) => ({
   human: one(characters, {
