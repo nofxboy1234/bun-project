@@ -282,9 +282,18 @@ const main = async () => {
     },
   );
 
-  await seed.character_affiliations((charAff) => charAff(3, () => ({})), {
-    connect: { characters, affiliations },
-  });
+  await seed.character_affiliations([
+    {
+      characters: (ctx) =>
+        ctx.connect(characters.find((char) => char.name === "Denji")!),
+      affiliations: (ctx) =>
+        ctx.connect(affiliations.find((aff) => aff.name === "Pochita")!),
+    },
+  ]);
+
+  // await seed.character_affiliations((charAff) => charAff(3, () => ({})), {
+  //   connect: { characters, affiliations },
+  // });
 
   await seed.character_occupations((charOcc) => charOcc(3, () => ({})), {
     connect: { characters, occupations },
