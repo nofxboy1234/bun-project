@@ -136,6 +136,8 @@ const main = async () => {
           charCtx.connect(genders.find((gender) => gender.name === "Male")!),
         species: (charCtx) =>
           charCtx.connect(species.find((sp) => sp.name === "Human")!),
+        locations: (charCtx) =>
+          charCtx.connect(locations.find((loc) => loc.name === "Japan")!),
       },
       // ...char(3),
       {
@@ -153,6 +155,8 @@ const main = async () => {
           charCtx.connect(genders.find((gender) => gender.name === "Female")!),
         species: (charCtx) =>
           charCtx.connect(species.find((sp) => sp.name === "Devil")!),
+        locations: (charCtx) =>
+          charCtx.connect(locations.find((loc) => loc.name === "Japan")!),
       },
       {
         name: "Aki",
@@ -167,6 +171,8 @@ const main = async () => {
           charCtx.connect(genders.find((gender) => gender.name === "Male")!),
         species: (charCtx) =>
           charCtx.connect(species.find((sp) => sp.name === "Human")!),
+        locations: (charCtx) =>
+          charCtx.connect(locations.find((loc) => loc.name === "Japan")!),
       },
       {
         name: "Pochita",
@@ -183,6 +189,8 @@ const main = async () => {
           charCtx.connect(genders.find((gender) => gender.name === "Male")!),
         species: (charCtx) =>
           charCtx.connect(species.find((sp) => sp.name === "Devil")!),
+        locations: (charCtx) =>
+          charCtx.connect(locations.find((loc) => loc.name === "Hell")!),
       },
       {
         name: "Future Devil",
@@ -193,6 +201,8 @@ const main = async () => {
           charCtx.connect(genders.find((gender) => gender.name === "Unknown")!),
         species: (charCtx) =>
           charCtx.connect(species.find((sp) => sp.name === "Devil")!),
+        locations: (charCtx) =>
+          charCtx.connect(locations.find((loc) => loc.name === "Hell")!),
       },
       {
         name: "Makima",
@@ -207,6 +217,8 @@ const main = async () => {
           charCtx.connect(genders.find((gender) => gender.name === "Female")!),
         species: (charCtx) =>
           charCtx.connect(species.find((sp) => sp.name === "Devil")!),
+        locations: (charCtx) =>
+          charCtx.connect(locations.find((loc) => loc.name === "Japan")!),
       },
       {
         name: "Curse Devil",
@@ -217,6 +229,8 @@ const main = async () => {
           charCtx.connect(genders.find((gender) => gender.name === "Unknown")!),
         species: (charCtx) =>
           charCtx.connect(species.find((sp) => sp.name === "Devil")!),
+        locations: (charCtx) =>
+          charCtx.connect(locations.find((loc) => loc.name === "Hell")!),
       },
       {
         name: "Fox Devil",
@@ -227,6 +241,8 @@ const main = async () => {
           charCtx.connect(genders.find((gender) => gender.name === "Female")!),
         species: (charCtx) =>
           charCtx.connect(species.find((sp) => sp.name === "Devil")!),
+        locations: (charCtx) =>
+          charCtx.connect(locations.find((loc) => loc.name === "Hell")!),
       },
       {
         name: "Aging Devil",
@@ -237,6 +253,8 @@ const main = async () => {
           charCtx.connect(genders.find((gender) => gender.name === "Unknown")!),
         species: (charCtx) =>
           charCtx.connect(species.find((sp) => sp.name === "Devil")!),
+        locations: (charCtx) =>
+          charCtx.connect(locations.find((loc) => loc.name === "Hell")!),
       },
     ],
     {
