@@ -29,7 +29,7 @@ const main = async () => {
     {
       name: "Human",
       description: null,
-      // species_aliases: []
+      species_aliases: [],
     },
     {
       name: "Devil",
@@ -186,7 +186,7 @@ const main = async () => {
       },
       {
         name: "Future Devil",
-        // character_aliases: [],
+        character_aliases: [],
         age: null,
         height: null,
         genders: (charCtx) =>
@@ -210,7 +210,7 @@ const main = async () => {
       },
       {
         name: "Curse Devil",
-        // character_aliases: [],
+        character_aliases: [],
         age: null,
         height: null,
         genders: (charCtx) =>
@@ -220,7 +220,7 @@ const main = async () => {
       },
       {
         name: "Fox Devil",
-        // character_aliases: [],
+        character_aliases: [],
         age: null,
         height: null,
         genders: (charCtx) =>
