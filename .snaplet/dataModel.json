@@ -130,16 +130,16 @@
       ],
       "uniqueConstraints": [
         {
-          "name": "affiliations_name_unique",
+          "name": "affiliations_pkey",
           "fields": [
-            "name"
+            "id"
           ],
           "nullNotDistinct": false
         },
         {
-          "name": "affiliations_pkey",
+          "name": "affiliations_name_idx",
           "fields": [
-            "id"
+            "name"
           ],
           "nullNotDistinct": false
         }
@@ -249,17 +249,17 @@
       ],
       "uniqueConstraints": [
         {
-          "name": "character_affiliations_characterId_affiliationId_unique",
+          "name": "character_affiliations_pkey",
           "fields": [
-            "affiliation_id",
-            "character_id"
+            "id"
           ],
           "nullNotDistinct": false
         },
         {
-          "name": "character_affiliations_pkey",
+          "name": "character_affiliations_characterId_affiliationId_idx",
           "fields": [
-            "id"
+            "affiliation_id",
+            "character_id"
           ],
           "nullNotDistinct": false
         }
@@ -351,17 +351,17 @@
       ],
       "uniqueConstraints": [
         {
-          "name": "character_aliases_name_characterId_unique",
+          "name": "character_aliases_pkey",
           "fields": [
-            "character_id",
-            "name"
+            "id"
           ],
           "nullNotDistinct": false
         },
         {
-          "name": "character_aliases_pkey",
+          "name": "character_aliases_name_characterId_idx",
           "fields": [
-            "id"
+            "character_id",
+            "name"
           ],
           "nullNotDistinct": false
         }
@@ -471,17 +471,17 @@
       ],
       "uniqueConstraints": [
         {
-          "name": "character_occupations_characterId_occupationId_unique",
+          "name": "character_occupations_pkey",
           "fields": [
-            "character_id",
-            "occupation_id"
+            "id"
           ],
           "nullNotDistinct": false
         },
         {
-          "name": "character_occupations_pkey",
+          "name": "character_occupations_characterId_occupationId_idx",
           "fields": [
-            "id"
+            "character_id",
+            "occupation_id"
           ],
           "nullNotDistinct": false
         }
@@ -795,16 +795,16 @@
       ],
       "uniqueConstraints": [
         {
-          "name": "characters_name_unique",
+          "name": "characters_pkey",
           "fields": [
-            "name"
+            "id"
           ],
           "nullNotDistinct": false
         },
         {
-          "name": "characters_pkey",
+          "name": "characters_name_idx",
           "fields": [
-            "id"
+            "name"
           ],
           "nullNotDistinct": false
         }
@@ -928,17 +928,17 @@
       ],
       "uniqueConstraints": [
         {
-          "name": "contracts_humanId_devilId_unique",
+          "name": "contracts_pkey",
           "fields": [
-            "devil_id",
-            "human_id"
+            "id"
           ],
           "nullNotDistinct": false
         },
         {
-          "name": "contracts_pkey",
+          "name": "contracts_humanId_devilId_idx",
           "fields": [
-            "id"
+            "devil_id",
+            "human_id"
           ],
           "nullNotDistinct": false
         }
@@ -1012,16 +1012,16 @@
       ],
       "uniqueConstraints": [
         {
-          "name": "genders_name_unique",
+          "name": "genders_pkey",
           "fields": [
-            "name"
+            "id"
           ],
           "nullNotDistinct": false
         },
         {
-          "name": "genders_pkey",
+          "name": "genders_name_idx",
           "fields": [
-            "id"
+            "name"
           ],
           "nullNotDistinct": false
         }
@@ -1095,16 +1095,16 @@
       ],
       "uniqueConstraints": [
         {
-          "name": "location_types_name_unique",
+          "name": "location_types_pkey",
           "fields": [
-            "name"
+            "id"
           ],
           "nullNotDistinct": false
         },
         {
-          "name": "location_types_pkey",
+          "name": "location_types_name_idx",
           "fields": [
-            "id"
+            "name"
           ],
           "nullNotDistinct": false
         }
@@ -1224,16 +1224,16 @@
       ],
       "uniqueConstraints": [
         {
-          "name": "locations_name_unique",
+          "name": "locations_pkey",
           "fields": [
-            "name"
+            "id"
           ],
           "nullNotDistinct": false
         },
         {
-          "name": "locations_pkey",
+          "name": "locations_name_idx",
           "fields": [
-            "id"
+            "name"
           ],
           "nullNotDistinct": false
         }
@@ -1325,16 +1325,16 @@
       ],
       "uniqueConstraints": [
         {
-          "name": "maps_locationId_unique",
+          "name": "maps_pkey",
           "fields": [
-            "location_id"
+            "id"
           ],
           "nullNotDistinct": false
         },
         {
-          "name": "maps_pkey",
+          "name": "maps_location_id_idx",
           "fields": [
-            "id"
+            "location_id"
           ],
           "nullNotDistinct": false
         }
@@ -1408,16 +1408,16 @@
       ],
       "uniqueConstraints": [
         {
-          "name": "occupations_name_unique",
+          "name": "occupations_pkey",
           "fields": [
-            "name"
+            "id"
           ],
           "nullNotDistinct": false
         },
         {
-          "name": "occupations_pkey",
+          "name": "occupations_name_idx",
           "fields": [
-            "id"
+            "name"
           ],
           "nullNotDistinct": false
         }
@@ -1491,16 +1491,16 @@
       ],
       "uniqueConstraints": [
         {
-          "name": "relative_types_name_unique",
+          "name": "relative_types_pkey",
           "fields": [
-            "name"
+            "id"
           ],
           "nullNotDistinct": false
         },
         {
-          "name": "relative_types_pkey",
+          "name": "relative_types_name_idx",
           "fields": [
-            "id"
+            "name"
           ],
           "nullNotDistinct": false
         }
@@ -1642,17 +1642,17 @@
       ],
       "uniqueConstraints": [
         {
-          "name": "relatives_character1Id_character2Id_unique",
+          "name": "relatives_pkey",
           "fields": [
-            "character1_id",
-            "character2_id"
+            "id"
           ],
           "nullNotDistinct": false
         },
         {
-          "name": "relatives_pkey",
+          "name": "relatives_character1Id_character2Id_idx",
           "fields": [
-            "id"
+            "character1_id",
+            "character2_id"
           ],
           "nullNotDistinct": false
         }
@@ -1754,16 +1754,16 @@
       ],
       "uniqueConstraints": [
         {
-          "name": "species_name_unique",
+          "name": "species_pkey",
           "fields": [
-            "name"
+            "id"
           ],
           "nullNotDistinct": false
         },
         {
-          "name": "species_pkey",
+          "name": "species_name_idx",
           "fields": [
-            "id"
+            "name"
           ],
           "nullNotDistinct": false
         }
@@ -1855,16 +1855,16 @@
       ],
       "uniqueConstraints": [
         {
-          "name": "species_aliases_name_unique",
+          "name": "species_aliases_pkey",
           "fields": [
-            "name"
+            "id"
           ],
           "nullNotDistinct": false
         },
         {
-          "name": "species_aliases_pkey",
+          "name": "species_aliases_name_idx",
           "fields": [
-            "id"
+            "name"
           ],
           "nullNotDistinct": false
         }
@@ -1938,16 +1938,16 @@
       ],
       "uniqueConstraints": [
         {
-          "name": "statuses_name_unique",
+          "name": "statuses_pkey",
           "fields": [
-            "name"
+            "id"
           ],
           "nullNotDistinct": false
         },
         {
-          "name": "statuses_pkey",
+          "name": "statuses_name_idx",
           "fields": [
-            "id"
+            "name"
           ],
           "nullNotDistinct": false
         }

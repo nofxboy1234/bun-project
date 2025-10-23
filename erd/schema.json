@@ -35,13 +35,6 @@
           "columnNames": [
             "id"
           ]
-        },
-        "UNIQUE_name": {
-          "type": "UNIQUE",
-          "name": "UNIQUE_name",
-          "columnNames": [
-            "name"
-          ]
         }
       },
       "indexes": {
@@ -90,13 +83,6 @@
           "name": "PRIMARY_id",
           "columnNames": [
             "id"
-          ]
-        },
-        "UNIQUE_name": {
-          "type": "UNIQUE",
-          "name": "UNIQUE_name",
-          "columnNames": [
-            "name"
           ]
         }
       },
@@ -154,13 +140,6 @@
           "name": "PRIMARY_id",
           "columnNames": [
             "id"
-          ]
-        },
-        "UNIQUE_name": {
-          "type": "UNIQUE",
-          "name": "UNIQUE_name",
-          "columnNames": [
-            "name"
           ]
         },
         "locations_locationTypeId_locationTypes_id_fk": {
@@ -294,13 +273,6 @@
           "columnNames": [
             "id"
           ]
-        },
-        "UNIQUE_name": {
-          "type": "UNIQUE",
-          "name": "UNIQUE_name",
-          "columnNames": [
-            "name"
-          ]
         }
       },
       "indexes": {
@@ -357,13 +329,6 @@
           "name": "PRIMARY_id",
           "columnNames": [
             "id"
-          ]
-        },
-        "UNIQUE_name": {
-          "type": "UNIQUE",
-          "name": "UNIQUE_name",
-          "columnNames": [
-            "name"
           ]
         },
         "species_aliases_speciesId_species_id_fk": {
@@ -435,13 +400,6 @@
           "columnNames": [
             "id"
           ]
-        },
-        "UNIQUE_name": {
-          "type": "UNIQUE",
-          "name": "UNIQUE_name",
-          "columnNames": [
-            "name"
-          ]
         }
       },
       "indexes": {
@@ -498,13 +456,6 @@
           "name": "PRIMARY_id",
           "columnNames": [
             "id"
-          ]
-        },
-        "UNIQUE_locationId": {
-          "type": "UNIQUE",
-          "name": "UNIQUE_locationId",
-          "columnNames": [
-            "locationId"
           ]
         },
         "maps_locationId_locations_id_fk": {
@@ -567,13 +518,6 @@
           "name": "PRIMARY_id",
           "columnNames": [
             "id"
-          ]
-        },
-        "UNIQUE_name": {
-          "type": "UNIQUE",
-          "name": "UNIQUE_name",
-          "columnNames": [
-            "name"
           ]
         }
       },
@@ -868,13 +812,6 @@
             "id"
           ]
         },
-        "UNIQUE_name": {
-          "type": "UNIQUE",
-          "name": "UNIQUE_name",
-          "columnNames": [
-            "name"
-          ]
-        },
         "characters_speciesId_species_id_fk": {
           "type": "FOREIGN KEY",
           "name": "characters_speciesId_species_id_fk",
@@ -935,38 +872,6 @@
             "id"
           ],
           "unique": true,
-          "type": ""
-        },
-        "characters_species_id_idx": {
-          "name": "characters_species_id_idx",
-          "columns": [
-            "speciesId"
-          ],
-          "unique": false,
-          "type": ""
-        },
-        "characters_gender_id_idx": {
-          "name": "characters_gender_id_idx",
-          "columns": [
-            "genderId"
-          ],
-          "unique": false,
-          "type": ""
-        },
-        "characters_birthplace_id_idx": {
-          "name": "characters_birthplace_id_idx",
-          "columns": [
-            "birthplaceId"
-          ],
-          "unique": false,
-          "type": ""
-        },
-        "characters_status_id_idx": {
-          "name": "characters_status_id_idx",
-          "columns": [
-            "statusId"
-          ],
-          "unique": false,
           "type": ""
         }
       },
@@ -1089,13 +994,6 @@
           "name": "PRIMARY_id",
           "columnNames": [
             "id"
-          ]
-        },
-        "UNIQUE_name": {
-          "type": "UNIQUE",
-          "name": "UNIQUE_name",
-          "columnNames": [
-            "name"
           ]
         }
       },
@@ -1228,13 +1126,6 @@
           "name": "PRIMARY_id",
           "columnNames": [
             "id"
-          ]
-        },
-        "UNIQUE_name": {
-          "type": "UNIQUE",
-          "name": "UNIQUE_name",
-          "columnNames": [
-            "name"
           ]
         }
       },
