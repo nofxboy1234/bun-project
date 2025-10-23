@@ -13,6 +13,7 @@
     "db:erd:serve": "bunx --bun serve erd/",
     "db": "bun run db:reset && bun run db:push && bun run db:sync && bun run db:seed && bun run db:erd:build",
     "lint": "bunx --bun eslint .",
+    "lint:fix": "bunx --bun eslint . --fix",
     "format": "FORCE_COLOR=1 bunx --bun prettier . --write",
     "ts": "bunx --bun tsc",
     "gen": "bunx --bun tsr generate",
