@@ -351,7 +351,7 @@
       ],
       "uniqueConstraints": [
         {
-          "name": "character_aliases_characterId_name_unique",
+          "name": "character_aliases_name_characterId_unique",
           "fields": [
             "character_id",
             "name"

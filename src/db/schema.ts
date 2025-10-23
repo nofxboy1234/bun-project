@@ -64,7 +64,7 @@ export const characterAliases = pgTable(
       .references(() => characters.id, { onDelete: "cascade" })
       .notNull(),
   },
-  (t) => [unique().on(t.characterId, t.name)],
+  (t) => [unique("character_aliases_name_characterId_unique").on(t.name, t.characterId)],
 );
 
 export const characterAliasesRelations = relations(
@@ -159,7 +159,7 @@ export const relatives = pgTable(
       })
       .notNull(),
   },
-  (t) => [unique().on(t.character1Id, t.character2Id)],
+  (t) => [unique("relatives_character1Id_character2Id_unique").on(t.character1Id, t.character2Id)],
 );
 
 export const relativesRelations = relations(relatives, ({ one }) => ({
@@ -194,7 +194,7 @@ export const contracts = pgTable(
   },
   (t) => [
     check("no_self_contract", sql`${t.humanId} <> ${t.devilId}`),
-    unique().on(t.humanId, t.devilId),
+    unique("contracts_humanId_devilId_unique").on(t.humanId, t.devilId),
   ],
 );
 
@@ -268,7 +268,7 @@ export const characterAffiliations = pgTable(
       .references(() => affiliations.id, { onDelete: "cascade" })
       .notNull(),
   },
-  (t) => [unique().on(t.characterId, t.affiliationId)],
+  (t) => [unique("character_affiliations_characterId_affiliationId_unique").on(t.characterId, t.affiliationId)],
 );
 
 export const characterAffiliationsRelations = relations(
@@ -307,7 +307,7 @@ export const characterOccupations = pgTable(
       .references(() => occupations.id, { onDelete: "cascade" })
       .notNull(),
   },
-  (t) => [unique().on(t.characterId, t.occupationId)],
+  (t) => [unique("character_occupations_characterId_occupationId_unique").on(t.characterId, t.occupationId)],
 );
 
 export const characterOccupationsRelations = relations(
