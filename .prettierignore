@@ -44,3 +44,6 @@ bun-project
 
 # @snaplet/seed
 .snaplet
+
+# @liam-hq/cli erd
+erd

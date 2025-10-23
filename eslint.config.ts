@@ -43,6 +43,7 @@ export default defineConfig(
       ".DS_Store",
       "routeTree.gen.ts",
       "bun-project",
+      "erd",
     ],
   },
   {
