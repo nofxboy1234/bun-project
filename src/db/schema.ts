@@ -64,7 +64,10 @@ export const characterAliases = pgTable(
       .references(() => characters.id, { onDelete: "cascade" })
       .notNull(),
   },
-  (t) => [unique("character_aliases_name_characterId_unique").on(t.name, t.characterId)],
+  (t) => [
+    unique("character_aliases_name_characterId_unique").on(t.name, t.characterId),
+    index("character_aliases_character_id_idx").on(t.characterId),
+  ],
 );
 
 export const characterAliasesRelations = relations(
@@ -87,14 +90,18 @@ export const gendersRelations = relations(genders, ({ many }) => ({
   characters: many(characters),
 }));
 
-export const speciesAliases = pgTable("species_aliases", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  created_at: timestamp().defaultNow(),
-  name: varchar({ length: 255 }).notNull().unique(),
-  speciesId: integer()
-    .references(() => species.id, { onDelete: "cascade" })
-    .notNull(),
-});
+export const speciesAliases = pgTable(
+  "species_aliases",
+  {
+    id: integer().primaryKey().generatedAlwaysAsIdentity(),
+    created_at: timestamp().defaultNow(),
+    name: varchar({ length: 255 }).notNull().unique(),
+    speciesId: integer()
+      .references(() => species.id, { onDelete: "cascade" })
+      .notNull(),
+  },
+  (t) => [index("species_aliases_species_id_idx").on(t.speciesId)],
+);
 
 export const speciesAliasesRelations = relations(speciesAliases, ({ one }) => ({
   species: one(species, {
@@ -159,7 +166,15 @@ export const relatives = pgTable(
       })
       .notNull(),
   },
-  (t) => [unique("relatives_character1Id_character2Id_unique").on(t.character1Id, t.character2Id)],
+  (t) => [
+    unique("relatives_character1Id_character2Id_unique").on(
+      t.character1Id,
+      t.character2Id,
+    ),
+    index("relatives_character1_id_idx").on(t.character1Id),
+    index("relatives_character2_id_idx").on(t.character2Id),
+    index("relatives_relative_type_id_idx").on(t.relativeTypeId),
+  ],
 );
 
 export const relativesRelations = relations(relatives, ({ one }) => ({
@@ -195,6 +210,8 @@ export const contracts = pgTable(
   (t) => [
     check("no_self_contract", sql`${t.humanId} <> ${t.devilId}`),
     unique("contracts_humanId_devilId_unique").on(t.humanId, t.devilId),
+    index("contracts_human_id_idx").on(t.humanId),
+    index("contracts_devil_id_idx").on(t.devilId),
   ],
 );
 
@@ -211,25 +228,34 @@ export const contractsRelations = relations(contracts, ({ one }) => ({
   }),
 }));
 
-export const characters = pgTable("characters", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  created_at: timestamp().defaultNow(),
-  name: varchar({ length: 255 }).notNull().unique(),
-  age: integer(),
-  height: integer(),
-  speciesId: integer()
-    .references(() => species.id, { onDelete: "cascade" })
-    .notNull(),
-  genderId: integer()
-    .references(() => genders.id, { onDelete: "cascade" })
-    .notNull(),
-  birthplaceId: integer()
-    .references(() => locations.id, { onDelete: "cascade" })
-    .notNull(),
-  statusId: integer()
-    .references(() => statuses.id, { onDelete: "cascade" })
-    .notNull(),
-});
+export const characters = pgTable(
+  "characters",
+  {
+    id: integer().primaryKey().generatedAlwaysAsIdentity(),
+    created_at: timestamp().defaultNow(),
+    name: varchar({ length: 255 }).notNull().unique(),
+    age: integer(),
+    height: integer(),
+    speciesId: integer()
+      .references(() => species.id, { onDelete: "cascade" })
+      .notNull(),
+    genderId: integer()
+      .references(() => genders.id, { onDelete: "cascade" })
+      .notNull(),
+    birthplaceId: integer()
+      .references(() => locations.id, { onDelete: "cascade" })
+      .notNull(),
+    statusId: integer()
+      .references(() => statuses.id, { onDelete: "cascade" })
+      .notNull(),
+  },
+  (t) => ({
+    speciesIdIdx: index("characters_species_id_idx").on(t.speciesId),
+    genderIdIdx: index("characters_gender_id_idx").on(t.genderId),
+    birthplaceIdIdx: index("characters_birthplace_id_idx").on(t.birthplaceId),
+    statusIdIdx: index("characters_status_id_idx").on(t.statusId),
+  }),
+);
 
 export const charactersRelations = relations(characters, ({ one, many }) => ({
   characterAliases: many(characterAliases),
@@ -268,7 +294,13 @@ export const characterAffiliations = pgTable(
       .references(() => affiliations.id, { onDelete: "cascade" })
       .notNull(),
   },
-  (t) => [unique("character_affiliations_characterId_affiliationId_unique").on(t.characterId, t.affiliationId)],
+  (t) => [
+    unique(
+      "character_affiliations_characterId_affiliationId_unique",
+    ).on(t.characterId, t.affiliationId),
+    index("character_affiliations_character_id_idx").on(t.characterId),
+    index("character_affiliations_affiliation_id_idx").on(t.affiliationId),
+  ],
 );
 
 export const characterAffiliationsRelations = relations(
@@ -307,7 +339,14 @@ export const characterOccupations = pgTable(
       .references(() => occupations.id, { onDelete: "cascade" })
       .notNull(),
   },
-  (t) => [unique("character_occupations_characterId_occupationId_unique").on(t.characterId, t.occupationId)],
+  (t) => [
+    unique("character_occupations_characterId_occupationId_unique").on(
+      t.characterId,
+      t.occupationId,
+    ),
+    index("character_occupations_character_id_idx").on(t.characterId),
+    index("character_occupations_occupation_id_idx").on(t.occupationId),
+  ],
 );
 
 export const characterOccupationsRelations = relations(

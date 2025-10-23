@@ -936,6 +936,38 @@
           ],
           "unique": true,
           "type": ""
+        },
+        "characters_species_id_idx": {
+          "name": "characters_species_id_idx",
+          "columns": [
+            "speciesId"
+          ],
+          "unique": false,
+          "type": ""
+        },
+        "characters_gender_id_idx": {
+          "name": "characters_gender_id_idx",
+          "columns": [
+            "genderId"
+          ],
+          "unique": false,
+          "type": ""
+        },
+        "characters_birthplace_id_idx": {
+          "name": "characters_birthplace_id_idx",
+          "columns": [
+            "birthplaceId"
+          ],
+          "unique": false,
+          "type": ""
+        },
+        "characters_status_id_idx": {
+          "name": "characters_status_id_idx",
+          "columns": [
+            "statusId"
+          ],
+          "unique": false,
+          "type": ""
         }
       },
       "comment": null

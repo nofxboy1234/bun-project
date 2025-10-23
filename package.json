@@ -11,6 +11,7 @@
     "db:studio": "bunx drizzle-kit studio --verbose",
     "db:erd:serve": "bunx --bun serve erd/",
     "db:erd:build": "bunx --bun @liam-hq/cli erd build --input src/db/schema.ts --format drizzle --output-dir erd",
+    "db": "bun run db:reset && bun run db:push && bun run db:sync && bun run db:seed && bun run db:erd:build",
     "lint": "bunx --bun eslint .",
     "format": "FORCE_COLOR=1 bunx --bun prettier . --write",
     "ts": "bunx --bun tsc",
