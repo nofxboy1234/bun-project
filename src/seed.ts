@@ -33,6 +33,7 @@ async function main() {
     }
 
     const characterWithContracts = { ...character, characterContracts };
+    console.log(characterWithContracts);
   }
 
   // db.delete(characterAffiliations);

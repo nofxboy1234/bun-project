@@ -5,8 +5,6 @@ import {
   varchar,
   index,
   timestamp,
-  date,
-  unique,
   uniqueIndex,
   check,
 } from "drizzle-orm/pg-core";
@@ -143,7 +141,7 @@ export const species = pgTable(
   (t) => [uniqueIndex("species_name_idx").on(t.name)],
 );
 
-export const speciesRelations = relations(species, ({ one, many }) => ({
+export const speciesRelations = relations(species, ({ many }) => ({
   speciesAliases: many(speciesAliases),
   characters: many(characters),
 }));

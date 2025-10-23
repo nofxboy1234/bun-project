@@ -5,7 +5,6 @@
  * Learn more about the Seed Client by following our guide: https://docs.snaplet.dev/seed/getting-started
  */
 import { createSeedClient } from "@snaplet/seed";
-import { copycat } from "@snaplet/copycat";
 
 const main = async () => {
   const seed = await createSeedClient();
@@ -25,7 +24,7 @@ const main = async () => {
     },
   ]);
 
-  const { species } = await seed.species((sp) => [
+  const { species } = await seed.species(() => [
     {
       name: "Human",
       description: null,
@@ -63,7 +62,7 @@ const main = async () => {
     },
   ]);
 
-  const { statuses } = await seed.statuses((status) => [
+  const { statuses } = await seed.statuses(() => [
     {
       name: "Alive",
     },
@@ -91,14 +90,14 @@ const main = async () => {
       loc(2, ({ index: locIndex }) => ({
         name: `${locationValues[locIndex]}`,
         maps: (map) =>
-          map(1, ({ index: mapIndex }) => ({
+          map(1, () => ({
             image_file_path: `path/to/map-of-${locationValues[locIndex]}`,
           })),
       })),
     { connect: { location_types }, seed: "1984" },
   );
 
-  const { affiliations } = await seed.affiliations((aff) => [
+  const { affiliations } = await seed.affiliations(() => [
     { name: "Pochita" },
     { name: "Yakuza" },
     { name: "Public Safety Devil Hunters" },
@@ -121,7 +120,7 @@ const main = async () => {
   ]);
 
   const { characters } = await seed.characters(
-    (char) => [
+    () => [
       {
         name: "Denji",
         character_aliases: [
