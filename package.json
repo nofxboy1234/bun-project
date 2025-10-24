@@ -19,7 +19,7 @@
     "gen": "bunx --bun tsr generate",
     "watch": "bunx --bun tsr watch",
     "dev": "bun run watch & bun --hot src/index.tsx",
-    "dev:debug": "bun run watch & bun --inspect-wait --hot src/index.tsx",
+    "debug": "bun run watch & bun --inspect --hot src/index.tsx",
     "dev:vite": "bunx --bun vite",
     "start": "NODE_ENV=production bun src/index.tsx",
     "build": "bun run gen && bun build --minify --sourcemap --env='BUN_PUBLIC_*' --production --target=bun ./src/index.tsx --outdir=dist",
