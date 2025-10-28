@@ -4,6 +4,26 @@ import { charactersData } from "seedData";
 const seed = await createSeedClient();
 await seed.$resetDatabase();
 
+const uniqueStatuses = Array.from(
+  new Map(
+    charactersData.map((char) => [char.status.name, char.status]),
+  ).values(),
+);
+
+const { statuses } = await seed.statuses(
+  uniqueStatuses.map((status) => ({ name: status.name })),
+);
+
+const uniqueGenders = Array.from(
+  new Map(
+    charactersData.map((char) => [char.gender.name, char.gender]),
+  ).values(),
+);
+
+const { genders } = await seed.genders(
+  uniqueGenders.map((gender) => ({ name: gender.name })),
+);
+
 const uniqueSpecies = Array.from(
   new Map(
     charactersData.map((char) => [char.species.name, char.species]),
@@ -15,16 +35,6 @@ const { species } = await seed.species(
     name: species.name,
     description: species.description,
   })),
-);
-
-const uniqueGenders = Array.from(
-  new Map(
-    charactersData.map((char) => [char.gender.name, char.gender]),
-  ).values(),
-);
-
-const { genders } = await seed.genders(
-  uniqueGenders.map((gender) => ({ name: gender.name })),
 );
 
 const uniqueLocationTypes = [
@@ -50,16 +60,6 @@ const { locations } = await seed.locations(
       return ctx.connect(parent);
     },
   })),
-);
-
-const uniqueStatuses = Array.from(
-  new Map(
-    charactersData.map((char) => [char.status.name, char.status]),
-  ).values(),
-);
-
-const { statuses } = await seed.statuses(
-  uniqueStatuses.map((status) => ({ name: status.name })),
 );
 
 await seed.characters((x) =>
