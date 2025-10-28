@@ -8,12 +8,25 @@ type CharacterData = {
   status: { name: string };
 };
 
+type SpeciesData = {
+  name: string;
+  description: string | null;
+};
+
+export const speciesData: SpeciesData[] = [
+  { name: "Human", description: null },
+  {
+    name: "Devil",
+    description: "Supernatural creatures born from human concepts",
+  },
+];
+
 export const charactersData: CharacterData[] = [
   {
     name: "Denji",
     age: 18,
     height: 173,
-    species: { name: "Human", description: null },
+    species: speciesData.find((species) => species.name === "Human")!,
     gender: { name: "Male" },
     birthplace: { name: "Japan", locationType: "City" },
     status: { name: "Alive" },
@@ -22,10 +35,7 @@ export const charactersData: CharacterData[] = [
     name: "Pochita",
     age: null,
     height: null,
-    species: {
-      name: "Devil",
-      description: "Supernatural creatures born from human concepts",
-    },
+    species: speciesData.find((species) => species.name === "Devil")!,
     gender: { name: "Male" },
     birthplace: { name: "Hell", locationType: "World" },
     status: { name: "Alive" },
@@ -34,10 +44,7 @@ export const charactersData: CharacterData[] = [
     name: "Makima",
     age: null,
     height: 168,
-    species: {
-      name: "Devil",
-      description: "Supernatural creatures born from human concepts",
-    },
+    species: speciesData.find((species) => species.name === "Devil")!,
     gender: { name: "Female" },
     birthplace: { name: "Japan", locationType: "City" },
     status: { name: "Deceased" },

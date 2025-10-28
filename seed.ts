@@ -1,5 +1,5 @@
 import { createSeedClient } from "@snaplet/seed";
-import { charactersData } from "seedData";
+import { charactersData, speciesData } from "seedData";
 
 const seed = await createSeedClient();
 await seed.$resetDatabase();
@@ -25,9 +25,7 @@ const { genders } = await seed.genders(
 );
 
 const uniqueSpecies = Array.from(
-  new Map(
-    charactersData.map((char) => [char.species.name, char.species]),
-  ).values(),
+  new Map(speciesData.map((species) => [species.name, species])).values(),
 );
 
 const { species } = await seed.species(
