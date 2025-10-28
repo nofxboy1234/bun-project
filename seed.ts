@@ -94,14 +94,6 @@ await seed.characters((x) =>
         )!;
         return ctx.connect(parent);
       },
-
-      // character_aliases: (x) => {
-      //   const aliases = char.character_aliases!;
-
-      //   return x(aliases.length, ({ index }) => ({
-      //     name: aliases.at(index),
-      //   }));
-      // },
     };
   }),
 );

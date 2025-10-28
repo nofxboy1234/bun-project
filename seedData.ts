@@ -1,6 +1,14 @@
-import type { charactersModel } from "@/types";
+type CharacterData = {
+  name: string;
+  age: number | null;
+  height: number | null;
+  species: { name: string; description: string | null };
+  gender: { name: string };
+  birthplace: { name: string; locationType: string };
+  status: { name: string };
+};
 
-export const charactersData = [
+export const charactersData: CharacterData[] = [
   {
     name: "Denji",
     age: 18,
@@ -14,20 +22,26 @@ export const charactersData = [
     name: "Pochita",
     age: null,
     height: null,
-    species: { name: "Devil", description: "" },
+    species: {
+      name: "Devil",
+      description: "Supernatural creatures born from human concepts",
+    },
     gender: { name: "Male" },
     birthplace: { name: "Hell", locationType: "World" },
     status: { name: "Alive" },
   },
-  // {
-  //   name: "Makima",
-  //   age: null,
-  //   height: 168,
-  //   species: "Devil",
-  //   gender: "Female",
-  //   birthplace: "Japan",
-  //   status: "Deceased",
-  // },
+  {
+    name: "Makima",
+    age: null,
+    height: 168,
+    species: {
+      name: "Devil",
+      description: "Supernatural creatures born from human concepts",
+    },
+    gender: { name: "Female" },
+    birthplace: { name: "Japan", locationType: "City" },
+    status: { name: "Deceased" },
+  },
   // {
   //   name: "Power",
   //   age: null,
