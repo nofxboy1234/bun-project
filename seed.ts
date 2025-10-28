@@ -35,9 +35,9 @@ const { species } = await seed.species(
   })),
 );
 
-const uniqueLocationTypes = [
-  ...new Set(charactersData.map((char) => char.birthplace.locationType)),
-];
+const uniqueLocationTypes = Array.from(
+  new Set(charactersData.map((char) => char.birthplace.locationType)),
+);
 const { location_types } = await seed.location_types(
   uniqueLocationTypes.map((locationTypeName) => ({ name: locationTypeName })),
 );
