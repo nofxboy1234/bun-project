@@ -2,24 +2,29 @@ import { createSeedClient } from "@snaplet/seed";
 import { charactersData } from "seedData";
 
 const seed = await createSeedClient();
-// Truncate all tables in the database
 await seed.$resetDatabase();
 
-// const
+const uniqueSpecies = Array.from(
+  new Map(
+    charactersData.map((char) => [char.species.name, char.species]),
+  ).values(),
+);
 
-const uniqueSpecies = [
-  ...new Set(charactersData.map((char) => char.species)),
-];
 const { species } = await seed.species(
-  uniqueSpecies.map((speciesName) => ({
-    name: speciesName,
-    description: null,
+  uniqueSpecies.map((species) => ({
+    name: species.name,
+    description: species.description,
   })),
 );
 
-const uniqueGenders = [...new Set(charactersData.map((char) => char.gender))];
+const uniqueGenders = Array.from(
+  new Map(
+    charactersData.map((char) => [char.gender.name, char.gender]),
+  ).values(),
+);
+
 const { genders } = await seed.genders(
-  uniqueGenders.map((genderName) => ({ name: genderName })),
+  uniqueGenders.map((gender) => ({ name: gender.name })),
 );
 
 const uniqueLocationTypes = [
@@ -47,9 +52,14 @@ const { locations } = await seed.locations(
   })),
 );
 
-const uniqueStatuses = [...new Set(charactersData.map((char) => char.status))];
+const uniqueStatuses = Array.from(
+  new Map(
+    charactersData.map((char) => [char.status.name, char.status]),
+  ).values(),
+);
+
 const { statuses } = await seed.statuses(
-  uniqueStatuses.map((statusName) => ({ name: statusName })),
+  uniqueStatuses.map((status) => ({ name: status.name })),
 );
 
 await seed.characters((x) =>
@@ -62,12 +72,14 @@ await seed.characters((x) =>
       height: char.height,
       species: (ctx) => {
         const parent = species.find(
-          (species) => species.name === char.species,
+          (species) => species.name === char.species.name,
         )!;
         return ctx.connect(parent);
       },
       genders: (ctx) => {
-        const parent = genders.find((gender) => gender.name === char.gender)!;
+        const parent = genders.find(
+          (gender) => gender.name === char.gender.name,
+        )!;
         return ctx.connect(parent);
       },
       locations: (ctx) => {
@@ -77,7 +89,9 @@ await seed.characters((x) =>
         return ctx.connect(parent);
       },
       statuses: (ctx) => {
-        const parent = statuses.find((status) => status.name === char.status)!;
+        const parent = statuses.find(
+          (status) => status.name === char.status.name,
+        )!;
         return ctx.connect(parent);
       },
 
