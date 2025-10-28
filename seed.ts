@@ -7,61 +7,49 @@ await seed.$resetDatabase();
 
 // const
 
-const { species } = await seed.species((x) =>
-  x(charactersData.length, ({ index }) => {
-    const char = charactersData.at(index)!;
-
-    return {
-      name: char.species,
-      description: null,
-    };
-  }),
+const uniqueSpecies = [
+  ...new Set(charactersData.map((char) => char.species)),
+];
+const { species } = await seed.species(
+  uniqueSpecies.map((speciesName) => ({
+    name: speciesName,
+    description: null,
+  })),
 );
 
-const { genders } = await seed.genders((x) =>
-  x(charactersData.length, ({ index }) => {
-    const char = charactersData.at(index)!;
-
-    return {
-      name: char.gender,
-    };
-  }),
+const uniqueGenders = [...new Set(charactersData.map((char) => char.gender))];
+const { genders } = await seed.genders(
+  uniqueGenders.map((genderName) => ({ name: genderName })),
 );
 
-const { location_types } = await seed.location_types((x) =>
-  x(charactersData.length, ({ index }) => {
-    const char = charactersData.at(index)!;
-
-    return {
-      name: char.birthplace.locationType,
-    };
-  }),
+const uniqueLocationTypes = [
+  ...new Set(charactersData.map((char) => char.birthplace.locationType)),
+];
+const { location_types } = await seed.location_types(
+  uniqueLocationTypes.map((locationTypeName) => ({ name: locationTypeName })),
 );
 
-const { locations } = await seed.locations((x) =>
-  x(charactersData.length, ({ index }) => {
-    const char = charactersData.at(index)!;
-
-    return {
-      name: char.birthplace.name,
-      location_types: (ctx) => {
-        const parent = location_types.find(
-          (locationType) => locationType.name === char.birthplace.locationType,
-        )!;
-        return ctx.connect(parent);
-      },
-    };
-  }),
+const uniqueBirthplaces = Array.from(
+  new Map(
+    charactersData.map((char) => [char.birthplace.name, char.birthplace]),
+  ).values(),
 );
 
-const { statuses } = await seed.statuses((x) =>
-  x(charactersData.length, ({ index }) => {
-    const char = charactersData.at(index)!;
+const { locations } = await seed.locations(
+  uniqueBirthplaces.map((bp) => ({
+    name: bp.name,
+    location_types: (ctx) => {
+      const parent = location_types.find(
+        (locationType) => locationType.name === bp.locationType,
+      )!;
+      return ctx.connect(parent);
+    },
+  })),
+);
 
-    return {
-      name: char.status,
-    };
-  }),
+const uniqueStatuses = [...new Set(charactersData.map((char) => char.status))];
+const { statuses } = await seed.statuses(
+  uniqueStatuses.map((statusName) => ({ name: statusName })),
 );
 
 await seed.characters((x) =>
