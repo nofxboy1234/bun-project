@@ -1,52 +1,37 @@
-type CharacterData = {
-  name: string;
-  age: number | null;
-  height: number | null;
-  species: { name: string; description: string | null };
-  gender: { name: string };
-  birthplace: { name: string; locationType: string };
-  status: { name: string };
-};
+import type { CharacterNewInsertModel } from "@/types";
 
-type SpeciesData = {
-  name: string;
-  description: string | null;
-};
-
-export const speciesData: SpeciesData[] = [
-  { name: "Human", description: null },
-  {
-    name: "Devil",
-    description: "Supernatural creatures born from human concepts",
-  },
-];
-
-export const charactersData: CharacterData[] = [
+export const charactersData: CharacterNewInsertModel[] = [
   {
     name: "Denji",
     age: 18,
     height: 173,
-    species: speciesData.find((species) => species.name === "Human")!,
+    species: { name: "Human", description: null },
     gender: { name: "Male" },
-    birthplace: { name: "Japan", locationType: "City" },
+    birthplace: { name: "Japan", locationType: { name: "City" } },
     status: { name: "Alive" },
   },
   {
     name: "Pochita",
     age: null,
     height: null,
-    species: speciesData.find((species) => species.name === "Devil")!,
+    species: {
+      name: "Devil",
+      description: "Supernatural creatures born from human concepts",
+    },
     gender: { name: "Male" },
-    birthplace: { name: "Hell", locationType: "World" },
+    birthplace: { name: "Hell", locationType: { name: "World" } },
     status: { name: "Alive" },
   },
   {
     name: "Makima",
     age: null,
     height: 168,
-    species: speciesData.find((species) => species.name === "Devil")!,
+    species: {
+      name: "Devil",
+      description: "Supernatural creatures born from human concepts",
+    },
     gender: { name: "Female" },
-    birthplace: { name: "Japan", locationType: "City" },
+    birthplace: { name: "Japan", locationType: { name: "City" } },
     status: { name: "Deceased" },
   },
   // {

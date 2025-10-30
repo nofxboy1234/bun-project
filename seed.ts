@@ -70,7 +70,7 @@ await seed.characters((x) =>
       height: char.height,
       species: (ctx) => {
         const parent = species.find(
-          (species) => species.name === char.species.name,
+          (species) => species.name === char.species,
         )!;
         return ctx.connect(parent);
       },
