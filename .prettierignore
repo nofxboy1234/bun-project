@@ -39,9 +39,6 @@ routeTree.gen.ts
 # Bun Single-File Executable
 bun-project
 
-# Postgres tools
-*.jsonc
-
 # @snaplet/seed
 .snaplet
 
