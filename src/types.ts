@@ -22,42 +22,19 @@ export type LocationTypeInsertModel = InferInsertModel<typeof locationTypes>;
 export type SpeciesInsertModel = InferInsertModel<typeof species>;
 export type StatusInsertModel = InferInsertModel<typeof statuses>;
 
-export type CharacterNewModel = Omit<
-  CharacterSelectModel,
-  "birthplaceId" | "genderId" | "speciesId" | "statusId"
-> & {
-  birthplace: LocationSelectModel;
-  gender: GenderSelectModel;
-  species: SpeciesSelectModel;
-  status: StatusSelectModel;
-};
+export type CharacterUpdateModel = Partial<CharacterInsertModel>;
+export type GenderUpdateModel = Partial<GenderInsertModel>;
+export type LocationUpdateModel = Partial<LocationInsertModel>;
+export type LocationTypeUpdateMode = Partial<LocationTypeInsertModel>;
+export type SpeciesUpdateModel = Partial<SpeciesInsertModel>;
+export type StatusUpdateModel = Partial<StatusInsertModel>;
 
-export type LocationNewModel = Omit<LocationSelectModel, "locationTypeId"> & {
-  locationType: LocationTypeSelectModel;
+export type TableData = {
+  table: string;
+  data: Array<{
+    [key: string]: (() => string | number | null) | null;
+  }>;
 };
-
-export type CharacterNewInsertModel = Omit<
-  CharacterInsertModel,
-  "birthplaceId" | "genderId" | "speciesId" | "statusId"
-> & {
-  birthplace: LocationNewInsertModel;
-  gender: GenderInsertModel;
-  species: SpeciesInsertModel;
-  status: StatusInsertModel;
-};
-
-export type LocationNewInsertModel = Omit<
-  LocationInsertModel,
-  "locationTypeId"
-> & {
-  locationType: LocationTypeInsertModel;
-};
-
-export type CharacterNewUpdateModel = Partial<CharacterNewInsertModel>;
-export type LocationNewUpdateModel = Partial<LocationNewInsertModel>;
-export type GenderNewUpdateModel = Partial<GenderInsertModel>;
-export type SpeciesNewUpdateModel = Partial<SpeciesInsertModel>;
-export type StatusNewUpdateModel = Partial<StatusInsertModel>;
 
 export type Task = {
   id?: number;

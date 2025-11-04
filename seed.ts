@@ -295,12 +295,12 @@ process.exit();
 // ]);
 
 // const { location_types } = await seed.location_types([
-//   { name: "Country" },
-//   { name: "City" },
-//   { name: "Church" },
-//   { name: "High School" },
-//   { name: "Restaurant" },
-//   { name: "Detention Center" },
+// { name: "Country" },
+// { name: "City" },
+// { name: "Church" },
+// { name: "High School" },
+// { name: "Restaurant" },
+// { name: "Detention Center" },
 // ]);
 
 // const locationValues = ["Japan", "Hell"];

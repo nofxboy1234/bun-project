@@ -1,7 +1,14 @@
 import { sql } from "bun";
-import { charactersData } from "./seedData";
-import { charactersRelations } from "./src/db/schema";
-import { getTableConfig } from "drizzle-orm/pg-core";
+import {
+  characters,
+  genders,
+  locationTypes,
+  locations,
+  locationsData,
+  species,
+  statuses,
+} from "./seedData";
+import type { StatusSelectModel, TableData } from "@/types";
 
 const camelToSnake = (str: string) =>
   str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
@@ -9,54 +16,29 @@ const camelToSnake = (str: string) =>
 const snakeToCamel = (str: string) =>
   str.replace(/(_\w)/g, (m) => m[1]!.toUpperCase());
 
-const relationEntries = (relations) =>
-  Object.entries(relations)
-    // Filter for 'one' relations, which are defined with a 'fields' property in their config.
-    .filter(([, relation]) => !!relation.config?.fields?.length)
-    .map(([relationName, relation]) => [
-      relationName,
-      getTableConfig(relation.referencedTable).name,
-    ]);
+const cleanModel = (model: object) => {
+  const entries = Object.entries(model)
+    .filter(([key]) => key !== "id")
+    .map(([key, value]) => [camelToSnake(key), value()]);
+  return Object.fromEntries(entries);
+};
 
-const modelEntries = (model, relationToIdMap) =>
-  Object.entries(model).map(([key, value]) => {
-    if (Object.keys(relationToIdMap).includes(key)) {
-      return [key + "_id", value];
-    } else {
-      return [key, value];
-    }
-  });
+const seed = async (table: TableData) => {
+  const cleanModels = table.data.map(cleanModel);
+  console.log(cleanModels);
 
-const seedDependencies = async (model, relationToTableMap, relationToIdMap) => {
-  for (const key of Object.keys(relationToTableMap)) {
-    const value = model[key as keyof typeof model];
-
-    if (typeof value === "object" && value !== null) {
-      const tableName = relationToTableMap[key];
-      const [record] = await sql`
-          insert into ${tableName} ${sql(value)}
-          on conflict () do nothing
-          returning *
+  const records = await sql<StatusSelectModel[]>`
+          INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
+          ON CONFLICT DO NOTHING
+          RETURNING *
         `;
-      relationToIdMap[key] = record.id;
-    }
-  }
+  console.log(records);
 };
 
-const seedCharacters = () => {
-  const relationToTableMap = Object.fromEntries(
-    relationEntries(charactersRelations),
+const main = () => {
+  [statuses, genders, species, locationTypes, locations, characters].forEach(
+    (table) => seed(table),
   );
-
-  charactersData.forEach(async (char) => {
-    const relationToIdMap = { ...relationToTableMap };
-
-    seedDependencies(char, relationToTableMap, relationToIdMap);
-
-    Object.assign(char, relationToIdMap);
-
-    const charEntries = modelEntries(char, relationToIdMap);
-    const charWithIds = Object.fromEntries(charEntries);
-    await sql`insert into characters ${sql(charWithIds)}`;
-  });
 };
+
+main();
