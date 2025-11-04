@@ -1,5 +1,4 @@
 import { getTableName } from "drizzle-orm";
-import { PgTable, getTableConfig } from "drizzle-orm/pg-core";
 
 import {
   species as speciesTable,
@@ -11,15 +10,6 @@ import {
 } from "@/db/schema";
 
 import type { TableData } from "@/types";
-
-// const getIndexes = (table: PgTable) => {
-//   const tableConfig = getTableConfig(table);
-//   return tableConfig;
-// };
-
-// const locationsTableConfig = getIndexes(locationsTable);
-// locationsTableConfig.indexes[0].config.name;
-// locationsTableConfig.foreignKeys[0].reference().foreignTable
 
 const statusesData = [
   { id: null, name: () => "Alive" },

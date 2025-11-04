@@ -25,14 +25,12 @@ const cleanModel = (model: object) => {
 
 const seed = async (table: TableData) => {
   const cleanModels = table.data.map(cleanModel);
-  console.log(cleanModels);
 
   const records = await sql<StatusSelectModel[]>`
           INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
           ON CONFLICT DO NOTHING
           RETURNING *
         `;
-  console.log(records);
 };
 
 const main = () => {
