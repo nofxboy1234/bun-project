@@ -1,12 +1,11 @@
 import { sql } from "bun";
 import {
+  statuses,
   characters,
   genders,
   locationTypes,
   locations,
-  locationsData,
   species,
-  statuses,
 } from "./seedData";
 import type { StatusSelectModel, TableData } from "@/types";
 
@@ -23,20 +22,40 @@ const cleanModel = (model: object) => {
   return Object.fromEntries(entries);
 };
 
+const cleanRecord = (record: object) => {
+  const entries = Object.entries(record).map(([key, value]) => [
+    snakeToCamel(key),
+    value,
+  ]);
+  return Object.fromEntries(entries);
+};
+
 const seed = async (table: TableData) => {
-  const cleanModels = table.data.map(cleanModel);
+  const models = table.data;
+  const cleanModels = models.map(cleanModel);
 
   const records = await sql<StatusSelectModel[]>`
           INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
           ON CONFLICT DO NOTHING
           RETURNING *
-        `;
+          `;
+
+  models.forEach((model) => {
+    const idRecord = records.map(cleanRecord).find((record) =>
+      Object.keys(model)
+        .filter((key) => key !== "id")
+        .every((key) => model[key]!() === record[key]),
+    );
+
+    model.id = idRecord.id;
+  });
 };
 
 const main = () => {
-  [statuses, genders, species, locationTypes, locations, characters].forEach(
-    (table) => seed(table),
-  );
+  // [statuses, genders, species, locationTypes, locations, characters].forEach(
+  //   (table) => seed(table),
+  // );
+  [statuses].forEach((table) => seed(table));
 };
 
 main();

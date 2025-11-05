@@ -32,7 +32,7 @@ export type StatusUpdateModel = Partial<StatusInsertModel>;
 export type TableData = {
   table: string;
   data: Array<{
-    [key: string]: (() => string | number | null) | null;
+    [key: string]: (() => string | number | null) | null | number;
   }>;
 };
 

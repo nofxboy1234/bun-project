@@ -69,7 +69,7 @@ export const locationTypes = {
   data: locationTypesData,
 };
 
-export const locationsData = [
+const locationsData = [
   {
     id: null,
     name: () => "Japan",
