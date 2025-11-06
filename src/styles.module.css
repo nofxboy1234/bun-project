@@ -59,9 +59,9 @@
   border-bottom: 1px solid var(--dracula-purple);
 }
 
-.task:first-child {
+/* .task:first-child {
   border-top: 1px solid var(--dracula-purple);
-}
+} */
 
 .task:hover {
   background-color: var(--dracula-selection);
