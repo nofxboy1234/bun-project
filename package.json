@@ -28,11 +28,11 @@
     "clean": "rm -rf dist && rm -f bun-project && echo 'Done cleaning.'"
   },
   "dependencies": {
-    "@tanstack/react-query": "^5.90.6",
+    "@tanstack/react-query": "^5.90.7",
     "@tanstack/react-query-devtools": "^5.90.2",
-    "@tanstack/react-router": "^1.134.12",
-    "@tanstack/react-router-devtools": "^1.134.12",
-    "@tanstack/router-cli": "^1.134.12",
+    "@tanstack/react-router": "^1.134.13",
+    "@tanstack/react-router-devtools": "^1.134.13",
+    "@tanstack/router-cli": "^1.134.13",
     "drizzle-orm": "^0.44.7",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
@@ -48,7 +48,7 @@
     "@types/pg": "^8.15.6",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
-    "@vitejs/plugin-react-swc": "^4.2.0",
+    "@vitejs/plugin-react-swc": "^4.2.1",
     "drizzle-kit": "^0.31.6",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
@@ -60,7 +60,7 @@
     "pg": "^8.16.3",
     "prettier": "3.6.2",
     "typescript-eslint": "^8.46.3",
-    "vite": "^7.1.12",
+    "vite": "^7.2.1",
     "vite-tsconfig-paths": "^5.1.4"
   }
 }
