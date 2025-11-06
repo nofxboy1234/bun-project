@@ -15,8 +15,8 @@
   display: flex;
   justify-content: space-between;
 
-  background-color: var(--reddit-shell);
-  border-bottom: 1px solid var(--reddit-shell-border);
+  background-color: var(--dracula-background);
+  border-bottom: 1px solid var(--dracula-purple);
   padding: 0.5rem;
 }
 
@@ -28,8 +28,8 @@
 
 .nav {
   grid-area: nav;
-  background-color: var(--reddit-shell);
-  border-right: 1px solid var(--reddit-shell-border);
+  background-color: var(--dracula-background);
+  border-right: 1px solid var(--dracula-purple);
 }
 
 .stickyNav {
@@ -44,7 +44,7 @@
 }
 
 .title {
-  color: var(--dracula-purple);
+  color: var(--dracula-green);
   font-size: 1.75rem;
   margin-left: 1rem;
 }
@@ -56,20 +56,21 @@
 
   cursor: pointer;
   height: 126px;
-  border-bottom: 1px solid var(--reddit-main-border-color);
+  border-bottom: 1px solid var(--dracula-purple);
 }
 
 .task:first-child {
-  border-top: 1px solid var(--reddit-main-border-color);
+  border-top: 1px solid var(--dracula-purple);
 }
 
 .task:hover {
-  background-color: var(--reddit-post-hover);
+  background-color: var(--dracula-selection);
 }
 
 .plusIcon {
   transform: scale(1);
   /* cursor: pointer; */
+  filter: invert(100%);
 }
 
 /* .updateIcon {
@@ -92,4 +93,10 @@
   width: 2rem;
   height: 2rem;
   margin: 1rem;
+  filter: invert(100%);
+}
+
+a {
+  color: var(--dracula-pink);
+  text-decoration: none;
 }
