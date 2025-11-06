@@ -1,11 +1,11 @@
 import { sql } from "bun";
 import {
   statuses,
-  characters,
-  genders,
-  locationTypes,
-  locations,
-  species,
+  // characters,
+  // genders,
+  // locationTypes,
+  // locations,
+  // species,
 } from "./seedData";
 import type { StatusSelectModel, TableData } from "@/types";
 
@@ -42,9 +42,13 @@ const seed = async (table: TableData) => {
 
   models.forEach((model) => {
     const idRecord = records.map(cleanRecord).find((record) =>
-      Object.keys(model)
-        .filter((key) => key !== "id")
-        .every((key) => model[key]!() === record[key]),
+      Object.entries(model)
+        .filter(([key]) => key !== "id")
+        .every(
+          ([key, value]) =>
+            (value as () => string | number | null)() ===
+            (record as Record<string, unknown>)[key],
+        ),
     );
 
     model.id = idRecord.id;
