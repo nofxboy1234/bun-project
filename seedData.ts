@@ -11,6 +11,7 @@ import {
   affiliations as affiliationsTable,
   occupations as occupationsTable,
   speciesAliases as speciesAliasesTable,
+  maps as mapsTable,
 } from "@/db/schema";
 
 import type { TableData } from "@/types";
@@ -220,6 +221,18 @@ const speciesAliasesData = [
 export const speciesAliases = {
   table: getTableName(speciesAliasesTable),
   data: speciesAliasesData,
+};
+
+const mapsData = [
+  {
+    id: null,
+    imageFilePath: () => "path/to/map-of-japan",
+    locationId: () => locationsData.find((obj) => obj.name() === "Japan")!.id,
+  },
+];
+export const maps = {
+  table: getTableName(mapsTable),
+  data: mapsData,
 };
 
 const charactersData = [

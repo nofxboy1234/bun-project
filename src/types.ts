@@ -9,6 +9,7 @@ import {
   affiliations,
   occupations,
   speciesAliases,
+  maps,
 } from "@/db/schema";
 import type { InferInsertModel, InferSelectModel } from "drizzle-orm";
 
@@ -22,6 +23,7 @@ export type RelativeTypeSelectModel = InferSelectModel<typeof relativeTypes>;
 export type AffiliationSelectModel = InferSelectModel<typeof affiliations>;
 export type OccupationSelectModel = InferSelectModel<typeof occupations>;
 export type SpeciesAliasSelectModel = InferSelectModel<typeof speciesAliases>;
+export type MapSelectModel = InferSelectModel<typeof maps>;
 
 export type CharacterInsertModel = InferInsertModel<typeof characters>;
 export type GenderInsertModel = InferInsertModel<typeof genders>;
@@ -33,6 +35,7 @@ export type RelativeTypeInsertModel = InferInsertModel<typeof relativeTypes>;
 export type AffiliationInsertModel = InferInsertModel<typeof affiliations>;
 export type OccupationInsertModel = InferInsertModel<typeof occupations>;
 export type SpeciesAliasInsertModel = InferInsertModel<typeof speciesAliases>;
+export type MapInsertModel = InferInsertModel<typeof maps>;
 
 export type CharacterUpdateModel = Partial<CharacterInsertModel>;
 export type GenderUpdateModel = Partial<GenderInsertModel>;
@@ -44,6 +47,7 @@ export type RelativeTypeUpdateModel = Partial<RelativeTypeInsertModel>;
 export type AffiliationUpdateModel = Partial<AffiliationInsertModel>;
 export type OccupationUpdateModel = Partial<OccupationInsertModel>;
 export type SpeciesAliasUpdateModel = Partial<SpeciesAliasInsertModel>;
+export type MapUpdateModel = Partial<MapInsertModel>;
 
 export type TableData = {
   table: string;

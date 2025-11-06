@@ -10,6 +10,7 @@ import {
   affiliations,
   occupations,
   speciesAliases,
+  maps,
 } from "./seedData";
 import type {
   TableData,
@@ -23,6 +24,7 @@ import type {
   AffiliationSelectModel,
   OccupationSelectModel,
   SpeciesAliasSelectModel,
+  MapSelectModel,
 } from "@/types";
 import { createSeedClient } from "@snaplet/seed";
 
@@ -62,6 +64,7 @@ const seed = async (table: TableData) => {
     | AffiliationSelectModel
     | OccupationSelectModel
     | SpeciesAliasSelectModel
+    | MapSelectModel
   >;
 
   switch (table.table) {
@@ -128,6 +131,13 @@ const seed = async (table: TableData) => {
               RETURNING *
               `;
       break;
+    case "maps":
+      records = await sql<MapSelectModel[]>`
+              INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
+              ON CONFLICT DO NOTHING
+              RETURNING *
+              `;
+      break;
     case "characters":
       records = await sql<CharacterSelectModel[]>`
                         INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
@@ -167,6 +177,7 @@ const main = async () => {
     occupations,
     locations,
     speciesAliases,
+    maps,
     characters,
   ];
 
