@@ -57,7 +57,8 @@ export default defineConfig(
   {
     files: ["src/**/*.{js,jsx,ts,tsx}"],
     plugins: {
-      "react-hooks": pluginReactHooks,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      "react-hooks": pluginReactHooks as any,
       "react-refresh": pluginReactRefresh,
     },
     rules: {
