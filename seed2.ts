@@ -6,6 +6,9 @@ import {
   locationTypes,
   locations,
   species,
+  relativeTypes,
+  affiliations,
+  occupations,
 } from "./seedData";
 import type {
   TableData,
@@ -15,6 +18,9 @@ import type {
   LocationSelectModel,
   CharacterSelectModel,
   LocationTypeSelectModel,
+  RelativeTypeSelectModel,
+  AffiliationSelectModel,
+  OccupationSelectModel,
 } from "@/types";
 import { createSeedClient } from "@snaplet/seed";
 
@@ -50,6 +56,9 @@ const seed = async (table: TableData) => {
     | LocationSelectModel
     | LocationTypeSelectModel
     | SpeciesSelectModel
+    | RelativeTypeSelectModel
+    | AffiliationSelectModel
+    | OccupationSelectModel
   >;
 
   switch (table.table) {
@@ -95,6 +104,27 @@ const seed = async (table: TableData) => {
               RETURNING *
               `;
       break;
+    case "relative_types":
+      records = await sql<RelativeTypeSelectModel[]>`
+              INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
+              ON CONFLICT DO NOTHING
+              RETURNING *
+              `;
+      break;
+    case "affiliations":
+      records = await sql<AffiliationSelectModel[]>`
+              INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
+              ON CONFLICT DO NOTHING
+              RETURNING *
+              `;
+      break;
+    case "occupations":
+      records = await sql<OccupationSelectModel[]>`
+              INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
+              ON CONFLICT DO NOTHING
+              RETURNING *
+              `;
+      break;
   }
 
   models.forEach((model) => {
@@ -108,8 +138,6 @@ const seed = async (table: TableData) => {
         ),
     );
 
-    console.log(model);
-    console.log(idRecord);
     model.id = idRecord.id;
   });
 };
@@ -124,6 +152,9 @@ const main = async () => {
     locationTypes,
     genders,
     species,
+    relativeTypes,
+    affiliations,
+    occupations,
     locations,
     characters,
   ];

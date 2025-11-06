@@ -7,6 +7,9 @@ import {
   locations as locationsTable,
   statuses as statusesTable,
   characters as charactersTable,
+  relativeTypes as relativeTypesTable,
+  affiliations as affiliationsTable,
+  occupations as occupationsTable,
 } from "@/db/schema";
 
 import type { TableData } from "@/types";
@@ -67,6 +70,104 @@ const speciesData = [
 export const species = {
   table: getTableName(speciesTable),
   data: speciesData,
+};
+
+const relativeTypesData = [
+  {
+    id: null,
+    name: () => "Mother",
+  },
+  {
+    id: null,
+    name: () => "Father",
+  },
+  {
+    id: null,
+    name: () => "Son",
+  },
+  {
+    id: null,
+    name: () => "Daughter",
+  },
+  {
+    id: null,
+    name: () => "Sister",
+  },
+  {
+    id: null,
+    name: () => "Brother",
+  },
+  {
+    id: null,
+    name: () => "Owner",
+  },
+  {
+    id: null,
+    name: () => "Pet",
+  },
+  {
+    id: null,
+    name: () => "Devil Pet",
+  },
+  {
+    id: null,
+    name: () => "Previous Incarnation",
+  },
+  {
+    id: null,
+    name: () => "Reincarnation",
+  },
+  {
+    id: null,
+    name: () => "Boyfriend",
+  },
+  {
+    id: null,
+    name: () => "Girlfriend",
+  },
+];
+export const relativeTypes = {
+  table: getTableName(relativeTypesTable),
+  data: relativeTypesData,
+};
+
+const affiliationsData = [
+  {
+    id: null,
+    name: () => "Pochita",
+  },
+  {
+    id: null,
+    name: () => "Yakuza",
+  },
+  {
+    id: null,
+    name: () => "Public Safety Devil Hunters",
+  },
+  { id: null, name: () => "Tokyo Special Division 4" },
+  { id: null, name: () => "Fourth East High School" },
+  { id: null, name: () => "Chainsaw Man Church" },
+  { id: null, name: () => "Bat Devil" },
+  { id: null, name: () => "Tokyo Divison 2" },
+  { id: null, name: () => "Devil Hunters" },
+  { id: null, name: () => "Weapon Devils" },
+];
+export const affiliations = {
+  table: getTableName(affiliationsTable),
+  data: affiliationsData,
+};
+
+const occupationsData = [
+  { id: null, name: () => "Private Devil Hunter" },
+  { id: null, name: () => "Public Safety Devil Hunter" },
+  { id: null, name: () => "High School Student" },
+  { id: null, name: () => "Wild Fiend" },
+  { id: null, name: () => "Wild Devil" },
+  { id: null, name: () => "Contract Devil" },
+];
+export const occupations = {
+  table: getTableName(occupationsTable),
+  data: occupationsData,
 };
 
 const locationsData = [

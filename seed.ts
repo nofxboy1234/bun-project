@@ -321,23 +321,23 @@
 // //   { name: "Pochita" },
 // //   { name: "Yakuza" },
 // //   { name: "Public Safety Devil Hunters" },
-// //   { name: "Tokyo Special Division 4" },
-// //   { name: "Fourth East High School" },
-// //   { name: "Chainsaw Man Church" },
-// //   { name: "Bat Devil" },
-// //   { name: "Tokyo Divison 2" },
-// //   { name: "Devil Hunters" },
-// //   { name: "Weapon Devils" },
-// // ]);
+// { name: "Tokyo Special Division 4" },
+// { name: "Fourth East High School" },
+// { name: "Chainsaw Man Church" },
+// { name: "Bat Devil" },
+// { name: "Tokyo Divison 2" },
+// { name: "Devil Hunters" },
+// { name: "Weapon Devils" },
+// ]);
 
 // // const { occupations } = await seed.occupations([
-// //   { name: "Private Devil Hunter" },
-// //   { name: "Public Safety Devil Hunter" },
-// //   { name: "High School Student" },
-// //   { name: "Wild Fiend" },
-// //   { name: "Wild Devil" },
-// //   { name: "Contract Devil" },
-// // ]);
+//   { name: "Private Devil Hunter" },
+//   { name: "Public Safety Devil Hunter" },
+//   { name: "High School Student" },
+//   { name: "Wild Fiend" },
+//   { name: "Wild Devil" },
+//   { name: "Contract Devil" },
+// ]);
 
 // // const findSpeciesRecord = async (value: string) =>
 // //   await db.query.species.findFirst({
