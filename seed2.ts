@@ -16,6 +16,7 @@ import type {
   CharacterSelectModel,
   LocationTypeSelectModel,
 } from "@/types";
+import { createSeedClient } from "@snaplet/seed";
 
 const camelToSnake = (str: string) =>
   str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
@@ -114,6 +115,10 @@ const seed = async (table: TableData) => {
 };
 
 const main = async () => {
+  const baseClient = await createSeedClient();
+  await baseClient.$resetDatabase();
+  console.log("Database reset successfully!");
+
   const tablesToSeed = [
     statuses,
     genders,
@@ -126,6 +131,9 @@ const main = async () => {
   for (const table of tablesToSeed) {
     await seed(table);
   }
+  console.log("Database seeded successfully!");
+
+  process.exit();
 };
 
 main();
