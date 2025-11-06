@@ -21,6 +21,20 @@ export const statuses: TableData = {
   data: statusesData,
 };
 
+const locationTypesData = [
+  { id: null, name: () => "Country" },
+  { id: null, name: () => "City" },
+  { id: null, name: () => "Church" },
+  { id: null, name: () => "High School" },
+  { id: null, name: () => "Restaurant" },
+  { id: null, name: () => "Detention Center" },
+  { id: null, name: () => "World" },
+];
+export const locationTypes = {
+  table: getTableName(locationTypesTable),
+  data: locationTypesData,
+};
+
 const gendersData = [
   { id: null, name: () => "Male" },
   { id: null, name: () => "Female" },
@@ -53,20 +67,6 @@ const speciesData = [
 export const species = {
   table: getTableName(speciesTable),
   data: speciesData,
-};
-
-const locationTypesData = [
-  { id: null, name: () => "Country" },
-  { id: null, name: () => "City" },
-  { id: null, name: () => "Church" },
-  { id: null, name: () => "High School" },
-  { id: null, name: () => "Restaurant" },
-  { id: null, name: () => "Detention Center" },
-  { id: null, name: () => "World" },
-];
-export const locationTypes = {
-  table: getTableName(locationTypesTable),
-  data: locationTypesData,
 };
 
 const locationsData = [

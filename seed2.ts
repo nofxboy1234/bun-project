@@ -121,9 +121,9 @@ const main = async () => {
 
   const tablesToSeed = [
     statuses,
+    locationTypes,
     genders,
     species,
-    locationTypes,
     locations,
     characters,
   ];
