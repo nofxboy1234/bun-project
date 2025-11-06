@@ -10,6 +10,7 @@ import {
   relativeTypes as relativeTypesTable,
   affiliations as affiliationsTable,
   occupations as occupationsTable,
+  speciesAliases as speciesAliasesTable,
 } from "@/db/schema";
 
 import type { TableData } from "@/types";
@@ -187,6 +188,38 @@ const locationsData = [
 export const locations = {
   table: getTableName(locationsTable),
   data: locationsData,
+};
+
+const speciesAliasesData = [
+  {
+    id: null,
+    name: () => "Fears",
+    speciesId: () => speciesData.find((obj) => obj.name() === "Devil")!.id,
+  },
+  {
+    id: null,
+    name: () => "Devil-humans",
+    speciesId: () => speciesData.find((obj) => obj.name() === "Hybrid")!.id,
+  },
+  {
+    id: null,
+    name: () => "Weapon-humans",
+    speciesId: () => speciesData.find((obj) => obj.name() === "Hybrid")!.id,
+  },
+  {
+    id: null,
+    name: () => "Majin",
+    speciesId: () => speciesData.find((obj) => obj.name() === "Fiend")!.id,
+  },
+  {
+    id: null,
+    name: () => "Devilmen",
+    speciesId: () => speciesData.find((obj) => obj.name() === "Fiend")!.id,
+  },
+];
+export const speciesAliases = {
+  table: getTableName(speciesAliasesTable),
+  data: speciesAliasesData,
 };
 
 const charactersData = [

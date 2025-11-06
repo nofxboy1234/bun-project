@@ -9,6 +9,7 @@ import {
   relativeTypes,
   affiliations,
   occupations,
+  speciesAliases,
 } from "./seedData";
 import type {
   TableData,
@@ -21,6 +22,7 @@ import type {
   RelativeTypeSelectModel,
   AffiliationSelectModel,
   OccupationSelectModel,
+  SpeciesAliasSelectModel,
 } from "@/types";
 import { createSeedClient } from "@snaplet/seed";
 
@@ -59,6 +61,7 @@ const seed = async (table: TableData) => {
     | RelativeTypeSelectModel
     | AffiliationSelectModel
     | OccupationSelectModel
+    | SpeciesAliasSelectModel
   >;
 
   switch (table.table) {
@@ -69,61 +72,68 @@ const seed = async (table: TableData) => {
               RETURNING *
               `;
       break;
-    case "characters":
-      records = await sql<CharacterSelectModel[]>`
-              INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-              ON CONFLICT DO NOTHING
-              RETURNING *
-              `;
+    case "location_types":
+      records = await sql<LocationTypeSelectModel[]>`
+                INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
+                ON CONFLICT DO NOTHING
+                RETURNING *
+                `;
       break;
     case "genders":
       records = await sql<GenderSelectModel[]>`
-              INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-              ON CONFLICT DO NOTHING
-              RETURNING *
-              `;
-      break;
-    case "location_types":
-      records = await sql<LocationTypeSelectModel[]>`
-              INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-              ON CONFLICT DO NOTHING
-              RETURNING *
-              `;
-      break;
-    case "locations":
-      records = await sql<LocationSelectModel[]>`
-              INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-              ON CONFLICT DO NOTHING
-              RETURNING *
-              `;
+                INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
+                ON CONFLICT DO NOTHING
+                RETURNING *
+                `;
       break;
     case "species":
       records = await sql<SpeciesSelectModel[]>`
-              INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-              ON CONFLICT DO NOTHING
-              RETURNING *
-              `;
+                INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
+                ON CONFLICT DO NOTHING
+                RETURNING *
+                `;
       break;
     case "relative_types":
       records = await sql<RelativeTypeSelectModel[]>`
-              INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-              ON CONFLICT DO NOTHING
-              RETURNING *
-              `;
+                INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
+                ON CONFLICT DO NOTHING
+                RETURNING *
+                `;
       break;
     case "affiliations":
       records = await sql<AffiliationSelectModel[]>`
+                INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
+                ON CONFLICT DO NOTHING
+                RETURNING *
+                `;
+      break;
+    case "occupations":
+      records = await sql<OccupationSelectModel[]>`
+                INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
+                ON CONFLICT DO NOTHING
+                RETURNING *
+                `;
+      break;
+    case "locations":
+      records = await sql<LocationSelectModel[]>`
+        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
+              ON CONFLICT DO NOTHING
+              RETURNING *
+              `;
+      break;
+    case "species_aliases":
+      records = await sql<SpeciesAliasSelectModel[]>`
               INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
               ON CONFLICT DO NOTHING
               RETURNING *
               `;
       break;
-    case "occupations":
-      records = await sql<OccupationSelectModel[]>`
-              INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-              ON CONFLICT DO NOTHING
-              RETURNING *
-              `;
+    case "characters":
+      records = await sql<CharacterSelectModel[]>`
+                        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
+                        ON CONFLICT DO NOTHING
+                        RETURNING *
+                        `;
       break;
   }
 
@@ -156,6 +166,7 @@ const main = async () => {
     affiliations,
     occupations,
     locations,
+    speciesAliases,
     characters,
   ];
 
