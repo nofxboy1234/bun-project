@@ -19,7 +19,6 @@
     "watch": "bunx --bun tsr watch",
     "dev": "bun run watch & bun --hot src/index.tsx",
     "debug": "bun run watch & bun --inspect --hot src/index.tsx",
-    "dev:vite": "bunx --bun vite",
     "start": "NODE_ENV=production bun src/index.tsx",
     "build": "bun run gen && bun build --minify --sourcemap --env='BUN_PUBLIC_*' --production --target=bun ./src/index.tsx --outdir=dist",
     "start:js": "NODE_ENV=production bun --cwd=dist index.js",
@@ -43,14 +42,11 @@
     "@types/pg": "^8.15.6",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
-    "@vitejs/plugin-react-swc": "^4.2.1",
     "drizzle-kit": "^0.31.6",
     "globals": "^16.5.0",
     "jiti": "^2.6.1",
     "oxlint": "^1.26.0",
     "pg": "^8.16.3",
-    "prettier": "3.6.2",
-    "vite": "^7.2.1",
-    "vite-tsconfig-paths": "^5.1.4"
+    "prettier": "3.6.2"
   }
 }
