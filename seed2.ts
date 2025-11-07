@@ -26,7 +26,7 @@ import type {
   SpeciesAliasSelectModel,
   MapSelectModel,
 } from "@/types";
-import { createSeedClient } from "@snaplet/seed";
+import { resetDB } from "resetDB";
 
 const camelToSnake = (str: string) =>
   str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
@@ -163,9 +163,7 @@ const seed = async (table: TableData) => {
 };
 
 const main = async () => {
-  const baseClient = await createSeedClient();
-  await baseClient.$resetDatabase();
-  console.log("Database reset successfully!");
+  await resetDB();
 
   const tablesToSeed = [
     statuses,
