@@ -1,13 +1,10 @@
 import type { QueryClient } from "@tanstack/react-query";
 
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-
 import {
   createRootRouteWithContext,
   Link,
   Outlet,
 } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
 import styles from "../styles.module.css";
 import plusIcon from "@/icons/add_2.svg";
@@ -31,9 +28,6 @@ const RootLayout = () => {
 
         <Outlet />
       </div>
-
-      <ReactQueryDevtools buttonPosition="bottom-right" />
-      <TanStackRouterDevtools position="bottom-right" />
     </>
   );
 };
