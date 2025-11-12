@@ -32,7 +32,15 @@ const hiPlugin = new Elysia({ name: "hiPlugin" }).macro({
 const auth = new Elysia({ name: "hiPlugin" }).macro({
   isAuth: {
     resolve: () => ({
-      user: "saltyaom",
+      user: "saltyaom" as const,
+    }),
+  },
+});
+
+const friends = new Elysia({ name: "friends" }).macro({
+  withFriends: {
+    body: t.Object({
+      friends: t.Tuple([t.Literal("Duke"), t.Literal("Zoey")]),
     }),
   },
 });
@@ -63,6 +71,7 @@ const app = new Elysia({
   .use(cats)
   .use(errPlugin)
   .use(auth)
+  .use(friends)
   .decorate("logger", new Logger())
   .resolve(() => ({ dog: "duke" }))
   .state("counter", 0)
@@ -77,6 +86,19 @@ const app = new Elysia({
     isAuth: true,
     role: "admin",
   })
+  .post(
+    "/friends",
+    ({ body }) => {
+      console.log(`friends: ${body.friends}`);
+      return body.friends;
+    },
+    {
+      body: t.Object({
+        name: t.Literal("Lilith"),
+      }),
+      withFriends: true,
+    },
+  )
   .post("/", ({ body }) => body, {
     body: t.Object({
       name: t.String(),
@@ -197,10 +219,20 @@ const app = new Elysia({
   )
   .listen(3000);
 
-// app.handle(new Request("http://localhost/e")).then(async (response) => {
-//   // console.log(response);
-//   // console.log(await response.json());
-//   console.log(response);
-// });
+app
+  .handle(
+    new Request("http://localhost:3000/v1/friends", {
+      method: "POST",
+      body: JSON.stringify({ name: "Lilith", friends: ["Duke", "Zoey"] }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }),
+  )
+  .then(async (response) => {
+    // console.log(response);
+    // console.log(await response.json());
+    console.log(response);
+  });
 
 console.log(`🦊 Elysia is running at ${app.server?.url}`);
