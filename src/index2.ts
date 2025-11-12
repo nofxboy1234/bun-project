@@ -1,4 +1,5 @@
 import { Elysia, t } from "elysia";
+import { openapi } from "@elysiajs/openapi";
 
 const setup = new Elysia({ name: "setup" }).decorate({
   argon: "a",
@@ -67,6 +68,7 @@ const app = new Elysia({
     },
   },
 })
+  .use(openapi())
   .use(hiPlugin)
   .use(cats)
   .use(errPlugin)
