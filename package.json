@@ -17,12 +17,9 @@
     "gen": "bunx --bun tsr generate",
     "watch": "bunx --bun tsr watch",
     "dev": "bun run watch & bun --hot src/index.ts",
-    "dev2": "bun --hot src/index2.ts",
     "debug": "bun run watch & bun --inspect --hot src/index.ts",
     "start": "NODE_ENV=production bun src/index.ts",
-    "start2": "NODE_ENV=production bun src/index2.ts",
     "build": "bun run gen && bun build --minify --sourcemap --env='BUN_PUBLIC_*' --production --target=bun ./src/index.ts --outdir=dist",
-    "build2": "bun build src/index2.ts --target bun --outdir ./dist",
     "start:js": "NODE_ENV=production bun --cwd=dist index.js",
     "build:exe": "bun run gen && bun build --compile --minify --sourcemap --env='BUN_PUBLIC_*' --bytecode --production --target=bun ./src/index.ts --outfile bun-project",
     "clean": "rm -rf dist && rm -f bun-project && echo 'Done cleaning.'"
