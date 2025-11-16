@@ -25,7 +25,7 @@ function TasksLayoutComponent() {
       onClickCapture={() => console.log("main onClickCapture")}
     >
       <div className={styles.tasksContainer}>
-        {tasks.map((task) => (
+        {tasks!.map((task) => (
           <TaskPreview key={task.id} task={task} />
         ))}
       </div>
