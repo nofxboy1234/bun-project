@@ -70,80 +70,80 @@ const seed = async (table: TableData) => {
   switch (table.table) {
     case "statuses":
       records = await sql<StatusSelectModel[]>`
-              INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-              ON CONFLICT DO NOTHING
-              RETURNING *
-              `;
+        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
+        ON CONFLICT DO NOTHING
+        RETURNING *
+      `;
       break;
     case "location_types":
       records = await sql<LocationTypeSelectModel[]>`
-                INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-                ON CONFLICT DO NOTHING
-                RETURNING *
-                `;
+        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
+        ON CONFLICT DO NOTHING
+        RETURNING *
+      `;
       break;
     case "genders":
       records = await sql<GenderSelectModel[]>`
-                INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-                ON CONFLICT DO NOTHING
-                RETURNING *
-                `;
+        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
+        ON CONFLICT DO NOTHING
+        RETURNING *
+      `;
       break;
     case "species":
       records = await sql<SpeciesSelectModel[]>`
-                INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-                ON CONFLICT DO NOTHING
-                RETURNING *
-                `;
+        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
+        ON CONFLICT DO NOTHING
+        RETURNING *
+      `;
       break;
     case "relative_types":
       records = await sql<RelativeTypeSelectModel[]>`
-                INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-                ON CONFLICT DO NOTHING
-                RETURNING *
-                `;
+        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
+        ON CONFLICT DO NOTHING
+        RETURNING *
+      `;
       break;
     case "affiliations":
       records = await sql<AffiliationSelectModel[]>`
-                INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-                ON CONFLICT DO NOTHING
-                RETURNING *
-                `;
+        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
+        ON CONFLICT DO NOTHING
+        RETURNING *
+      `;
       break;
     case "occupations":
       records = await sql<OccupationSelectModel[]>`
-                INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-                ON CONFLICT DO NOTHING
-                RETURNING *
-                `;
+        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
+        ON CONFLICT DO NOTHING
+        RETURNING *
+      `;
       break;
     case "locations":
       records = await sql<LocationSelectModel[]>`
         INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-              ON CONFLICT DO NOTHING
-              RETURNING *
-              `;
+        ON CONFLICT DO NOTHING
+        RETURNING *
+      `;
       break;
     case "species_aliases":
       records = await sql<SpeciesAliasSelectModel[]>`
-              INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-              ON CONFLICT DO NOTHING
-              RETURNING *
-              `;
+        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
+        ON CONFLICT DO NOTHING
+        RETURNING *
+      `;
       break;
     case "maps":
       records = await sql<MapSelectModel[]>`
-              INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-              ON CONFLICT DO NOTHING
-              RETURNING *
-              `;
+        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
+        ON CONFLICT DO NOTHING
+        RETURNING *
+      `;
       break;
     case "characters":
       records = await sql<CharacterSelectModel[]>`
-                        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-                        ON CONFLICT DO NOTHING
-                        RETURNING *
-                        `;
+        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
+        ON CONFLICT DO NOTHING
+        RETURNING *
+      `;
       break;
   }
 
