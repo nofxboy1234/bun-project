@@ -28,6 +28,7 @@
     "clean": "rm -rf dist && rm -f bun-project && echo 'Done cleaning.'"
   },
   "dependencies": {
+    "@elysiajs/eden": "^1.4.4",
     "@elysiajs/openapi": "^1.4.11",
     "@tanstack/react-query": "^5.90.7",
     "@tanstack/react-router": "^1.134.18",

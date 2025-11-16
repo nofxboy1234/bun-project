@@ -68,6 +68,7 @@ const app = new Elysia({
     },
   },
 })
+  .error({})
   .use(openapi())
   .use(hiPlugin)
   .use(cats)
@@ -108,13 +109,13 @@ const app = new Elysia({
   })
   .get(
     "/",
-    ({ store, cookie: { name }, logger, dog }) => {
+    ({ store, cookie: { hello }, logger, dog, request }) => {
       // name.remove();
-      name.value = {
+      hello.value = {
         id: 19,
         name: "Duke",
       };
-      console.log(name?.value);
+      console.log(hello?.value);
       store.counter++;
 
       console.log(store.counter);
@@ -126,7 +127,7 @@ const app = new Elysia({
     },
     {
       cookie: t.Cookie({
-        name: t.Optional(
+        hello: t.Optional(
           t.Object({
             id: t.Numeric(),
             name: t.String(),
@@ -238,3 +239,5 @@ app
   });
 
 console.log(`🦊 Elysia is running at ${app.server?.url}`);
+
+export type App = typeof app;
