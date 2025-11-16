@@ -14,6 +14,8 @@ import {
   maps as mapsTable,
   characterAliases as characterAliasesTable,
   contracts as contractsTable,
+  relatives as relativesTable,
+  characterAffiliations as characterAffiliationsTable,
 } from "@/db/schema";
 
 import type { TableData } from "@/types";
@@ -149,12 +151,16 @@ const affiliationsData = [
     name: () => "Public Safety Devil Hunters",
   },
   { id: null, name: () => "Tokyo Special Division 4" },
+  { id: null, name: () => "Tokyo Special Division 5" },
   { id: null, name: () => "Fourth East High School" },
   { id: null, name: () => "Chainsaw Man Church" },
   { id: null, name: () => "Bat Devil" },
   { id: null, name: () => "Tokyo Divison 2" },
   { id: null, name: () => "Devil Hunters" },
   { id: null, name: () => "Weapon Devils" },
+  { id: null, name: () => "Four Horsemen" },
+  { id: null, name: () => "Tokyo Division 2" },
+  { id: null, name: () => "Denji" },
 ];
 export const affiliations = {
   table: getTableName(affiliationsTable),
@@ -505,4 +511,201 @@ const contractsData = [
 export const contracts = {
   table: getTableName(contractsTable),
   data: contractsData,
+};
+
+const relativesData = [
+  {
+    id: null,
+    character1Id: () =>
+      charactersData.find((obj) => obj.name() === "Denji")!.id,
+    character2Id: () =>
+      charactersData.find((obj) => obj.name() === "Pochita")!.id,
+    relativeTypeId: () =>
+      relativeTypesData.find((obj) => obj.name() === "Devil Pet")!.id,
+  },
+  {
+    id: null,
+    character1Id: () =>
+      charactersData.find((obj) => obj.name() === "Pochita")!.id,
+    character2Id: () =>
+      charactersData.find((obj) => obj.name() === "Denji")!.id,
+    relativeTypeId: () =>
+      relativeTypesData.find((obj) => obj.name() === "Owner")!.id,
+  },
+];
+export const relatives = {
+  table: getTableName(relativesTable),
+  data: relativesData,
+};
+
+const characterAffiliationsData = [
+  {
+    id: null,
+    characterId: () => charactersData.find((obj) => obj.name() === "Denji")!.id,
+    affiliationId: () =>
+      affiliationsData.find((obj) => obj.name() === "Pochita")!.id,
+  },
+  {
+    id: null,
+    characterId: () => charactersData.find((obj) => obj.name() === "Denji")!.id,
+    affiliationId: () =>
+      affiliationsData.find((obj) => obj.name() === "Yakuza")!.id,
+  },
+  {
+    id: null,
+    characterId: () => charactersData.find((obj) => obj.name() === "Denji")!.id,
+    affiliationId: () =>
+      affiliationsData.find(
+        (obj) => obj.name() === "Public Safety Devil Hunters",
+      )!.id,
+  },
+  {
+    id: null,
+    characterId: () => charactersData.find((obj) => obj.name() === "Denji")!.id,
+    affiliationId: () =>
+      affiliationsData.find((obj) => obj.name() === "Tokyo Special Division 4")!
+        .id,
+  },
+  {
+    id: null,
+    characterId: () => charactersData.find((obj) => obj.name() === "Denji")!.id,
+    affiliationId: () =>
+      affiliationsData.find((obj) => obj.name() === "Fourth East High School")!
+        .id,
+  },
+  {
+    id: null,
+    characterId: () => charactersData.find((obj) => obj.name() === "Denji")!.id,
+    affiliationId: () =>
+      affiliationsData.find((obj) => obj.name() === "Chainsaw Man Church")!.id,
+  },
+
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Pochita")!.id,
+    affiliationId: () =>
+      affiliationsData.find((obj) => obj.name() === "Yakuza")!.id,
+  },
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Pochita")!.id,
+    affiliationId: () =>
+      affiliationsData.find((obj) => obj.name() === "Denji")!.id,
+  },
+
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Makima")!.id,
+    affiliationId: () =>
+      affiliationsData.find((obj) => obj.name() === "Four Horsemen")!.id,
+  },
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Makima")!.id,
+    affiliationId: () =>
+      affiliationsData.find(
+        (obj) => obj.name() === "Public Safety Devil Hunters",
+      )!.id,
+  },
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Makima")!.id,
+    affiliationId: () =>
+      affiliationsData.find((obj) => obj.name() === "Tokyo Special Division 4")!
+        .id,
+  },
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Makima")!.id,
+    affiliationId: () =>
+      affiliationsData.find((obj) => obj.name() === "Tokyo Special Division 5")!
+        .id,
+  },
+
+  {
+    id: null,
+    characterId: () => charactersData.find((obj) => obj.name() === "Power")!.id,
+    affiliationId: () =>
+      affiliationsData.find((obj) => obj.name() === "Bat Devil")!.id,
+  },
+  {
+    id: null,
+    characterId: () => charactersData.find((obj) => obj.name() === "Power")!.id,
+    affiliationId: () =>
+      affiliationsData.find(
+        (obj) => obj.name() === "Public Safety Devil Hunters",
+      )!.id,
+  },
+  {
+    id: null,
+    characterId: () => charactersData.find((obj) => obj.name() === "Power")!.id,
+    affiliationId: () =>
+      affiliationsData.find((obj) => obj.name() === "Tokyo Special Division 4")!
+        .id,
+  },
+
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Aki Hayakawa")!.id,
+    affiliationId: () =>
+      affiliationsData.find(
+        (obj) => obj.name() === "Public Safety Devil Hunters",
+      )!.id,
+  },
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Aki Hayakawa")!.id,
+    affiliationId: () =>
+      affiliationsData.find((obj) => obj.name() === "Tokyo Division 2")!.id,
+  },
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Aki Hayakawa")!.id,
+    affiliationId: () =>
+      affiliationsData.find((obj) => obj.name() === "Tokyo Special Division 4")!
+        .id,
+  },
+
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Future Devil")!.id,
+    affiliationId: () =>
+      affiliationsData.find(
+        (obj) => obj.name() === "Public Safety Devil Hunters",
+      )!.id,
+  },
+
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Fox Devil")!.id,
+    affiliationId: () =>
+      affiliationsData.find(
+        (obj) => obj.name() === "Public Safety Devil Hunters",
+      )!.id,
+  },
+
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Aging Devil")!.id,
+    affiliationId: () =>
+      affiliationsData.find(
+        (obj) => obj.name() === "Public Safety Devil Hunters",
+      )!.id,
+  },
+];
+export const characterAffiliations = {
+  table: getTableName(characterAffiliationsTable),
+  data: characterAffiliationsData,
 };
