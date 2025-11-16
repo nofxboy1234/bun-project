@@ -16,6 +16,7 @@ import {
   contracts as contractsTable,
   relatives as relativesTable,
   characterAffiliations as characterAffiliationsTable,
+  characterOccupations as characterOccupationsTable,
 } from "@/db/schema";
 
 import type { TableData } from "@/types";
@@ -174,6 +175,8 @@ const occupationsData = [
   { id: null, name: () => "Wild Fiend" },
   { id: null, name: () => "Wild Devil" },
   { id: null, name: () => "Contract Devil" },
+  { id: null, name: () => "Denji's Heart" },
+  { id: null, name: () => "Primal Fear" },
 ];
 export const occupations = {
   table: getTableName(occupationsTable),
@@ -708,4 +711,157 @@ const characterAffiliationsData = [
 export const characterAffiliations = {
   table: getTableName(characterAffiliationsTable),
   data: characterAffiliationsData,
+};
+
+// { id: null, name: () => "Private Devil Hunter" },
+// { id: null, name: () => "Public Safety Devil Hunter" },
+// { id: null, name: () => "High School Student" },
+// { id: null, name: () => "Wild Fiend" },
+// { id: null, name: () => "Wild Devil" },
+// { id: null, name: () => "Contract Devil" },
+// { id: null, name: () => "Denji's Heart" },
+
+const characterOccupationsData = [
+  {
+    id: null,
+    characterId: () => charactersData.find((obj) => obj.name() === "Denji")!.id,
+    occupationId: () =>
+      occupationsData.find((obj) => obj.name() === "Private Devil Hunter")!.id,
+  },
+  {
+    id: null,
+    characterId: () => charactersData.find((obj) => obj.name() === "Denji")!.id,
+    occupationId: () =>
+      occupationsData.find(
+        (obj) => obj.name() === "Public Safety Devil Hunter",
+      )!.id,
+  },
+  {
+    id: null,
+    characterId: () => charactersData.find((obj) => obj.name() === "Denji")!.id,
+    occupationId: () =>
+      occupationsData.find((obj) => obj.name() === "High School Student")!.id,
+  },
+
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Pochita")!.id,
+    occupationId: () =>
+      occupationsData.find((obj) => obj.name() === "Wild Devil")!.id,
+  },
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Pochita")!.id,
+    occupationId: () =>
+      occupationsData.find((obj) => obj.name() === "Contract Devil")!.id,
+  },
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Pochita")!.id,
+    occupationId: () =>
+      occupationsData.find((obj) => obj.name() === "Denji's Heart")!.id,
+  },
+
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Makima")!.id,
+    occupationId: () =>
+      occupationsData.find(
+        (obj) => obj.name() === "Public Safety Devil Hunter",
+      )!.id,
+  },
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Makima")!.id,
+    occupationId: () =>
+      occupationsData.find((obj) => obj.name() === "Contract Devil")!.id,
+  },
+
+  {
+    id: null,
+    characterId: () => charactersData.find((obj) => obj.name() === "Power")!.id,
+    occupationId: () =>
+      occupationsData.find(
+        (obj) => obj.name() === "Public Safety Devil Hunter",
+      )!.id,
+  },
+
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Aki Hayakawa")!.id,
+    occupationId: () =>
+      occupationsData.find(
+        (obj) => obj.name() === "Public Safety Devil Hunter",
+      )!.id,
+  },
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Aki Hayakawa")!.id,
+    occupationId: () =>
+      occupationsData.find((obj) => obj.name() === "Wild Fiend")!.id,
+  },
+
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Future Devil")!.id,
+    occupationId: () =>
+      occupationsData.find((obj) => obj.name() === "Contract Devil")!.id,
+  },
+
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Curse Devil")!.id,
+    occupationId: () =>
+      occupationsData.find((obj) => obj.name() === "Contract Devil")!.id,
+  },
+
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Fox Devil")!.id,
+    occupationId: () =>
+      occupationsData.find((obj) => obj.name() === "Wild Devil")!.id,
+  },
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Fox Devil")!.id,
+    occupationId: () =>
+      occupationsData.find((obj) => obj.name() === "Contract Devil")!.id,
+  },
+
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Aging Devil")!.id,
+    occupationId: () =>
+      occupationsData.find((obj) => obj.name() === "Wild Devil")!.id,
+  },
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Aging Devil")!.id,
+    occupationId: () =>
+      occupationsData.find((obj) => obj.name() === "Contract Devil")!.id,
+  },
+  {
+    id: null,
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Aging Devil")!.id,
+    occupationId: () =>
+      occupationsData.find((obj) => obj.name() === "Primal Fear")!.id,
+  },
+];
+export const characterOccupations = {
+  table: getTableName(characterOccupationsTable),
+  data: characterOccupationsData,
 };

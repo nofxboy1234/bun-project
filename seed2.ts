@@ -15,6 +15,7 @@ import {
   contracts,
   relatives,
   characterAffiliations,
+  characterOccupations,
 } from "./seedData";
 import type { TableData, Model, DBRow } from "@/types";
 import { resetDB } from "resetDB";
@@ -96,6 +97,7 @@ const main = async () => {
     contracts,
     relatives,
     characterAffiliations,
+    characterOccupations,
   ];
 
   for (const table of tablesToSeed) {
