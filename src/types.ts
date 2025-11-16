@@ -49,12 +49,27 @@ export type OccupationUpdateModel = Partial<OccupationInsertModel>;
 export type SpeciesAliasUpdateModel = Partial<SpeciesAliasInsertModel>;
 export type MapUpdateModel = Partial<MapInsertModel>;
 
+export type Model = {
+  [key: string]: (() => string | number | null) | null | number;
+};
+
 export type TableData = {
   table: string;
-  data: Array<{
-    [key: string]: (() => string | number | null) | null | number;
-  }>;
+  data: Array<Model>;
 };
+
+export type DBRow =
+  | StatusSelectModel
+  | CharacterSelectModel
+  | GenderSelectModel
+  | LocationSelectModel
+  | LocationTypeSelectModel
+  | SpeciesSelectModel
+  | RelativeTypeSelectModel
+  | AffiliationSelectModel
+  | OccupationSelectModel
+  | SpeciesAliasSelectModel
+  | MapSelectModel;
 
 export type Task = {
   id?: number;
