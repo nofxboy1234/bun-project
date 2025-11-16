@@ -12,6 +12,7 @@ import {
   speciesAliases,
   maps,
   characterAliases,
+  contracts,
 } from "./seedData";
 import type { TableData, Model, DBRow } from "@/types";
 import { resetDB } from "resetDB";
@@ -90,6 +91,7 @@ const main = async () => {
     maps,
     characters,
     characterAliases,
+    contracts,
   ];
 
   for (const table of tablesToSeed) {

@@ -13,6 +13,7 @@ import {
   speciesAliases as speciesAliasesTable,
   maps as mapsTable,
   characterAliases as characterAliasesTable,
+  contracts as contractsTable,
 } from "@/db/schema";
 
 import type { TableData } from "@/types";
@@ -440,4 +441,68 @@ const characterAliasesData = [
 export const characterAliases = {
   table: getTableName(characterAliasesTable),
   data: characterAliasesData,
+};
+
+const contractsData = [
+  {
+    id: null,
+    terms: () =>
+      "In exchange for letting him live in his right eye, Aki can see a few seconds into the future with the Future Devil's power. For the two others in Public Safety, one has to pay half of their lifespan, and the other one has to exchange their eyes, sense of taste and smell. The price of the exchange will depend on the future of the devil hunter.",
+    humanId: () =>
+      charactersData.find((obj) => obj.name() === "Aki Hayakawa")!.id,
+    devilId: () =>
+      charactersData.find((obj) => obj.name() === "Future Devil")!.id,
+  },
+  {
+    id: null,
+    terms: () =>
+      "The Control Devil will give Aki power if he gives everything of himself to her",
+    humanId: () =>
+      charactersData.find((obj) => obj.name() === "Aki Hayakawa")!.id,
+    devilId: () => charactersData.find((obj) => obj.name() === "Makima")!.id,
+  },
+  {
+    id: null,
+    terms: () =>
+      "In exchange for most of his lifespan, the Curse Devil kills his target if he stabs it with his sword by three times.",
+    humanId: () =>
+      charactersData.find((obj) => obj.name() === "Aki Hayakawa")!.id,
+    devilId: () =>
+      charactersData.find((obj) => obj.name() === "Curse Devil")!.id,
+  },
+  {
+    id: null,
+    terms: () =>
+      "In exchange for feeding her a part of his body, Aki may summon the Fox Devil to attack a target. Aki can summon her head because the Fox Devil considers him 'handsome'",
+    humanId: () =>
+      charactersData.find((obj) => obj.name() === "Aki Hayakawa")!.id,
+    devilId: () => charactersData.find((obj) => obj.name() === "Fox Devil")!.id,
+  },
+
+  {
+    id: null,
+    terms: () =>
+      "In exchange for promising to find and befriend the reincarnated blood devil and 'turn her back into Power,' Power gave Denji her blood.",
+    humanId: () => charactersData.find((obj) => obj.name() === "Denji")!.id,
+    devilId: () => charactersData.find((obj) => obj.name() === "Power")!.id,
+  },
+  {
+    id: null,
+    terms: () =>
+      "In exchange for living a normal life, the Chainsaw Devil became Denji's heart and turned him into a hybrid.",
+    humanId: () => charactersData.find((obj) => obj.name() === "Denji")!.id,
+    devilId: () => charactersData.find((obj) => obj.name() === "Pochita")!.id,
+  },
+  {
+    id: null,
+    terms: () =>
+      "In exchange for escaping Aging's World, and Yoshida, Denji, Asa, Yoru and the Aging Devil's Victim to return to their respective worlds and never fight each other again.",
+    humanId: () => charactersData.find((obj) => obj.name() === "Denji")!.id,
+    devilId: () =>
+      charactersData.find((obj) => obj.name() === "Aging Devil")!.id,
+  },
+];
+export const contracts = {
+  table: getTableName(contractsTable),
+  data: contractsData,
 };
