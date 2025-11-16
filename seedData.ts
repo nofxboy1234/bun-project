@@ -12,6 +12,7 @@ import {
   occupations as occupationsTable,
   speciesAliases as speciesAliasesTable,
   maps as mapsTable,
+  characterAliases as characterAliasesTable,
 } from "@/db/schema";
 
 import type { TableData } from "@/types";
@@ -331,4 +332,112 @@ const charactersData = [
 export const characters = {
   table: getTableName(charactersTable),
   data: charactersData,
+};
+
+const characterAliasesData = [
+  {
+    id: null,
+    name: () => "Blood Fiend",
+    characterId: () => charactersData.find((obj) => obj.name() === "Power")!.id,
+  },
+  {
+    id: null,
+    name: () => "Blood Devil",
+    characterId: () => charactersData.find((obj) => obj.name() === "Power")!.id,
+  },
+  {
+    id: null,
+    name: () => "Detective Power",
+    characterId: () => charactersData.find((obj) => obj.name() === "Power")!.id,
+  },
+  {
+    id: null,
+    name: () => "Powy",
+    characterId: () => charactersData.find((obj) => obj.name() === "Power")!.id,
+  },
+  {
+    id: null,
+    name: () => "Number One",
+    characterId: () => charactersData.find((obj) => obj.name() === "Power")!.id,
+  },
+
+  {
+    id: null,
+    name: () => "Topknot",
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Aki Hayakawa")!.id,
+  },
+  {
+    id: null,
+    name: () => "Jerk-face",
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Aki Hayakawa")!.id,
+  },
+  {
+    id: null,
+    name: () => "Gun Fiend",
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Aki Hayakawa")!.id,
+  },
+
+  {
+    id: null,
+    name: () => "Chainsaw",
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Pochita")!.id,
+  },
+  {
+    id: null,
+    name: () => "Chainsaw Devil",
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Pochita")!.id,
+  },
+  {
+    id: null,
+    name: () => "Chainsaw Man",
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Pochita")!.id,
+  },
+  {
+    id: null,
+    name: () => "Hero of Hell",
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Pochita")!.id,
+  },
+  {
+    id: null,
+    name: () => "Black Chainsaw Man",
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Pochita")!.id,
+  },
+
+  {
+    id: null,
+    name: () => "Control Devil",
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Makima")!.id,
+  },
+  {
+    id: null,
+    name: () => "Conquest Devil",
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Makima")!.id,
+  },
+  {
+    id: null,
+    name: () => "Devil of Domination",
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Makima")!.id,
+  },
+
+  {
+    id: null,
+    name: () => "Aging",
+    characterId: () =>
+      charactersData.find((obj) => obj.name() === "Aging Devil")!.id,
+  },
+];
+export const characterAliases = {
+  table: getTableName(characterAliasesTable),
+  data: characterAliasesData,
 };
