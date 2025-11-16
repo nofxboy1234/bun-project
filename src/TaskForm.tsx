@@ -5,7 +5,7 @@ export function TaskForm({ task }: { task?: Task }) {
   const queryClient = useQueryClient();
   const postMutation = useMutation({
     mutationFn: (taskData: FormData) =>
-      fetch("/api/tasks", {
+      fetch("/api/v1/tasks", {
         method: "POST",
         body: taskData,
       }),
@@ -19,7 +19,7 @@ export function TaskForm({ task }: { task?: Task }) {
       const taskId = task!.id!.toString();
       taskData.set("id", taskId);
 
-      return fetch(`/api/tasks/${taskId}`, {
+      return fetch(`/api/v1/tasks/${taskId}`, {
         method: "PATCH",
         body: taskData,
       });

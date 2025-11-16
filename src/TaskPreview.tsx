@@ -10,7 +10,8 @@ export function TaskPreview({ task }: { task: Task }) {
   const navigate = useNavigate();
 
   const deleteMutation = useMutation({
-    mutationFn: (id: number) => fetch(`/api/tasks/${id}`, { method: "DELETE" }),
+    mutationFn: (id: number) =>
+      fetch(`/api/v1/tasks/${id}`, { method: "DELETE" }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
     },
