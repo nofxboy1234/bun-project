@@ -12,22 +12,7 @@ import {
   speciesAliases,
   maps,
 } from "./seedData";
-import type {
-  TableData,
-  StatusSelectModel,
-  GenderSelectModel,
-  SpeciesSelectModel,
-  LocationSelectModel,
-  CharacterSelectModel,
-  LocationTypeSelectModel,
-  RelativeTypeSelectModel,
-  AffiliationSelectModel,
-  OccupationSelectModel,
-  SpeciesAliasSelectModel,
-  MapSelectModel,
-  Model,
-  DBRow,
-} from "@/types";
+import type { TableData, Model, DBRow } from "@/types";
 import { resetDB } from "resetDB";
 
 const camelToSnake = (str: string) =>
@@ -36,10 +21,13 @@ const camelToSnake = (str: string) =>
 const snakeToCamel = (str: string) =>
   str.replace(/(_\w)/g, (m) => m[1]!.toUpperCase());
 
-const cleanModel = (model: object) => {
+const cleanModel = (model: Model): Model => {
   const entries = Object.entries(model)
     .filter(([key]) => key !== "id")
-    .map(([key, value]) => [camelToSnake(key), value()]);
+    .map(([key, value]) => [
+      camelToSnake(key),
+      (value as () => string | number | null)(),
+    ]);
   return Object.fromEntries(entries);
 };
 
@@ -67,91 +55,20 @@ const updateModelIds = (models: Model[], rows: DBRow[]) => {
   });
 };
 
+const insertCleanModels = async (
+  tableName: string,
+  cleanModels: Model[],
+): Promise<DBRow[]> =>
+  await sql`
+        INSERT INTO ${sql(tableName)} ${sql(cleanModels)}
+        ON CONFLICT DO NOTHING
+        RETURNING *
+      `;
+
 const seed = async (table: TableData) => {
   const models = table.data;
   const cleanModels = models.map(cleanModel);
-
-  let rows: DBRow[] = [];
-
-  switch (table.table) {
-    case "statuses":
-      rows = await sql<StatusSelectModel[]>`
-        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-        ON CONFLICT DO NOTHING
-        RETURNING *
-      `;
-      break;
-    case "location_types":
-      rows = await sql<LocationTypeSelectModel[]>`
-        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-        ON CONFLICT DO NOTHING
-        RETURNING *
-      `;
-      break;
-    case "genders":
-      rows = await sql<GenderSelectModel[]>`
-        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-        ON CONFLICT DO NOTHING
-        RETURNING *
-      `;
-      break;
-    case "species":
-      rows = await sql<SpeciesSelectModel[]>`
-        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-        ON CONFLICT DO NOTHING
-        RETURNING *
-      `;
-      break;
-    case "relative_types":
-      rows = await sql<RelativeTypeSelectModel[]>`
-        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-        ON CONFLICT DO NOTHING
-        RETURNING *
-      `;
-      break;
-    case "affiliations":
-      rows = await sql<AffiliationSelectModel[]>`
-        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-        ON CONFLICT DO NOTHING
-        RETURNING *
-      `;
-      break;
-    case "occupations":
-      rows = await sql<OccupationSelectModel[]>`
-        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-        ON CONFLICT DO NOTHING
-        RETURNING *
-      `;
-      break;
-    case "locations":
-      rows = await sql<LocationSelectModel[]>`
-        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-        ON CONFLICT DO NOTHING
-        RETURNING *
-      `;
-      break;
-    case "species_aliases":
-      rows = await sql<SpeciesAliasSelectModel[]>`
-        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-        ON CONFLICT DO NOTHING
-        RETURNING *
-      `;
-      break;
-    case "maps":
-      rows = await sql<MapSelectModel[]>`
-        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-        ON CONFLICT DO NOTHING
-        RETURNING *
-      `;
-      break;
-    case "characters":
-      rows = await sql<CharacterSelectModel[]>`
-        INSERT INTO ${sql(table.table)} ${sql(cleanModels)}
-        ON CONFLICT DO NOTHING
-        RETURNING *
-      `;
-      break;
-  }
+  const rows = await insertCleanModels(table.table, cleanModels);
 
   updateModelIds(models, rows);
 };
