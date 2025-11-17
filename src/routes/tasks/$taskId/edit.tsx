@@ -21,5 +21,5 @@ function RouteComponent() {
 
   console.log("/tasks/$taskId/edit");
 
-  return <TaskForm task={task} />;
+  return <TaskForm task={task!} />;
 }

@@ -1,8 +1,7 @@
-import { Elysia } from "elysia";
+import { Elysia, t } from "elysia";
 import { openapi } from "@elysiajs/openapi";
 import index from "./index.html";
 import { tasks } from "./tasks";
-import type { Task } from "./types";
 
 let taskId = 15;
 
@@ -12,44 +11,79 @@ const api = new Elysia({
 })
   .use(openapi())
   .get("/tasks", () => tasks)
-  .post("/tasks", async ({ request }) => {
-    const formData = await request.formData();
+  .post(
+    "/tasks",
+    ({ body }) => {
+      const task = {
+        id: taskId++,
+        ...body,
+      };
 
-    const task: Task = {
-      id: taskId++,
-      title: formData.get("title") as string,
-      description: formData.get("description") as string,
-      deadline: new Date(formData.get("deadline") as string),
-    };
+      tasks.push(task);
+    },
+    {
+      body: t.Object({
+        title: t.String(),
+        description: t.String(),
+        deadline: t.Date(),
+      }),
+    },
+  )
+  .get(
+    "/tasks/:id",
+    ({ params: { id }, status }) => {
+      const task = tasks.find((task) => task.id === id);
 
-    tasks.push(task);
-    return task;
-  })
-  .get("/tasks/:id", ({ params: { id } }) => {
-    const task = tasks.find((task) => task.id === Number(id));
-    return task;
-  })
-  .patch("/tasks/:id", async ({ request }) => {
-    const formData = await request.formData();
+      if (!task) {
+        return status(404, "Not Found");
+      }
 
-    const taskId = formData.get("id") as string;
-    const task = tasks.find((task) => task.id === Number(taskId));
-
-    const updatedTask: Task = {
-      id: Number(taskId),
-      title: formData.get("title") as string,
-      description: formData.get("description") as string,
-      deadline: new Date(formData.get("deadline") as string),
-    };
-
-    Object.assign(task!, updatedTask);
-    return { updated: true, ...task };
-  })
-  .delete("/tasks/:id", ({ params: { id } }) => {
-    const deleteIndex = tasks.findIndex((task) => task.id === Number(id));
-    const deletedTask = tasks.splice(deleteIndex, 1);
-    return { deleted: true, ...deletedTask };
-  });
+      return task;
+    },
+    {
+      params: t.Object({
+        id: t.Number(),
+      }),
+      response: {
+        200: t.Object({
+          id: t.Number(),
+          title: t.String(),
+          description: t.String(),
+          deadline: t.Date(),
+        }),
+        404: t.String(),
+      },
+    },
+  )
+  .patch(
+    "/tasks/:id",
+    ({ params: { id }, body }) => {
+      const task = tasks.find((task) => task.id === id);
+      Object.assign(task!, body);
+    },
+    {
+      params: t.Object({
+        id: t.Number(),
+      }),
+      body: t.Object({
+        title: t.String(),
+        description: t.String(),
+        deadline: t.Date(),
+      }),
+    },
+  )
+  .delete(
+    "/tasks/:id",
+    ({ params: { id } }) => {
+      const deleteIndex = tasks.findIndex((task) => task.id === id);
+      tasks.splice(deleteIndex, 1);
+    },
+    {
+      params: t.Object({
+        id: t.Number(),
+      }),
+    },
+  );
 
 const app = new Elysia({
   name: "app",

@@ -4,14 +4,18 @@ import updateIcon from "@/icons/update.svg";
 import type { Task } from "./types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
+import { treaty } from "@elysiajs/eden";
+import type { Api } from "@/index";
+
+const client = treaty<Api>("localhost:3000");
 
 export function TaskPreview({ task }: { task: Task }) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const deleteMutation = useMutation({
-    mutationFn: (id: number) =>
-      fetch(`/api/v1/tasks/${id}`, { method: "DELETE" }),
+    mutationFn: async (id: number) =>
+      await client.api.v1.tasks({ id }).delete(),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
     },

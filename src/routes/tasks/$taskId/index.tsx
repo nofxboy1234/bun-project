@@ -19,5 +19,5 @@ function RouteComponent() {
     ...taskQueryOptions(Number(taskId)),
   });
 
-  return <Task task={task} />;
+  return <Task task={task!} />;
 }

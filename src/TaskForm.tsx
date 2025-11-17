@@ -1,28 +1,34 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { Task } from "./types";
+import { treaty } from "@elysiajs/eden";
+import type { Api } from "@/index";
+
+const client = treaty<Api>("localhost:3000");
 
 export function TaskForm({ task }: { task?: Task }) {
   const queryClient = useQueryClient();
+
+  const formDataToTask = (taskData: FormData) => ({
+    title: taskData.get("title") as string,
+    description: taskData.get("description") as string,
+    deadline: new Date(taskData.get("deadline") as string),
+  });
+
   const postMutation = useMutation({
-    mutationFn: (taskData: FormData) =>
-      fetch("/api/v1/tasks", {
-        method: "POST",
-        body: taskData,
-      }),
+    mutationFn: async (taskData: FormData) =>
+      await client.api.v1.tasks.post(formDataToTask(taskData)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
     },
   });
 
   const patchMutation = useMutation({
-    mutationFn: (taskData: FormData) => {
-      const taskId = task!.id!.toString();
-      taskData.set("id", taskId);
+    mutationFn: async (taskData: FormData) => {
+      const taskId = task!.id;
 
-      return fetch(`/api/v1/tasks/${taskId}`, {
-        method: "PATCH",
-        body: taskData,
-      });
+      return await client.api.v1
+        .tasks({ id: taskId! })
+        .patch(formDataToTask(taskData));
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
@@ -35,12 +41,8 @@ export function TaskForm({ task }: { task?: Task }) {
         onSubmit={(event) => {
           event.preventDefault();
 
-          console.log(`currentTarget: ${event.currentTarget}`);
-          console.log(`target: ${event.target}`);
-
           const form = event.currentTarget;
           const formData = new FormData(form);
-          console.log(formData.entries());
 
           if (task) {
             patchMutation.mutate(formData);
@@ -79,7 +81,7 @@ export function TaskForm({ task }: { task?: Task }) {
             name="deadline"
             defaultValue={
               task?.deadline
-                ? new Date(task.deadline).toISOString().slice(0, 10)
+                ? task.deadline.toISOString().slice(0, 10)
                 : new Date().toISOString().slice(0, 10)
             }
           />
