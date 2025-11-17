@@ -7,7 +7,7 @@
     "db:reset": "bun reset.ts",
     "db:push": "bunx drizzle-kit push --verbose",
     "db:seed": "bun seed2.ts",
-    "db:erd:build": "bunx --bun @liam-hq/cli erd build --input src/db/schema.ts --format drizzle --output-dir erd",
+    "db:erd:build": "bunx liam erd build --input src/db/schema.ts --format drizzle --output-dir erd",
     "db:studio": "bunx drizzle-kit studio --verbose",
     "db:erd:serve": "bunx --bun serve erd/",
     "db": "bun run db:reset && bun run db:push && bun run db:seed && bun run db:erd:build",
