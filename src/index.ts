@@ -85,6 +85,10 @@ const api = new Elysia({
     },
   );
 
+const spa = new Elysia({
+  name: "spa",
+}).get("/*", index);
+
 const app = new Elysia({
   name: "app",
   aot: true,
@@ -96,7 +100,7 @@ const app = new Elysia({
     },
   },
 })
-  .get("/", index)
+  .use(spa)
   .use(api)
   .listen(3000);
 
