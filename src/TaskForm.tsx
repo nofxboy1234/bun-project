@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "@tanstack/react-router";
 import type { Task } from "./types";
 import { treaty } from "@elysiajs/eden";
 import type { Api } from "@/index";
@@ -7,6 +8,7 @@ const client = treaty<Api>("localhost:3000");
 
 export function TaskForm({ task }: { task?: Task }) {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const formDataToTask = (taskData: FormData) => ({
     title: taskData.get("title") as string,
@@ -19,6 +21,7 @@ export function TaskForm({ task }: { task?: Task }) {
       await client.api.v1.tasks.post(formDataToTask(taskData)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      navigate({ to: "/" });
     },
   });
 
@@ -32,6 +35,7 @@ export function TaskForm({ task }: { task?: Task }) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      navigate({ to: "/" });
     },
   });
 
