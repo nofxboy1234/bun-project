@@ -29,6 +29,10 @@ const api = new Elysia({
       }),
     },
   )
+  .all("/tasks/*", ({ params, status }) => {
+    console.log(`Wildcard route matched: ${params["*"]}`);
+    return status(404, "Not Found");
+  })
   .get(
     "/tasks/:id",
     ({ params: { id }, status }) => {
@@ -100,8 +104,8 @@ const app = new Elysia({
     },
   },
 })
-  .use(spa)
   .use(api)
+  .use(spa)
   .listen(3000);
 
 console.log(`🦊 Elysia is running at ${app.server?.url}`);
