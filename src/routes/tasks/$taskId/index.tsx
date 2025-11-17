@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Task } from "@/Task";
 import { taskQueryOptions } from "@/taskQueryOptions";
@@ -11,6 +11,14 @@ export const Route = createFileRoute("/tasks/$taskId/")({
     });
   },
   component: RouteComponent,
+  notFoundComponent: () => {
+    return (
+      <div>
+        <p>This is the notFoundComponent configured on /tasks/$taskId</p>
+        <Link to="/">Start Over</Link>
+      </div>
+    );
+  },
 });
 
 function RouteComponent() {
