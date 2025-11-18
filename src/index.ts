@@ -32,7 +32,7 @@ const api = new Elysia({
       }),
     },
   )
-  .all("/tasks/*", ({ params, status }) => {
+  .all("/*", ({ params, status }) => {
     console.log(`Wildcard route matched: ${params["*"]}`);
     return status(404, "Not Found");
   })
