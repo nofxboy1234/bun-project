@@ -97,10 +97,6 @@ const handle = ({ request }: { request: BunRequest }) => api.fetch(request);
 const server = serve({
   routes: {
     "/*": index,
-    "/api/v1/": (req) => {
-      console.log("/api/v1/");
-      return handle({ request: req });
-    },
     "/api/v1/*": (req) => {
       console.log("/api/v1/*");
       return handle({ request: req });
