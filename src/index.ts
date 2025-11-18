@@ -32,10 +32,6 @@ const api = new Elysia({
       }),
     },
   )
-  .all("/*", ({ params, status }) => {
-    console.log(`Wildcard route matched: ${params["*"]}`);
-    return status(404, "Not Found");
-  })
   .get(
     "/tasks/:id",
     ({ params: { id }, status }) => {
@@ -90,7 +86,11 @@ const api = new Elysia({
         id: t.Number(),
       }),
     },
-  );
+  )
+  .all("/*", ({ params, status }) => {
+    console.log(`Wildcard route matched: ${params["*"]}`);
+    return status(404, "Not Found");
+  });
 
 const handle = ({ request }: { request: BunRequest }) => api.fetch(request);
 
