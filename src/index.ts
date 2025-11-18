@@ -92,26 +92,6 @@ const api = new Elysia({
     },
   );
 
-const spa = new Elysia({
-  name: "spa",
-}).get("/*", index);
-
-const app = new Elysia({
-  name: "app",
-  aot: true,
-  nativeStaticResponse: true,
-  serve: {
-    development: process.env.NODE_ENV !== "production" && {
-      hmr: false,
-      console: true,
-    },
-  },
-})
-  .use(api)
-  .use(spa);
-// .listen(3000);
-// console.log(`🦊 Elysia Server is running at ${app.server?.url}`);
-
 const handle = ({ request }: { request: BunRequest }) => api.fetch(request);
 
 const server = serve({
@@ -120,19 +100,14 @@ const server = serve({
     "/api/v1/": (req) => {
       console.log("/api/v1/");
       return handle({ request: req });
-      // return new Response("Elysia Server: /api/v1/");
     },
     "/api/v1/*": (req) => {
       console.log("/api/v1/*");
       return handle({ request: req });
-      // return new Response("Elysia Server: /api/v1/*");
     },
   },
   development: process.env.NODE_ENV !== "production" && {
-    // Enable browser hot reloading in development
     hmr: false,
-
-    // Echo console logs from the browser to the server
     console: true,
   },
 });
