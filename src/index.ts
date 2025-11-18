@@ -1,6 +1,9 @@
+import { serve, type BunRequest } from "bun";
+import index from "./index.html";
+
 import { Elysia, t } from "elysia";
 import { openapi } from "@elysiajs/openapi";
-import index from "./index.html";
+
 import { tasks } from "./tasks";
 
 let taskId = 15;
@@ -105,9 +108,34 @@ const app = new Elysia({
   },
 })
   .use(api)
-  .use(spa)
-  .listen(3000);
+  .use(spa);
+// .listen(3000);
+// console.log(`🦊 Elysia Server is running at ${app.server?.url}`);
 
-console.log(`🦊 Elysia is running at ${app.server?.url}`);
+const handle = ({ request }: { request: BunRequest }) => api.fetch(request);
+
+const server = serve({
+  routes: {
+    "/*": index,
+    "/api/v1/": (req) => {
+      console.log("/api/v1/");
+      return handle({ request: req });
+      // return new Response("Elysia Server: /api/v1/");
+    },
+    "/api/v1/*": (req) => {
+      console.log("/api/v1/*");
+      return handle({ request: req });
+      // return new Response("Elysia Server: /api/v1/*");
+    },
+  },
+  development: process.env.NODE_ENV !== "production" && {
+    // Enable browser hot reloading in development
+    hmr: false,
+
+    // Echo console logs from the browser to the server
+    console: true,
+  },
+});
+console.log(`🚀 Bun Server running at ${server.url}`);
 
 export type Api = typeof api;
