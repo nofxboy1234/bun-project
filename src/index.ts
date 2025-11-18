@@ -6,8 +6,8 @@ import { tasks } from "./tasks";
 let taskId = 15;
 
 const api = new Elysia({
-  prefix: "/api/v1",
   name: "api",
+  prefix: "/api/v1",
 })
   .use(openapi())
   .get("/tasks", () => tasks)

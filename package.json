@@ -17,7 +17,6 @@
     "gen": "bunx --bun tsr generate",
     "watch": "bunx --bun tsr watch",
     "dev": "bun run watch & bun --hot src/index.ts",
-    "dev2": "bun src/index.ts",
     "debug": "bun run watch & bun --inspect --hot src/index.ts",
     "start": "NODE_ENV=production bun src/index.ts",
     "build": "bun run gen && bun build --minify --sourcemap --env='BUN_PUBLIC_*' --production --target=bun ./src/index.ts --outdir=dist",
