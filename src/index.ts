@@ -13,6 +13,7 @@ const api = new Elysia({
   prefix: "/api/v1",
 })
   .use(openapi())
+  .get("/", "/api/v1/tasks/")
   .get("/tasks", () => tasks)
   .post(
     "/tasks",
@@ -88,7 +89,7 @@ const api = new Elysia({
     },
   )
   .all("/*", ({ params, status }) => {
-    console.log(`Wildcard route matched: ${params["*"]}`);
+    console.log(`Wildcard params: ${params["*"]}`);
     return status(404, "Not Found");
   });
 
@@ -98,7 +99,7 @@ const server = serve({
   routes: {
     "/*": index,
     "/api/v1/*": (req) => {
-      console.log("/api/v1/*");
+      console.log("/api/v1/* -> passing to Elysia instance");
       return handle({ request: req });
     },
   },
