@@ -1,5 +1,7 @@
 import { serve, type BunRequest } from "bun";
 import index from "./index.html";
+import { renderToReadableStream } from "react-dom/server";
+import { TestComponent } from "./ssr-react";
 
 import { Elysia, t } from "elysia";
 import { openapi } from "@elysiajs/openapi";
@@ -97,6 +99,14 @@ const handle = ({ request }: { request: BunRequest }) => api.fetch(request);
 
 const server = serve({
   routes: {
+    "/ssr-react": async () => {
+      const stream = await renderToReadableStream(
+        <TestComponent message="Hello from Bun.serve! This was SSR'd!" />,
+      );
+      return new Response(stream, {
+        headers: { "Content-Type": "text/html" },
+      });
+    },
     "/*": index,
     "/api/v1/*": (req) => {
       console.log("/api/v1/* -> passing to Elysia instance");
