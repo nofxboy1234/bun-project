@@ -67,8 +67,8 @@ import path from "node:path";
 
 // Configuration
 const SERVER_PORT = Number(process.env.PORT ?? 3000);
-const CLIENT_DIRECTORY = "./dist/client";
-const SERVER_ENTRY_POINT = "./dist/server/server.js";
+const CLIENT_DIRECTORY = "../dist/client";
+const SERVER_ENTRY_POINT = "../dist/server/server.js";
 
 // Logging utilities for professional output
 const log = {
@@ -275,7 +275,7 @@ function createCompositeGlobPattern(): Bun.Glob {
     .map((s) => s.trim())
     .filter(Boolean);
   if (raw.length === 0) return new Bun.Glob("**/*");
-  if (raw.length === 1) return new Bun.Glob(raw[0]);
+  if (raw.length === 1) return new Bun.Glob(raw[0]!);
   return new Bun.Glob(`{${raw.join(",")}}`);
 }
 

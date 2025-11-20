@@ -17,10 +17,14 @@
     "gen": "bunx --bun tsr generate",
     "watch": "bunx --bun tsr watch",
     "dev": "bun run watch & bun --hot src/index.tsx",
+    "dev:tss": "bun --bun vite dev",
     "debug": "bun run watch & bun --inspect --hot src/index.tsx",
     "start": "NODE_ENV=production bun src/index.tsx",
+    "start:tss": "NODE_ENV=production bun src/tss-server.tsx",
     "build": "bun run gen && bun build --minify --sourcemap --env='BUN_PUBLIC_*' --production --target=bun ./src/index.tsx --outdir=dist",
+    "build:tss": "bun --bun vite build",
     "start:js": "NODE_ENV=production bun --cwd=dist index.js",
+    "start:js:tss": "bun --bun vite preview",
     "build:exe": "bun run gen && bun build --compile --minify --sourcemap --env='BUN_PUBLIC_*' --bytecode --production --target=bun ./src/index.tsx --outfile bun-project",
     "clean": "rm -rf dist && rm -f bun-project && echo 'Done cleaning.'"
   },
@@ -29,6 +33,8 @@
     "@elysiajs/openapi": "^1.4.11",
     "@tanstack/react-query": "^5.90.10",
     "@tanstack/react-router": "^1.136.11",
+    "@tanstack/react-router-ssr-query": "^1.136.18",
+    "@tanstack/react-start": "^1.136.11",
     "@tanstack/router-cli": "^1.136.11",
     "drizzle-orm": "^0.44.7",
     "elysia": "^1.4.16",
@@ -41,10 +47,13 @@
     "@types/pg": "^8.15.6",
     "@types/react": "^19.2.6",
     "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
     "drizzle-kit": "^0.31.7",
     "oxlint": "^1.29.0",
     "pg": "^8.16.3",
     "prettier": "^3.6.2",
-    "serve": "^14.2.5"
+    "serve": "^14.2.5",
+    "vite": "^7.2.2",
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }
