@@ -1,6 +1,6 @@
-import { tasksQueryOptions } from "@/tasksQueryOptions";
-import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { tasksQueryOptions } from "@/tasksQueryOptions";
 
 import styles from "@/styles.module.css";
 import { TaskPreview } from "@/TaskPreview";

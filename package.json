@@ -20,7 +20,7 @@
     "dev:tss": "bun --bun vite dev --port 3000",
     "debug": "bun run watch & bun --inspect --hot src/index.tsx",
     "start": "NODE_ENV=production bun src/index.tsx",
-    "start:tss": "NODE_ENV=production bun src/tss-server.tsx",
+    "start:tss": "NODE_ENV=production bun server.tsx",
     "build": "bun run gen && bun build --minify --sourcemap --env='BUN_PUBLIC_*' --production --target=bun ./src/index.tsx --outdir=dist",
     "build:tss": "bun --bun vite build",
     "start:js": "NODE_ENV=production bun --cwd=dist index.js",

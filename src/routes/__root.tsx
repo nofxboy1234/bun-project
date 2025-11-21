@@ -1,79 +1,81 @@
-/// <reference types="vite/client" />
-import type { QueryClient } from "@tanstack/react-query";
-
-import type { ReactNode } from "react";
 import {
   createRootRouteWithContext,
   Link,
-  Outlet,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import { TanStackDevtools } from "@tanstack/react-devtools";
 
-import styles from "../styles.module.css";
-import plusIcon from "@/icons/add_2.svg";
+import RootLayout from "@/components/RootLayout";
 
-import "../index.css";
+import TanStackQueryDevtools from "@/integrations/tanstack-query/devtools";
 
-const RootLayout = () => {
-  return (
-    <RootDocument>
-      <div className={styles.app}>
-        <div className={`${styles.header} ${styles.stickyHeader}`}>
-          <Link to="/">
-            <h1 className={styles.title}>bun-project</h1>
-          </Link>
-          <Link to="/tasks/new">
-            <img src={plusIcon} alt="Create Task" className={styles.plusIcon} />
-          </Link>
-        </div>
+// import "../index.css";
+import appCss from "@/index.css?url";
 
-        <div className={`${styles.nav} ${styles.stickyNav}`}>nav</div>
+import type { QueryClient } from "@tanstack/react-query";
 
-        <Outlet />
+interface MyRouterContext {
+  queryClient: QueryClient;
+}
+
+export const Route = createRootRouteWithContext<MyRouterContext>()({
+  head: () => ({
+    meta: [
+      {
+        charSet: "utf-8",
+      },
+      {
+        name: "viewport",
+        content: "width=device-width, initial-scale=1",
+      },
+      {
+        title: "bun-project",
+      },
+    ],
+    links: [
+      {
+        rel: "stylesheet",
+        href: appCss,
+      },
+    ],
+  }),
+
+  shellComponent: RootDocument,
+  notFoundComponent: () => {
+    return (
+      <div>
+        <p>This is the notFoundComponent configured on root route</p>
+        <Link to="/">Start Over</Link>
       </div>
-    </RootDocument>
-  );
-};
+    );
+  },
+});
 
-const RootDocument = ({ children }: Readonly<{ children: ReactNode }>) => {
+function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html>
+    <html lang="en">
       <head>
         <HeadContent />
       </head>
       <body>
+        <RootLayout />
         {children}
+        <TanStackDevtools
+          config={{
+            position: "bottom-right",
+          }}
+          plugins={[
+            {
+              name: "Tanstack Router",
+              render: <TanStackRouterDevtoolsPanel />,
+            },
+            TanStackQueryDevtools,
+          ]}
+        />
         <Scripts />
       </body>
     </html>
   );
-};
-
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
-  {
-    head: () => ({
-      meta: [
-        {
-          charSet: "utf-8",
-        },
-        {
-          name: "viewport",
-          content: "width=device-width, initial-scale=1",
-        },
-        {
-          title: "TanStack Start Starter",
-        },
-      ],
-    }),
-    component: RootLayout,
-    notFoundComponent: () => {
-      return (
-        <div>
-          <p>This is the notFoundComponent configured on root route</p>
-          <Link to="/">Start Over</Link>
-        </div>
-      );
-    },
-  },
-);
+}
