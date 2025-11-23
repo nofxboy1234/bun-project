@@ -53,7 +53,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
   },
 });
 
-function RootDocument({ children }: { children: React.ReactNode }) {
+function RootDocument() {
   return (
     <html lang="en">
       <head>
@@ -61,7 +61,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <RootLayout />
-        {children}
         <TanStackDevtools
           config={{
             position: "bottom-right",
