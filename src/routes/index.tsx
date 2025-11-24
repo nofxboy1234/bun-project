@@ -14,9 +14,15 @@ export const Route = createFileRoute("/")({
     });
   },
   component: TasksLayoutComponent,
-  head: () => ({
-    styles: [{ children: stylesContent }],
-  }),
+  head: () => {
+    if (process.env.NODE_ENV !== "production") {
+      return {
+        styles: [{ children: stylesContent }],
+      };
+    }
+
+    return {};
+  },
 });
 
 function TasksLayoutComponent() {
