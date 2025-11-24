@@ -1,4 +1,4 @@
-import type { Task } from "./types";
+import type { Task } from "../types";
 
 export function Task({ task }: { task: Task }) {
   return (

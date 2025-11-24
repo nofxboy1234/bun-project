@@ -4,7 +4,7 @@ import { tasksQueryOptions } from "@/tasksQueryOptions";
 
 import styles from "@/styles.module.css";
 import stylesContent from "@/styles.module.css?inline";
-import { TaskPreview } from "@/TaskPreview";
+import { TaskPreview } from "@/components/TaskPreview";
 
 export const Route = createFileRoute("/")({
   loader: async ({ context: { queryClient } }) => {

@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
-import type { Task } from "./types";
-import { api } from "./routes/api.v1.$";
+import type { Task } from "../types";
+import { api } from "../routes/api.v1.$";
 
 export function TaskForm({ task }: { task?: Task }) {
   const queryClient = useQueryClient();

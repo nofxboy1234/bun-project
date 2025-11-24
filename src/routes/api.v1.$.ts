@@ -5,7 +5,7 @@ import { treaty } from "@elysiajs/eden";
 import { createFileRoute } from "@tanstack/react-router";
 import { createIsomorphicFn } from "@tanstack/react-start";
 
-import { tasks } from "@/tasks";
+import { tasks } from "@/db/tasks";
 
 let taskId = 15;
 

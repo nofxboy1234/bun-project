@@ -1,4 +1,4 @@
-import { TaskForm } from "@/TaskForm";
+import { TaskForm } from "@/components/TaskForm";
 import { taskQueryOptions } from "@/taskQueryOptions";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";

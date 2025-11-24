@@ -1,10 +1,10 @@
-import styles from "./styles.module.css";
+import styles from "@/styles.module.css";
 import deleteIcon from "@/icons/delete.svg";
 import updateIcon from "@/icons/update.svg";
-import type { Task } from "./types";
+import type { Task } from "../types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { api } from "./routes/api.v1.$";
+import { api } from "../routes/api.v1.$";
 
 export function TaskPreview({ task }: { task: Task }) {
   const queryClient = useQueryClient();
