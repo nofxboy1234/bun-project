@@ -3,7 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { tasksQueryOptions } from "@/tasksQueryOptions";
 
 import styles from "@/styles.module.css";
-import stylesContent from "@/styles.module.css?inline";
+
 import { TaskPreview } from "@/components/TaskPreview";
 
 export const Route = createFileRoute("/")({
@@ -14,15 +14,6 @@ export const Route = createFileRoute("/")({
     });
   },
   component: TasksLayoutComponent,
-  head: () => {
-    if (process.env.NODE_ENV !== "production") {
-      return {
-        styles: [{ children: stylesContent }],
-      };
-    }
-
-    return {};
-  },
 });
 
 function TasksLayoutComponent() {

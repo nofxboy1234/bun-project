@@ -13,6 +13,7 @@ import TanStackQueryDevtools from "@/integrations/tanstack-query/devtools";
 
 // import "../index.css";
 import appCss from "@/index.css?url";
+import stylesContent from "@/styles.module.css?inline";
 
 import type { QueryClient } from "@tanstack/react-query";
 
@@ -40,6 +41,10 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         href: appCss,
       },
     ],
+    styles:
+      process.env.NODE_ENV !== "production"
+        ? [{ children: stylesContent }]
+        : [],
   }),
 
   shellComponent: RootDocument,
