@@ -5,7 +5,6 @@ import { treaty } from "@elysiajs/eden";
 import { createFileRoute } from "@tanstack/react-router";
 import { createIsomorphicFn } from "@tanstack/react-start";
 
-import { type BunRequest } from "bun";
 import { tasks } from "@/tasks";
 
 let taskId = 15;
@@ -103,6 +102,8 @@ export const Route = createFileRoute("/api/v1/$")({
       GET: handle,
       POST: handle,
       DELETE: handle,
+      PATCH: handle,
+      PUT: handle,
     },
   },
 });
