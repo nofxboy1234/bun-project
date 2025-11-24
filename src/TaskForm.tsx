@@ -1,10 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import type { Task } from "./types";
-import { treaty } from "@elysiajs/eden";
-import type { Api } from "@/index";
-
-const client = treaty<Api>("localhost:3000");
+import { api } from "./routes/api.v1.$";
 
 export function TaskForm({ task }: { task?: Task }) {
   const queryClient = useQueryClient();
@@ -18,7 +15,7 @@ export function TaskForm({ task }: { task?: Task }) {
 
   const postMutation = useMutation({
     mutationFn: async (taskData: FormData) =>
-      await client.api.v1.tasks.post(formDataToTask(taskData)),
+      await api().v1.tasks.post(formDataToTask(taskData)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
       navigate({ to: "/" });
@@ -29,8 +26,8 @@ export function TaskForm({ task }: { task?: Task }) {
     mutationFn: async (taskData: FormData) => {
       const taskId = task!.id;
 
-      return await client.api.v1
-        .tasks({ id: taskId! })
+      return await api()
+        .v1.tasks({ id: taskId! })
         .patch(formDataToTask(taskData));
     },
     onSuccess: () => {
