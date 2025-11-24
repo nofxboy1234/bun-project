@@ -107,11 +107,11 @@ const server = serve({
         headers: { "Content-Type": "text/html" },
       });
     },
-    "/*": index,
     "/api/v1/*": (req) => {
       console.log("/api/v1/* -> passing to Elysia instance");
       return handle({ request: req });
     },
+    "/*": index,
   },
   development: process.env.NODE_ENV !== "production" && {
     hmr: false,

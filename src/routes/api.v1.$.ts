@@ -9,7 +9,7 @@ import { tasks } from "@/tasks";
 
 let taskId = 15;
 
-const app = new Elysia({
+export const app = new Elysia({
   name: "api",
   prefix: "/api/v1",
 })
@@ -94,7 +94,10 @@ const app = new Elysia({
     return status(404, "Not Found");
   });
 
-const handle = ({ request }: { request: Request }) => app.fetch(request);
+const handle = ({ request }: { request: Request }) => {
+  console.log("/api/v1/$ -> passing request to Elysia");
+  return app.fetch(request);
+};
 
 export const Route = createFileRoute("/api/v1/$")({
   server: {

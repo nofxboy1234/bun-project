@@ -63,6 +63,8 @@
  *   bun run server.ts
  */
 
+import { app } from "@/routes/api.v1.$";
+import { BunRequest } from "bun";
 import path from "node:path";
 
 // Configuration
@@ -505,17 +507,21 @@ async function initializeServer() {
   log.header("Starting Production Server");
 
   // Load TanStack Start server handler
-  let handler: { fetch: (request: Request) => Response | Promise<Response> };
+  let tanstackHandler: {
+    fetch: (request: Request) => Response | Promise<Response>;
+  };
   try {
     const serverModule = (await import(SERVER_ENTRY_POINT)) as {
       default: { fetch: (request: Request) => Response | Promise<Response> };
     };
-    handler = serverModule.default;
+    tanstackHandler = serverModule.default;
     log.success("TanStack Start application handler initialized");
   } catch (error) {
     log.error(`Failed to load server handler: ${String(error)}`);
     process.exit(1);
   }
+  const elysiaHandler = ({ request }: { request: BunRequest }) =>
+    app.fetch(request);
 
   // Build static routes with intelligent preloading
   const { routes } = await initializeStaticRoutes(CLIENT_DIRECTORY);
@@ -529,9 +535,13 @@ async function initializeServer() {
       ...routes,
 
       // Fallback to TanStack Start handler for all other routes
+      "/api/v1/*": (req) => {
+        console.log("/api/v1/* -> passing request to Elysia");
+        return elysiaHandler({ request: req });
+      },
       "/*": (req: Request) => {
         try {
-          return handler.fetch(req);
+          return tanstackHandler.fetch(req);
         } catch (error) {
           log.error(`Server handler error: ${String(error)}`);
           return new Response("Internal Server Error", { status: 500 });
