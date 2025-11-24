@@ -11,7 +11,6 @@ import RootLayout from "@/components/RootLayout";
 
 import TanStackQueryDevtools from "@/integrations/tanstack-query/devtools";
 
-// import "../index.css";
 import appCss from "@/index.css?url";
 import stylesContent from "@/styles.module.css?inline";
 

@@ -1,6 +1,4 @@
 .app {
-  /* width: 100vw; */
-
   display: grid;
   grid-template-columns: 271px 1fr;
   grid-template-rows: 57.27px 1fr;
@@ -59,29 +57,14 @@
   border-bottom: 1px solid var(--dracula-purple);
 }
 
-/* .task:first-child {
-  border-top: 1px solid var(--dracula-purple);
-} */
-
 .task:hover {
   background-color: var(--dracula-selection);
 }
 
 .plusIcon {
   transform: scale(1);
-  /* cursor: pointer; */
   filter: invert(100%);
 }
-
-/* .updateIcon {
-  transform: scale(1.2);
-  padding: 0.5rem;
-}
-
-.deleteIcon {
-  transform: scale(1.2);
-  padding: 0.5rem;
-} */
 
 .taskOperations {
   display: flex;
