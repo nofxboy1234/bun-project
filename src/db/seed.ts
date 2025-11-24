@@ -18,7 +18,7 @@ import {
   characterOccupations,
 } from "./seedData";
 import type { TableData, Model, DBRow } from "@/types";
-import { resetDB } from "resetDB";
+import { resetDB } from "@/db/resetDB";
 
 const camelToSnake = (str: string) =>
   str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);

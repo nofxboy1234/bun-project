@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "db:reset": "bun reset.ts",
+    "db:reset": "bun src/db/reset.ts",
     "db:push": "bunx drizzle-kit push --verbose",
-    "db:seed": "bun seed.ts",
+    "db:seed": "bun src/db/seed.ts",
     "db:erd:build": "bunx liam erd build --input src/db/schema.ts --format drizzle --output-dir erd",
     "db:studio": "bunx drizzle-kit studio --verbose",
     "db:erd:serve": "bunx --bun serve erd/",
