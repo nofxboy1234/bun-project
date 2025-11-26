@@ -556,6 +556,8 @@ async function initializeServer() {
       );
       return new Response("Internal Server Error", { status: 500 });
     },
+
+    development: false,
   });
 
   log.success(`Server listening on http://localhost:${String(server.port)}`);
