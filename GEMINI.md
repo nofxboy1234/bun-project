@@ -1,34 +1,46 @@
-# GEMINI.md
+# Project Overview
 
-## Project Overview
+This is a full-stack web application built with a modern JavaScript toolchain. The project uses [Bun](https://bun.sh/) as the runtime, [Vite](https://vitejs.dev/) for the frontend build, and [ElysiaJS](https://elysiajs.com/) for the backend API.
 
-This is a full-stack TypeScript project that appears to be a web application for managing and displaying data about the world and characters of the "Chainsaw Man" manga and anime.
+## Key Technologies
 
-It uses the following technologies:
-
-- **Backend:** [Elysia.js](https://elysiajs.com/)
-- **Frontend:** [React](https://react.dev/) and [TanStack Router](https://tanstack.com/router/)
+- **Runtime:** [Bun](https://bun.sh/)
+- **Frontend:** [React](https://react.dev/) with [TanStack Router](https://tanstack.com/router) for routing and [TanStack Query](https://tanstack.com/query) for data fetching.
+- **Framework:** [TanStack Start](https://tanstack.com/start)
+- **Backend:** [ElysiaJS](https://elysiajs.com/)
 - **Database:** [PostgreSQL](https://www.postgresql.org/) with [Drizzle ORM](https://orm.drizzle.team/)
 - **Build Tool:** [Vite](https://vitejs.dev/)
-- **Package Manager & Runtime:** [Bun](https://bun.sh/)
-- **Linting:** [Oxlint](https://oxc-project.github.io/docs/guide/linter.html)
+- **Linting:** [oxlint](https://oxlint.rs/)
 - **Formatting:** [Prettier](https://prettier.io/)
+- **Type-checking:** [TypeScript](https://www.typescriptlang.org/)
 
-The project is structured as a monorepo with the frontend and backend code in the `src` directory. The database schema is defined in `src/db/schema.ts` and the database is seeded with data from `src/db/seedData.ts`.
+## Project Structure
 
-## Building and Running
+The project is organized into the following main directories:
 
-### Prerequisites
+- `src`: Contains the source code for the application.
+  - `components`: Reusable React components.
+  - `db`: Database-related files, including the schema, migrations, and seeding scripts.
+  - `integrations`: Integration with third-party libraries like TanStack Query.
+  - `routes`: Application routes, with a clear separation between API and frontend routes.
+- `erd`: Contains the auto-generated Entity-Relationship Diagram (ERD).
+- `dist`: Contains the built production assets.
 
-- [Bun](https://bun.sh/docs/installation)
+## Database Schema
 
-### Installation
+The database schema is defined in `src/db/schema.ts` and appears to model a fictional world with characters, species, locations, and their relationships. This suggests the application might be a companion app for a story, game, or a similar world-building project.
+
+# Building and Running
+
+## Installation
+
+To install the project dependencies, run:
 
 ```bash
 bun install
 ```
 
-### Development
+## Development
 
 To start the development server, run:
 
@@ -36,25 +48,9 @@ To start the development server, run:
 bun dev
 ```
 
-This will start the Vite development server for the frontend and the Elysia.js server for the backend.
+This will start the Vite development server for the frontend and the ElysiaJS server for the backend.
 
-### Database
-
-The project includes several scripts for managing the database:
-
-- **Reset:** `bun db:reset` - Resets the database.
-- **Push:** `bun db:push` - Pushes schema changes to the database.
-- **Seed:** `bun db:seed` - Seeds the database with initial data.
-- **Studio:** `bun db:studio` - Starts the Drizzle ORM studio.
-- **ERD:** `bun db:erd:build` - Generates an entity-relationship diagram.
-
-To reset, push, seed, and generate the ERD all at once, run:
-
-```bash
-bun db
-```
-
-### Building for Production
+## Production
 
 To build the project for production, run:
 
@@ -62,30 +58,43 @@ To build the project for production, run:
 bun build
 ```
 
-This will create a `dist` directory with the bundled assets.
-
-### Starting the Production Server
-
 To start the production server, run:
 
 ```bash
 bun start
 ```
 
-## Development Conventions
+## Database Commands
 
-### Code Style
+The project provides several scripts for managing the database:
 
-The project uses [Prettier](https://prettier.io/) for code formatting. To format the code, run:
+- `bun db:reset`: Resets the database.
+- `bun db:push`: Pushes schema changes to the database.
+- `bun db:seed`: Seeds the database with initial data.
+- `bun db:erd:build`: Generates an Entity-Relationship Diagram (ERD).
+- `bun db:studio`: Starts the Drizzle Studio.
+- `bun db`: A convenient script that runs `db:reset`, `db:push`, `db:seed`, and `db:erd:build` in sequence.
+
+# Development Conventions
+
+## Linting and Formatting
+
+The project uses [oxlint](https.oxlint.rs) for linting and [Prettier](https://prettier.io) for code formatting. To lint the code, run:
+
+```bash
+bun lint
+```
+
+To format the code, run:
 
 ```bash
 bun format
 ```
 
-### Linting
+## Type-checking
 
-The project uses [Oxlint](https://oxc-project.github.io/docs/guide/linter.html) for linting. To lint the code, run:
+The project uses [TypeScript](https://www.typescriptlang.org/) for static type-checking. To check for type errors, run:
 
 ```bash
-bun lint
+bun ts
 ```
