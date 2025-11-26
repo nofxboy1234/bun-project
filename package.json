@@ -15,8 +15,10 @@
     "format": "FORCE_COLOR=1 bunx --bun prettier . --write",
     "ts": "bunx --bun tsc",
     "dev": "bun --bun vite dev --port 3000",
+    "dev:debug": "bun --bun --inspect node_modules/.bin/vite dev --port 3000",
     "build": "bun --bun vite build",
-    "start": "NODE_ENV=production bun server.tsx",
+    "start": "NODE_ENV=production bun --bun server.tsx",
+    "start:debug": "NODE_ENV=production bun --bun --inspect server.tsx",
     "clean": "rm -rf dist && rm -f bun-project && echo 'Done cleaning.'"
   },
   "dependencies": {
