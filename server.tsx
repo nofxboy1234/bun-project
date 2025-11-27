@@ -542,7 +542,6 @@ async function initializeServer() {
 
       // Fallback to TanStack Start handler for all other routes
       "/api/v1/*": (req) => {
-        debugger;
         console.log("/api/v1/* -> passing request to Elysia");
         return elysiaHandler({ request: req });
       },

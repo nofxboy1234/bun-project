@@ -15,6 +15,7 @@
     "format": "FORCE_COLOR=1 bunx --bun prettier . --write",
     "ts": "bunx --bun tsc",
     "dev": "bun --bun vite dev --port 3000",
+    "dev:debug": "bun --bun --inspect node_modules/.bin/vite dev --port 3000",
     "debug:client": "bun --bun vite dev --config vite.config.debug.client.ts --debug true",
     "build": "bun --bun vite build",
     "debug:server": "NODE_ENV=development PORT=3001 bun --hot --inspect server.tsx",
