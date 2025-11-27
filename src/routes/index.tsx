@@ -12,6 +12,7 @@ export const Route = createFileRoute("/")({
       ...tasksQueryOptions,
       revalidateIfStale: true,
     });
+    // debugger;
   },
   component: TasksLayoutComponent,
 });

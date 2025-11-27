@@ -504,7 +504,13 @@ async function initializeStaticRoutes(
  * Initialize the server
  */
 async function initializeServer() {
-  log.header("Starting Production Server");
+  const isDevelopment = process.env.NODE_ENV === "development";
+
+  log.header(
+    isDevelopment
+      ? "Starting Development Server"
+      : "Starting Production Server",
+  );
 
   // Load TanStack Start server handler
   let tanstackHandler: {
@@ -536,6 +542,7 @@ async function initializeServer() {
 
       // Fallback to TanStack Start handler for all other routes
       "/api/v1/*": (req) => {
+        debugger;
         console.log("/api/v1/* -> passing request to Elysia");
         return elysiaHandler({ request: req });
       },
@@ -557,7 +564,7 @@ async function initializeServer() {
       return new Response("Internal Server Error", { status: 500 });
     },
 
-    development: false,
+    development: isDevelopment,
   });
 
   log.success(`Server listening on http://localhost:${String(server.port)}`);
