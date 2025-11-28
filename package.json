@@ -21,8 +21,7 @@
     "preview": "bun --bun vite preview --port 3000",
     "debug:preview": "bun --bun --inspect node_modules/.bin/vite preview --port 3000",
     "start": "NODE_ENV=production bun --bun server.tsx",
-    "debug:start:server": "NODE_ENV=development PORT=3001 bun --bun --hot --inspect server.tsx",
-    "debug:start:client": "bun --bun vite dev --port 3000 --config vite.config.debug.client.ts"
+    "debug:start": "NODE_ENV=development bun --bun --inspect server.tsx"
   },
   "dependencies": {
     "@elysiajs/eden": "^1.4.5",
