@@ -63,8 +63,6 @@
  *   bun run server.ts
  */
 
-import { app } from "@/routes/api.v1.$";
-import { BunRequest } from "bun";
 import path from "node:path";
 
 // Configuration
@@ -526,8 +524,6 @@ async function initializeServer() {
     log.error(`Failed to load server handler: ${String(error)}`);
     process.exit(1);
   }
-  const elysiaHandler = ({ request }: { request: BunRequest }) =>
-    app.fetch(request);
 
   // Build static routes with intelligent preloading
   const { routes } = await initializeStaticRoutes(CLIENT_DIRECTORY);
@@ -541,10 +537,6 @@ async function initializeServer() {
       ...routes,
 
       // Fallback to TanStack Start handler for all other routes
-      "/api/v1/*": (req) => {
-        console.log("/api/v1/* -> passing request to Elysia");
-        return elysiaHandler({ request: req });
-      },
       "/*": (req: Request) => {
         try {
           console.log("/* -> passing request to TanStack");
