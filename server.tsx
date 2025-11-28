@@ -547,6 +547,7 @@ async function initializeServer() {
       },
       "/*": (req: Request) => {
         try {
+          console.log("/* -> passing request to TanStack");
           return tanstackHandler.fetch(req);
         } catch (error) {
           log.error(`Server handler error: ${String(error)}`);
@@ -563,7 +564,12 @@ async function initializeServer() {
       return new Response("Internal Server Error", { status: 500 });
     },
 
-    development: isDevelopment,
+    development: isDevelopment
+      ? {
+          console: true,
+          hmr: false,
+        }
+      : false,
   });
 
   log.success(`Server listening on http://localhost:${String(server.port)}`);

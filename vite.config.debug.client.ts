@@ -12,9 +12,12 @@ export default defineConfig({
     viteReact(),
   ],
   server: {
-    port: 3000,
     proxy: {
       "/api/v1": {
+        target: "http://localhost:3001",
+        changeOrigin: true,
+      },
+      "/": {
         target: "http://localhost:3001",
         changeOrigin: true,
       },

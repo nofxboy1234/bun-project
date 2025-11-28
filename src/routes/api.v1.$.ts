@@ -102,11 +102,7 @@ const handle = ({ request }: { request: Request }) => {
 export const Route = createFileRoute("/api/v1/$")({
   server: {
     handlers: {
-      GET: handle,
-      POST: handle,
-      DELETE: handle,
-      PATCH: handle,
-      PUT: handle,
+      ANY: handle,
     },
   },
 });
