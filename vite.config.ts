@@ -8,7 +8,12 @@ export default defineConfig({
   plugins: [
     devtools(),
     viteTsConfigPaths({ projects: ["./tsconfig.json"] }),
-    tanstackStart(),
+    tanstackStart({
+      router: { autoCodeSplitting: true },
+    }),
     viteReact(),
   ],
+  build: {
+    chunkSizeWarningLimit: 1000,
+  },
 });
