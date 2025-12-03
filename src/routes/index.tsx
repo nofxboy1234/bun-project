@@ -7,8 +7,8 @@ import styles from "@/styles.module.css";
 import { TaskPreview } from "@/components/TaskPreview";
 
 export const Route = createFileRoute("/")({
-  loader: async ({ context: { queryClient } }) => {
-    await queryClient.ensureQueryData({
+  loader: ({ context: { queryClient } }) => {
+    queryClient.ensureQueryData({
       ...tasksQueryOptions,
       revalidateIfStale: true,
     });

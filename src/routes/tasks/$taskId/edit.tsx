@@ -4,8 +4,8 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/tasks/$taskId/edit")({
-  loader: async ({ context: { queryClient }, params: { taskId } }) => {
-    await queryClient.ensureQueryData({
+  loader: ({ context: { queryClient }, params: { taskId } }) => {
+    queryClient.ensureQueryData({
       ...taskQueryOptions(Number(taskId)),
       revalidateIfStale: true,
     });
