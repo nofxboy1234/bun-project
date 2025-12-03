@@ -4,8 +4,8 @@ import { Task } from "@/components/Task";
 import { taskQueryOptions } from "@/taskQueryOptions";
 
 export const Route = createFileRoute("/tasks/$taskId/")({
-  loader: async ({ context: { queryClient }, params: { taskId } }) => {
-    await queryClient.ensureQueryData({
+  loader: ({ context: { queryClient }, params: { taskId } }) => {
+    queryClient.ensureQueryData({
       ...taskQueryOptions(Number(taskId)),
       revalidateIfStale: true,
     });
@@ -18,6 +18,9 @@ export const Route = createFileRoute("/tasks/$taskId/")({
         <Link to="/">Start Over</Link>
       </div>
     );
+  },
+  pendingComponent: () => {
+    return <div>pending!</div>;
   },
 });
 
