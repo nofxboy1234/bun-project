@@ -25,6 +25,8 @@ export const app = new Elysia({
       };
 
       tasks.push(task);
+
+      return { task };
     },
     {
       body: t.Object({
@@ -65,6 +67,8 @@ export const app = new Elysia({
     ({ params: { id }, body }) => {
       const task = tasks.find((task) => task.id === id);
       Object.assign(task!, body);
+
+      return { task };
     },
     {
       params: t.Object({
