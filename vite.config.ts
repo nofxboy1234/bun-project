@@ -8,9 +8,7 @@ export default defineConfig({
   plugins: [
     devtools(),
     viteTsConfigPaths({ projects: ["./tsconfig.json"] }),
-    tanstackStart({
-      router: { autoCodeSplitting: true },
-    }),
+    tanstackStart(),
     viteReact(),
   ],
   build: {
