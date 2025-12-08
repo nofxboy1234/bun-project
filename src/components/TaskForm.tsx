@@ -46,7 +46,7 @@ export function TaskForm({ task }: { task?: Task }) {
 
   const postMutation = useMutation({
     mutationFn: async (data: FormData) => {
-      await postTask({ data } as any);
+      await postTask({ data });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
@@ -56,7 +56,7 @@ export function TaskForm({ task }: { task?: Task }) {
 
   const patchMutation = useMutation({
     mutationFn: async (data: FormData) => {
-      await patchTask({ data } as any);
+      await patchTask({ data });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
