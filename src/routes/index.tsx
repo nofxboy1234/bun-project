@@ -31,11 +31,7 @@ function TasksLayoutComponent() {
   const { data: tasks } = useSuspenseQuery(tasksQueryOptions);
 
   return (
-    <div
-      className={styles.main}
-      onClick={() => console.log("main onclick")}
-      onClickCapture={() => console.log("main onClickCapture")}
-    >
+    <div className={styles.main}>
       <div className={styles.tasksContainer}>
         {tasks!.map((task) => (
           <TaskPreview key={task.id} task={task} />

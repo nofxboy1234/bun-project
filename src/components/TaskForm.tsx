@@ -23,46 +23,30 @@ const parseFormData = (data: FormData) => {
   return task;
 };
 
-const postTask = createServerFn({ method: "POST" })
+const saveTask = createServerFn({ method: "POST" })
   .inputValidator(parseFormData)
   .handler(async ({ data }) => {
-    const { data: result, error } = await api().v1.tasks.post(data);
-
-    if (error) throw error;
-    return result.task;
-  });
-
-const patchTask = createServerFn({ method: "POST" })
-  .inputValidator(parseFormData)
-  .handler(async ({ data }) => {
-    const id = data.id;
-    const { data: result, error } = await api().v1.tasks({ id }).patch(data);
-
-    if (error) throw error;
-    return result.task;
+    if ("id" in data) {
+      const { id, ...payload } = data;
+      const { data: result, error } = await api()
+        .v1.tasks({ id })
+        .patch(payload);
+      if (error) throw error;
+      return result.task;
+    } else {
+      const { data: result, error } = await api().v1.tasks.post(data);
+      if (error) throw error;
+      return result.task;
+    }
   });
 
 export function TaskForm({ task }: { task?: Task }) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const postMutation = useMutation({
+  const saveMutation = useMutation({
     mutationFn: async (data: FormData) => {
-      try {
-        await postTask({ data });
-      } catch (error) {
-        console.log((error as any).message);
-      }
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["tasks"] });
-      navigate({ to: "/" });
-    },
-  });
-
-  const patchMutation = useMutation({
-    mutationFn: async (data: FormData) => {
-      await patchTask({ data });
+      await saveTask({ data });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
@@ -79,11 +63,7 @@ export function TaskForm({ task }: { task?: Task }) {
           const form = event.currentTarget;
           const formData = new FormData(form);
 
-          if (task) {
-            patchMutation.mutate(formData);
-          } else {
-            postMutation.mutate(formData);
-          }
+          saveMutation.mutate(formData);
         }}
       >
         {task && <input type="hidden" name="id" value={task.id} />}

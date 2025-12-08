@@ -20,12 +20,7 @@ export function TaskPreview({ task }: { task: Task }) {
   const taskId = task.id!.toString();
 
   return (
-    <Link
-      to="/tasks/$taskId"
-      params={{ taskId }}
-      className={styles.task}
-      onClick={() => console.log("Link onclick")}
-    >
+    <Link to="/tasks/$taskId" params={{ taskId }} className={styles.task}>
       <div>{task.title}</div>
       <div>{task.deadline.toString()}</div>
       <div className={styles.taskOperations}>
@@ -44,7 +39,6 @@ export function TaskPreview({ task }: { task: Task }) {
           alt="Delete Task"
           className={styles.deleteIcon}
           onClick={(event) => {
-            console.log("delete img onclick");
             event.stopPropagation();
             event.preventDefault();
             deleteMutation.mutate(task.id!);

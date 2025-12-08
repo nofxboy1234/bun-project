@@ -30,7 +30,5 @@ function RouteComponent() {
     ...taskQueryOptions(Number(taskId)),
   });
 
-  console.log("/tasks/$taskId/edit");
-
   return <TaskForm task={task!} />;
 }
