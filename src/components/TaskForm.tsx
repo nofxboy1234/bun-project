@@ -31,10 +31,12 @@ const saveTask = createServerFn({ method: "POST" })
       const { data: result, error } = await api()
         .v1.tasks({ id })
         .patch(payload);
+
       if (error) throw error;
       return result.task;
     } else {
       const { data: result, error } = await api().v1.tasks.post(data);
+
       if (error) throw error;
       return result.task;
     }
