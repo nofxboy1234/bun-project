@@ -1,21 +1,53 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
+import { createServerFn } from "@tanstack/react-start";
 import type { Task } from "../types";
 import { api } from "../routes/api.v1.$";
+
+const parseFormData = (data: FormData): Task => ({
+  id: data.get("id") ? Number(data.get("id")) : undefined,
+  title: data.get("title") as string,
+  description: data.get("description") as string,
+  deadline: new Date(data.get("deadline") as string),
+});
+
+const postTask = createServerFn({ method: "POST" })
+  .inputValidator(parseFormData)
+  .handler(async ({ data }) => {
+    const title = data.title;
+    const description = data.description;
+    const deadline = data.deadline;
+
+    const res = await api().v1.tasks.post({ title, description, deadline });
+    if (res.error) throw res.error;
+  });
+
+const patchTask = createServerFn({ method: "POST" })
+  .inputValidator(parseFormData)
+  .handler(async ({ data }) => {
+    const id = data.id;
+    if (!id) throw new Error("Task needs an ID");
+
+    const title = data.title;
+    const description = data.description;
+    const deadline = data.deadline;
+
+    const res = await api().v1.tasks({ id }).patch({
+      title,
+      description,
+      deadline,
+    });
+    if (res.error) throw res.error;
+  });
 
 export function TaskForm({ task }: { task?: Task }) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const formDataToTask = (taskData: FormData) => ({
-    title: taskData.get("title") as string,
-    description: taskData.get("description") as string,
-    deadline: new Date(taskData.get("deadline") as string),
-  });
-
   const postMutation = useMutation({
-    mutationFn: async (taskData: FormData) =>
-      await api().v1.tasks.post(formDataToTask(taskData)),
+    mutationFn: async (data: FormData) => {
+      await postTask({ data } as any);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
       navigate({ to: "/" });
@@ -23,12 +55,8 @@ export function TaskForm({ task }: { task?: Task }) {
   });
 
   const patchMutation = useMutation({
-    mutationFn: async (taskData: FormData) => {
-      const taskId = task!.id;
-
-      return await api()
-        .v1.tasks({ id: taskId! })
-        .patch(formDataToTask(taskData));
+    mutationFn: async (data: FormData) => {
+      await patchTask({ data } as any);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
@@ -52,6 +80,7 @@ export function TaskForm({ task }: { task?: Task }) {
           }
         }}
       >
+        {task && <input type="hidden" name="id" value={task.id} />}
         <div>
           <label htmlFor="task-title">Title</label>
           <input
