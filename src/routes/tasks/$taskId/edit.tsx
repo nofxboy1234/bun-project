@@ -1,7 +1,7 @@
 import { TaskForm } from "@/components/TaskForm";
 import { taskQueryOptions } from "@/taskQueryOptions";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/tasks/$taskId/edit")({
   loader: ({ context: { queryClient }, params: { taskId } }) => {
@@ -11,6 +11,17 @@ export const Route = createFileRoute("/tasks/$taskId/edit")({
     });
   },
   component: RouteComponent,
+  notFoundComponent: () => {
+    return (
+      <div>
+        <p>This is the notFoundComponent configured on /tasks/$taskId/edit</p>
+        <Link to="/">Start Over</Link>
+      </div>
+    );
+  },
+  pendingComponent: () => {
+    return <div>loading task edit form</div>;
+  },
 });
 
 function RouteComponent() {

@@ -20,7 +20,7 @@ export const Route = createFileRoute("/tasks/$taskId/")({
     );
   },
   pendingComponent: () => {
-    return <div>pending!</div>;
+    return <div>loading task</div>;
   },
 });
 
