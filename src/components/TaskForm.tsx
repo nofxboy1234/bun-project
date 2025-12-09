@@ -5,22 +5,22 @@ import type { Task } from "../types";
 import { api } from "../routes/api.v1.$";
 
 const parseFormData = (data: FormData) => {
-  const id = data.get("id");
-
-  const task = {
+  const payload = {
     title: data.get("title") as string,
     description: data.get("description") as string,
     deadline: new Date(data.get("deadline") as string),
   };
 
+  const id = data.get("id");
+
   if (id) {
     return {
       id: Number(id),
-      ...task,
+      ...payload,
     };
   }
 
-  return task;
+  return payload;
 };
 
 const saveTask = createServerFn({ method: "POST" })
@@ -33,11 +33,13 @@ const saveTask = createServerFn({ method: "POST" })
         .patch(payload);
 
       if (error) throw error;
+
       return result.task;
     } else {
       const { data: result, error } = await api().v1.tasks.post(data);
 
       if (error) throw error;
+
       return result.task;
     }
   });
@@ -106,6 +108,9 @@ export function TaskForm({ task }: { task?: Task }) {
         </div>
 
         <button type="submit">{task ? "Update" : "Create"}</button>
+        {saveMutation.isError && (
+          <p style={{ color: "red" }}>{saveMutation.error.message}</p>
+        )}
       </form>
     </div>
   );
