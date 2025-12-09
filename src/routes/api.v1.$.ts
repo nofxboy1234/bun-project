@@ -117,4 +117,7 @@ export const Route = createFileRoute("/api/v1/$")({
 
 export const api = createIsomorphicFn()
   .server(() => treaty(app).api)
-  .client(() => treaty<typeof app>(`${import.meta.env.VITE_API_URL}`).api);
+  .client(() => {
+    const origin = typeof window !== "undefined" ? window.location.origin : "";
+    return treaty<typeof app>(origin).api;
+  });
