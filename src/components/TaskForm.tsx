@@ -32,13 +32,13 @@ const saveTask = createServerFn({ method: "POST" })
         .v1.tasks({ id })
         .patch(payload);
 
-      if (error) throw error;
+      if (error) throw error.value;
 
       return result.task;
     } else {
       const { data: result, error } = await api().v1.tasks.post(data);
 
-      if (error) throw error;
+      if (error) throw error.value;
 
       return result.task;
     }
@@ -50,7 +50,12 @@ export function TaskForm({ task }: { task?: Task }) {
 
   const saveMutation = useMutation({
     mutationFn: async (data: FormData) => {
-      return await saveTask({ data });
+      try {
+        return await saveTask({ data });
+      } catch (error) {
+        console.log(error.message);
+        throw error;
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
