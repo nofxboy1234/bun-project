@@ -41,7 +41,11 @@ export function TaskPreview({ task }: { task: Task }) {
   return (
     <Link to="/tasks/$taskId" params={{ taskId }} className={styles.task}>
       <div>{task.title}</div>
-      <div>{task.deadline.toString()}</div>
+      <div>
+        {task.deadline.toLocaleDateString("en-ZA", {
+          timeZone: "Africa/Johannesburg",
+        })}
+      </div>
       <div className={styles.taskOperations}>
         <img
           src={updateIcon}

@@ -5,7 +5,11 @@ export function Task({ task }: { task: Task }) {
     <div>
       <div>{task.title}</div>
       <div>{task.description}</div>
-      <div>{task.deadline.toString()}</div>
+      <div>
+        {task.deadline.toLocaleDateString("en-ZA", {
+          timeZone: "Africa/Johannesburg",
+        })}
+      </div>
     </div>
   );
 }
