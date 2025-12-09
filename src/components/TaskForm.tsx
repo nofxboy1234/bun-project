@@ -50,7 +50,7 @@ export function TaskForm({ task }: { task?: Task }) {
 
   const saveMutation = useMutation({
     mutationFn: async (data: FormData) => {
-      await saveTask({ data });
+      return await saveTask({ data });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
