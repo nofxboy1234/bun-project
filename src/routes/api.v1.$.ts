@@ -15,7 +15,9 @@ export const app = new Elysia({
 })
   .use(openapi())
   .get("/", "/api/v1/tasks/")
-  .get("/tasks", () => tasks)
+  .get("/tasks", () => ({
+    tasks,
+  }))
   .post(
     "/tasks",
     ({ body }) => {
@@ -45,7 +47,7 @@ export const app = new Elysia({
         return status(404, "Not Found");
       }
 
-      return task;
+      return { task };
     },
     {
       params: t.Object({
@@ -53,10 +55,12 @@ export const app = new Elysia({
       }),
       response: {
         200: t.Object({
-          id: t.Number(),
-          title: t.String(),
-          description: t.String(),
-          deadline: t.Date(),
+          task: t.Object({
+            id: t.Number(),
+            title: t.String(),
+            description: t.String(),
+            deadline: t.Date(),
+          }),
         }),
         404: t.String(),
       },
