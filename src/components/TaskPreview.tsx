@@ -5,13 +5,32 @@ import type { Task } from "../types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { api } from "../routes/api.v1.$";
+import { createServerFn } from "@tanstack/react-start";
+import type { ValidationError } from "elysia";
+
+const deleteTask = createServerFn({ method: "POST" })
+  .inputValidator((data: { id: number }) => data)
+  .handler(async ({ data: { id } }) => {
+    const { data: result, error } = await api().v1.tasks({ id }).delete();
+
+    if (error) throw error.value;
+
+    return result.task;
+  });
 
 export function TaskPreview({ task }: { task: Task }) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const deleteMutation = useMutation({
-    mutationFn: async (id: number) => await api().v1.tasks({ id }).delete(),
+    mutationFn: async (id: number) => {
+      try {
+        await deleteTask({ data: { id } });
+      } catch (error) {
+        console.log((error as ValidationError).message);
+        throw error;
+      }
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
     },
@@ -31,6 +50,7 @@ export function TaskPreview({ task }: { task: Task }) {
           onClick={(event) => {
             event.preventDefault();
             event.stopPropagation();
+
             navigate({ to: "/tasks/$taskId/edit", params: { taskId } });
           }}
         />
@@ -39,11 +59,17 @@ export function TaskPreview({ task }: { task: Task }) {
           alt="Delete Task"
           className={styles.deleteIcon}
           onClick={(event) => {
-            event.stopPropagation();
             event.preventDefault();
+            event.stopPropagation();
+
             deleteMutation.mutate(task.id!);
           }}
         />
+        {deleteMutation.isError && (
+          <p style={{ color: "red" }}>
+            {(deleteMutation.error as ValidationError).message}
+          </p>
+        )}
       </div>
     </Link>
   );

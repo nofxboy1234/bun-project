@@ -85,7 +85,7 @@ export const app = new Elysia({
     "/tasks/:id",
     ({ params: { id } }) => {
       const deleteIndex = tasks.findIndex((task) => task.id === id);
-      tasks.splice(deleteIndex, 1);
+      return { task: tasks.splice(deleteIndex, 1) };
     },
     {
       params: t.Object({
