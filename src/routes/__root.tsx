@@ -15,6 +15,7 @@ import appCss from "@/index.css?url";
 import stylesContent from "@/styles.module.css?inline";
 
 import type { QueryClient } from "@tanstack/react-query";
+import logo from "@/logo.svg";
 
 interface MyRouterContext {
   queryClient: QueryClient;
@@ -38,6 +39,11 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       {
         rel: "stylesheet",
         href: appCss,
+      },
+      {
+        rel: "icon",
+        href: logo,
+        type: "image/svg+xml",
       },
     ],
     styles:
