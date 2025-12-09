@@ -3,6 +3,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import type { Task } from "../types";
 import { api } from "../routes/api.v1.$";
+import type { ValidationError } from "elysia/error";
 
 const parseFormData = (data: FormData) => {
   const payload = {
@@ -53,7 +54,7 @@ export function TaskForm({ task }: { task?: Task }) {
       try {
         return await saveTask({ data });
       } catch (error) {
-        console.log(error.message);
+        console.log((error as ValidationError).message);
         throw error;
       }
     },
@@ -114,7 +115,9 @@ export function TaskForm({ task }: { task?: Task }) {
 
         <button type="submit">{task ? "Update" : "Create"}</button>
         {saveMutation.isError && (
-          <p style={{ color: "red" }}>{saveMutation.error.message}</p>
+          <p style={{ color: "red" }}>
+            {(saveMutation.error as ValidationError).message}
+          </p>
         )}
       </form>
     </div>
