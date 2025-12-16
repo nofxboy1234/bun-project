@@ -49,9 +49,9 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.2",
-    "oxlint": "^1.32.0",
+    "oxlint": "^1.33.0",
     "prettier": "^3.7.4",
     "serve": "^14.2.5",
-    "vite": "^7.2.7"
+    "vite": "^7.3.0"
   }
 }
