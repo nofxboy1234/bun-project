@@ -1,944 +1,131 @@
 {
   "tables": {
-    "statuses": {
-      "name": "statuses",
+    "affiliations": {
+      "name": "affiliations",
       "columns": {
         "id": {
           "name": "id",
-          "type": "integer",
+          "type": "int4",
           "default": null,
+          "check": null,
           "notNull": true,
-          "comment": null,
-          "check": null
+          "comment": null
         },
         "created_at": {
           "name": "created_at",
           "type": "timestamp",
-          "default": "now()",
+          "default": null,
+          "check": null,
           "notNull": false,
-          "comment": null,
-          "check": null
+          "comment": null
         },
         "name": {
           "name": "name",
           "type": "varchar",
           "default": null,
+          "check": null,
           "notNull": true,
-          "comment": null,
-          "check": null
+          "comment": null
+        }
+      },
+      "comment": null,
+      "indexes": {
+        "affiliations_name_idx": {
+          "name": "affiliations_name_idx",
+          "unique": true,
+          "columns": [
+            "name"
+          ],
+          "type": "btree"
         }
       },
       "constraints": {
-        "PRIMARY_id": {
+        "affiliations_pkey": {
           "type": "PRIMARY KEY",
-          "name": "PRIMARY_id",
+          "name": "affiliations_pkey",
           "columnNames": [
             "id"
           ]
         }
-      },
-      "indexes": {
-        "statuses_pkey": {
-          "name": "statuses_pkey",
-          "columns": [
-            "id"
-          ],
-          "unique": true,
-          "type": ""
-        }
-      },
-      "comment": null
-    },
-    "location_types": {
-      "name": "location_types",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "default": "now()",
-          "notNull": false,
-          "comment": null,
-          "check": null
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        }
-      },
-      "constraints": {
-        "PRIMARY_id": {
-          "type": "PRIMARY KEY",
-          "name": "PRIMARY_id",
-          "columnNames": [
-            "id"
-          ]
-        }
-      },
-      "indexes": {
-        "location_types_pkey": {
-          "name": "location_types_pkey",
-          "columns": [
-            "id"
-          ],
-          "unique": true,
-          "type": ""
-        }
-      },
-      "comment": null
-    },
-    "locations": {
-      "name": "locations",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "default": "now()",
-          "notNull": false,
-          "comment": null,
-          "check": null
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "locationTypeId": {
-          "name": "locationTypeId",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        }
-      },
-      "constraints": {
-        "PRIMARY_id": {
-          "type": "PRIMARY KEY",
-          "name": "PRIMARY_id",
-          "columnNames": [
-            "id"
-          ]
-        },
-        "locations_locationTypeId_locationTypes_id_fk": {
-          "type": "FOREIGN KEY",
-          "name": "locations_locationTypeId_locationTypes_id_fk",
-          "columnNames": [
-            "locationTypeId"
-          ],
-          "targetTableName": "location_types",
-          "targetColumnNames": [
-            "id"
-          ],
-          "updateConstraint": "NO_ACTION",
-          "deleteConstraint": "CASCADE"
-        }
-      },
-      "indexes": {
-        "locations_pkey": {
-          "name": "locations_pkey",
-          "columns": [
-            "id"
-          ],
-          "unique": true,
-          "type": ""
-        }
-      },
-      "comment": null
-    },
-    "character_aliases": {
-      "name": "character_aliases",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "default": "now()",
-          "notNull": false,
-          "comment": null,
-          "check": null
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "characterId": {
-          "name": "characterId",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        }
-      },
-      "constraints": {
-        "PRIMARY_id": {
-          "type": "PRIMARY KEY",
-          "name": "PRIMARY_id",
-          "columnNames": [
-            "id"
-          ]
-        },
-        "character_aliases_characterId_characters_id_fk": {
-          "type": "FOREIGN KEY",
-          "name": "character_aliases_characterId_characters_id_fk",
-          "columnNames": [
-            "characterId"
-          ],
-          "targetTableName": "characters",
-          "targetColumnNames": [
-            "id"
-          ],
-          "updateConstraint": "NO_ACTION",
-          "deleteConstraint": "CASCADE"
-        }
-      },
-      "indexes": {
-        "character_aliases_pkey": {
-          "name": "character_aliases_pkey",
-          "columns": [
-            "id"
-          ],
-          "unique": true,
-          "type": ""
-        }
-      },
-      "comment": null
-    },
-    "genders": {
-      "name": "genders",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "default": "now()",
-          "notNull": false,
-          "comment": null,
-          "check": null
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        }
-      },
-      "constraints": {
-        "PRIMARY_id": {
-          "type": "PRIMARY KEY",
-          "name": "PRIMARY_id",
-          "columnNames": [
-            "id"
-          ]
-        }
-      },
-      "indexes": {
-        "genders_pkey": {
-          "name": "genders_pkey",
-          "columns": [
-            "id"
-          ],
-          "unique": true,
-          "type": ""
-        }
-      },
-      "comment": null
-    },
-    "species_aliases": {
-      "name": "species_aliases",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "default": "now()",
-          "notNull": false,
-          "comment": null,
-          "check": null
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "speciesId": {
-          "name": "speciesId",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        }
-      },
-      "constraints": {
-        "PRIMARY_id": {
-          "type": "PRIMARY KEY",
-          "name": "PRIMARY_id",
-          "columnNames": [
-            "id"
-          ]
-        },
-        "species_aliases_speciesId_species_id_fk": {
-          "type": "FOREIGN KEY",
-          "name": "species_aliases_speciesId_species_id_fk",
-          "columnNames": [
-            "speciesId"
-          ],
-          "targetTableName": "species",
-          "targetColumnNames": [
-            "id"
-          ],
-          "updateConstraint": "NO_ACTION",
-          "deleteConstraint": "CASCADE"
-        }
-      },
-      "indexes": {
-        "species_aliases_pkey": {
-          "name": "species_aliases_pkey",
-          "columns": [
-            "id"
-          ],
-          "unique": true,
-          "type": ""
-        }
-      },
-      "comment": null
-    },
-    "species": {
-      "name": "species",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "default": "now()",
-          "notNull": false,
-          "comment": null,
-          "check": null
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "description": {
-          "name": "description",
-          "type": "varchar",
-          "default": null,
-          "notNull": false,
-          "comment": null,
-          "check": null
-        }
-      },
-      "constraints": {
-        "PRIMARY_id": {
-          "type": "PRIMARY KEY",
-          "name": "PRIMARY_id",
-          "columnNames": [
-            "id"
-          ]
-        }
-      },
-      "indexes": {
-        "species_pkey": {
-          "name": "species_pkey",
-          "columns": [
-            "id"
-          ],
-          "unique": true,
-          "type": ""
-        }
-      },
-      "comment": null
-    },
-    "maps": {
-      "name": "maps",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "default": "now()",
-          "notNull": false,
-          "comment": null,
-          "check": null
-        },
-        "imageFilePath": {
-          "name": "imageFilePath",
-          "type": "varchar",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "locationId": {
-          "name": "locationId",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        }
-      },
-      "constraints": {
-        "PRIMARY_id": {
-          "type": "PRIMARY KEY",
-          "name": "PRIMARY_id",
-          "columnNames": [
-            "id"
-          ]
-        },
-        "maps_locationId_locations_id_fk": {
-          "type": "FOREIGN KEY",
-          "name": "maps_locationId_locations_id_fk",
-          "columnNames": [
-            "locationId"
-          ],
-          "targetTableName": "locations",
-          "targetColumnNames": [
-            "id"
-          ],
-          "updateConstraint": "NO_ACTION",
-          "deleteConstraint": "CASCADE"
-        }
-      },
-      "indexes": {
-        "maps_pkey": {
-          "name": "maps_pkey",
-          "columns": [
-            "id"
-          ],
-          "unique": true,
-          "type": ""
-        }
-      },
-      "comment": null
-    },
-    "relative_types": {
-      "name": "relative_types",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "default": "now()",
-          "notNull": false,
-          "comment": null,
-          "check": null
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        }
-      },
-      "constraints": {
-        "PRIMARY_id": {
-          "type": "PRIMARY KEY",
-          "name": "PRIMARY_id",
-          "columnNames": [
-            "id"
-          ]
-        }
-      },
-      "indexes": {
-        "relative_types_pkey": {
-          "name": "relative_types_pkey",
-          "columns": [
-            "id"
-          ],
-          "unique": true,
-          "type": ""
-        }
-      },
-      "comment": null
-    },
-    "relatives": {
-      "name": "relatives",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "default": "now()",
-          "notNull": false,
-          "comment": null,
-          "check": null
-        },
-        "character1Id": {
-          "name": "character1Id",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "character2Id": {
-          "name": "character2Id",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "relativeTypeId": {
-          "name": "relativeTypeId",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        }
-      },
-      "constraints": {
-        "PRIMARY_id": {
-          "type": "PRIMARY KEY",
-          "name": "PRIMARY_id",
-          "columnNames": [
-            "id"
-          ]
-        },
-        "relatives_character1Id_characters_id_fk": {
-          "type": "FOREIGN KEY",
-          "name": "relatives_character1Id_characters_id_fk",
-          "columnNames": [
-            "character1Id"
-          ],
-          "targetTableName": "characters",
-          "targetColumnNames": [
-            "id"
-          ],
-          "updateConstraint": "NO_ACTION",
-          "deleteConstraint": "CASCADE"
-        },
-        "relatives_character2Id_characters_id_fk": {
-          "type": "FOREIGN KEY",
-          "name": "relatives_character2Id_characters_id_fk",
-          "columnNames": [
-            "character2Id"
-          ],
-          "targetTableName": "characters",
-          "targetColumnNames": [
-            "id"
-          ],
-          "updateConstraint": "NO_ACTION",
-          "deleteConstraint": "CASCADE"
-        },
-        "relatives_relativeTypeId_relativeTypes_id_fk": {
-          "type": "FOREIGN KEY",
-          "name": "relatives_relativeTypeId_relativeTypes_id_fk",
-          "columnNames": [
-            "relativeTypeId"
-          ],
-          "targetTableName": "relative_types",
-          "targetColumnNames": [
-            "id"
-          ],
-          "updateConstraint": "NO_ACTION",
-          "deleteConstraint": "CASCADE"
-        }
-      },
-      "indexes": {
-        "relatives_pkey": {
-          "name": "relatives_pkey",
-          "columns": [
-            "id"
-          ],
-          "unique": true,
-          "type": ""
-        }
-      },
-      "comment": null
-    },
-    "contracts": {
-      "name": "contracts",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "default": "now()",
-          "notNull": false,
-          "comment": null,
-          "check": null
-        },
-        "terms": {
-          "name": "terms",
-          "type": "varchar",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "humanId": {
-          "name": "humanId",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "devilId": {
-          "name": "devilId",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        }
-      },
-      "constraints": {
-        "PRIMARY_id": {
-          "type": "PRIMARY KEY",
-          "name": "PRIMARY_id",
-          "columnNames": [
-            "id"
-          ]
-        },
-        "contracts_humanId_characters_id_fk": {
-          "type": "FOREIGN KEY",
-          "name": "contracts_humanId_characters_id_fk",
-          "columnNames": [
-            "humanId"
-          ],
-          "targetTableName": "characters",
-          "targetColumnNames": [
-            "id"
-          ],
-          "updateConstraint": "NO_ACTION",
-          "deleteConstraint": "CASCADE"
-        },
-        "contracts_devilId_characters_id_fk": {
-          "type": "FOREIGN KEY",
-          "name": "contracts_devilId_characters_id_fk",
-          "columnNames": [
-            "devilId"
-          ],
-          "targetTableName": "characters",
-          "targetColumnNames": [
-            "id"
-          ],
-          "updateConstraint": "NO_ACTION",
-          "deleteConstraint": "CASCADE"
-        }
-      },
-      "indexes": {
-        "contracts_pkey": {
-          "name": "contracts_pkey",
-          "columns": [
-            "id"
-          ],
-          "unique": true,
-          "type": ""
-        }
-      },
-      "comment": null
-    },
-    "characters": {
-      "name": "characters",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "default": "now()",
-          "notNull": false,
-          "comment": null,
-          "check": null
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "age": {
-          "name": "age",
-          "type": "integer",
-          "default": null,
-          "notNull": false,
-          "comment": null,
-          "check": null
-        },
-        "height": {
-          "name": "height",
-          "type": "integer",
-          "default": null,
-          "notNull": false,
-          "comment": null,
-          "check": null
-        },
-        "speciesId": {
-          "name": "speciesId",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "genderId": {
-          "name": "genderId",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "birthplaceId": {
-          "name": "birthplaceId",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        },
-        "statusId": {
-          "name": "statusId",
-          "type": "integer",
-          "default": null,
-          "notNull": true,
-          "comment": null,
-          "check": null
-        }
-      },
-      "constraints": {
-        "PRIMARY_id": {
-          "type": "PRIMARY KEY",
-          "name": "PRIMARY_id",
-          "columnNames": [
-            "id"
-          ]
-        },
-        "characters_speciesId_species_id_fk": {
-          "type": "FOREIGN KEY",
-          "name": "characters_speciesId_species_id_fk",
-          "columnNames": [
-            "speciesId"
-          ],
-          "targetTableName": "species",
-          "targetColumnNames": [
-            "id"
-          ],
-          "updateConstraint": "NO_ACTION",
-          "deleteConstraint": "CASCADE"
-        },
-        "characters_genderId_genders_id_fk": {
-          "type": "FOREIGN KEY",
-          "name": "characters_genderId_genders_id_fk",
-          "columnNames": [
-            "genderId"
-          ],
-          "targetTableName": "genders",
-          "targetColumnNames": [
-            "id"
-          ],
-          "updateConstraint": "NO_ACTION",
-          "deleteConstraint": "CASCADE"
-        },
-        "characters_birthplaceId_locations_id_fk": {
-          "type": "FOREIGN KEY",
-          "name": "characters_birthplaceId_locations_id_fk",
-          "columnNames": [
-            "birthplaceId"
-          ],
-          "targetTableName": "locations",
-          "targetColumnNames": [
-            "id"
-          ],
-          "updateConstraint": "NO_ACTION",
-          "deleteConstraint": "CASCADE"
-        },
-        "characters_statusId_statuses_id_fk": {
-          "type": "FOREIGN KEY",
-          "name": "characters_statusId_statuses_id_fk",
-          "columnNames": [
-            "statusId"
-          ],
-          "targetTableName": "statuses",
-          "targetColumnNames": [
-            "id"
-          ],
-          "updateConstraint": "NO_ACTION",
-          "deleteConstraint": "CASCADE"
-        }
-      },
-      "indexes": {
-        "characters_pkey": {
-          "name": "characters_pkey",
-          "columns": [
-            "id"
-          ],
-          "unique": true,
-          "type": ""
-        }
-      },
-      "comment": null
+      }
     },
     "character_affiliations": {
       "name": "character_affiliations",
       "columns": {
         "id": {
           "name": "id",
-          "type": "integer",
+          "type": "int4",
           "default": null,
+          "check": null,
           "notNull": true,
-          "comment": null,
-          "check": null
+          "comment": null
         },
         "created_at": {
           "name": "created_at",
           "type": "timestamp",
-          "default": "now()",
+          "default": null,
+          "check": null,
           "notNull": false,
-          "comment": null,
-          "check": null
+          "comment": null
         },
-        "characterId": {
-          "name": "characterId",
-          "type": "integer",
+        "character_id": {
+          "name": "character_id",
+          "type": "int4",
           "default": null,
+          "check": null,
           "notNull": true,
-          "comment": null,
-          "check": null
+          "comment": null
         },
-        "affiliationId": {
-          "name": "affiliationId",
-          "type": "integer",
+        "affiliation_id": {
+          "name": "affiliation_id",
+          "type": "int4",
           "default": null,
+          "check": null,
           "notNull": true,
-          "comment": null,
-          "check": null
+          "comment": null
+        }
+      },
+      "comment": null,
+      "indexes": {
+        "character_affiliations_affiliation_id_idx": {
+          "name": "character_affiliations_affiliation_id_idx",
+          "unique": false,
+          "columns": [
+            "affiliation_id"
+          ],
+          "type": "btree"
+        },
+        "character_affiliations_characterId_affiliationId_idx": {
+          "name": "character_affiliations_characterId_affiliationId_idx",
+          "unique": true,
+          "columns": [
+            "character_id",
+            "affiliation_id"
+          ],
+          "type": "btree"
+        },
+        "character_affiliations_character_id_idx": {
+          "name": "character_affiliations_character_id_idx",
+          "unique": false,
+          "columns": [
+            "character_id"
+          ],
+          "type": "btree"
         }
       },
       "constraints": {
-        "PRIMARY_id": {
+        "character_affiliations_pkey": {
           "type": "PRIMARY KEY",
-          "name": "PRIMARY_id",
+          "name": "character_affiliations_pkey",
           "columnNames": [
             "id"
           ]
         },
-        "character_affiliations_characterId_characters_id_fk": {
+        "character_affiliations_affiliation_id_affiliations_id_fkey": {
           "type": "FOREIGN KEY",
-          "name": "character_affiliations_characterId_characters_id_fk",
+          "name": "character_affiliations_affiliation_id_affiliations_id_fkey",
           "columnNames": [
-            "characterId"
-          ],
-          "targetTableName": "characters",
-          "targetColumnNames": [
-            "id"
-          ],
-          "updateConstraint": "NO_ACTION",
-          "deleteConstraint": "CASCADE"
-        },
-        "character_affiliations_affiliationId_affiliations_id_fk": {
-          "type": "FOREIGN KEY",
-          "name": "character_affiliations_affiliationId_affiliations_id_fk",
-          "columnNames": [
-            "affiliationId"
+            "affiliation_id"
           ],
           "targetTableName": "affiliations",
           "targetColumnNames": [
@@ -946,118 +133,178 @@
           ],
           "updateConstraint": "NO_ACTION",
           "deleteConstraint": "CASCADE"
-        }
-      },
-      "indexes": {
-        "character_affiliations_pkey": {
-          "name": "character_affiliations_pkey",
-          "columns": [
+        },
+        "character_affiliations_character_id_characters_id_fkey": {
+          "type": "FOREIGN KEY",
+          "name": "character_affiliations_character_id_characters_id_fkey",
+          "columnNames": [
+            "character_id"
+          ],
+          "targetTableName": "characters",
+          "targetColumnNames": [
             "id"
           ],
-          "unique": true,
-          "type": ""
+          "updateConstraint": "NO_ACTION",
+          "deleteConstraint": "CASCADE"
         }
-      },
-      "comment": null
+      }
     },
-    "affiliations": {
-      "name": "affiliations",
+    "character_aliases": {
+      "name": "character_aliases",
       "columns": {
         "id": {
           "name": "id",
-          "type": "integer",
+          "type": "int4",
           "default": null,
+          "check": null,
           "notNull": true,
-          "comment": null,
-          "check": null
+          "comment": null
         },
         "created_at": {
           "name": "created_at",
           "type": "timestamp",
-          "default": "now()",
+          "default": null,
+          "check": null,
           "notNull": false,
-          "comment": null,
-          "check": null
+          "comment": null
         },
         "name": {
           "name": "name",
           "type": "varchar",
           "default": null,
+          "check": null,
           "notNull": true,
-          "comment": null,
-          "check": null
+          "comment": null
+        },
+        "character_id": {
+          "name": "character_id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        }
+      },
+      "comment": null,
+      "indexes": {
+        "character_aliases_character_id_idx": {
+          "name": "character_aliases_character_id_idx",
+          "unique": false,
+          "columns": [
+            "character_id"
+          ],
+          "type": "btree"
+        },
+        "character_aliases_name_characterId_idx": {
+          "name": "character_aliases_name_characterId_idx",
+          "unique": true,
+          "columns": [
+            "name",
+            "character_id"
+          ],
+          "type": "btree"
         }
       },
       "constraints": {
-        "PRIMARY_id": {
+        "character_aliases_pkey": {
           "type": "PRIMARY KEY",
-          "name": "PRIMARY_id",
+          "name": "character_aliases_pkey",
           "columnNames": [
             "id"
           ]
-        }
-      },
-      "indexes": {
-        "affiliations_pkey": {
-          "name": "affiliations_pkey",
-          "columns": [
+        },
+        "character_aliases_character_id_characters_id_fkey": {
+          "type": "FOREIGN KEY",
+          "name": "character_aliases_character_id_characters_id_fkey",
+          "columnNames": [
+            "character_id"
+          ],
+          "targetTableName": "characters",
+          "targetColumnNames": [
             "id"
           ],
-          "unique": true,
-          "type": ""
+          "updateConstraint": "NO_ACTION",
+          "deleteConstraint": "CASCADE"
         }
-      },
-      "comment": null
+      }
     },
     "character_occupations": {
       "name": "character_occupations",
       "columns": {
         "id": {
           "name": "id",
-          "type": "integer",
+          "type": "int4",
           "default": null,
+          "check": null,
           "notNull": true,
-          "comment": null,
-          "check": null
+          "comment": null
         },
         "created_at": {
           "name": "created_at",
           "type": "timestamp",
-          "default": "now()",
+          "default": null,
+          "check": null,
           "notNull": false,
-          "comment": null,
-          "check": null
+          "comment": null
         },
-        "characterId": {
-          "name": "characterId",
-          "type": "integer",
+        "character_id": {
+          "name": "character_id",
+          "type": "int4",
           "default": null,
+          "check": null,
           "notNull": true,
-          "comment": null,
-          "check": null
+          "comment": null
         },
-        "occupationId": {
-          "name": "occupationId",
-          "type": "integer",
+        "occupation_id": {
+          "name": "occupation_id",
+          "type": "int4",
           "default": null,
+          "check": null,
           "notNull": true,
-          "comment": null,
-          "check": null
+          "comment": null
+        }
+      },
+      "comment": null,
+      "indexes": {
+        "character_occupations_characterId_occupationId_idx": {
+          "name": "character_occupations_characterId_occupationId_idx",
+          "unique": true,
+          "columns": [
+            "character_id",
+            "occupation_id"
+          ],
+          "type": "btree"
+        },
+        "character_occupations_character_id_idx": {
+          "name": "character_occupations_character_id_idx",
+          "unique": false,
+          "columns": [
+            "character_id"
+          ],
+          "type": "btree"
+        },
+        "character_occupations_occupation_id_idx": {
+          "name": "character_occupations_occupation_id_idx",
+          "unique": false,
+          "columns": [
+            "occupation_id"
+          ],
+          "type": "btree"
         }
       },
       "constraints": {
-        "PRIMARY_id": {
+        "character_occupations_pkey": {
           "type": "PRIMARY KEY",
-          "name": "PRIMARY_id",
+          "name": "character_occupations_pkey",
           "columnNames": [
             "id"
           ]
         },
-        "character_occupations_characterId_characters_id_fk": {
+        "character_occupations_character_id_characters_id_fkey": {
           "type": "FOREIGN KEY",
-          "name": "character_occupations_characterId_characters_id_fk",
+          "name": "character_occupations_character_id_characters_id_fkey",
           "columnNames": [
-            "characterId"
+            "character_id"
           ],
           "targetTableName": "characters",
           "targetColumnNames": [
@@ -1066,11 +313,11 @@
           "updateConstraint": "NO_ACTION",
           "deleteConstraint": "CASCADE"
         },
-        "character_occupations_occupationId_occupations_id_fk": {
+        "character_occupations_occupation_id_occupations_id_fkey": {
           "type": "FOREIGN KEY",
-          "name": "character_occupations_occupationId_occupations_id_fk",
+          "name": "character_occupations_occupation_id_occupations_id_fkey",
           "columnNames": [
-            "occupationId"
+            "occupation_id"
           ],
           "targetTableName": "occupations",
           "targetColumnNames": [
@@ -1079,67 +326,958 @@
           "updateConstraint": "NO_ACTION",
           "deleteConstraint": "CASCADE"
         }
-      },
-      "indexes": {
-        "character_occupations_pkey": {
-          "name": "character_occupations_pkey",
-          "columns": [
-            "id"
-          ],
-          "unique": true,
-          "type": ""
+      }
+    },
+    "characters": {
+      "name": "characters",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "default": null,
+          "check": null,
+          "notNull": false,
+          "comment": null
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        },
+        "age": {
+          "name": "age",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": false,
+          "comment": null
+        },
+        "height": {
+          "name": "height",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": false,
+          "comment": null
+        },
+        "species_id": {
+          "name": "species_id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        },
+        "gender_id": {
+          "name": "gender_id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        },
+        "birthplace_id": {
+          "name": "birthplace_id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        },
+        "status_id": {
+          "name": "status_id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
         }
       },
-      "comment": null
+      "comment": null,
+      "indexes": {
+        "characters_birthplace_id_idx": {
+          "name": "characters_birthplace_id_idx",
+          "unique": false,
+          "columns": [
+            "birthplace_id"
+          ],
+          "type": "btree"
+        },
+        "characters_gender_id_idx": {
+          "name": "characters_gender_id_idx",
+          "unique": false,
+          "columns": [
+            "gender_id"
+          ],
+          "type": "btree"
+        },
+        "characters_name_idx": {
+          "name": "characters_name_idx",
+          "unique": true,
+          "columns": [
+            "name"
+          ],
+          "type": "btree"
+        },
+        "characters_species_id_idx": {
+          "name": "characters_species_id_idx",
+          "unique": false,
+          "columns": [
+            "species_id"
+          ],
+          "type": "btree"
+        },
+        "characters_status_id_idx": {
+          "name": "characters_status_id_idx",
+          "unique": false,
+          "columns": [
+            "status_id"
+          ],
+          "type": "btree"
+        }
+      },
+      "constraints": {
+        "characters_pkey": {
+          "type": "PRIMARY KEY",
+          "name": "characters_pkey",
+          "columnNames": [
+            "id"
+          ]
+        },
+        "characters_birthplace_id_locations_id_fkey": {
+          "type": "FOREIGN KEY",
+          "name": "characters_birthplace_id_locations_id_fkey",
+          "columnNames": [
+            "birthplace_id"
+          ],
+          "targetTableName": "locations",
+          "targetColumnNames": [
+            "id"
+          ],
+          "updateConstraint": "NO_ACTION",
+          "deleteConstraint": "CASCADE"
+        },
+        "characters_gender_id_genders_id_fkey": {
+          "type": "FOREIGN KEY",
+          "name": "characters_gender_id_genders_id_fkey",
+          "columnNames": [
+            "gender_id"
+          ],
+          "targetTableName": "genders",
+          "targetColumnNames": [
+            "id"
+          ],
+          "updateConstraint": "NO_ACTION",
+          "deleteConstraint": "CASCADE"
+        },
+        "characters_species_id_species_id_fkey": {
+          "type": "FOREIGN KEY",
+          "name": "characters_species_id_species_id_fkey",
+          "columnNames": [
+            "species_id"
+          ],
+          "targetTableName": "species",
+          "targetColumnNames": [
+            "id"
+          ],
+          "updateConstraint": "NO_ACTION",
+          "deleteConstraint": "CASCADE"
+        },
+        "characters_status_id_statuses_id_fkey": {
+          "type": "FOREIGN KEY",
+          "name": "characters_status_id_statuses_id_fkey",
+          "columnNames": [
+            "status_id"
+          ],
+          "targetTableName": "statuses",
+          "targetColumnNames": [
+            "id"
+          ],
+          "updateConstraint": "NO_ACTION",
+          "deleteConstraint": "CASCADE"
+        }
+      }
+    },
+    "contracts": {
+      "name": "contracts",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "default": null,
+          "check": null,
+          "notNull": false,
+          "comment": null
+        },
+        "terms": {
+          "name": "terms",
+          "type": "varchar",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        },
+        "human_id": {
+          "name": "human_id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        },
+        "devil_id": {
+          "name": "devil_id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        }
+      },
+      "comment": null,
+      "indexes": {
+        "contracts_devil_id_idx": {
+          "name": "contracts_devil_id_idx",
+          "unique": false,
+          "columns": [
+            "devil_id"
+          ],
+          "type": "btree"
+        },
+        "contracts_humanId_devilId_idx": {
+          "name": "contracts_humanId_devilId_idx",
+          "unique": true,
+          "columns": [
+            "human_id",
+            "devil_id"
+          ],
+          "type": "btree"
+        },
+        "contracts_human_id_idx": {
+          "name": "contracts_human_id_idx",
+          "unique": false,
+          "columns": [
+            "human_id"
+          ],
+          "type": "btree"
+        }
+      },
+      "constraints": {
+        "no_self_contract": {
+          "type": "CHECK",
+          "name": "no_self_contract",
+          "detail": "(human_id <> devil_id)"
+        },
+        "contracts_pkey": {
+          "type": "PRIMARY KEY",
+          "name": "contracts_pkey",
+          "columnNames": [
+            "id"
+          ]
+        },
+        "contracts_devil_id_characters_id_fkey": {
+          "type": "FOREIGN KEY",
+          "name": "contracts_devil_id_characters_id_fkey",
+          "columnNames": [
+            "devil_id"
+          ],
+          "targetTableName": "characters",
+          "targetColumnNames": [
+            "id"
+          ],
+          "updateConstraint": "NO_ACTION",
+          "deleteConstraint": "CASCADE"
+        },
+        "contracts_human_id_characters_id_fkey": {
+          "type": "FOREIGN KEY",
+          "name": "contracts_human_id_characters_id_fkey",
+          "columnNames": [
+            "human_id"
+          ],
+          "targetTableName": "characters",
+          "targetColumnNames": [
+            "id"
+          ],
+          "updateConstraint": "NO_ACTION",
+          "deleteConstraint": "CASCADE"
+        }
+      }
+    },
+    "genders": {
+      "name": "genders",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "default": null,
+          "check": null,
+          "notNull": false,
+          "comment": null
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        }
+      },
+      "comment": null,
+      "indexes": {
+        "genders_name_idx": {
+          "name": "genders_name_idx",
+          "unique": true,
+          "columns": [
+            "name"
+          ],
+          "type": "btree"
+        }
+      },
+      "constraints": {
+        "genders_pkey": {
+          "type": "PRIMARY KEY",
+          "name": "genders_pkey",
+          "columnNames": [
+            "id"
+          ]
+        }
+      }
+    },
+    "location_types": {
+      "name": "location_types",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "default": null,
+          "check": null,
+          "notNull": false,
+          "comment": null
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        }
+      },
+      "comment": null,
+      "indexes": {
+        "location_types_name_idx": {
+          "name": "location_types_name_idx",
+          "unique": true,
+          "columns": [
+            "name"
+          ],
+          "type": "btree"
+        }
+      },
+      "constraints": {
+        "location_types_pkey": {
+          "type": "PRIMARY KEY",
+          "name": "location_types_pkey",
+          "columnNames": [
+            "id"
+          ]
+        }
+      }
+    },
+    "locations": {
+      "name": "locations",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "default": null,
+          "check": null,
+          "notNull": false,
+          "comment": null
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        },
+        "location_type_id": {
+          "name": "location_type_id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        }
+      },
+      "comment": null,
+      "indexes": {
+        "location_type_id_idx": {
+          "name": "location_type_id_idx",
+          "unique": false,
+          "columns": [
+            "location_type_id"
+          ],
+          "type": "btree"
+        },
+        "locations_name_idx": {
+          "name": "locations_name_idx",
+          "unique": true,
+          "columns": [
+            "name"
+          ],
+          "type": "btree"
+        }
+      },
+      "constraints": {
+        "locations_pkey": {
+          "type": "PRIMARY KEY",
+          "name": "locations_pkey",
+          "columnNames": [
+            "id"
+          ]
+        },
+        "locations_location_type_id_location_types_id_fkey": {
+          "type": "FOREIGN KEY",
+          "name": "locations_location_type_id_location_types_id_fkey",
+          "columnNames": [
+            "location_type_id"
+          ],
+          "targetTableName": "location_types",
+          "targetColumnNames": [
+            "id"
+          ],
+          "updateConstraint": "NO_ACTION",
+          "deleteConstraint": "CASCADE"
+        }
+      }
+    },
+    "maps": {
+      "name": "maps",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "default": null,
+          "check": null,
+          "notNull": false,
+          "comment": null
+        },
+        "image_file_path": {
+          "name": "image_file_path",
+          "type": "varchar",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        },
+        "location_id": {
+          "name": "location_id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        }
+      },
+      "comment": null,
+      "indexes": {
+        "maps_location_id_idx": {
+          "name": "maps_location_id_idx",
+          "unique": true,
+          "columns": [
+            "location_id"
+          ],
+          "type": "btree"
+        }
+      },
+      "constraints": {
+        "maps_pkey": {
+          "type": "PRIMARY KEY",
+          "name": "maps_pkey",
+          "columnNames": [
+            "id"
+          ]
+        },
+        "maps_location_id_locations_id_fkey": {
+          "type": "FOREIGN KEY",
+          "name": "maps_location_id_locations_id_fkey",
+          "columnNames": [
+            "location_id"
+          ],
+          "targetTableName": "locations",
+          "targetColumnNames": [
+            "id"
+          ],
+          "updateConstraint": "NO_ACTION",
+          "deleteConstraint": "CASCADE"
+        }
+      }
     },
     "occupations": {
       "name": "occupations",
       "columns": {
         "id": {
           "name": "id",
-          "type": "integer",
+          "type": "int4",
           "default": null,
+          "check": null,
           "notNull": true,
-          "comment": null,
-          "check": null
+          "comment": null
         },
         "created_at": {
           "name": "created_at",
           "type": "timestamp",
-          "default": "now()",
+          "default": null,
+          "check": null,
           "notNull": false,
-          "comment": null,
-          "check": null
+          "comment": null
         },
         "name": {
           "name": "name",
           "type": "varchar",
           "default": null,
+          "check": null,
           "notNull": true,
-          "comment": null,
-          "check": null
+          "comment": null
+        }
+      },
+      "comment": null,
+      "indexes": {
+        "occupations_name_idx": {
+          "name": "occupations_name_idx",
+          "unique": true,
+          "columns": [
+            "name"
+          ],
+          "type": "btree"
         }
       },
       "constraints": {
-        "PRIMARY_id": {
+        "occupations_pkey": {
           "type": "PRIMARY KEY",
-          "name": "PRIMARY_id",
+          "name": "occupations_pkey",
           "columnNames": [
             "id"
           ]
         }
-      },
-      "indexes": {
-        "occupations_pkey": {
-          "name": "occupations_pkey",
-          "columns": [
-            "id"
-          ],
-          "unique": true,
-          "type": ""
+      }
+    },
+    "relative_types": {
+      "name": "relative_types",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "default": null,
+          "check": null,
+          "notNull": false,
+          "comment": null
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
         }
       },
-      "comment": null
+      "comment": null,
+      "indexes": {
+        "relative_types_name_idx": {
+          "name": "relative_types_name_idx",
+          "unique": true,
+          "columns": [
+            "name"
+          ],
+          "type": "btree"
+        }
+      },
+      "constraints": {
+        "relative_types_pkey": {
+          "type": "PRIMARY KEY",
+          "name": "relative_types_pkey",
+          "columnNames": [
+            "id"
+          ]
+        }
+      }
+    },
+    "relatives": {
+      "name": "relatives",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "default": null,
+          "check": null,
+          "notNull": false,
+          "comment": null
+        },
+        "character1_id": {
+          "name": "character1_id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        },
+        "character2_id": {
+          "name": "character2_id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        },
+        "relative_type_id": {
+          "name": "relative_type_id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        }
+      },
+      "comment": null,
+      "indexes": {
+        "relatives_character1Id_character2Id_idx": {
+          "name": "relatives_character1Id_character2Id_idx",
+          "unique": true,
+          "columns": [
+            "character1_id",
+            "character2_id"
+          ],
+          "type": "btree"
+        },
+        "relatives_character1_id_idx": {
+          "name": "relatives_character1_id_idx",
+          "unique": false,
+          "columns": [
+            "character1_id"
+          ],
+          "type": "btree"
+        },
+        "relatives_character2_id_idx": {
+          "name": "relatives_character2_id_idx",
+          "unique": false,
+          "columns": [
+            "character2_id"
+          ],
+          "type": "btree"
+        },
+        "relatives_relative_type_id_idx": {
+          "name": "relatives_relative_type_id_idx",
+          "unique": false,
+          "columns": [
+            "relative_type_id"
+          ],
+          "type": "btree"
+        }
+      },
+      "constraints": {
+        "relatives_pkey": {
+          "type": "PRIMARY KEY",
+          "name": "relatives_pkey",
+          "columnNames": [
+            "id"
+          ]
+        },
+        "relatives_character1_id_characters_id_fkey": {
+          "type": "FOREIGN KEY",
+          "name": "relatives_character1_id_characters_id_fkey",
+          "columnNames": [
+            "character1_id"
+          ],
+          "targetTableName": "characters",
+          "targetColumnNames": [
+            "id"
+          ],
+          "updateConstraint": "NO_ACTION",
+          "deleteConstraint": "CASCADE"
+        },
+        "relatives_character2_id_characters_id_fkey": {
+          "type": "FOREIGN KEY",
+          "name": "relatives_character2_id_characters_id_fkey",
+          "columnNames": [
+            "character2_id"
+          ],
+          "targetTableName": "characters",
+          "targetColumnNames": [
+            "id"
+          ],
+          "updateConstraint": "NO_ACTION",
+          "deleteConstraint": "CASCADE"
+        },
+        "relatives_relative_type_id_relative_types_id_fkey": {
+          "type": "FOREIGN KEY",
+          "name": "relatives_relative_type_id_relative_types_id_fkey",
+          "columnNames": [
+            "relative_type_id"
+          ],
+          "targetTableName": "relative_types",
+          "targetColumnNames": [
+            "id"
+          ],
+          "updateConstraint": "NO_ACTION",
+          "deleteConstraint": "CASCADE"
+        }
+      }
+    },
+    "species": {
+      "name": "species",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "default": null,
+          "check": null,
+          "notNull": false,
+          "comment": null
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar",
+          "default": null,
+          "check": null,
+          "notNull": false,
+          "comment": null
+        }
+      },
+      "comment": null,
+      "indexes": {
+        "species_name_idx": {
+          "name": "species_name_idx",
+          "unique": true,
+          "columns": [
+            "name"
+          ],
+          "type": "btree"
+        }
+      },
+      "constraints": {
+        "species_pkey": {
+          "type": "PRIMARY KEY",
+          "name": "species_pkey",
+          "columnNames": [
+            "id"
+          ]
+        }
+      }
+    },
+    "species_aliases": {
+      "name": "species_aliases",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "default": null,
+          "check": null,
+          "notNull": false,
+          "comment": null
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        },
+        "species_id": {
+          "name": "species_id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        }
+      },
+      "comment": null,
+      "indexes": {
+        "species_aliases_name_idx": {
+          "name": "species_aliases_name_idx",
+          "unique": true,
+          "columns": [
+            "name"
+          ],
+          "type": "btree"
+        },
+        "species_aliases_species_id_idx": {
+          "name": "species_aliases_species_id_idx",
+          "unique": false,
+          "columns": [
+            "species_id"
+          ],
+          "type": "btree"
+        }
+      },
+      "constraints": {
+        "species_aliases_pkey": {
+          "type": "PRIMARY KEY",
+          "name": "species_aliases_pkey",
+          "columnNames": [
+            "id"
+          ]
+        },
+        "species_aliases_species_id_species_id_fkey": {
+          "type": "FOREIGN KEY",
+          "name": "species_aliases_species_id_species_id_fkey",
+          "columnNames": [
+            "species_id"
+          ],
+          "targetTableName": "species",
+          "targetColumnNames": [
+            "id"
+          ],
+          "updateConstraint": "NO_ACTION",
+          "deleteConstraint": "CASCADE"
+        }
+      }
+    },
+    "statuses": {
+      "name": "statuses",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int4",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "default": null,
+          "check": null,
+          "notNull": false,
+          "comment": null
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "default": null,
+          "check": null,
+          "notNull": true,
+          "comment": null
+        }
+      },
+      "comment": null,
+      "indexes": {
+        "statuses_name_idx": {
+          "name": "statuses_name_idx",
+          "unique": true,
+          "columns": [
+            "name"
+          ],
+          "type": "btree"
+        }
+      },
+      "constraints": {
+        "statuses_pkey": {
+          "type": "PRIMARY KEY",
+          "name": "statuses_pkey",
+          "columnNames": [
+            "id"
+          ]
+        }
+      }
     }
   },
   "enums": {},
