@@ -1,9 +1,4 @@
-import {
-  pgTable,
-  index,
-  uniqueIndex,
-  check,
-} from "drizzle-orm/pg-core";
+import { pgTable, index, uniqueIndex, check } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 
 export const statuses = pgTable(
@@ -81,7 +76,8 @@ export const speciesAliases = pgTable(
     id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
     created_at: t.timestamp().defaultNow(),
     name: t.varchar({ length: 255 }).notNull(),
-    speciesId: t.integer()
+    speciesId: t
+      .integer()
       .references(() => species.id, { onDelete: "cascade" })
       .notNull(),
   }),
@@ -108,7 +104,8 @@ export const maps = pgTable(
     id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
     created_at: t.timestamp().defaultNow(),
     imageFilePath: t.varchar({ length: 255 }).notNull(),
-    locationId: t.integer()
+    locationId: t
+      .integer()
       .references(() => locations.id, { onDelete: "cascade" })
       .notNull(),
   }),
@@ -130,13 +127,16 @@ export const relatives = pgTable(
   (t) => ({
     id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
     created_at: t.timestamp().defaultNow(),
-    character1Id: t.integer()
+    character1Id: t
+      .integer()
       .references(() => characters.id, { onDelete: "cascade" })
       .notNull(),
-    character2Id: t.integer()
+    character2Id: t
+      .integer()
       .references(() => characters.id, { onDelete: "cascade" })
       .notNull(),
-    relativeTypeId: t.integer()
+    relativeTypeId: t
+      .integer()
       .references(() => relativeTypes.id, {
         onDelete: "cascade",
       })
@@ -159,10 +159,12 @@ export const contracts = pgTable(
     id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
     created_at: t.timestamp().defaultNow(),
     terms: t.varchar({ length: 2000 }).notNull(),
-    humanId: t.integer()
+    humanId: t
+      .integer()
       .references(() => characters.id, { onDelete: "cascade" })
       .notNull(),
-    devilId: t.integer()
+    devilId: t
+      .integer()
       .references(() => characters.id, { onDelete: "cascade" })
       .notNull(),
   }),
@@ -182,16 +184,20 @@ export const characters = pgTable(
     name: t.varchar({ length: 255 }).notNull(),
     age: t.integer(),
     height: t.integer(),
-    speciesId: t.integer()
+    speciesId: t
+      .integer()
       .references(() => species.id, { onDelete: "cascade" })
       .notNull(),
-    genderId: t.integer()
+    genderId: t
+      .integer()
       .references(() => genders.id, { onDelete: "cascade" })
       .notNull(),
-    birthplaceId: t.integer()
+    birthplaceId: t
+      .integer()
       .references(() => locations.id, { onDelete: "cascade" })
       .notNull(),
-    statusId: t.integer()
+    statusId: t
+      .integer()
       .references(() => statuses.id, { onDelete: "cascade" })
       .notNull(),
   }),
@@ -209,10 +215,12 @@ export const characterAffiliations = pgTable(
   (t) => ({
     id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
     created_at: t.timestamp().defaultNow(),
-    characterId: t.integer()
+    characterId: t
+      .integer()
       .references(() => characters.id, { onDelete: "cascade" })
       .notNull(),
-    affiliationId: t.integer()
+    affiliationId: t
+      .integer()
       .references(() => affiliations.id, { onDelete: "cascade" })
       .notNull(),
   }),
@@ -241,10 +249,12 @@ export const characterOccupations = pgTable(
   (t) => ({
     id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
     created_at: t.timestamp().defaultNow(),
-    characterId: t.integer()
+    characterId: t
+      .integer()
       .references(() => characters.id, { onDelete: "cascade" })
       .notNull(),
-    occupationId: t.integer()
+    occupationId: t
+      .integer()
       .references(() => occupations.id, { onDelete: "cascade" })
       .notNull(),
   }),
