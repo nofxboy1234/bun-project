@@ -51,11 +51,6 @@ async function main() {
   await seed(db, {
     maps: schema.maps,
     characters: schema.characters,
-    // characterAliases: schema.characterAliases,
-    // contracts: schema.contracts,
-    // relatives: schema.relatives,
-    // characterAffiliations: schema.characterAffiliations,
-    // characterOccupations: schema.characterOccupations,
   }).refine((f) => ({
     maps: {
       columns: {
@@ -115,8 +110,6 @@ async function main() {
   };
   const rng = mulberry32(seedVal);
 
-  // Manual seeding for characterAffiliations (Many-to-Many)
-  // This avoids unique constraint violations while allowing multiple affiliations per character.
   const allAffiliationIds = affiliations.map((a) => a.id);
   const characterAffiliationsData: {
     characterId: number;
@@ -124,10 +117,8 @@ async function main() {
   }[] = [];
 
   for (const char of characters) {
-    // Randomly assign 0 to 3 affiliations per character using seeded rng
     const numAffiliations = Math.floor(rng() * 4);
 
-    // Shuffle and pick unique IDs using seeded rng
     const shuffled = [...allAffiliationIds].sort(() => 0.5 - rng());
     const selected = shuffled.slice(0, numAffiliations);
 
