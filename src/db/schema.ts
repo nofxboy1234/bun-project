@@ -52,10 +52,7 @@ export const characterAliases = pgTable(
       .notNull(),
   }),
   (t) => [
-    uniqueIndex("character_aliases_name_characterId_idx").on(
-      t.name,
-      t.characterId,
-    ),
+    uniqueIndex("character_aliases_name_characterId_idx").on(t.name),
     index("character_aliases_character_id_idx").on(t.characterId),
   ],
 );

@@ -199,8 +199,7 @@
           "name": "character_aliases_name_characterId_idx",
           "unique": true,
           "columns": [
-            "name",
-            "character_id"
+            "name"
           ],
           "type": "btree"
         }

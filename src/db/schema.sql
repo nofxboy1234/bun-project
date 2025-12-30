@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict aYkXeo8pfYScdlFKj0BXcLEd85ab5Kc60E5KjgfeaDeTFaaWcMcOdRG5I1dacmK
+\restrict N5nmilHQ0cSfhIddMZx58ASh0WMJRWU4YNDHgpIb80PRoiNee9E6PVzsbky4f9t
 
 -- Dumped from database version 17.7
 -- Dumped by pg_dump version 17.7
@@ -640,7 +640,7 @@ CREATE INDEX character_aliases_character_id_idx ON public.character_aliases USIN
 -- Name: character_aliases_name_characterId_idx; Type: INDEX; Schema: public; Owner: dylan
 --
 
-CREATE UNIQUE INDEX "character_aliases_name_characterId_idx" ON public.character_aliases USING btree (name, character_id);
+CREATE UNIQUE INDEX "character_aliases_name_characterId_idx" ON public.character_aliases USING btree (name);
 
 
 --
@@ -965,5 +965,5 @@ ALTER TABLE ONLY public.species_aliases
 -- PostgreSQL database dump complete
 --
 
-\unrestrict aYkXeo8pfYScdlFKj0BXcLEd85ab5Kc60E5KjgfeaDeTFaaWcMcOdRG5I1dacmK
+\unrestrict N5nmilHQ0cSfhIddMZx58ASh0WMJRWU4YNDHgpIb80PRoiNee9E6PVzsbky4f9t
 

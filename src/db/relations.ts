@@ -56,7 +56,7 @@ export const relations = defineRelations(schema, (r) => ({
   },
   characterOccupations: {
     character: r.one.characters({
-      from: r.characterAffiliations.characterId,
+      from: r.characterOccupations.characterId,
       to: r.characters.id,
       alias: "character",
     }),
