@@ -2,6 +2,8 @@ import * as schema from "@/db/schema";
 import { db } from "@/db";
 import { reset, seed } from "drizzle-seed";
 
+const seedVal = 9999;
+
 async function main() {
   await reset(db, schema);
 
@@ -92,7 +94,7 @@ async function main() {
       // characterOccupations: schema.characterOccupations,
       // relatives: schema.relatives,
     },
-    { seed: 9999 },
+    { seed: seedVal },
   ).refine((f) => ({
     characterAliases: {
       columns: {
@@ -103,6 +105,16 @@ async function main() {
     },
   }));
 
+  const mulberry32 = (a: number) => {
+    return () => {
+      let t = (a += 0x6d2b79f5);
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  };
+  const rng = mulberry32(seedVal);
+
   // Manual seeding for characterAffiliations (Many-to-Many)
   // This avoids unique constraint violations while allowing multiple affiliations per character.
   const allAffiliationIds = affiliations.map((a) => a.id);
@@ -112,13 +124,12 @@ async function main() {
   }[] = [];
 
   for (const char of characters) {
-    // Randomly assign 0 to 3 affiliations per character
-    const numAffiliations = Math.floor(Math.random() * 4);
+    // Randomly assign 0 to 3 affiliations per character using seeded rng
+    const numAffiliations = Math.floor(rng() * 4);
 
-    // Shuffle and pick unique IDs
-    const shuffled = [...allAffiliationIds].sort(() => 0.5 - Math.random());
+    // Shuffle and pick unique IDs using seeded rng
+    const shuffled = [...allAffiliationIds].sort(() => 0.5 - rng());
     const selected = shuffled.slice(0, numAffiliations);
-    console.log(selected);
 
     for (const affId of selected) {
       characterAffiliationsData.push({
