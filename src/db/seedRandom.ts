@@ -16,6 +16,11 @@ async function main() {
     species: schema.species,
     statuses: schema.statuses,
   }).refine((f) => ({
+    affiliations: {
+      columns: {
+        name: f.companyName(),
+      },
+    },
     species: {
       columns: {
         name: f.valuesFromArray({
