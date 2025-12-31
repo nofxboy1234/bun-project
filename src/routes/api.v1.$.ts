@@ -1,6 +1,7 @@
 import { Elysia, t } from "elysia";
 import { openapi } from "@elysiajs/openapi";
 import { treaty } from "@elysiajs/eden";
+
 import { createInsertSchema } from "drizzle-typebox";
 import * as schema from "@/db/schema";
 
@@ -9,7 +10,7 @@ import { createIsomorphicFn } from "@tanstack/react-start";
 
 import { tasks } from "@/db/tasks";
 
-const _createUser = createInsertSchema(schema.affiliations);
+const affiliationInsertSchema = createInsertSchema(schema.affiliations);
 
 let taskId = 15;
 
