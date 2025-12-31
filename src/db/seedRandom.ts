@@ -110,8 +110,6 @@ async function main() {
     db,
     {
       characterAliases: schema.characterAliases,
-      // characterOccupations: schema.characterOccupations,
-      // relatives: schema.relatives,
     },
     { seed: seedVal },
   ).refine((f) => ({
@@ -213,6 +211,37 @@ async function main() {
     await db
       .insert(schema.characterOccupations)
       .values(characterOccupationsData);
+  }
+
+  // relatives
+  const allCharacterIds = characters.map((a) => a.id);
+  const relativesData: {
+    character1Id: number;
+    character2Id: number;
+    relativeTypeId: number;
+  }[] = [];
+  const allRelativeTypeIds = relativeTypes.map((a) => a.id);
+
+  for (const char of characters) {
+    const numRelatives = Math.floor(rng() * 6);
+
+    const shuffled = [...allCharacterIds].sort(() => 0.5 - rng());
+    const selected = shuffled.slice(0, numRelatives);
+
+    for (const charId of selected) {
+      const shuffled = [...allRelativeTypeIds].sort(() => 0.5 - rng());
+      const selectedId = shuffled[0];
+
+      relativesData.push({
+        character1Id: char.id,
+        character2Id: charId,
+        relativeTypeId: selectedId,
+      });
+    }
+  }
+
+  if (relativesData.length > 0) {
+    await db.insert(schema.relatives).values(relativesData);
   }
 }
 
