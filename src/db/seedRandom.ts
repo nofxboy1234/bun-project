@@ -21,6 +21,15 @@ async function main() {
         name: f.companyName(),
       },
     },
+    genders: {
+      columns: {
+        name: f.valuesFromArray({
+          isUnique: true,
+          values: ["Male", "Female"],
+        }),
+      },
+      count: 2,
+    },
     species: {
       columns: {
         name: f.valuesFromArray({
