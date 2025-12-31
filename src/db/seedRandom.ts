@@ -110,7 +110,6 @@ async function main() {
     db,
     {
       characterAliases: schema.characterAliases,
-      // contracts: schema.contracts,
       // characterOccupations: schema.characterOccupations,
       // relatives: schema.relatives,
     },
@@ -187,6 +186,33 @@ async function main() {
 
   if (contractsData.length > 0) {
     await db.insert(schema.contracts).values(contractsData);
+  }
+
+  // characterOccupations
+  const allOccupationIds = occupations.map((a) => a.id);
+  const characterOccupationsData: {
+    characterId: number;
+    occupationId: number;
+  }[] = [];
+
+  for (const char of characters) {
+    const numOccupations = Math.floor(rng() * 5);
+
+    const shuffled = [...allOccupationIds].sort(() => 0.5 - rng());
+    const selected = shuffled.slice(0, numOccupations);
+
+    for (const occId of selected) {
+      characterOccupationsData.push({
+        characterId: char.id,
+        occupationId: occId,
+      });
+    }
+  }
+
+  if (characterOccupationsData.length > 0) {
+    await db
+      .insert(schema.characterOccupations)
+      .values(characterOccupationsData);
   }
 }
 
