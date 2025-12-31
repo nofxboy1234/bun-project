@@ -15,7 +15,17 @@ async function main() {
     relativeTypes: schema.relativeTypes,
     species: schema.species,
     statuses: schema.statuses,
-  });
+  }).refine((f) => ({
+    species: {
+      columns: {
+        name: f.valuesFromArray({
+          isUnique: true,
+          values: ["Human", "Devil", "Fiend", "Hybrid"],
+        }),
+      },
+      count: 4,
+    },
+  }));
 
   const affiliations = await db.select().from(schema.affiliations);
   const genders = await db.select().from(schema.genders);
@@ -75,11 +85,26 @@ async function main() {
           values: statuses.map((value) => value.id),
         }),
       },
+      count: 50,
     },
   }));
 
   const maps = await db.select().from(schema.maps);
   const characters = await db.select().from(schema.characters);
+  const humans = await db.query.characters.findMany({
+    where: {
+      species: {
+        name: "Human",
+      },
+    },
+  });
+  const devils = await db.query.characters.findMany({
+    where: {
+      species: {
+        name: "Devil",
+      },
+    },
+  });
 
   await seed(
     db,
@@ -110,6 +135,7 @@ async function main() {
   };
   const rng = mulberry32(seedVal);
 
+  // characterAffiliations
   const allAffiliationIds = affiliations.map((a) => a.id);
   const characterAffiliationsData: {
     characterId: number;
@@ -134,6 +160,33 @@ async function main() {
     await db
       .insert(schema.characterAffiliations)
       .values(characterAffiliationsData);
+  }
+
+  // contracts
+  const allDevilIds = devils.map((a) => a.id);
+  const contractsData: {
+    terms: string;
+    humanId: number;
+    devilId: number;
+  }[] = [];
+
+  for (const human of humans) {
+    const numContracts = Math.floor(rng() * 7);
+
+    const shuffled = [...allDevilIds].sort(() => 0.5 - rng());
+    const selected = shuffled.slice(0, numContracts);
+
+    for (const devilId of selected) {
+      contractsData.push({
+        terms: "a contract!",
+        humanId: human.id,
+        devilId: devilId,
+      });
+    }
+  }
+
+  if (contractsData.length > 0) {
+    await db.insert(schema.contracts).values(contractsData);
   }
 }
 
