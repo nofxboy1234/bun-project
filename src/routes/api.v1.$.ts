@@ -2,15 +2,10 @@ import { Elysia, t } from "elysia";
 import { openapi } from "@elysiajs/openapi";
 import { treaty } from "@elysiajs/eden";
 
-import { createInsertSchema } from "drizzle-typebox";
-import * as schema from "@/db/schema";
-
 import { createFileRoute } from "@tanstack/react-router";
 import { createIsomorphicFn } from "@tanstack/react-start";
 
 import { tasks } from "@/db/tasks";
-
-const affiliationInsertSchema = createInsertSchema(schema.affiliations);
 
 let taskId = 15;
 
