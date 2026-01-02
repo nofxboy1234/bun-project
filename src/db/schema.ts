@@ -28,7 +28,7 @@ export const locations = pgTable(
     createdAt: t.timestamp().defaultNow(),
     name: t.varchar({ length: 255 }).notNull(),
     locationTypeId: t
-      .integer()
+      .integer("location_type_id")
       .references(() => locationTypes.id, {
         onDelete: "cascade",
       })
@@ -47,7 +47,7 @@ export const characterAliases = pgTable(
     createdAt: t.timestamp().defaultNow(),
     name: t.varchar({ length: 255 }).notNull(),
     characterId: t
-      .integer()
+      .integer("character_id")
       .references(() => characters.id, { onDelete: "cascade" })
       .notNull(),
   }),
@@ -74,7 +74,7 @@ export const speciesAliases = pgTable(
     createdAt: t.timestamp().defaultNow(),
     name: t.varchar({ length: 255 }).notNull(),
     speciesId: t
-      .integer()
+      .integer("species_id")
       .references(() => species.id, { onDelete: "cascade" })
       .notNull(),
   }),
@@ -102,7 +102,7 @@ export const maps = pgTable(
     createdAt: t.timestamp().defaultNow(),
     imageFilePath: t.varchar({ length: 255 }).notNull(),
     locationId: t
-      .integer()
+      .integer("location_id")
       .references(() => locations.id, { onDelete: "cascade" })
       .notNull(),
   }),
@@ -125,15 +125,15 @@ export const relatives = pgTable(
     id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
     createdAt: t.timestamp().defaultNow(),
     character1Id: t
-      .integer()
+      .integer("character1_id")
       .references(() => characters.id, { onDelete: "cascade" })
       .notNull(),
     character2Id: t
-      .integer()
+      .integer("character2_id")
       .references(() => characters.id, { onDelete: "cascade" })
       .notNull(),
     relativeTypeId: t
-      .integer()
+      .integer("relative_type_id")
       .references(() => relativeTypes.id, {
         onDelete: "cascade",
       })
@@ -157,11 +157,11 @@ export const contracts = pgTable(
     createdAt: t.timestamp().defaultNow(),
     terms: t.varchar({ length: 2000 }).notNull(),
     humanId: t
-      .integer()
+      .integer("human_id")
       .references(() => characters.id, { onDelete: "cascade" })
       .notNull(),
     devilId: t
-      .integer()
+      .integer("devil_id")
       .references(() => characters.id, { onDelete: "cascade" })
       .notNull(),
   }),
@@ -182,19 +182,19 @@ export const characters = pgTable(
     age: t.integer(),
     height: t.integer(),
     speciesId: t
-      .integer()
+      .integer("species_id")
       .references(() => species.id, { onDelete: "cascade" })
       .notNull(),
     genderId: t
-      .integer()
+      .integer("gender_id")
       .references(() => genders.id, { onDelete: "cascade" })
       .notNull(),
     birthplaceId: t
-      .integer()
+      .integer("birthplace_id")
       .references(() => locations.id, { onDelete: "cascade" })
       .notNull(),
     statusId: t
-      .integer()
+      .integer("status_id")
       .references(() => statuses.id, { onDelete: "cascade" })
       .notNull(),
   }),
@@ -213,11 +213,11 @@ export const characterAffiliations = pgTable(
     id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
     createdAt: t.timestamp().defaultNow(),
     characterId: t
-      .integer()
+      .integer("character_id")
       .references(() => characters.id, { onDelete: "cascade" })
       .notNull(),
     affiliationId: t
-      .integer()
+      .integer("affiliation_id")
       .references(() => affiliations.id, { onDelete: "cascade" })
       .notNull(),
   }),
@@ -247,11 +247,11 @@ export const characterOccupations = pgTable(
     id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
     createdAt: t.timestamp().defaultNow(),
     characterId: t
-      .integer()
+      .integer("character_id")
       .references(() => characters.id, { onDelete: "cascade" })
       .notNull(),
     occupationId: t
-      .integer()
+      .integer("occupation_id")
       .references(() => occupations.id, { onDelete: "cascade" })
       .notNull(),
   }),
