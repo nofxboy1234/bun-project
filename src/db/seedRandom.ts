@@ -6,6 +6,8 @@ import { count, eq } from "drizzle-orm";
 const seedVal = 9999;
 
 async function main() {
+  console.log("hello");
+
   await reset(db, schema);
 
   await seed(db, {
@@ -285,4 +287,4 @@ async function main() {
   console.log(genderCounts);
 }
 
-main();
+await main();
