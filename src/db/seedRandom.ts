@@ -6,22 +6,26 @@ import { count, eq } from "drizzle-orm";
 const seedVal = 9999;
 
 async function main() {
-  console.log("hello");
-
   await reset(db, schema);
 
-  await seed(db, {
-    affiliations: schema.affiliations,
-    genders: schema.genders,
-    locationTypes: schema.locationTypes,
-    occupations: schema.occupations,
-    relativeTypes: schema.relativeTypes,
-    species: schema.species,
-    statuses: schema.statuses,
-  }).refine((f) => ({
+  await seed(
+    db,
+    {
+      affiliations: schema.affiliations,
+      genders: schema.genders,
+      locationTypes: schema.locationTypes,
+      occupations: schema.occupations,
+      relativeTypes: schema.relativeTypes,
+      species: schema.species,
+      statuses: schema.statuses,
+    },
+    { seed: seedVal },
+  ).refine((f) => ({
     affiliations: {
       columns: {
-        name: f.companyName(),
+        name: f.companyName({
+          isUnique: true,
+        }),
       },
     },
     genders: {
@@ -33,6 +37,27 @@ async function main() {
       },
       count: 2,
     },
+    locationTypes: {
+      columns: {
+        name: f.string({
+          isUnique: true,
+        }),
+      },
+    },
+    occupations: {
+      columns: {
+        name: f.string({
+          isUnique: true,
+        }),
+      },
+    },
+    relativeTypes: {
+      columns: {
+        name: f.string({
+          isUnique: true,
+        }),
+      },
+    },
     species: {
       columns: {
         name: f.valuesFromArray({
@@ -41,6 +66,13 @@ async function main() {
         }),
       },
       count: 4,
+    },
+    statuses: {
+      columns: {
+        name: f.string({
+          isUnique: true,
+        }),
+      },
     },
   }));
 
@@ -52,12 +84,19 @@ async function main() {
   const species = await db.select().from(schema.species);
   const statuses = await db.select().from(schema.statuses);
 
-  await seed(db, {
-    locations: schema.locations,
-    speciesAliases: schema.speciesAliases,
-  }).refine((f) => ({
+  await seed(
+    db,
+    {
+      locations: schema.locations,
+      speciesAliases: schema.speciesAliases,
+    },
+    { seed: seedVal },
+  ).refine((f) => ({
     locations: {
       columns: {
+        name: f.city({
+          isUnique: true,
+        }),
         locationTypeId: f.valuesFromArray({
           values: locationTypes.map((value) => value.id),
         }),
@@ -65,6 +104,9 @@ async function main() {
     },
     speciesAliases: {
       columns: {
+        name: f.string({
+          isUnique: true,
+        }),
         speciesId: f.valuesFromArray({
           values: species.map((value) => value.id),
         }),
@@ -74,6 +116,7 @@ async function main() {
 
   const locations = await db.select().from(schema.locations);
   const speciesAliases = await db.select().from(schema.speciesAliases);
+
   const males = await db.query.genders.findMany({
     where: {
       name: "Male",
@@ -85,10 +128,14 @@ async function main() {
     },
   });
 
-  await seed(db, {
-    maps: schema.maps,
-    characters: schema.characters,
-  }).refine((f) => ({
+  await seed(
+    db,
+    {
+      maps: schema.maps,
+      characters: schema.characters,
+    },
+    { seed: seedVal },
+  ).refine((f) => ({
     maps: {
       columns: {
         locationId: f.valuesFromArray({
@@ -107,8 +154,8 @@ async function main() {
         }),
         genderId: f.valuesFromArray({
           values: [
-            { weight: 0.3, values: males.map((value) => value.id) },
-            { weight: 0.7, values: females.map((value) => value.id) },
+            { weight: 0.4, values: males.map((value) => value.id) },
+            { weight: 0.6, values: females.map((value) => value.id) },
           ],
         }),
         birthplaceId: f.valuesFromArray({
@@ -123,6 +170,7 @@ async function main() {
 
   const maps = await db.select().from(schema.maps);
   const characters = await db.select().from(schema.characters);
+
   const humans = await db.query.characters.findMany({
     where: {
       species: {
@@ -147,6 +195,9 @@ async function main() {
   ).refine((f) => ({
     characterAliases: {
       columns: {
+        name: f.firstName({
+          isUnique: true,
+        }),
         characterId: f.valuesFromArray({
           values: characters.map((value) => value.id),
         }),
