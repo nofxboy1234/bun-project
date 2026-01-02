@@ -10,7 +10,7 @@
     "db:seed:random": "bun src/db/seedRandom.ts",
     "db:dump": "pg_dump --schema-only --file=./src/db/schema.sql bun-project",
     "db:erd:build": "bun db:dump && bunx liam erd build --input src/db/schema.sql --format postgres --output-dir erd",
-    "db:studio": "bunx drizzle-kit studio --verbose",
+    "db:studio": "bun --bun drizzle-kit studio --verbose",
     "db:erd:serve": "bunx --bun serve erd/",
     "db": "bun run db:reset && bun run db:push && bun run db:seed && bun run db:erd:build",
     "lint": "bunx --bun oxlint",
