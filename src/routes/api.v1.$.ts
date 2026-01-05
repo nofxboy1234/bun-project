@@ -3,11 +3,17 @@ import { openapi } from "@elysiajs/openapi";
 import { treaty } from "@elysiajs/eden";
 
 import { createFileRoute } from "@tanstack/react-router";
-import { createIsomorphicFn } from "@tanstack/react-start";
+import { createIsomorphicFn, createServerOnlyFn } from "@tanstack/react-start";
 
 import { tasks } from "@/db/tasks";
 
+import { db } from "@/db";
+
 let taskId = 15;
+
+const getLocations = createServerOnlyFn(
+  async () => await db.query.locations.findMany(),
+);
 
 export const app = new Elysia({
   name: "api",
@@ -18,6 +24,7 @@ export const app = new Elysia({
   .get("/tasks", () => ({
     tasks,
   }))
+  .get("/locations", async () => await getLocations())
   .post(
     "/tasks",
     ({ body }) => {
