@@ -9,6 +9,8 @@ import { tasks } from "@/db/tasks";
 
 import { db } from "@/db";
 
+import { schemas } from "@/schemas/backend";
+
 let taskId = 15;
 
 const getLocations = createServerOnlyFn(
@@ -23,7 +25,11 @@ export const app = new Elysia({
   .get("/tasks", () => ({
     tasks,
   }))
-  .get("/locations", async () => await getLocations())
+  .get("/locations", async () => await getLocations(), {
+    response: {
+      200: t.Array(schemas.select.locations),
+    },
+  })
   .post(
     "/tasks",
     ({ body }) => {
