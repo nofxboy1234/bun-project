@@ -20,7 +20,6 @@ export const app = new Elysia({
   prefix: "/api/v1",
 })
   .use(openapi())
-  .get("/", "/api/v1/tasks/")
   .get("/tasks", () => ({
     tasks,
   }))
@@ -103,11 +102,7 @@ export const app = new Elysia({
         id: t.Number(),
       }),
     },
-  )
-  .all("/*", ({ params, status }) => {
-    console.log(`Wildcard params: ${params["*"]}`);
-    return status(404, "Not Found");
-  });
+  );
 
 const handle = ({ request }: { request: Request }) => {
   console.log(`${request.method} ${request.url}`);
