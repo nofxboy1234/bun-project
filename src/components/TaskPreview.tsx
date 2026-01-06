@@ -5,18 +5,15 @@ import type { Task } from "../types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { api } from "../routes/api.v1.$";
-import { createServerFn } from "@tanstack/react-start";
 import type { ValidationError } from "elysia";
 
-const deleteTask = createServerFn({ method: "POST" })
-  .inputValidator((data: { id: number }) => data)
-  .handler(async ({ data: { id } }) => {
-    const { data: result, error } = await api().v1.tasks({ id }).delete();
+const deleteTask = async (id: number) => {
+  const { data: result, error } = await api().v1.tasks({ id }).delete();
 
-    if (error) throw error.value;
+  if (error) throw error.value;
 
-    return result.task;
-  });
+  return result.task;
+};
 
 export function TaskPreview({ task }: { task: Task }) {
   const queryClient = useQueryClient();
@@ -25,7 +22,7 @@ export function TaskPreview({ task }: { task: Task }) {
   const deleteMutation = useMutation({
     mutationFn: async (id: number) => {
       try {
-        await deleteTask({ data: { id } });
+        await deleteTask(id);
       } catch (error) {
         console.log((error as ValidationError).message);
         throw error;

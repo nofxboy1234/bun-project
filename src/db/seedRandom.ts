@@ -335,7 +335,6 @@ async function main() {
     .from(schema.characters)
     .leftJoin(schema.genders, eq(schema.characters.genderId, schema.genders.id))
     .groupBy(schema.genders.name);
-  console.log(genderCounts);
 }
 
 await main();

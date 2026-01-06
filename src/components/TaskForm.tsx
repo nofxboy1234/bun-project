@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
-import { createServerFn } from "@tanstack/react-start";
 import type { Task } from "../types";
 import { api } from "../routes/api.v1.$";
 import type { ValidationError } from "elysia/error";
@@ -24,26 +23,24 @@ const parseFormData = (data: FormData) => {
   return payload;
 };
 
-const saveTask = createServerFn({ method: "POST" })
-  .inputValidator(parseFormData)
-  .handler(async ({ data }) => {
-    if ("id" in data) {
-      const { id, ...payload } = data;
-      const { data: result, error } = await api()
-        .v1.tasks({ id })
-        .patch(payload);
+const saveTask = async (formData: FormData) => {
+  const data = parseFormData(formData);
 
-      if (error) throw error.value;
+  if ("id" in data) {
+    const { id, ...payload } = data;
+    const { data: result, error } = await api().v1.tasks({ id }).patch(payload);
 
-      return result.task;
-    } else {
-      const { data: result, error } = await api().v1.tasks.post(data);
+    if (error) throw error.value;
 
-      if (error) throw error.value;
+    return result.task;
+  } else {
+    const { data: result, error } = await api().v1.tasks.post(data);
 
-      return result.task;
-    }
-  });
+    if (error) throw error.value;
+
+    return result.task;
+  }
+};
 
 export function TaskForm({ task }: { task?: Task }) {
   const queryClient = useQueryClient();
@@ -52,7 +49,7 @@ export function TaskForm({ task }: { task?: Task }) {
   const saveMutation = useMutation({
     mutationFn: async (data: FormData) => {
       try {
-        return await saveTask({ data });
+        return await saveTask(data);
       } catch (error) {
         console.log((error as ValidationError).message);
         throw error;

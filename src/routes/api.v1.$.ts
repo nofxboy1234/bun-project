@@ -110,7 +110,8 @@ export const app = new Elysia({
   });
 
 const handle = ({ request }: { request: Request }) => {
-  console.log("/api/v1/$ -> passing request to Elysia");
+  console.log(`${request.method} ${request.url}`);
+
   return app.fetch(request);
 };
 
