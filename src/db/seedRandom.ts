@@ -1,7 +1,6 @@
 import * as schema from "@/db/schema";
 import { db } from "@/db";
 import { reset, seed } from "drizzle-seed";
-import { count, eq } from "drizzle-orm";
 
 const seedVal = 9999;
 
@@ -77,7 +76,6 @@ async function main() {
   }));
 
   const affiliations = await db.select().from(schema.affiliations);
-  const genders = await db.select().from(schema.genders);
   const locationTypes = await db.select().from(schema.locationTypes);
   const occupations = await db.select().from(schema.occupations);
   const relativeTypes = await db.select().from(schema.relativeTypes);
@@ -115,7 +113,6 @@ async function main() {
   }));
 
   const locations = await db.select().from(schema.locations);
-  const speciesAliases = await db.select().from(schema.speciesAliases);
 
   const males = await db.query.genders.findMany({
     where: {
@@ -168,7 +165,6 @@ async function main() {
     },
   }));
 
-  const maps = await db.select().from(schema.maps);
   const characters = await db.select().from(schema.characters);
 
   const humans = await db.query.characters.findMany({
@@ -326,15 +322,6 @@ async function main() {
   if (relativesData.length > 0) {
     await db.insert(schema.relatives).values(relativesData);
   }
-
-  const genderCounts = await db
-    .select({
-      gender: schema.genders.name,
-      count: count(schema.characters.id),
-    })
-    .from(schema.characters)
-    .leftJoin(schema.genders, eq(schema.characters.genderId, schema.genders.id))
-    .groupBy(schema.genders.name);
 }
 
 await main();
