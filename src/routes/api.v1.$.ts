@@ -7,7 +7,9 @@ import { createIsomorphicFn } from "@tanstack/react-start";
 
 import { tasks } from "@/db/tasks";
 
-import { schemas } from "@/schemas/backend";
+import { Location } from "@/schemas/select";
+import * as z from "zod";
+
 import { getLocations } from "@/queries/locations";
 
 let taskId = 15;
@@ -21,9 +23,7 @@ export const app = new Elysia({
     tasks,
   }))
   .get("/locations", async () => await getLocations(), {
-    response: {
-      200: t.Array(schemas.select.location),
-    },
+    response: z.array(Location),
   })
   .post(
     "/tasks",
