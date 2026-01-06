@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Task } from "@/components/Task";
-import { taskQueryOptions } from "@/taskQueryOptions";
+import { taskQueryOptions } from "@/queryOptions/taskQueryOptions";
 
 export const Route = createFileRoute("/tasks/$taskId/")({
   loader: ({ context: { queryClient }, params: { taskId } }) => {

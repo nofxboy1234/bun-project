@@ -1,5 +1,5 @@
 import { TaskForm } from "@/components/TaskForm";
-import { taskQueryOptions } from "@/taskQueryOptions";
+import { taskQueryOptions } from "@/queryOptions/taskQueryOptions";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
 

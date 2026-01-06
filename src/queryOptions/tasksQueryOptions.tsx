@@ -1,5 +1,5 @@
 import { queryOptions } from "@tanstack/react-query";
-import { api } from "./routes/api.v1.$";
+import { api } from "../routes/api.v1.$";
 
 export const tasksQueryOptions = queryOptions({
   queryKey: ["tasks"],
