@@ -27,7 +27,7 @@ export const app = new Elysia({
   }))
   .get("/locations", async () => await getLocations(), {
     response: {
-      200: t.Array(schemas.select.locations),
+      200: t.Array(schemas.select.location),
     },
   })
   .post(
