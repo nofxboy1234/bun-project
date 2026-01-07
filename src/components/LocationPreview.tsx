@@ -5,8 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { api } from "../routes/api.v1.$";
 import type { ValidationError } from "elysia";
-import { select } from "@/schemas/select";
-import * as z from "zod";
+import { SelectLocation } from "@/types/select";
 
 const deleteLocation = async (id: number) => {
   const { data, error } = await api().v1.locations({ id }).delete();
@@ -16,11 +15,7 @@ const deleteLocation = async (id: number) => {
   return data;
 };
 
-export function LocationPreview({
-  location,
-}: {
-  location: z.infer<typeof select.location>;
-}) {
+export function LocationPreview({ location }: { location: SelectLocation }) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
