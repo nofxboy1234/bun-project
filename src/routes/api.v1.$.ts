@@ -1,107 +1,112 @@
-import { Elysia, t } from "elysia";
+import { Elysia } from "elysia";
 import { openapi } from "@elysiajs/openapi";
 import { treaty } from "@elysiajs/eden";
 
 import { createFileRoute } from "@tanstack/react-router";
 import { createIsomorphicFn } from "@tanstack/react-start";
 
-import { tasks } from "@/db/tasks";
-
-import { Location } from "@/schemas/select";
+import { select } from "@/schemas/select";
+import { insert } from "@/schemas/insert";
+import { update } from "@/schemas/update";
 import * as z from "zod";
 
-import { getLocations } from "@/queries/locations";
-
-let taskId = 15;
+import {
+  deleteLocation,
+  getLocation,
+  getLocations,
+  insertLocation,
+  updateLocation,
+} from "@/queries/locations";
 
 export const app = new Elysia({
   name: "api",
   prefix: "/api/v1",
 })
   .use(openapi())
-  .get("/tasks", () => ({
-    tasks,
-  }))
   .get("/locations", async () => await getLocations(), {
-    response: z.array(Location),
+    response: { 200: z.array(select.location) },
   })
   .post(
-    "/tasks",
-    ({ body }) => {
-      const task = {
-        id: taskId++,
-        ...body,
-      };
+    "/locations",
+    async ({ body, status }) => {
+      const location = await insertLocation(body);
 
-      tasks.push(task);
+      if (!location) {
+        return status(500, "Failed to create location");
+      }
 
-      return { task };
+      return location;
     },
     {
-      body: t.Object({
-        title: t.String(),
-        description: t.String(),
-        deadline: t.Date(),
-      }),
+      body: insert.location,
+      response: {
+        200: select.location,
+        500: z.string(),
+      },
     },
   )
   .get(
-    "/tasks/:id",
-    ({ params: { id }, status }) => {
-      const task = tasks.find((task) => task.id === id);
+    "/locations/:id",
+    async ({ params: { id }, status }) => {
+      const location = await getLocation(id);
 
-      if (!task) {
+      if (!location) {
         return status(404, "Not Found");
       }
 
-      return { task };
+      return location;
     },
     {
-      params: t.Object({
-        id: t.Number(),
+      params: z.object({
+        id: z.coerce.number({ error: "Id must be numeric" }).int().positive(),
       }),
       response: {
-        200: t.Object({
-          task: t.Object({
-            id: t.Number(),
-            title: t.String(),
-            description: t.String(),
-            deadline: t.Date(),
-          }),
-        }),
-        404: t.String(),
+        200: select.location,
+        404: z.string(),
       },
     },
   )
   .patch(
-    "/tasks/:id",
-    ({ params: { id }, body }) => {
-      const task = tasks.find((task) => task.id === id);
-      Object.assign(task!, body);
+    "/locations/:id",
+    async ({ params: { id }, body, status }) => {
+      const location = await updateLocation(id, body);
 
-      return { task };
+      if (!location) {
+        return status(500, "Failed to update location");
+      }
+
+      return location;
     },
     {
-      params: t.Object({
-        id: t.Number(),
+      params: z.object({
+        id: z.coerce.number({ error: "Id must be numeric" }).int().positive(),
       }),
-      body: t.Object({
-        title: t.String(),
-        description: t.String(),
-        deadline: t.Date(),
-      }),
+      body: update.location,
+      response: {
+        200: select.location,
+        500: z.string(),
+      },
     },
   )
   .delete(
-    "/tasks/:id",
-    ({ params: { id } }) => {
-      const deleteIndex = tasks.findIndex((task) => task.id === id);
-      return { task: tasks.splice(deleteIndex, 1) };
+    "/locations/:id",
+    async ({ params: { id }, status }) => {
+      const location = await deleteLocation(id);
+
+      if (!location) {
+        return status(500, "Failed to delete location");
+      }
+
+      return location;
     },
     {
-      params: t.Object({
-        id: t.Number(),
+      params: z.object({
+        id: z.coerce.number({ error: "Id must be numeric" }).int().positive(),
       }),
+      response: {
+        200: select.location,
+        500: z.string(),
+      },
     },
   );
 

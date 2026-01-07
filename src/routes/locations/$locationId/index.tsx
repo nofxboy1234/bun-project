@@ -3,7 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { Task } from "@/components/Task";
 import { taskQueryOptions } from "@/queryOptions/taskQueryOptions";
 
-export const Route = createFileRoute("/tasks/$taskId/")({
+export const Route = createFileRoute("/locations/$locationId/")({
   loader: ({ context: { queryClient }, params: { taskId } }) => {
     queryClient.ensureQueryData({
       ...taskQueryOptions(Number(taskId)),

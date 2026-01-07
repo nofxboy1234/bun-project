@@ -1,69 +1,81 @@
 import styles from "@/styles.module.css";
 import deleteIcon from "@/icons/delete.svg";
 import updateIcon from "@/icons/update.svg";
-import type { Task } from "../types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { api } from "../routes/api.v1.$";
 import type { ValidationError } from "elysia";
+import { select } from "@/schemas/select";
+import * as z from "zod";
 
-const deleteTask = async (id: number) => {
-  const { data: result, error } = await api().v1.tasks({ id }).delete();
+const deleteLocation = async (id: number) => {
+  const { data, error } = await api().v1.locations({ id }).delete();
 
   if (error) throw error.value;
 
-  return result.task;
+  return data;
 };
 
-export function TaskPreview({ task }: { task: Task }) {
+export function LocationPreview({
+  location,
+}: {
+  location: z.infer<typeof select.location>;
+}) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const deleteMutation = useMutation({
     mutationFn: async (id: number) => {
       try {
-        await deleteTask(id);
+        await deleteLocation(id);
       } catch (error) {
         console.log((error as ValidationError).message);
         throw error;
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      queryClient.invalidateQueries({ queryKey: ["locations"] });
     },
   });
 
-  const taskId = task.id!.toString();
+  const locationId = location.id.toString();
 
   return (
-    <Link to="/tasks/$taskId" params={{ taskId }} className={styles.task}>
-      <div>{task.title}</div>
+    <Link
+      to="/locations/$locationId"
+      params={{ locationId: locationId }}
+      className={styles.task}
+    >
+      <div>{location.name}</div>
       <div>
-        {task.deadline.toLocaleDateString("en-ZA", {
+        {location.createdAt!.toLocaleDateString("en-ZA", {
           timeZone: "Africa/Johannesburg",
         })}
       </div>
       <div className={styles.taskOperations}>
         <img
           src={updateIcon}
-          alt="Update Task"
+          alt="Update Location"
           className={styles.updateIcon}
           onClick={(event) => {
             event.preventDefault();
             event.stopPropagation();
 
-            navigate({ to: "/tasks/$taskId/edit", params: { taskId } });
+            navigate({
+              to: "/locations/$locationId/edit",
+              params: { locationId: locationId },
+            });
           }}
         />
         <img
           src={deleteIcon}
-          alt="Delete Task"
+          alt="Delete Location"
           className={styles.deleteIcon}
           onClick={(event) => {
             event.preventDefault();
             event.stopPropagation();
 
-            deleteMutation.mutate(task.id!);
+            deleteMutation.mutate(location.id);
           }}
         />
         {deleteMutation.isError && (

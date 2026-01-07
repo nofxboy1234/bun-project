@@ -1,15 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { tasksQueryOptions } from "@/queryOptions/tasksQueryOptions";
+import { locationsQueryOptions } from "@/queryOptions/locationsQueryOptions";
 
 import styles from "@/styles.module.css";
 
-import { TaskPreview } from "@/components/TaskPreview";
+import { LocationPreview } from "@/components/LocationPreview";
 
 export const Route = createFileRoute("/")({
   loader: ({ context: { queryClient } }) => {
     queryClient.ensureQueryData({
-      ...tasksQueryOptions,
+      ...locationsQueryOptions,
       revalidateIfStale: true,
     });
   },
@@ -28,13 +28,13 @@ export const Route = createFileRoute("/")({
 });
 
 function TasksLayoutComponent() {
-  const { data: tasks } = useSuspenseQuery(tasksQueryOptions);
+  const { data } = useSuspenseQuery(locationsQueryOptions);
 
   return (
     <div className={styles.main}>
       <div className={styles.tasksContainer}>
-        {tasks!.map((task) => (
-          <TaskPreview key={task.id} task={task} />
+        {data.map((location) => (
+          <LocationPreview key={location.id} location={location} />
         ))}
       </div>
     </div>
