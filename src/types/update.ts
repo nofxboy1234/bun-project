@@ -12,7 +12,11 @@ export type UpdateRelativeType = z.infer<typeof update.relativeType>;
 export type UpdateRelative = z.infer<typeof update.relative>;
 export type UpdateContract = z.infer<typeof update.contract>;
 export type UpdateCharacter = z.infer<typeof update.character>;
-export type UpdateCharacterAffiliation = z.infer<typeof update.characterAffiliation>;
+export type UpdateCharacterAffiliation = z.infer<
+  typeof update.characterAffiliation
+>;
 export type UpdateAffiliation = z.infer<typeof update.affiliation>;
-export type UpdateCharacterOccupation = z.infer<typeof update.characterOccupation>;
+export type UpdateCharacterOccupation = z.infer<
+  typeof update.characterOccupation
+>;
 export type UpdateOccupation = z.infer<typeof update.occupation>;

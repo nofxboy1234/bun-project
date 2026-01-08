@@ -9,8 +9,12 @@ export default function RootLayout() {
         <Link to="/">
           <h1 className={styles.title}>bun-project</h1>
         </Link>
-        <Link to="/tasks/new">
-          <img src={plusIcon} alt="Create Task" className={styles.plusIcon} />
+        <Link to="/locations/new">
+          <img
+            src={plusIcon}
+            alt="Create Location"
+            className={styles.plusIcon}
+          />
         </Link>
       </div>
 

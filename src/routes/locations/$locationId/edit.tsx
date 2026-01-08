@@ -1,34 +1,30 @@
-import { TaskForm } from "@/components/TaskForm";
-import { taskQueryOptions } from "@/queryOptions/taskQueryOptions";
+import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { LocationForm } from "@/components/LocationForm";
+import { locationQueryOptions } from "@/queryOptions/locationQueryOptions";
+import { locationTypesQueryOptions } from "@/queryOptions/locationTypesQueryOptions";
 
 export const Route = createFileRoute("/locations/$locationId/edit")({
-  loader: ({ context: { queryClient }, params: { taskId } }) => {
-    queryClient.ensureQueryData({
-      ...taskQueryOptions(Number(taskId)),
-      revalidateIfStale: true,
-    });
+  loader: async ({ context: { queryClient }, params: { locationId } }) => {
+    const id = Number(locationId);
+    await Promise.all([
+      queryClient.ensureQueryData(locationQueryOptions(id)),
+      queryClient.ensureQueryData(locationTypesQueryOptions),
+    ]);
   },
-  component: RouteComponent,
-  notFoundComponent: () => {
-    return (
-      <div>
-        <p>This is the notFoundComponent configured on /tasks/$taskId/edit</p>
-        <Link to="/">Start Over</Link>
-      </div>
-    );
-  },
-  pendingComponent: () => {
-    return <div>loading task edit form</div>;
-  },
+  component: EditLocationComponent,
 });
 
-function RouteComponent() {
-  const { taskId } = Route.useParams();
-  const { data: task } = useSuspenseQuery({
-    ...taskQueryOptions(Number(taskId)),
-  });
+function EditLocationComponent() {
+  const params = Route.useParams();
+  const { data: location } = useSuspenseQuery(
+    locationQueryOptions(Number(params.locationId)),
+  );
 
-  return <TaskForm task={task!} />;
+  return (
+    <div>
+      <h2>Edit Location</h2>
+      <LocationForm location={location} />
+    </div>
+  );
 }

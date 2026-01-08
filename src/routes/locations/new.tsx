@@ -1,10 +1,19 @@
-import { TaskForm } from "@/components/TaskForm";
 import { createFileRoute } from "@tanstack/react-router";
+import { LocationForm } from "@/components/LocationForm";
+import { locationTypesQueryOptions } from "@/queryOptions/locationTypesQueryOptions";
 
 export const Route = createFileRoute("/locations/new")({
-  component: RouteComponent,
+  loader: ({ context: { queryClient } }) => {
+    queryClient.ensureQueryData(locationTypesQueryOptions);
+  },
+  component: NewLocationComponent,
 });
 
-function RouteComponent() {
-  return <TaskForm />;
+function NewLocationComponent() {
+  return (
+    <div>
+      <h2>Create New Location</h2>
+      <LocationForm />
+    </div>
+  );
 }

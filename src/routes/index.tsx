@@ -13,7 +13,7 @@ export const Route = createFileRoute("/")({
       revalidateIfStale: true,
     });
   },
-  component: TasksLayoutComponent,
+  component: LocationsLayoutComponent,
   notFoundComponent: () => {
     return (
       <div>
@@ -27,12 +27,12 @@ export const Route = createFileRoute("/")({
   },
 });
 
-function TasksLayoutComponent() {
+function LocationsLayoutComponent() {
   const { data } = useSuspenseQuery(locationsQueryOptions);
 
   return (
     <div className={styles.main}>
-      <div className={styles.tasksContainer}>
+      <div className={styles.locationsContainer}>
         {data.map((location) => (
           <LocationPreview key={location.id} location={location} />
         ))}

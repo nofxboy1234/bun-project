@@ -39,7 +39,7 @@ export function LocationPreview({ location }: { location: SelectLocation }) {
     <Link
       to="/locations/$locationId"
       params={{ locationId: locationId }}
-      className={styles.task}
+      className={styles.location}
     >
       <div>{location.name}</div>
       <div>
@@ -47,7 +47,7 @@ export function LocationPreview({ location }: { location: SelectLocation }) {
           timeZone: "Africa/Johannesburg",
         })}
       </div>
-      <div className={styles.taskOperations}>
+      <div className={styles.locationOperations}>
         <img
           src={updateIcon}
           alt="Update Location"

@@ -17,12 +17,16 @@ import {
   insertLocation,
   updateLocation,
 } from "@/queries/locations";
+import { getLocationTypes } from "@/queries/locationTypes";
 
 export const app = new Elysia({
   name: "api",
   prefix: "/api/v1",
 })
   .use(openapi())
+  .get("/location-types", async () => await getLocationTypes(), {
+    response: { 200: z.array(select.locationType) },
+  })
   .get("/locations", async () => await getLocations(), {
     response: { 200: z.array(select.location) },
   })

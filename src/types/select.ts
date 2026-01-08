@@ -12,7 +12,11 @@ export type SelectRelativeType = z.infer<typeof select.relativeType>;
 export type SelectRelative = z.infer<typeof select.relative>;
 export type SelectContract = z.infer<typeof select.contract>;
 export type SelectCharacter = z.infer<typeof select.character>;
-export type SelectCharacterAffiliation = z.infer<typeof select.characterAffiliation>;
+export type SelectCharacterAffiliation = z.infer<
+  typeof select.characterAffiliation
+>;
 export type SelectAffiliation = z.infer<typeof select.affiliation>;
-export type SelectCharacterOccupation = z.infer<typeof select.characterOccupation>;
+export type SelectCharacterOccupation = z.infer<
+  typeof select.characterOccupation
+>;
 export type SelectOccupation = z.infer<typeof select.occupation>;

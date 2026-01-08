@@ -1,34 +1,26 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { Task } from "@/components/Task";
-import { taskQueryOptions } from "@/queryOptions/taskQueryOptions";
+import { locationQueryOptions } from "@/queryOptions/locationQueryOptions";
 
 export const Route = createFileRoute("/locations/$locationId/")({
-  loader: ({ context: { queryClient }, params: { taskId } }) => {
-    queryClient.ensureQueryData({
-      ...taskQueryOptions(Number(taskId)),
-      revalidateIfStale: true,
-    });
+  loader: ({ context: { queryClient }, params: { locationId } }) => {
+    queryClient.ensureQueryData(locationQueryOptions(Number(locationId)));
   },
-  component: RouteComponent,
-  notFoundComponent: () => {
-    return (
-      <div>
-        <p>This is the notFoundComponent configured on /tasks/$taskId</p>
-        <Link to="/">Start Over</Link>
-      </div>
-    );
-  },
-  pendingComponent: () => {
-    return <div>loading task</div>;
-  },
+  component: LocationDetailComponent,
 });
 
-function RouteComponent() {
-  const { taskId } = Route.useParams();
-  const { data: task } = useSuspenseQuery({
-    ...taskQueryOptions(Number(taskId)),
-  });
+function LocationDetailComponent() {
+  const params = Route.useParams();
+  const { data: location } = useSuspenseQuery(
+    locationQueryOptions(Number(params.locationId)),
+  );
 
-  return <Task task={task!} />;
+  return (
+    <div>
+      <h2>{location.name}</h2>
+      <p>Created At: {new Date(location.createdAt!).toLocaleString()}</p>
+      {/* Add more details here if needed, like location type name which requires joining or fetching types */}
+      <Link to="/">Back to Locations</Link>
+    </div>
+  );
 }

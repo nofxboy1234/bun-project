@@ -47,7 +47,12 @@
   margin-left: 1rem;
 }
 
-.task {
+.locationsContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.location {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -55,9 +60,10 @@
   cursor: pointer;
   height: 126px;
   border-bottom: 1px solid var(--dracula-purple);
+  padding: 1rem;
 }
 
-.task:hover {
+.location:hover {
   background-color: var(--dracula-selection);
 }
 
@@ -66,7 +72,7 @@
   filter: invert(100%);
 }
 
-.taskOperations {
+.locationOperations {
   display: flex;
 }
 
