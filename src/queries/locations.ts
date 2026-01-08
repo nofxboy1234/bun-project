@@ -9,15 +9,25 @@ export const getLocations = createServerOnlyFn(
   async () => await db.query.locations.findMany(),
 );
 
-export const insertLocation = createServerOnlyFn(async (data: InsertLocation) =>
-  (await db.insert(schema.locations).values(data).returning()).at(0),
+export const insertLocation = createServerOnlyFn(
+  async (data: InsertLocation) => {
+    const [location] = await db
+      .insert(schema.locations)
+      .values(data)
+      .returning();
+
+    return location;
+  },
 );
 
-export const getLocation = createServerOnlyFn(async (id: number) =>
-  (
-    await db.select().from(schema.locations).where(eq(schema.locations.id, id))
-  ).at(0),
-);
+export const getLocation = createServerOnlyFn(async (id: number) => {
+  const [location] = await db
+    .select()
+    .from(schema.locations)
+    .where(eq(schema.locations.id, id));
+
+  return location;
+});
 
 export const updateLocation = createServerOnlyFn(
   async (id: number, data: UpdateLocation) => {
@@ -31,11 +41,11 @@ export const updateLocation = createServerOnlyFn(
   },
 );
 
-export const deleteLocation = createServerOnlyFn(async (id: number) =>
-  (
-    await db
-      .delete(schema.locations)
-      .where(eq(schema.locations.id, id))
-      .returning()
-  ).at(0),
-);
+export const deleteLocation = createServerOnlyFn(async (id: number) => {
+  const [location] = await db
+    .delete(schema.locations)
+    .where(eq(schema.locations.id, id))
+    .returning();
+
+  return location;
+});
