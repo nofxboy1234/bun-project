@@ -66,18 +66,6 @@ export const relations = defineRelations(schema, (r) => ({
       alias: "occupation",
     }),
   },
-  // contracts: {
-  //   human: r.one.characters({
-  //     from: r.contracts.humanId,
-  //     to: r.characters.id,
-  //     alias: "human",
-  //   }),
-  //   devil: r.one.characters({
-  //     from: r.contracts.devilId,
-  //     to: r.characters.id,
-  //     alias: "devil",
-  //   }),
-  // },
   genders: {
     characters: r.many.characters(),
   },
@@ -95,12 +83,6 @@ export const relations = defineRelations(schema, (r) => ({
   locationTypes: {
     locations: r.many.locations(),
   },
-  // maps: {
-  //   location: r.one.locations({
-  //     from: r.maps.locationId,
-  //     to: r.locations.id,
-  //   }),
-  // },
   occupations: {
     characters: r.many.characterOccupations({ alias: "occupation" }),
   },

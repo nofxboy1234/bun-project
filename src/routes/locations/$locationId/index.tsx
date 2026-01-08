@@ -19,7 +19,6 @@ function LocationDetailComponent() {
     <div>
       <h2>{location.name}</h2>
       <p>Created At: {new Date(location.createdAt!).toLocaleString()}</p>
-      {/* Add more details here if needed, like location type name which requires joining or fetching types */}
       <Link to="/">Back to Locations</Link>
     </div>
   );

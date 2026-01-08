@@ -713,14 +713,6 @@ export const characterAffiliations = {
   data: characterAffiliationsData,
 };
 
-// { id: null, name: () => "Private Devil Hunter" },
-// { id: null, name: () => "Public Safety Devil Hunter" },
-// { id: null, name: () => "High School Student" },
-// { id: null, name: () => "Wild Fiend" },
-// { id: null, name: () => "Wild Devil" },
-// { id: null, name: () => "Contract Devil" },
-// { id: null, name: () => "Denji's Heart" },
-
 const characterOccupationsData = [
   {
     id: null,
