@@ -7,7 +7,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { api } from "../routes/api.v1.$";
 import type { ValidationError } from "elysia/error";
 import { locationTypesQueryOptions } from "@/queryOptions/locationTypesQueryOptions";
-import { SelectLocation } from "@/types/select";
+import { SelectLocation } from "@/types/validation/zod/select";
 
 const parseFormData = (data: FormData) => {
   const payload = {

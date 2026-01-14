@@ -2,8 +2,8 @@ import { db } from "@/db";
 import * as schema from "@/db/schema";
 import { createServerOnlyFn } from "@tanstack/react-start";
 import { eq } from "drizzle-orm";
-import { InsertLocation } from "@/types/insert";
-import { UpdateLocation } from "@/types/update";
+import { InsertLocation } from "@/types/validation/zod/insert";
+import { UpdateLocation } from "@/types/validation/zod/update";
 
 export const getLocations = createServerOnlyFn(
   async () => await db.query.locations.findMany(),

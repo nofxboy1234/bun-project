@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { api } from "../routes/api.v1.$";
 import type { ValidationError } from "elysia";
-import { SelectLocation } from "@/types/select";
+import { SelectLocation } from "@/types/validation/zod/select";
 
 const deleteLocation = async (id: number) => {
   const { data, error } = await api().v1.locations({ id }).delete();

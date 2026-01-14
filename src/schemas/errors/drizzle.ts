@@ -1,9 +1,9 @@
-import * as z from "zod";
+import { t } from "elysia";
 
 export const drizzle = {
-  DrizzleQueryError: z.object({
-    name: z.string(),
-    query: z.string(),
-    message: z.string().optional(),
+  DrizzleQueryError: t.Object({
+    name: t.String(),
+    query: t.String(),
+    message: t.Optional(t.String()),
   }),
 };

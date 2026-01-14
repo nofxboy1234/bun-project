@@ -1,4 +1,4 @@
-import { select } from "@/schemas/validation/select";
+import { select } from "@/schemas/validation/zod/select";
 import * as z from "zod";
 
 export type SelectStatus = z.infer<typeof select.status>;

@@ -1,14 +1,13 @@
-import { Elysia } from "elysia";
+import { Elysia, t } from "elysia";
 import { openapi } from "@elysiajs/openapi";
 import { treaty } from "@elysiajs/eden";
 
 import { createFileRoute } from "@tanstack/react-router";
 import { createIsomorphicFn } from "@tanstack/react-start";
 
-import { select } from "@/schemas/validation/select";
-import { insert } from "@/schemas/validation/insert";
-import { update } from "@/schemas/validation/update";
-import * as z from "zod";
+import { select } from "@/schemas/validation/typebox/select";
+import { insert } from "@/schemas/validation/typebox/insert";
+import { update } from "@/schemas/validation/typebox/update";
 
 import {
   deleteLocation,
@@ -42,18 +41,18 @@ export const app = new Elysia({
     }
   })
   .get("/location-types", async () => await getLocationTypes(), {
-    response: { 200: z.array(select.locationType) },
+    response: { 200: t.Array(select.locationType) },
   })
   .get("/locations", async () => await getLocations(), {
-    response: { 200: z.array(select.location) },
+    response: { 200: t.Array(select.location) },
   })
   .post(
     "/locations",
     async ({ body }) => {
+      console.log("### post /locations handler");
       try {
         return await insertLocation(body);
       } catch (error) {
-        console.log("### post /locations handler");
         throw error as DrizzleQueryError;
       }
     },
@@ -80,12 +79,15 @@ export const app = new Elysia({
       return location;
     },
     {
-      params: z.object({
-        id: z.coerce.number({ error: "Id must be numeric" }).int().positive(),
+      params: t.Object({
+        id: t.Number(),
       }),
       response: {
         200: select.location,
-        404: z.object({ success: z.boolean(), error: z.string() }),
+        404: t.Object({
+          success: t.Boolean(),
+          error: t.String(),
+        }),
       },
     },
   )
@@ -102,13 +104,13 @@ export const app = new Elysia({
       return location;
     },
     {
-      params: z.object({
-        id: z.coerce.number({ error: "Id must be numeric" }).int().positive(),
+      params: t.Object({
+        id: t.Number(),
       }),
       body: update.location,
       response: {
         200: select.location,
-        500: z.object({ success: z.boolean(), error: z.string() }),
+        500: t.Object({ success: t.Boolean(), error: t.String() }),
       },
     },
   )
@@ -125,12 +127,12 @@ export const app = new Elysia({
       return location;
     },
     {
-      params: z.object({
-        id: z.coerce.number({ error: "Id must be numeric" }).int().positive(),
+      params: t.Object({
+        id: t.Number(),
       }),
       response: {
         200: select.location,
-        500: z.object({ success: z.boolean(), error: z.string() }),
+        500: t.Object({ success: t.Boolean(), error: t.String() }),
       },
     },
   );

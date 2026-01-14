@@ -1,4 +1,4 @@
-import { insert } from "@/schemas/validation/insert";
+import { insert } from "@/schemas/validation/zod/insert";
 import * as z from "zod";
 
 export type InsertStatus = z.infer<typeof insert.status>;

@@ -1,4 +1,4 @@
-import { update } from "@/schemas/validation/update";
+import { update } from "@/schemas/validation/zod/update";
 import * as z from "zod";
 
 export type UpdateStatus = z.infer<typeof update.status>;
