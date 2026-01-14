@@ -5,9 +5,9 @@ import { treaty } from "@elysiajs/eden";
 import { createFileRoute } from "@tanstack/react-router";
 import { createIsomorphicFn } from "@tanstack/react-start";
 
-import { select } from "@/schemas/select";
-import { insert } from "@/schemas/insert";
-import { update } from "@/schemas/update";
+import { select } from "@/schemas/validation/select";
+import { insert } from "@/schemas/validation/insert";
+import { update } from "@/schemas/validation/update";
 import * as z from "zod";
 
 import {
@@ -18,12 +18,29 @@ import {
   updateLocation,
 } from "@/queries/locations";
 import { getLocationTypes } from "@/queries/locationTypes";
+import { DrizzleQueryError } from "drizzle-orm";
+import { drizzle } from "@/schemas/errors/drizzle";
 
 export const app = new Elysia({
   name: "api",
   prefix: "/api/v1",
 })
   .use(openapi())
+  .error({
+    DrizzleQueryError,
+  })
+  .onError(({ code, error, set }) => {
+    switch (code) {
+      case "DrizzleQueryError":
+        set.status = 500;
+
+        return {
+          name: error.name,
+          query: error.query,
+          message: error.cause?.message,
+        };
+    }
+  })
   .get("/location-types", async () => await getLocationTypes(), {
     response: { 200: z.array(select.locationType) },
   })
@@ -32,30 +49,32 @@ export const app = new Elysia({
   })
   .post(
     "/locations",
-    async ({ body, status }) => {
-      const location = await insertLocation(body);
-
-      if (!location) {
-        return status(500, "Failed to create location");
+    async ({ body }) => {
+      try {
+        return await insertLocation(body);
+      } catch (error) {
+        console.log("### post /locations handler");
+        throw error as DrizzleQueryError;
       }
-
-      return location;
     },
     {
       body: insert.location,
       response: {
+        500: drizzle.DrizzleQueryError,
         200: select.location,
-        500: z.string(),
       },
     },
   )
   .get(
     "/locations/:id",
-    async ({ params: { id }, status }) => {
+    async ({ params: { id }, set }) => {
       const location = await getLocation(id);
 
       if (!location) {
-        return status(404, "Not Found");
+        console.log("get /locations/:id - not found");
+
+        set.status = 404;
+        return { success: false, error: "Not Found" };
       }
 
       return location;
@@ -66,17 +85,18 @@ export const app = new Elysia({
       }),
       response: {
         200: select.location,
-        404: z.string(),
+        404: z.object({ success: z.boolean(), error: z.string() }),
       },
     },
   )
   .patch(
     "/locations/:id",
-    async ({ params: { id }, body, status }) => {
+    async ({ params: { id }, body, set }) => {
       const location = await updateLocation(id, body);
 
       if (!location) {
-        return status(500, "Failed to update location");
+        set.status = 500;
+        return { success: false, error: "Failed to update location" };
       }
 
       return location;
@@ -88,17 +108,18 @@ export const app = new Elysia({
       body: update.location,
       response: {
         200: select.location,
-        500: z.string(),
+        500: z.object({ success: z.boolean(), error: z.string() }),
       },
     },
   )
   .delete(
     "/locations/:id",
-    async ({ params: { id }, status }) => {
+    async ({ params: { id }, set }) => {
       const location = await deleteLocation(id);
 
       if (!location) {
-        return status(500, "Failed to delete location");
+        set.status = 500;
+        return { success: false, error: "Failed to delete location" };
       }
 
       return location;
@@ -109,7 +130,7 @@ export const app = new Elysia({
       }),
       response: {
         200: select.location,
-        500: z.string(),
+        500: z.object({ success: z.boolean(), error: z.string() }),
       },
     },
   );

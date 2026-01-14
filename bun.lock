@@ -18,7 +18,7 @@
         "drizzle-kit": "^1.0.0-beta.10-4a43a22",
         "drizzle-orm": "^1.0.0-beta.10-4a43a22",
         "drizzle-seed": "^1.0.0-beta.10-4a43a22",
-        "drizzle-zod": "^0.8.3",
+        "drizzle-zod": "^1.0.0-beta.10-4a43a22",
         "elysia": "^1.4.22",
         "react": "^19.2.3",
         "react-dom": "^19.2.3",
@@ -627,7 +627,7 @@
 
     "drizzle-seed": ["drizzle-seed@1.0.0-beta.10-4a43a22", "", { "dependencies": { "pure-rand": "^6.1.0" }, "peerDependencies": { "drizzle-orm": ">=1.0.0-beta.2" } }, "sha512-VXHHq6/SzjWc3F8M2JXrZFQZiQ61K4VoP9CKLXIQhqwC1z+oeDn0/+bCi+h6AGl5Us16W0jgyoEVHd6iasjIgg=="],
 
-    "drizzle-zod": ["drizzle-zod@0.8.3", "", { "peerDependencies": { "drizzle-orm": ">=0.36.0", "zod": "^3.25.0 || ^4.0.0" } }, "sha512-66yVOuvGhKJnTdiqj1/Xaaz9/qzOdRJADpDa68enqS6g3t0kpNkwNYjUuaeXgZfO/UWuIM9HIhSlJ6C5ZraMww=="],
+    "drizzle-zod": ["drizzle-zod@1.0.0-beta.10-4a43a22", "", { "peerDependencies": { "drizzle-orm": ">=1.0.0-beta.2", "zod": "^3.25.0 || ^4.0.0" } }, "sha512-EWPe/Ub1hknfTfMlY8yRlI+2mftReRt0VVyq91RVcZhkYPp3Sc9K8mv62dmyb6J2cp+9cO9Sv16t6OIk02Uduw=="],
 
     "eastasianwidth": ["eastasianwidth@0.2.0", "", {}, "sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA=="],
 
