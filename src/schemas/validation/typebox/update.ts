@@ -1,6 +1,5 @@
 import * as schema from "@/db/schema";
 import { createUpdateSchema } from "drizzle-typebox";
-import { z } from "zod";
 
 export const update = {
   status: createUpdateSchema(schema.statuses),
