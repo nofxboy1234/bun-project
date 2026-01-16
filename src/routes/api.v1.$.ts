@@ -50,11 +50,7 @@ export const app = new Elysia({
     "/locations",
     async ({ body }) => {
       console.log("### post /locations handler");
-      try {
-        return await insertLocation(body);
-      } catch (error) {
-        throw error as DrizzleQueryError;
-      }
+      return await insertLocation(body);
     },
     {
       body: insert.location,

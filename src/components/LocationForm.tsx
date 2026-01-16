@@ -28,24 +28,27 @@ const parseFormData = (data: FormData) => {
 };
 
 const saveLocation = async (formData: FormData) => {
-  const data = parseFormData(formData);
+  const parsedData = parseFormData(formData);
 
-  if ("id" in data) {
-    const { id, ...payload } = data;
-    const { data: result, error } = await api()
-      .v1.locations({ id })
-      .patch(payload);
+  let response;
 
-    if (error) throw error.value;
-
-    return result;
+  if ("id" in parsedData) {
+    const { id, ...payload } = parsedData;
+    response = await api().v1.locations({ id }).patch(payload);
   } else {
-    const { data: result, error } = await api().v1.locations.post(data);
-
-    if (error) throw error.value;
-
-    return result;
+    response = await api().v1.locations.post(parsedData);
   }
+
+  const { data, error } = response;
+
+  if (error) {
+    switch (error.status) {
+      case 422:
+        return (error as ValidationError).all;
+    }
+  }
+
+  return data;
 };
 
 export function LocationForm({ location }: { location?: SelectLocation }) {
