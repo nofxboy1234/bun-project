@@ -54,7 +54,7 @@ const saveLocation = async (formData: FormData) => {
 export function LocationForm({ location }: { location?: Location.select }) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const { data: locationTypes } = useSuspenseQuery(locationTypesQueryOptions);
+  const { data: locationTypes } = useSuspenseQuery(locationTypesQueryOptions());
 
   const saveMutation = useMutation({
     mutationFn: async (data: FormData) => {

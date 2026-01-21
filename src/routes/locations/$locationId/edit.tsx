@@ -14,7 +14,7 @@ export const Route = createFileRoute("/locations/$locationId/edit")({
     });
 
     queryClient.ensureQueryData({
-      ...locationTypesQueryOptions,
+      ...locationTypesQueryOptions(),
       revalidateIfStale: true,
     });
   },

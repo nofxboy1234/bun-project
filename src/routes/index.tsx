@@ -9,7 +9,7 @@ import { LocationPreview } from "@/components/LocationPreview";
 export const Route = createFileRoute("/")({
   loader: ({ context: { queryClient } }) => {
     queryClient.ensureQueryData({
-      ...locationsQueryOptions,
+      ...locationsQueryOptions(),
       revalidateIfStale: true,
     });
   },
@@ -28,7 +28,7 @@ export const Route = createFileRoute("/")({
 });
 
 function LocationsLayoutComponent() {
-  const { data } = useSuspenseQuery(locationsQueryOptions);
+  const { data } = useSuspenseQuery(locationsQueryOptions());
 
   return (
     <div className={styles.main}>
