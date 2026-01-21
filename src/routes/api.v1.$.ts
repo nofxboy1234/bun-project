@@ -61,7 +61,6 @@ export const app = new Elysia({
         .post(
           "/locations",
           async ({ body }) => {
-            console.log("### post /locations handler");
             return await insertLocation(body);
           },
           {
