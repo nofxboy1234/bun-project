@@ -47,7 +47,7 @@ export interface FileRoutesByFullPath {
   '/locations/new': typeof LocationsNewRoute
   '/api/v1/$': typeof ApiV1SplatRoute
   '/locations/$locationId/edit': typeof LocationsLocationIdEditRoute
-  '/locations/$locationId': typeof LocationsLocationIdIndexRoute
+  '/locations/$locationId/': typeof LocationsLocationIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -71,7 +71,7 @@ export interface FileRouteTypes {
     | '/locations/new'
     | '/api/v1/$'
     | '/locations/$locationId/edit'
-    | '/locations/$locationId'
+    | '/locations/$locationId/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -115,7 +115,7 @@ declare module '@tanstack/react-router' {
     '/locations/$locationId/': {
       id: '/locations/$locationId/'
       path: '/locations/$locationId'
-      fullPath: '/locations/$locationId'
+      fullPath: '/locations/$locationId/'
       preLoaderRoute: typeof LocationsLocationIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
