@@ -4,7 +4,10 @@ import { locationTypesQueryOptions } from "@/queryOptions/locationTypesQueryOpti
 
 export const Route = createFileRoute("/locations/new")({
   loader: ({ context: { queryClient } }) => {
-    queryClient.ensureQueryData(locationTypesQueryOptions);
+    queryClient.ensureQueryData({
+      ...locationTypesQueryOptions,
+      revalidateIfStale: true,
+    });
   },
   component: NewLocationComponent,
 });

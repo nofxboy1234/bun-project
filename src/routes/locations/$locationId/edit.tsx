@@ -8,8 +8,14 @@ export const Route = createFileRoute("/locations/$locationId/edit")({
   loader: async ({ context: { queryClient }, params: { locationId } }) => {
     const id = Number(locationId);
     await Promise.all([
-      queryClient.ensureQueryData(locationQueryOptions(id)),
-      queryClient.ensureQueryData(locationTypesQueryOptions),
+      queryClient.ensureQueryData({
+        ...locationQueryOptions(id),
+        revalidateIfStale: true,
+      }),
+      queryClient.ensureQueryData({
+        ...locationTypesQueryOptions,
+        revalidateIfStale: true,
+      }),
     ]);
   },
   component: EditLocationComponent,
