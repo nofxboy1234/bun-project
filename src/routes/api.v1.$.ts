@@ -19,6 +19,7 @@ import {
 import { getLocationTypes } from "@/queries/locationTypes";
 import { DrizzleQueryError } from "drizzle-orm";
 import { drizzle } from "@/schemas/errors/drizzle";
+import { Location } from "@/modules/location/model";
 
 export const app = new Elysia({
   name: "api",
@@ -64,9 +65,9 @@ export const app = new Elysia({
             return await insertLocation(body);
           },
           {
-            body: insert.location,
+            body: Location.insert,
             response: {
-              200: select.location,
+              200: Location.select,
             },
           },
         )
