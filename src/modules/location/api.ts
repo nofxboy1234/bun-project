@@ -1,7 +1,4 @@
-import { Elysia, t } from "elysia";
-
-import { select } from "@/schemas/validation/typebox/select";
-import { update } from "@/schemas/validation/typebox/update";
+import { Elysia, t, ValidationError } from "elysia";
 
 import {
   deleteLocation,
@@ -10,6 +7,7 @@ import {
   updateLocation,
 } from "@/queries/locations";
 import { DrizzleQueryError } from "drizzle-orm";
+
 import { LocationModel } from "@/modules/location/model";
 import { LocationQuery } from "@/modules/location/query";
 import { LocationElysiaModel } from "@/modules/location/elysiaModel";
@@ -20,10 +18,11 @@ export const locationApi = new Elysia({
   .use(LocationElysiaModel)
   .prefix("model", "location.")
   .get("/locations", async () => await getLocations(), {
-    response: { 200: t.Array(select.location) },
+    response: { 200: t.Array(LocationModel.select) },
   })
   .guard({
     response: {
+      422: "location.ValidationError",
       500: "location.QueryError",
       200: "location.Select",
     },
@@ -33,6 +32,15 @@ export const locationApi = new Elysia({
           name: error.name,
           query: error.query,
           message: error.cause?.message,
+        });
+      } else if (error instanceof ValidationError) {
+        return status(422, {
+          name: "ValidationError",
+          errors: error.all.map((e) => ({
+            path: e.path,
+            value: e.value,
+            message: e.message,
+          })),
         });
       }
     },
@@ -83,7 +91,7 @@ export const locationApi = new Elysia({
       params: t.Object({
         id: t.Number(),
       }),
-      body: update.location,
+      body: LocationModel.update,
     },
   )
   .delete(
