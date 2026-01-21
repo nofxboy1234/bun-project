@@ -7,18 +7,19 @@ import { locationTypesQueryOptions } from "@/queryOptions/locationTypesQueryOpti
 export const Route = createFileRoute("/locations/$locationId/edit")({
   loader: async ({ context: { queryClient }, params: { locationId } }) => {
     const id = Number(locationId);
-    await Promise.all([
-      queryClient.ensureQueryData({
-        ...locationQueryOptions(id),
-        revalidateIfStale: true,
-      }),
-      queryClient.ensureQueryData({
-        ...locationTypesQueryOptions,
-        revalidateIfStale: true,
-      }),
-    ]);
+
+    queryClient.ensureQueryData({
+      ...locationQueryOptions(id),
+      revalidateIfStale: true,
+    });
+
+    queryClient.ensureQueryData({
+      ...locationTypesQueryOptions,
+      revalidateIfStale: true,
+    });
   },
   component: EditLocationComponent,
+  pendingComponent: () => <div>pending</div>,
 });
 
 function EditLocationComponent() {
