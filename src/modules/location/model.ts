@@ -5,7 +5,7 @@ import {
   createUpdateSchema,
 } from "drizzle-typebox";
 
-export namespace Location {
+export namespace LocationModel {
   export const insert = createInsertSchema(locations);
   export type insert = typeof insert.static;
 

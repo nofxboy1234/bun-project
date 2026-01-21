@@ -7,7 +7,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { api } from "../routes/api.v1.$";
 import type { ValidationError } from "elysia/error";
 import { locationTypesQueryOptions } from "@/queryOptions/locationTypesQueryOptions";
-import { Location } from "@/modules/location/model";
+import { LocationModel } from "@/modules/location/model";
 
 const parseFormData = (data: FormData) => {
   const payload = {
@@ -51,7 +51,11 @@ const saveLocation = async (formData: FormData) => {
   return data;
 };
 
-export function LocationForm({ location }: { location?: Location.select }) {
+export function LocationForm({
+  location,
+}: {
+  location?: LocationModel.select;
+}) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { data: locationTypes } = useSuspenseQuery(locationTypesQueryOptions());
