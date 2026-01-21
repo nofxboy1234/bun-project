@@ -6,20 +6,19 @@ import { createFileRoute } from "@tanstack/react-router";
 import { createIsomorphicFn } from "@tanstack/react-start";
 
 import { select } from "@/schemas/validation/typebox/select";
-import { insert } from "@/schemas/validation/typebox/insert";
 import { update } from "@/schemas/validation/typebox/update";
 
 import {
   deleteLocation,
   getLocation,
   getLocations,
-  insertLocation,
   updateLocation,
 } from "@/queries/locations";
 import { getLocationTypes } from "@/queries/locationTypes";
 import { DrizzleQueryError } from "drizzle-orm";
 import { drizzle } from "@/schemas/errors/drizzle";
 import { LocationModel } from "@/modules/location/model";
+import { LocationQuery } from "@/modules/location/query";
 
 export const app = new Elysia({
   name: "api",
@@ -61,7 +60,7 @@ export const app = new Elysia({
         .post(
           "/locations",
           async ({ body }) => {
-            return await insertLocation(body);
+            return await LocationQuery.insert(body);
           },
           {
             body: LocationModel.insert,
