@@ -12,6 +12,7 @@ export const locationApi = new Elysia({
     response: {
       422: LocationModel.validationError,
       500: LocationModel.queryError,
+      200: LocationModel.select,
     },
     error({ error, status }) {
       if (error instanceof ValidationError) {
@@ -39,9 +40,6 @@ export const locationApi = new Elysia({
   })
   .post("/locations", async ({ body }) => await LocationQuery.insert(body), {
     body: LocationModel.insert,
-    response: {
-      200: LocationModel.select,
-    },
   })
   .get(
     "/locations/:id",
@@ -66,7 +64,6 @@ export const locationApi = new Elysia({
           name: t.String(),
           message: t.String(),
         }),
-        200: LocationModel.select,
       },
     },
   )
@@ -94,7 +91,6 @@ export const locationApi = new Elysia({
           name: t.String(),
           message: t.String(),
         }),
-        200: LocationModel.select,
       },
     },
   )
@@ -121,7 +117,6 @@ export const locationApi = new Elysia({
           name: t.String(),
           message: t.String(),
         }),
-        200: LocationModel.select,
       },
     },
   );
