@@ -8,11 +8,10 @@ import { LocationQuery } from "@/modules/location/query";
 export const locationApi = new Elysia({
   name: "locations",
 })
-  .get("/locations", async () => await LocationQuery.getAll(), {
+  .guard({
     response: {
       422: LocationModel.validationError,
       500: LocationModel.queryError,
-      200: t.Array(LocationModel.select),
     },
     error({ error, status }) {
       if (error instanceof ValidationError) {
@@ -33,30 +32,15 @@ export const locationApi = new Elysia({
       }
     },
   })
+  .get("/locations", async () => await LocationQuery.getAll(), {
+    response: {
+      200: t.Array(LocationModel.select),
+    },
+  })
   .post("/locations", async ({ body }) => await LocationQuery.insert(body), {
     body: LocationModel.insert,
     response: {
-      422: LocationModel.validationError,
-      500: LocationModel.queryError,
       200: LocationModel.select,
-    },
-    error({ error, status }) {
-      if (error instanceof ValidationError) {
-        return status(422, {
-          name: "ValidationError",
-          errors: error.all.map((e) => ({
-            path: e.path,
-            value: e.value,
-            message: e.message,
-          })),
-        });
-      } else if (error instanceof DrizzleQueryError) {
-        return status(500, {
-          name: error.name,
-          query: error.query,
-          message: error.cause?.message,
-        });
-      }
     },
   })
   .get(
@@ -78,31 +62,11 @@ export const locationApi = new Elysia({
         id: t.Number(),
       }),
       response: {
-        422: LocationModel.validationError,
         404: t.Object({
           name: t.String(),
           message: t.String(),
         }),
-        500: LocationModel.queryError,
         200: LocationModel.select,
-      },
-      error({ error, status }) {
-        if (error instanceof ValidationError) {
-          return status(422, {
-            name: "ValidationError",
-            errors: error.all.map((e) => ({
-              path: e.path,
-              value: e.value,
-              message: e.message,
-            })),
-          });
-        } else if (error instanceof DrizzleQueryError) {
-          return status(500, {
-            name: error.name,
-            query: error.query,
-            message: error.cause?.message,
-          });
-        }
       },
     },
   )
@@ -126,31 +90,11 @@ export const locationApi = new Elysia({
       }),
       body: LocationModel.update,
       response: {
-        422: LocationModel.validationError,
         404: t.Object({
           name: t.String(),
           message: t.String(),
         }),
-        500: LocationModel.queryError,
         200: LocationModel.select,
-      },
-      error({ error, status }) {
-        if (error instanceof ValidationError) {
-          return status(422, {
-            name: "ValidationError",
-            errors: error.all.map((e) => ({
-              path: e.path,
-              value: e.value,
-              message: e.message,
-            })),
-          });
-        } else if (error instanceof DrizzleQueryError) {
-          return status(500, {
-            name: error.name,
-            query: error.query,
-            message: error.cause?.message,
-          });
-        }
       },
     },
   )
@@ -173,31 +117,11 @@ export const locationApi = new Elysia({
         id: t.Number(),
       }),
       response: {
-        422: LocationModel.validationError,
         404: t.Object({
           name: t.String(),
           message: t.String(),
         }),
-        500: LocationModel.queryError,
         200: LocationModel.select,
-      },
-      error({ error, status }) {
-        if (error instanceof ValidationError) {
-          return status(422, {
-            name: "ValidationError",
-            errors: error.all.map((e) => ({
-              path: e.path,
-              value: e.value,
-              message: e.message,
-            })),
-          });
-        } else if (error instanceof DrizzleQueryError) {
-          return status(500, {
-            name: error.name,
-            query: error.query,
-            message: error.cause?.message,
-          });
-        }
       },
     },
   );
