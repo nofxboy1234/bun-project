@@ -1,39 +1,21 @@
 import { Elysia, t, ValidationError } from "elysia";
 
-import {
-  deleteLocation,
-  getLocation,
-  getLocations,
-  updateLocation,
-} from "@/queries/locations";
 import { DrizzleQueryError } from "drizzle-orm";
 
 import { LocationModel } from "@/modules/location/model";
 import { LocationQuery } from "@/modules/location/query";
-import { LocationElysiaModel } from "@/modules/location/elysiaModel";
 
 export const locationApi = new Elysia({
   name: "locations",
 })
-  .use(LocationElysiaModel)
-  .prefix("model", "location.")
-  .get("/locations", async () => await getLocations(), {
-    response: { 200: t.Array(LocationModel.select) },
-  })
-  .guard({
+  .get("/locations", async () => await LocationQuery.getAll(), {
     response: {
-      422: "location.ValidationError",
-      500: "location.QueryError",
-      200: "location.Select",
+      422: LocationModel.validationError,
+      500: LocationModel.queryError,
+      200: t.Array(LocationModel.select),
     },
     error({ error, status }) {
-      if (error instanceof DrizzleQueryError) {
-        return status(500, {
-          name: error.name,
-          query: error.query,
-          message: error.cause?.message,
-        });
-      } else if (error instanceof ValidationError) {
+      if (error instanceof ValidationError) {
         return status(422, {
           name: "ValidationError",
           errors: error.all.map((e) => ({
@@ -42,28 +24,51 @@ export const locationApi = new Elysia({
             message: e.message,
           })),
         });
+      } else if (error instanceof DrizzleQueryError) {
+        return status(500, {
+          name: error.name,
+          query: error.query,
+          message: error.cause?.message,
+        });
       }
     },
   })
-  .post(
-    "/locations",
-    async ({ body }) => {
-      return await LocationQuery.insert(body);
+  .post("/locations", async ({ body }) => await LocationQuery.insert(body), {
+    body: LocationModel.insert,
+    response: {
+      422: LocationModel.validationError,
+      500: LocationModel.queryError,
+      200: LocationModel.select,
     },
-    {
-      body: LocationModel.insert,
+    error({ error, status }) {
+      if (error instanceof ValidationError) {
+        return status(422, {
+          name: "ValidationError",
+          errors: error.all.map((e) => ({
+            path: e.path,
+            value: e.value,
+            message: e.message,
+          })),
+        });
+      } else if (error instanceof DrizzleQueryError) {
+        return status(500, {
+          name: error.name,
+          query: error.query,
+          message: error.cause?.message,
+        });
+      }
     },
-  )
+  })
   .get(
     "/locations/:id",
-    async ({ params: { id }, set }) => {
-      const location = await getLocation(id);
+    async ({ params: { id }, status }) => {
+      const location = await LocationQuery.getById(id);
 
       if (!location) {
-        console.log("get /locations/:id - not found");
-
-        set.status = 404;
-        return { success: false, error: "Not Found" };
+        return status(404, {
+          name: "NotFoundError",
+          message: `location with id=${id} was not found`,
+        });
       }
 
       return location;
@@ -73,17 +78,45 @@ export const locationApi = new Elysia({
         id: t.Number(),
       }),
       response: {
+        422: LocationModel.validationError,
         404: t.Object({
-          success: t.Boolean(),
-          error: t.String(),
+          name: t.String(),
+          message: t.String(),
         }),
+        500: LocationModel.queryError,
+        200: LocationModel.select,
+      },
+      error({ error, status }) {
+        if (error instanceof ValidationError) {
+          return status(422, {
+            name: "ValidationError",
+            errors: error.all.map((e) => ({
+              path: e.path,
+              value: e.value,
+              message: e.message,
+            })),
+          });
+        } else if (error instanceof DrizzleQueryError) {
+          return status(500, {
+            name: error.name,
+            query: error.query,
+            message: error.cause?.message,
+          });
+        }
       },
     },
   )
   .patch(
     "/locations/:id",
-    async ({ params: { id }, body }) => {
-      const location = await updateLocation(id, body);
+    async ({ params: { id }, body, status }) => {
+      const location = await LocationQuery.update(id, body);
+
+      if (!location) {
+        return status(404, {
+          name: "NotFoundError",
+          message: `location with id=${id} was not found`,
+        });
+      }
 
       return location;
     },
@@ -92,12 +125,46 @@ export const locationApi = new Elysia({
         id: t.Number(),
       }),
       body: LocationModel.update,
+      response: {
+        422: LocationModel.validationError,
+        404: t.Object({
+          name: t.String(),
+          message: t.String(),
+        }),
+        500: LocationModel.queryError,
+        200: LocationModel.select,
+      },
+      error({ error, status }) {
+        if (error instanceof ValidationError) {
+          return status(422, {
+            name: "ValidationError",
+            errors: error.all.map((e) => ({
+              path: e.path,
+              value: e.value,
+              message: e.message,
+            })),
+          });
+        } else if (error instanceof DrizzleQueryError) {
+          return status(500, {
+            name: error.name,
+            query: error.query,
+            message: error.cause?.message,
+          });
+        }
+      },
     },
   )
   .delete(
     "/locations/:id",
-    async ({ params: { id } }) => {
-      const location = await deleteLocation(id);
+    async ({ params: { id }, status }) => {
+      const location = await LocationQuery.delete(id);
+
+      if (!location) {
+        return status(404, {
+          name: "NotFoundError",
+          message: `location with id=${id} was not found`,
+        });
+      }
 
       return location;
     },
@@ -105,5 +172,32 @@ export const locationApi = new Elysia({
       params: t.Object({
         id: t.Number(),
       }),
+      response: {
+        422: LocationModel.validationError,
+        404: t.Object({
+          name: t.String(),
+          message: t.String(),
+        }),
+        500: LocationModel.queryError,
+        200: LocationModel.select,
+      },
+      error({ error, status }) {
+        if (error instanceof ValidationError) {
+          return status(422, {
+            name: "ValidationError",
+            errors: error.all.map((e) => ({
+              path: e.path,
+              value: e.value,
+              message: e.message,
+            })),
+          });
+        } else if (error instanceof DrizzleQueryError) {
+          return status(500, {
+            name: error.name,
+            query: error.query,
+            message: error.cause?.message,
+          });
+        }
+      },
     },
   );
